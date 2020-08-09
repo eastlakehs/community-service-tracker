@@ -23,9 +23,9 @@
     "typescript": "~3.7.2"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
+    "start": "yarn tailwind && react-scripts start",
+    "build": "yarn tailwind && react-scripts build",
+    "test": "yarn tailwind && react-scripts test",
     "eject": "react-scripts eject",
     "tailwind": "npx tailwindcss build ./src/styles/tailwind.in.css -o src/styles/tailwind.out.css"
   },
