@@ -2,6 +2,7 @@ import React from "react";
 //import logo from "./logo.svg";
 
 import PageHeader from "./Pages/Header/pageHeader";
+import Body from "./Pages/Body/body"
 /*function App() {
   return (
     <div className="App">
@@ -25,7 +26,12 @@ import PageHeader from "./Pages/Header/pageHeader";
 */
 
 const App = () => {
-  return <PageHeader />;
+  return (
+    <div>
+      <PageHeader />
+      <Body />
+    </div>
+  );
 };
 
 export default App;
