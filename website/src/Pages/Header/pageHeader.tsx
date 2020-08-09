@@ -4,6 +4,7 @@ const HeaderButtons: React.FunctionComponent<{ title: string }> = ({
   title,
 }) => {
   return (
+    // eslint-disable-next-line jsx-a11y/anchor-is-valid
     <a className="block lg:inline-block text-white mr-6 mt-2 lg:mt-auto">
       {title}
     </a>
@@ -35,7 +36,9 @@ const PageHeader = () => {
           </svg>
         </button>
       </div>
-      <div className={`${show_nav ? "block" : "hidden"} w-full lg:w-auto`}>
+      <div
+        className={`${show_nav ? "block" : "hidden"} lg:block w-full lg:w-auto`}
+      >
         <div className="text-lg">
           <HeaderButtons title={"Account"} />
           <HeaderButtons title={"Logout"} />
