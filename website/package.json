@@ -17,13 +17,15 @@
     "react-redux": "^7.2.1",
     "react-scripts": "3.4.1",
     "redux": "^4.0.5",
+    "tailwindcss": "^1.6.2",
     "typescript": "~3.7.2"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "tailwind": "npx tailwindcss build ./src/styles/tailwind.in.css -o src/styles/tailwind.out.css"
   },
   "eslintConfig": {
     "extends": "react-app"
