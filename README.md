@@ -1,4 +1,4 @@
-# community-service-tracker
+# Community Service Tracker
 
 
 ## Best Practicies
