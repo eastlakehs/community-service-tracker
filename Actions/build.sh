@@ -1,3 +1,4 @@
+#!/bin/sh
 echo "starting website build, running build.sh"
 cd website
 yarn
