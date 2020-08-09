@@ -22,7 +22,6 @@ jobs:
     - name: Build Website
       run: |
         sh Actions/build.sh
-        exit $?
 
     - name: Github Pages 🚀
       uses: JamesIves/github-pages-deploy-action@releases/v3
