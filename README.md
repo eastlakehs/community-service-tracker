@@ -19,6 +19,11 @@
 # Work in progress 
 ## Cloning origin website with react components
 ### ~~Header~~ : https://github.com/eastlake-key/community-service-tracker/pull/7
+## Body of main page : Not Done
+## Footer : Not Done
+## Login UI: Not Done
+## Events Component: Not Done
+
 
 ## Best Practicies
 ### In order to make this repo maintainible, the following rules should be followed: 
