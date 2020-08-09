@@ -27,7 +27,7 @@ import Body from "./Pages/Body/body"
 
 const App = () => {
   return (
-    <div>
+    <div className="h-screen bg-gray-600">
       <PageHeader />
       <Body />
     </div>
