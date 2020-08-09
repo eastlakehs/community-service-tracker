@@ -16,6 +16,9 @@
   <img src="./Docs/images/wolflogo.png" width="200" height="200" />
 </p>
 
+# Work in progress 
+## Cloning origin website with react components
+### ~~Header~~ : https://github.com/eastlake-key/community-service-tracker/pull/7
 
 ## Best Practicies
 ### In order to make this repo maintainible, the following rules should be followed: 
