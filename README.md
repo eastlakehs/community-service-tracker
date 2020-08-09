@@ -17,12 +17,12 @@
 </p>
 
 # Work in progress 
-## Cloning origin website with react components
+## Cloning origin website with react components. Origin website URL: https://eastlakecommunityservice.web.app/.
 ### ~~Header~~ : https://github.com/eastlake-key/community-service-tracker/pull/7
-## Body of main page : Not Done
-## Footer : Not Done
-## Login UI: Not Done
-## Events Component: Not Done
+### Body of main page : Not Done
+### Footer : Not Done
+### Login UI: Not Done
+### Events Component: Not Done
 
 
 ## Best Practicies
