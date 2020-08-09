@@ -1,0 +1,285 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Eastlake Community Service</title>
+    <link rel="icon" href="assets/img/wolflogo.png" />
+    <link href="css/styles.css" rel="stylesheet" />
+    <!-- Font Awesome icons (free version)-->
+    <script src="https://use.fontawesome.com/releases/v5.12.1/js/all.js" crossorigin="anonymous"></script>
+    <!-- Google fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
+    <!-- Core theme CSS (includes Bootstrap)-->
+  <!-- Compiled and minified CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+</head>
+<body>
+
+    <!-- Email: s-jizhang@lwsd.org link to github -->
+
+  <!-- NAVBAR -->
+  <nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="mainNav">
+    <!-- <div class="container"> -->
+        <a class="navbar-brand js-scroll-trigger" href="#">Wolfpack Service Tracker</a><button class="navbar-toggler navbar-toggler-right text-uppercase font-weight-bold bg-primary text-white rounded" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">Menu <i class="fas fa-bars"></i></button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                <li class="logged-in nav-item mx-0 mx-lg-1" style="display: none;">
+                    <a href="#" class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger modal-trigger" data-target="modal-account">Account</a>          
+                </li>
+                <li class="logged-in nav-item mx-0 mx-lg-1" style="display: none;">
+                    <a href="#" class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" id="logout" data-target="modal-logout">Logout</a>          
+                </li>
+                <li class="logged-in nav-item mx-0 mx-lg-1 tracktime" style="display: none;">
+                    <a href="#" class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger modal-trigger" data-target="modal-create">Track Time</a>          
+                </li>
+                <li class="logged-out nav-item mx-0 mx-lg-1" style="display: none;">
+                    <a href="#" class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger modal-trigger" data-target="modal-login">Login</a>          
+                </li>
+                <!-- <li class="admin nav-item mx-0 mx-lg-1" style="display: none;"> -->
+                    <!-- <a href="#" class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger modal-trigger" data-target="modal-portal">Admin Portal</a>           -->
+                <!-- </li> -->
+                <li class="logged-out nav-item mx-0 mx-lg-1" style="display: none;">
+                    <a href="#" class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger modal-trigger" data-target="modal-signup">Sign Up</a>          
+                </li>
+           </ul>
+        </div>
+    <!-- </div> -->
+  </nav>
+  <div class="bg-secondary">
+    <header class="masthead bg-primary text-white text-center">
+        <div class="container d-flex align-items-center flex-column">
+            <!-- Masthead Avatar Image--><img class="masthead-avatar mb-1" src="assets/img/wolflogo.png" alt="" /><!-- Masthead Heading-->
+            <h1 class="masthead-heading text-uppercase mb-0">Eastlake Community Service Portal</h1>
+            <!-- Icon Divider-->
+            <div class="divider-custom divider-light">
+                <div class="divider-custom-line"></div>
+                <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+                <div class="divider-custom-line"></div>
+            </div>
+            <!-- ADMIN ACTIONS -->
+            <div class="center-align admin-actions" style="display: none; color: white;">
+                <!-- Student Detail MODAL -->
+                <div style="color: black;">
+                    <div id="modal-student-detail" class="modal">
+                        <div class="modal-content">
+                        <h4>Student Details</h4><br />
+                        <div id="studentdetail"></div>
+                        </div>
+                    </div>
+                </div>
+                <!-- <table>
+                    <tr>
+                        <td>
+                            <button onclick="showAll()">All Activities</button>
+                        </td>
+                        <td>
+                            <button onclick="showSearch()">Student Search</button>
+                        </td>
+                        <td>
+                            <button onclick="showHourCategories()">Hour Categories</button>
+                        </td>
+                    </tr>
+                </table> -->
+                <div class="center-align" id="allactivities" style="display: block;">
+                </div>
+                <!-- <div class="center-align" id="studenttotals" style="display: none;">
+                </div>
+                <div class="center-align" id="hourcategories" style="display: none;"> -->
+                    <!-- <form>
+                        <select name="numberhours">
+                            <option value="50" label="50"></option>
+                            <option value="100" label="100"></option>
+                            <option value="150" label="150"></option>
+                            <option value="200" label="200"></option>
+                        </select>
+
+                    </form> -->
+                </div>
+            </div>
+
+                <!-- SIGN UP MODAL -->
+            <div style="color: black;">
+                <div id="modal-signup" class="modal">
+                    <div class="modal-content">
+                    <h4>Sign up</h4><br />
+                    <form id="signup-form">
+                        <div class="input-field">
+                        <input type="email" id="signup-email" required />
+                        <label for="signup-email">Email address</label>
+                        </div>
+                        <div class="input-field">
+                        <input type="password" id="signup-password" required />
+                        <label for="signup-password">Choose password</label>
+                        </div>
+                        <div class="input-field">
+                        <input type="text" id="firstname" required />
+                        <label for="firstname">First Name</label>
+                        </div>
+                        <div class="input-field">
+                        <input type="text" id="lastname" required />
+                        <label for="lastname">Last Name</label>
+                        </div>
+                        <div class="input-field">
+                        <input type="number" id="gradyear" required />
+                        <label for="gradyear">Graduation Year</label>
+                        </div>
+                        <!-- <div class="row">
+                            <label for="gradyear">Graduation Year</label>
+                            <select name="gradyear" id="gradyear" required />
+                            <option value="2021">2021</option>
+                            <option value="2022">2022</option>
+                            <option value="2023">2023</option>
+                            <option value="2024">2024</option>
+                        </select>
+                        </div> -->
+                        <button class="btn green darken-2 z-depth-0">Sign up</button>
+                        <p class="error pink-text center-align"></p>
+                    </form>
+                    </div>
+                </div>
+            </div>
+                <!-- LOGIN MODAL -->
+            <div style="color: black;">
+                <div id="modal-login" class="modal">
+                    <div class="modal-content">
+                    <h4>Login</h4><br />
+                    <form id="login-form">
+                        <div class="input-field">
+                        <input type="email" id="login-email" required />
+                        <label for="login-email">Email address</label>
+                        </div>
+                        <div class="input-field">
+                        <input type="password" id="login-password" required />
+                        <label for="login-password">Your password</label>
+                        </div>
+                        <p><a href="pwdreset.html">Forgot your password?</a></p>
+                        <button class="btn green darken-2 z-depth-0">Login</button>
+                        <p class="error pink-text center-align"></p>
+                    </form>
+                    </div>
+                </div>
+            </div>
+
+                <!-- ACCOUNT MODAL -->
+            <div style="color: black;">
+                <div id="modal-account" class="modal">
+                    <div class="modal-content center-align">
+                    <h4>Account details</h4><br />
+                    <div class="account-details"></div>
+                    </div>
+                </div>
+            </div>
+                <!-- LOG TIME MODAL -->
+            <div style="color: black;">
+                <div id="modal-create" class="modal">
+                    <div class="modal-content">
+                    <h4>Log New Service Activity</h4><br />
+                    <form id="create-form">
+                        <div class="row">
+                                <input type="text" id="activityname" required>
+                                <label for="activityname">Activity Name</label>
+                        </div>
+                        <div class="row">
+                                <textarea id="description" class="materialize-textarea" ></textarea>
+                                <label for="description">Activity Description (Include date range if this is a long term activity)</label>
+                        </div>
+                        <div class="row">
+                                <input type="date" id="date" name="date" required>
+                                <label for="date">Activity End Date</label>
+                        </div>
+                        <div class="row">
+                            <input type="number" min="0" step=".25" id="hours" required>
+                            <label for="hours">Hours Worked</label>
+                        </div>
+                        <div class="row">
+                                <input type="text" id="contactname" >
+                                <label for="contactname">Contact Person</label>
+                        </div>
+                        <div class="row">
+                                <input type="text" id="contactphone" >
+                                <label for="contactphone">Contact Person's Phone Number</label>
+                        </div>
+                        <div class="row">
+                                <label>
+                                    <input type="checkbox" id="count">
+                                    <span>Are you a Key Club Member?</span>
+                                </label>
+                        </div>
+                        <div class="row">
+                                <label>
+                                    <input type="checkbox" id="event">
+                                    <span>Is this activity a Key Club Event?</span>
+                                </label>
+                        </div>
+                        <div class="row">
+                                <label>
+                                    <input type="checkbox" id="accurate" required>
+                                    <span>I verify that this is service form is accurate</span>
+                                </label>
+                        </div>
+                        <br>
+                        <button class="btn green darken-2 z-depth-0">Submit</button>
+                    </form>
+                    </div>
+                </div>
+            </div>
+
+            <div class="loginmessage">
+                    
+            </div>
+                <!-- GUIDE LIST -->
+                <div class="container" style="margin-top: 40px;">
+                    <div class="runningtotal"></div>
+                    <ul class="collapsible z-depth-0 activities" style="border: none;">
+
+                    </ul>
+                </div>
+        </div>
+    </header>
+</div>
+<iframe id="txtArea1" style="display:none"></iframe>
+
+<footer class='modal-footer bg-secondary'>
+    <p>Copyright 2020 - Eastlake High School</p>
+    <p>Questions? Need help? Contact us at eastlakeservice@gmail.com</p>
+</footer>
+  <!-- Bootstrap core JS-->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+  <!-- Third party plugin JS-->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+  <!-- Contact form JS-->
+  <script src="assets/mail/jqBootstrapValidation.js"></script>
+  <script src="assets/mail/contact_me.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/5.6.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/5.6.0/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/5.6.0/firebase-database.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/5.6.0/firebase-firestore.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/5.6.0/firebase-functions.js"></script>
+  <script>
+    // Initialize Firebase
+    var config = {
+    apiKey: "AIzaSyDNH42tsDocjFRXO28BZHm-_SWVFPptuqQ",
+    authDomain: "eastlakecommunityservice.firebaseapp.com",
+    databaseURL: "https://eastlakecommunityservice.firebaseio.com",
+    projectId: "eastlakecommunityservice"
+    };
+    firebase.initializeApp(config);
+    
+    // make auth and firestore references
+    const auth = firebase.auth();
+    const db = firebase.firestore();
+    var database = firebase.database();
+    const functions = firebase.functions();
+
+    // update firestore settings
+    db.settings({ timestampsInSnapshots: true });
+  </script>
+  <!-- Compiled and minified JavaScript -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/index.js"></script>
+</body>
+</html>
