@@ -1,5 +1,6 @@
 {
   "name": "website",
+  "homepage": "https://eastlake-key.github.io/community-service-tracker",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
