@@ -1,8 +1,13 @@
 module.exports = {
-  purge: [],
+  purge: [
+    "./src/**/*.html",
+    "./src/**/*.js",
+    "./src/**/*.jsx",
+    "./src/**/*.tsx",
+  ],
   theme: {
     fontFamily: {
-      text: ['Roboto', 'sans-serif'],
+      text: ["Roboto", "sans-serif"],
     },
     extend: {
       colors: {
