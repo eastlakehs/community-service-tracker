@@ -4,5 +4,4 @@ cd website
 yarn
 yarn build
 exit $?
-#echo "Exited with '$?'"
 touch build/.nojekyll
