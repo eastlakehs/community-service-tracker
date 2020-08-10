@@ -19,7 +19,7 @@
 # Work in progress 
 ## Cloning origin website with react components. Origin website URL: https://eastlakecommunityservice.web.app/.
 ### ~~Header~~ : https://github.com/eastlake-key/community-service-tracker/pull/7
-### Body of main page : Not Done @zjjc123 assigned
+### ~~Body of main page~~ : https://github.com/eastlake-key/community-service-tracker/pull/21
 ### Footer : Not Done
 ### Login UI: Not Done
 ### Events Component: Not Done
