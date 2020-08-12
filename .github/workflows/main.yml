@@ -2,9 +2,6 @@ name: CI
 
 # Run on any commit or pr on any branch
 on:
-  push:
-    branches:
-      - '**'  
   pull_request:
     branches:
       - '**'
