@@ -19,13 +19,6 @@ jobs:
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
     - uses: actions/checkout@v2
 
-    - name: Build Website
+    - name: Run tests
       run: |
-        sh Actions/build.sh
-
-    - name: Github Pages 🚀
-      uses: JamesIves/github-pages-deploy-action@releases/v3
-      with:
-        ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
-        BRANCH: gh-pages # The branch the action should deploy to.
-        FOLDER: website/build # The folder the action should deploy.
+        echo "nothing happened"
