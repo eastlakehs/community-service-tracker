@@ -3,6 +3,7 @@ import React from "react";
 
 import PageHeader from "./Pages/Header/pageHeader";
 import Body from "./Pages/Body/body"
+import Footer from "./Pages/Footer/footer";
 /*function App() {
   return (
     <div className="App">
@@ -27,9 +28,10 @@ import Body from "./Pages/Body/body"
 
 const App = () => {
   return (
-    <div className="h-screen bg-eastlake-grey font-text">
+    <div className="flex flex-col min-h-screen bg-eastlake-grey font-text">
       <PageHeader />
       <Body />
+      <Footer />
     </div>
   );
 };
