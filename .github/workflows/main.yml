@@ -16,9 +16,11 @@ jobs:
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
     - uses: actions/checkout@v2
 
-    - name: Run tests
+    - name: Generate Website Screenshots
       run: |
-        echo "nothing happened"
+         python -m pip install --upgrade pip
+         pip install selenium
+         python Actions/screenshots/screenshot.py
         
         
     - uses: actions/upload-artifact@v2
