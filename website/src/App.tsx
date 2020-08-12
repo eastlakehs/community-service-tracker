@@ -1,34 +1,17 @@
 import React from "react";
 //import logo from "./logo.svg";
-
+import Helmet from "./Pages/Header/helmet";
 import PageHeader from "./Pages/Header/pageHeader";
-import Body from "./Pages/Body/body"
+import Body from "./Pages/Body/body";
 import Footer from "./Pages/Footer/footer";
-/*function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
-*/
 
 const App = () => {
   return (
     <div className="flex flex-col min-h-screen bg-eastlake-grey font-text">
+      <Helmet
+        title="EHS tracker"
+        description="Main page for the eastlake service tracker website where students can record their volunteer hours."
+      />
       <PageHeader />
       <Body />
       <Footer />
