@@ -4,7 +4,7 @@ const Body = () => {
     return (
         <div className={"flex-1 flex-grow"}>
             <div className={"flex justify-center"}>
-                <img className={"py-0 lg:py-10 w-1/3 lg:w-1/6"} src={require("../../Images/wolflogo.png")} alt={""} />
+                <img className={"py-0 lg:py-10 w-1/3 h-1/3 lg:w-1/6 lg:h-1/6"} src={require("../../Images/wolflogo.png")} alt={""} />
             </div>
             <div className={"flex flex-col justify-center"}>
                 <h1 className={"text-center text-white py-2 lg:py-3 text-4xl sm:text-4xl lg:text-5xl xl:text-6xl"}>EASTLAKE COMMUNITY SERVICE PORTAL</h1>
