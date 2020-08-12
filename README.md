@@ -1,5 +1,14 @@
 <h1 align="center">Community Service Tracker</h1>
 <p align="center">
+                
+  <a href="https://www.netlify.com">
+    <img src="https://www.netlify.com/img/global/badges/netlify-color-accent.svg" alt="Deploys by Netlify" />
+  </a>
+  
+  <a href="https://github.com/eastlake-key/community-service-tracker/workflows/CI/badge.svg">
+    <img src="https://github.com/eastlake-key/community-service-tracker/workflows/CI/badge.svg" alt="CI github actions build" />
+  </a>
+  
 <!--  <a href="https://img.shields.io/badge/Minimized-4KB-brightgreen.svg"> EX: How to make custom badges with shields.io API --!>
 <!--    <img src="https://img.shields.io/badge/Minimized-4KB-brightgreen.svg" /> --!>
 <!--  </a> --!>
