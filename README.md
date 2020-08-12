@@ -1,4 +1,4 @@
-<h1 align="center">Community Service Tracker</h1>
+<h1 align="center">Community Service Tracker</h1> 
 
 <p align="center">
                 
