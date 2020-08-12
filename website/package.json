@@ -1,6 +1,9 @@
 {
   "name": "website",
-  //"homepage": "https://eastlake-key.github.io/community-service-tracker",
+  "@comments": {
+    "homepage": "the homepage variable can be used to change the default mount point of a react app. Ex: https://eastlake-key.github.io/community-service-tracker",
+    "homepage2": "however, since we are using a root domain path, such as ehs-service.org, we do not have to set a custom homepage variable"
+  },
   "version": "0.1.0",
   "private": true,
   "dependencies": {
