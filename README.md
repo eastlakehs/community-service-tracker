@@ -13,7 +13,8 @@
 </p>
 
 <p align="center">
-   Repo for the eastlake community service tracker website
+   Repo for the eastlake community service tracker website<br>
+   <a href="https://ehs-service.org">ehs-service.org</a>
 </p>
 
 <p align="center">
