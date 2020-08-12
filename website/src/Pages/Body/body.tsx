@@ -2,7 +2,7 @@ import React from "react";
 
 const Body = () => {
     return (
-        <div className={"flex-1"}>
+        <div className={"flex-1 flex-grow"}>
             <div className={"flex justify-center"}>
                 <img className={"py-10 w-1/3 lg:w-1/6"} src={require("../../Images/wolflogo.png")} alt={""} />
             </div>
