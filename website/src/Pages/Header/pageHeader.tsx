@@ -11,7 +11,7 @@ const HeaderButtons: React.FunctionComponent<{ title: string }> = ({
 };
 
 const PageHeader = () => {
-  const [show_nav, set_nav] = useState(true);
+  const [show_nav, set_nav] = useState(false);
   return (
     <nav className="mb-10 bg-top-red p-6 flex flex-wrap font-black item-center justify-between">
       <div className="text-white mr-6 ">
