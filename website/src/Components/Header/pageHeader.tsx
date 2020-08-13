@@ -1,25 +1,40 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import useIsSignedIn from "../../Firebase/linkAuth/useIsSignedIn";
+import { signOut } from "../../Firebase/linkAuth/signOut";
 /* eslint-disable jsx-a11y/anchor-is-valid */
-const HeaderButtons: React.FunctionComponent<{ title: string }> = ({
-  title,
-}) => {
+
+const HeaderButtons: React.FunctionComponent<{}> = () => {
   const signedIn = useIsSignedIn();
   // Display user email adress if the user is signed in
-  if (signedIn && title === "Login" && typeof signedIn === "string") {
+  if (signedIn && typeof signedIn === "string") {
     return (
-      <a className="block lg:inline-block text-white mr-6 mt-2 lg:mt-auto">
-        {signedIn}
-      </a>
+      <>
+        <a className="block lg:inline-block text-white mr-6 mt-2 lg:mt-auto">
+          {signedIn}
+        </a>
+        <a
+          href="#"
+          onClick={async (e) => {
+            e.preventDefault();
+            const error = await signOut();
+            if (error) {
+              console.log(error);
+            }
+          }}
+          className="block lg:inline-block text-white mr-6 mt-2 lg:mt-auto"
+        >
+          Logout
+        </a>
+      </>
     );
   }
   return (
     <Link
       className="block lg:inline-block text-white mr-6 mt-2 lg:mt-auto"
-      to={"/" + title}
+      to={"/login"}
     >
-      {title}
+      Login
     </Link>
   );
 };
@@ -29,9 +44,11 @@ const PageHeader = () => {
   return (
     <nav className="mb-10 bg-top-red p-6 flex flex-wrap font-black item-center justify-between">
       <div className="text-white mr-6 ">
-        <span className="text-xl tracking-tight">
-          Wolf Pack Service Tracker
-        </span>
+        <Link to="/">
+          <span className="text-xl tracking-tight">
+            Wolf Pack Service Tracker
+          </span>
+        </Link>
       </div>
       <div className={`block lg:hidden`}>
         <button
@@ -53,8 +70,7 @@ const PageHeader = () => {
         className={`${show_nav ? "block" : "hidden"} lg:block w-full lg:w-auto`}
       >
         <div className="text-lg">
-          <HeaderButtons title={"Login"} />
-          <HeaderButtons title={"Track time"} />
+          <HeaderButtons />
         </div>
       </div>
     </nav>
