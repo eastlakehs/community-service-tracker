@@ -1,13 +1,24 @@
-import firebase from "firebase";
+import * as firebase from "firebase/app";
+import "firebase/auth";
+import "firebase/firestore";
 
-let firebaseConfig = {
-  apiKey: "placeholder",
-  authDomain: "placeholder",
-  databaseURL: "placeholder",
-  projectId: "placeholder",
-  storageBucket: "placeholder",
-  messagingSenderId: "placeholder",
-  appId: "placeholder",
+/** Configuration for firebase project. The apiKey is NOT private information. */
+const firebaseConfig = {
+  apiKey: "AIzaSyClj1HmSNOVdGBsTVBceJvWU-YvobG9Oqc",
+  authDomain: "community-ser.firebaseapp.com",
+  databaseURL: "https://community-ser.firebaseio.com",
+  projectId: "community-ser",
+  storageBucket: "community-ser.appspot.com",
+  messagingSenderId: "77950684711",
+  appId: "1:77950684711:web:997100f34877ec7ae74802",
+};
+
+/** Documentation at https://firebase.google.com/docs/auth/web/passing-state-in-email-actions#passing_statecontinue_url_in_email_actions */
+const actionCodeSettings = {
+  // The redirect URL
+  url: "https://ehs-service.org",
+  handleCodeInApp: false,
+  dynamicLinkDomain: undefined,
 };
 
 if (firebase.apps.length === 0) {
@@ -15,4 +26,4 @@ if (firebase.apps.length === 0) {
 }
 let db = firebase.firestore();
 
-export { db };
+export { db, firebase, actionCodeSettings };
