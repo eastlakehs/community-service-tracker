@@ -1,7 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 import sendEmailAuth from "../../Firebase/linkAuth/sendEmailAuth";
-import { stringify } from "querystring";
 
 type emailState =
   | "base"
@@ -41,7 +40,7 @@ const UserHint: React.FunctionComponent<{ state: emailState }> = ({
 
 const basicEmailValidation = (email: string) => {
   if (
-    email.endsWith("@lwsd.org") &&
+    //email.endsWith("@lwsd.org") &&
     email.includes(".") &&
     email.includes("@")
   ) {

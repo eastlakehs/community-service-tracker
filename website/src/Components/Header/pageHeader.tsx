@@ -1,9 +1,19 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import useIsSignedIn from "../../Firebase/linkAuth/useIsSignedIn";
 /* eslint-disable jsx-a11y/anchor-is-valid */
 const HeaderButtons: React.FunctionComponent<{ title: string }> = ({
   title,
 }) => {
+  const signedIn = useIsSignedIn();
+  // Display user email adress if the user is signed in
+  if (signedIn && title === "Login" && typeof signedIn === "string") {
+    return (
+      <a className="block lg:inline-block text-white mr-6 mt-2 lg:mt-auto">
+        {signedIn}
+      </a>
+    );
+  }
   return (
     <Link
       className="block lg:inline-block text-white mr-6 mt-2 lg:mt-auto"
@@ -43,7 +53,6 @@ const PageHeader = () => {
         className={`${show_nav ? "block" : "hidden"} lg:block w-full lg:w-auto`}
       >
         <div className="text-lg">
-          <HeaderButtons title={"Account"} />
           <HeaderButtons title={"Login"} />
           <HeaderButtons title={"Track time"} />
         </div>

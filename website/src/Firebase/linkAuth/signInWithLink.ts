@@ -1,6 +1,6 @@
 import { firebase } from "../setup";
 
-const signInWithLink = async () => {
+const signInwithLink = async () => {
   // Confirm the link is a sign-in with email link.
   if (firebase.auth().isSignInWithEmailLink(window.location.href)) {
     var email = window.localStorage.getItem("emailForSignIn");
@@ -19,4 +19,4 @@ const signInWithLink = async () => {
   return null;
 };
 
-export default signInWithLink;
+export default signInwithLink;
