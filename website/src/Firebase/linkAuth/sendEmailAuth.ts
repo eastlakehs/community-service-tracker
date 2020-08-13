@@ -5,6 +5,7 @@ const sendEmailAuth = async (email: string) => {
     .auth()
     .sendSignInLinkToEmail(email, actionCodeSettings)
     .catch((e) => {
+      console.log(e);
       return null;
     });
   if (result == null) return null;

@@ -14,10 +14,10 @@ const firebaseConfig = {
 };
 
 /** Documentation at https://firebase.google.com/docs/auth/web/passing-state-in-email-actions#passing_statecontinue_url_in_email_actions */
-const actionCodeSettings = {
+const actionCodeSettings: firebase.auth.ActionCodeSettings = {
   // The redirect URL
   url: "https://ehs-service.org",
-  handleCodeInApp: false,
+  handleCodeInApp: true,
   dynamicLinkDomain: undefined,
 };
 

@@ -1,12 +1,16 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 /* eslint-disable jsx-a11y/anchor-is-valid */
 const HeaderButtons: React.FunctionComponent<{ title: string }> = ({
   title,
 }) => {
   return (
-    <a className="block lg:inline-block text-white mr-6 mt-2 lg:mt-auto">
+    <Link
+      className="block lg:inline-block text-white mr-6 mt-2 lg:mt-auto"
+      to={"/" + title}
+    >
       {title}
-    </a>
+    </Link>
   );
 };
 
@@ -40,7 +44,7 @@ const PageHeader = () => {
       >
         <div className="text-lg">
           <HeaderButtons title={"Account"} />
-          <HeaderButtons title={"Logout"} />
+          <HeaderButtons title={"Login"} />
           <HeaderButtons title={"Track time"} />
         </div>
       </div>
