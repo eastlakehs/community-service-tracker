@@ -21,9 +21,8 @@ jobs:
          pip3 install --upgrade pip
          export BROWSERSTACK_KEY=${{secrets.BROWSERSTACK_KEY}}
          pip3 install selenium
-         python3 Actions/screenshots/screenshot.py
-        
-        
+         cd Action/screenshots && python3 screenshot.py
+         
     - uses: actions/upload-artifact@v2
       with:
         name: Screenshots
