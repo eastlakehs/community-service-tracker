@@ -8,7 +8,8 @@ const sendEmailAuth = async (email: string) => {
       console.log(e);
       return null;
     });
-  if (result == null) return null;
+  console.log(result);
+  if (result === null) return null;
   // The link was successfully sent - store email.
   window.localStorage.setItem("emailForSignIn", email);
   return true;
