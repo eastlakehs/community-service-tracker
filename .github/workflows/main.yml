@@ -18,9 +18,10 @@ jobs:
 
     - name: Generate Website Screenshots
       run: |
-         python -m pip install --upgrade pip
-         pip install selenium
-         python Actions/screenshots/screenshot.py
+         pip3 install --upgrade pip
+         export BROWSERSTACK_KEY=${{secrets.BROWSERSTACK_KEY}}
+         pip3 install selenium
+         python3 Actions/screenshots/screenshot.py
         
         
     - uses: actions/upload-artifact@v2
