@@ -29,6 +29,43 @@
 ### Login UI: Not Done
 ### Events Component: Not Done
 
+# Dependencies
+## Browserstack + selenium
+
+Generates screenshots for website based on ```Actions/screenshots/screenshot.py```. Screenshots are automatically uploaded as artifacts for each pull request to verify any significant UI breaking changes and ensure compatibility across platforms. 
+
+Current platforms added to the config include: 
+```
+iPhone 8 (Safari)
+iPhone 8 Plus (Safari)
+iPhone 11 Pro Max (Safari)
+Samsung Galaxy S20 (Chrome)
+```
+
+## Netlify 
+
+Generates automatic preview builds for each pull request in order to demo for breaking changes. Once merged to master, netlify will automatically upate the live website to the preview build. 
+
+## React-helmet 
+
+Managment for the head element of the website (language tags, description, page title, etc). 
+
+## React 
+
+UI framework 
+
+## Redux 
+
+State managment library 
+
+## Tailwind CSS
+
+Utility CSS Library 
+
+## Firebase
+
+Email link authentication and firestore database
+
 # Common Problems encountered 
 ## Release build shows blank page and console.log shows "nothing was returned from render"
 This is mostly likely due to a comment being placed above a return line, causing babel to transform it (incorrectly) and break syntax.
