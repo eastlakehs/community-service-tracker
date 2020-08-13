@@ -42,9 +42,17 @@ iPhone 11 Pro Max (Safari)
 Samsung Galaxy S20 (Chrome)
 ```
 
+You can access screenshots by going to the artifact section of a github actions run and downloading the zip file. 
+<img width="1680" alt="Screen Shot 2020-08-12 at 5 55 13 PM" src="https://user-images.githubusercontent.com/52898838/90082918-e365f780-dcc5-11ea-9632-7e188a03585e.png">
 ## Netlify 
 
 Generates automatic preview builds for each pull request in order to demo for breaking changes. Once merged to master, netlify will automatically upate the live website to the preview build. 
+
+
+<img width="932" alt="Screen Shot 2020-08-12 at 6 04 01 PM" src="https://user-images.githubusercontent.com/52898838/90083025-38a20900-dcc6-11ea-9d6e-9d0243722d67.png">
+
+<img width="741" alt="Screen Shot 2020-08-12 at 6 05 34 PM" src="https://user-images.githubusercontent.com/52898838/90083087-71da7900-dcc6-11ea-9ce1-171e46159b53.png">
+
 
 ## React-helmet 
 
