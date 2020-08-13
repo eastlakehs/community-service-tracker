@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Body = () => {
   return (
@@ -18,20 +19,24 @@ const Body = () => {
         >
           EASTLAKE COMMUNITY SERVICE PORTAL
         </h1>
-        <h2
-          className={
-            "text-center text-white py-2 lg:py-3 text-base sm:text-xl lg:text-2xl xl:text-3xl"
-          }
-        >
-          Login to track service activities
-        </h2>
-        <h3
-          className={
-            "text-center font-light text-white py-2 lg:py-3 text-sm sm:text-base lg:text-lg xl:text-xl"
-          }
-        >
-          First time here? Sign up with your lwsd account
-        </h3>
+        <Link to="/login">
+          <h2
+            className={
+              "text-center text-white py-2 lg:py-3 text-base sm:text-xl lg:text-2xl xl:text-3xl"
+            }
+          >
+            Login to track service activities
+          </h2>
+        </Link>
+        <Link to="/login">
+          <h3
+            className={
+              "text-center font-light text-white py-2 lg:py-3 text-sm sm:text-base lg:text-lg xl:text-xl"
+            }
+          >
+            An OTP login link will be sent to your email adress.
+          </h3>
+        </Link>
       </div>
     </div>
   );
