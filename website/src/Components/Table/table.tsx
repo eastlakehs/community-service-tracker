@@ -3,6 +3,8 @@ import React from "react";
 import Filter from "./filter"
 import Page from "./page";
 
+/* Table CSS Credit: https://tailwindcomponents.com/component/table-responsive-with-filters */
+
 const CSTable: React.FunctionComponent<{ header: any, body: any }> = ({ header, body }) => {
     const generateHeader = () => {
         return header.map((row: any) => {
