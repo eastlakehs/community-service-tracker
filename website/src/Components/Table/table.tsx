@@ -12,7 +12,7 @@ const CSTable: React.FunctionComponent<{ header: any, body: any, className: stri
             return (<tr >
                 <td className="border px-4 py-2" key={row.Name}>{row.Name}</td>
                 <td className="border px-4 py-2" key={row.Description}>{row.Description}</td>
-                <td className="border px-4 py-2" key={row.Hours}>{row.Hours}</td>
+                <td className="border px-4 py-2" key={row.Hour}>{row.Hour}</td>
                 <td className="border px-4 py-2" key={row.Date}>{row.Date}</td>
             </tr>)
         })
