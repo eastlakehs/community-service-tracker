@@ -1,5 +1,36 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import CSTable from "../Table/table";
+
+const testData = {
+  header : ["Name", "Description", "Hour", "Date"],
+  data: [
+    {
+      Name: "Test Name",
+      Description: "Test Description",
+      Hour: 34,
+      Date: "3/2/12334"
+    },
+    {
+      Name: "Test Name",
+      Description: "Test Description",
+      Hour: 34,
+      Date: "3/2/12334"
+    },
+    {
+      Name: "Test Name",
+      Description: "Test Description",
+      Hour: 34,
+      Date: "3/2/12334"
+    },
+    {
+      Name: "Test Name",
+      Description: "Test Description",
+      Hour: 34,
+      Date: "3/2/12334"
+    },
+  ]
+}
 
 const Body = () => {
   return (
@@ -38,6 +69,7 @@ const Body = () => {
           </h3>
         </Link>
       </div>
+      <CSTable header={testData.header} body={testData.data} className={"table table-auto"}/>
     </div>
   );
 };
