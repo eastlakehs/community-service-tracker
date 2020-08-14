@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import CSTable from "../Table/table";
 
 const testData = {
-  header : ["Name", "Description", "Hour", "Date"],
+  header: ["Name", "Description", "Hour", "Date"],
   data: [
     {
       Name: "Test Name",
@@ -69,7 +69,7 @@ const Body = () => {
           </h3>
         </Link>
       </div>
-      <CSTable header={testData.header} body={testData.data} className={"table table-auto"}/>
+      <CSTable header={testData.header} body={testData.data} />
     </div>
   );
 };
