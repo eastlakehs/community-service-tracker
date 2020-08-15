@@ -1,8 +1,8 @@
 import { configureStore } from "@reduxjs/toolkit";
-import exampleSlice from "./exampleSlice";
+import tableDataSlice from "./tableDataSlice";
 
 export default configureStore({
   reducer: {
-    example: exampleSlice,
+    tableData: tableDataSlice,
   },
 });

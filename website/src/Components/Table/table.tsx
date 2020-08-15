@@ -1,14 +1,14 @@
-import React from "react";
-
+import React, { useState } from "react";
 import Filter from "./filter";
-import Page from "./page";
-
-import { tableDataType } from "../Body/body";
+import PageController from "./pageController";
+import { tableDataType } from "../Table/table.types";
 /* Table CSS Credit: https://tailwindcomponents.com/component/table-responsive-with-filters */
 
-const CSTable: React.FunctionComponent<{ data: tableDataType }> = ({
-  data,
-}) => {
+const CSTable: React.FunctionComponent<{
+  data: tableDataType;
+  curEntry: number;
+  endEntry: number;
+}> = ({ data, curEntry, endEntry }) => {
   const generateHeader = () => {
     return data.header.map((header) => {
       return (
@@ -32,18 +32,21 @@ const CSTable: React.FunctionComponent<{ data: tableDataType }> = ({
     </td>
   );
 
-  const generateTableData = () => {
-    return data.data.map((row) => {
-      return (
+  const generateTableData = (startPosition: number, endPosition: number) => {
+    const ret_elements: React.ReactElement[] = [];
+    for (let i = startPosition; i <= endPosition; i++) {
+      ret_elements.push(
         <tr>
-          <TableRow name={row.Name} />
-          <TableRow name={row.Description} />
-          <TableRow name={row.Hours} />
-          <TableRow name={row.Date} />
+          <TableRow name={data.data[i].Name} />
+          <TableRow name={data.data[i].Description} />
+          <TableRow name={data.data[i].Hours} />
+          <TableRow name={data.data[i].Date} />
         </tr>
       );
-    });
+    }
+    return ret_elements;
   };
+
   return (
     <div className="container mx-auto px-4 sm:px-8">
       <div className="py-8">
@@ -57,10 +60,10 @@ const CSTable: React.FunctionComponent<{ data: tableDataType }> = ({
                 </tr>
               </thead>
               <tbody>
-                <>{generateTableData()}</>
+                <>{generateTableData(curEntry, endEntry)}</>
               </tbody>
             </table>
-            <Page />
+            <PageController />
           </div>
         </div>
       </div>

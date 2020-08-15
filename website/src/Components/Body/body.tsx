@@ -1,47 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import CSTable from "../Table/table";
-
-export interface tableDataType {
-  header: ["Name", "Description", "Hour", "Date"];
-  data: {
-    Name: string;
-    Description: string;
-    Hours: number;
-    Date: string;
-  }[];
-}
-
-const testData: tableDataType = {
-  header: ["Name", "Description", "Hour", "Date"],
-  data: [
-    {
-      Name: "Test Name",
-      Description:
-        "Test description is really long here and \n\nwill cause the componenet to overflow and create really bad stuff",
-      Hours: 34,
-      Date: "3/2/12334",
-    },
-    {
-      Name: "Test Name",
-      Description: "Test Description",
-      Hours: 34,
-      Date: "3/2/12334",
-    },
-    {
-      Name: "Test Name",
-      Description: "Test Description",
-      Hours: 34,
-      Date: "3/2/12334",
-    },
-    {
-      Name: "Test Name",
-      Description: "Test Description",
-      Hours: 34,
-      Date: "3/2/12334",
-    },
-  ],
-};
+import TableController from "../Table/tableController";
 
 const Body = () => {
   return (
@@ -80,7 +39,7 @@ const Body = () => {
           </h3>
         </Link>
       </div>
-      <CSTable data={testData} />
+      <TableController />
     </div>
   );
 };
