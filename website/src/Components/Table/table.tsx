@@ -4,6 +4,10 @@ import PageController from "./pageController";
 import { tableDataType } from "../Table/table.types";
 /* Table CSS Credit: https://tailwindcomponents.com/component/table-responsive-with-filters */
 
+const TableHeaderStyle: string = "px-2 py-2 sm:px-3 sm:py-3 md:px-4 md:py-4 lg:px-5 lg:py-5 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider"
+
+const ButtonStyle: string = "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+
 const CSTable: React.FunctionComponent<{
   data: tableDataType;
   curEntry: number;
@@ -13,7 +17,7 @@ const CSTable: React.FunctionComponent<{
     return data.header.map((header) => {
       return (
         <th
-          className="px-2 py-2 sm:px-3 sm:py-3 md:px-4 md:py-4 lg:px-5 lg:py-5 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider"
+          className={TableHeaderStyle}
           key={header}
         >
           {header}
@@ -21,7 +25,7 @@ const CSTable: React.FunctionComponent<{
       );
     });
   };
-  const TableRow: React.FunctionComponent<{ name: string | number }> = ({
+  const TableCell: React.FunctionComponent<{ name: string | number }> = ({
     name,
   }) => (
     <td
@@ -32,15 +36,26 @@ const CSTable: React.FunctionComponent<{
     </td>
   );
 
+  const EditButton: React.FunctionComponent<{ name: string }> = ({
+    name,
+  }) => (
+    <td className="px-2 py-2 sm:px-3 sm:py-3 md:px-4 md:py-4 lg:px-5 lg:py-5 border-b border-gray-200 bg-white text-sm">
+      <button className={ButtonStyle}>
+        {name}
+      </button>
+    </td>
+  );
+
   const generateTableData = (startPosition: number, endPosition: number) => {
     const ret_elements: React.ReactElement[] = [];
     for (let i = startPosition; i <= endPosition; i++) {
       ret_elements.push(
         <tr>
-          <TableRow name={data.data[i].Name} />
-          <TableRow name={data.data[i].Description} />
-          <TableRow name={data.data[i].Hours} />
-          <TableRow name={data.data[i].Date} />
+          <TableCell name={data.data[i].Name} />
+          <TableCell name={data.data[i].Description} />
+          <TableCell name={data.data[i].Hours} />
+          <TableCell name={data.data[i].Date} />
+          <EditButton name="Edit" />
         </tr>
       );
     }
@@ -57,6 +72,9 @@ const CSTable: React.FunctionComponent<{
               <thead>
                 <tr>
                   <>{generateHeader()}</>
+                  <th className={TableHeaderStyle}>
+                    Operation
+                  </th>
                 </tr>
               </thead>
               <tbody>
