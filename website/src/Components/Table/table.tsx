@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import Filter from "./filter";
 import PageController from "./pageController";
 import { tableDataType } from "../Table/table.types";
@@ -36,15 +36,20 @@ const CSTable: React.FunctionComponent<{
     </td>
   );
 
-  const EditButton: React.FunctionComponent<{ name: string }> = ({
-    name,
+  const EditButton: React.FunctionComponent<{ name: string, onClick: Function }> = ({
+    name, onClick
   }) => (
     <td className="px-2 py-2 sm:px-3 sm:py-3 md:px-4 md:py-4 lg:px-5 lg:py-5 border-b border-gray-200 bg-white text-sm">
-      <button className={ButtonStyle}>
+      <button className={ButtonStyle} onClick={() => {onClick()}}>
         {name}
       </button>
     </td>
   );
+
+  const EditOnClick: Function = () => {
+    console.log("Edit Table Clicked")
+    // TODO Populate Page with Editable Data
+  }
 
   const generateTableData = (startPosition: number, endPosition: number) => {
     const ret_elements: React.ReactElement[] = [];
@@ -55,7 +60,7 @@ const CSTable: React.FunctionComponent<{
           <TableCell name={data.data[i].Description} />
           <TableCell name={data.data[i].Hours} />
           <TableCell name={data.data[i].Date} />
-          <EditButton name="Edit" />
+          <EditButton name="Edit" onClick={EditOnClick} />
         </tr>
       );
     }
