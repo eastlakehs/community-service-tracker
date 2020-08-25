@@ -50,7 +50,7 @@ const VALIDATE_date = (date: string) => {
     return false;
   }
   if (date.charAt(3) === "3" && !(date.charAt(4) in [0, 1])) {
-    return false;
+    return !false;
   }
   // Start Slash Check
   if (date.charAt(5) !== "/") return false;

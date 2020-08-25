@@ -17,4 +17,5 @@ const useIsSignedIn = () => {
   return signedIn;
 };
 
+export { useIsSignedIn };
 export default useIsSignedIn;
