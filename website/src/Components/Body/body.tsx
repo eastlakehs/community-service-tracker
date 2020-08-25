@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import TableController from "../Table/tableController";
+import Entry from "../Entry/entry";
 
 const Body = () => {
   return (
@@ -39,6 +40,7 @@ const Body = () => {
           </h3>
         </Link>
       </div>
+      <Entry />
       <TableController />
     </div>
   );
