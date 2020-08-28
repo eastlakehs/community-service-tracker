@@ -1,5 +1,5 @@
 import React from "react";
-import { tableDataType } from "../Table/table.types";
+import { initialStateType } from "../../Redux/userDataSlice";
 /* Table CSS Credit: https://tailwindcomponents.com/component/table-responsive-with-filters */
 
 const TableHeaderStyle: string =
@@ -9,7 +9,7 @@ const ButtonStyle: string =
   "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded";
 
 const CSTable: React.FunctionComponent<{
-  data: tableDataType;
+  data: initialStateType;
 }> = ({ data }) => {
   const generateHeader = () => {
     return data.header.map((header) => {
@@ -53,19 +53,17 @@ const CSTable: React.FunctionComponent<{
   };
 
   const generateTableData = () => {
-    const ret_elements: React.ReactElement[] = [];
-    for (let i = 0; i < data.data.length; i++) {
-      ret_elements.push(
+    return Object.keys(data.data).map((entry) => {
+      return (
         <tr>
-          <TableCell name={data.data[i].Name} />
-          <TableCell name={data.data[i].Description} />
-          <TableCell name={data.data[i].Hours} />
-          <TableCell name={data.data[i].Date} />
+          <TableCell name={data.data[entry].Name} />
+          <TableCell name={data.data[entry].Description} />
+          <TableCell name={data.data[entry].Hours} />
+          <TableCell name={data.data[entry].Date} />
           <EditButton name="Edit" onClick={EditOnClick} />
         </tr>
       );
-    }
-    return ret_elements;
+    });
   };
 
   return (

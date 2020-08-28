@@ -13,7 +13,7 @@ const useSyncUserData = () => {
     let unsubscribe: null | (() => void) = null;
     if (isSignedIn && typeof isSignedIn === "string") {
       unsubscribe = db
-        .collection("activities")
+        .collection("users")
         .doc(isSignedIn)
         .collection("entries")
         .onSnapshot((querySnapshot) => {
@@ -21,6 +21,7 @@ const useSyncUserData = () => {
             const DocumentData = change.doc.data() as firestoreDocumentType;
             if (change.type === "added") {
               console.log("added");
+              console.log(change.doc.data());
               dispatch(
                 setDocument({
                   data: DocumentData,

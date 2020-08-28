@@ -1,17 +1,9 @@
 /** Holds the data of a firestore document */
 export interface firestoreDocumentType {
-  activityName: string;
-  allowToCountForKeyclub: string;
-  contactInfo: string;
-  contactPerson: string;
-  date: string;
-  description: string;
-  graduationYear: string;
-  hours: string;
-  keyclub: "Yes" | "No";
-  name: string;
-  timestamp: string;
-  verify: "Yes" | "No";
+  Name: string;
+  Description: string;
+  Hours: string;
+  Date: string;
 }
 
 /** Holds both the data and the key value of a firestore Document.  */
@@ -23,4 +15,14 @@ export interface fireStoreDocumentSnapshot {
 /** Holds the entirety of a users firestore data */
 export interface fireStoreUserData {
   [key: string]: firestoreDocumentType;
+}
+
+export interface tableDataType {
+  header: ["Name", "Description", "Hour", "Date"];
+  data: {
+    Name: string;
+    Description: string;
+    Hours: number;
+    Date: string;
+  }[];
 }

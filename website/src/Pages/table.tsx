@@ -3,9 +3,12 @@ import Helmet from "../Components/Header/helmet";
 import PageHeader from "../Components/Header/pageHeader";
 import Footer from "../Components/Footer/footer";
 
+import { useSyncUserData } from "../Firebase/firestore/useUserData";
+
 import TableController from "../Components/Table/tableController";
 
 const Table: React.FC<{}> = () => {
+  useSyncUserData();
   return (
     <div className="flex flex-col min-h-screen bg-eastlake-grey font-text">
       <Helmet

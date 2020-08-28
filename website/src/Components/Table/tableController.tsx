@@ -2,10 +2,11 @@ import React from "react";
 import CSTable from "./table";
 
 import { useSelector } from "react-redux";
-import { selectTableState } from "../../Redux/tableDataSlice";
+import { selectUserData } from "../../Redux/userDataSlice";
 
 const TableController: React.FunctionComponent<{}> = () => {
-  const data = useSelector(selectTableState).data;
+  const data = useSelector(selectUserData);
+  console.log(data);
   return <CSTable data={data} />;
 };
 
