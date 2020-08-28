@@ -1,0 +1,17 @@
+{
+  "name": "fbackup-res",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "typescript": "tsc --project tsconfig.json",
+    "backup": "npm run typescript && node build/backup.js",
+    "restore": "npm run typescript && node build/restore.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "firebase-admin": "^9.1.1"
+  }
+}
