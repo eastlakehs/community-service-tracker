@@ -1,6 +1,6 @@
 import React from "react";
 
-import { StringField } from "../Components/Entry/entry";
+import { StringField, CheckBox } from "../Components/Entry/entry";
 import Helmet from "../Components/Header/helmet";
 import PageHeader from "../Components/Header/pageHeader";
 import Footer from "../Components/Footer/footer";
@@ -22,7 +22,7 @@ const Edit: React.FC<{}> = () => {
       />
       <PageHeader />
       <div className="mb-auto">
-        <form className="flex flex-col items-center">
+        <form className="w-full max-w-lg container mx-auto px-4 sm:px-8 items-center">
           <h1 className="text-center text-gray-200 py-2 lg:py-3 text-4xl sm:text-4xl lg:text-5xl xl:text-6xl">
             Activity Edit Screen
           </h1>
@@ -32,9 +32,10 @@ const Edit: React.FC<{}> = () => {
           />
           <StringField name="Description" placeholder="I did ....." />
           <StringField name="Date" placeholder="December-1-2020" />
-          <StringField name="Key Club Event" placeholder="Yes or No" />
-          <StringField name="Contact Name" placeholder="Jonathan Swift" />
           <StringField name="Hours" placeholder="Ex: 5" />
+          <StringField name="Contact Name" placeholder="Jonathan Swift" />
+          <StringField name="Contact Phone Number" placeholder="(425) 123-4567" />
+          <CheckBox label="Key Club Event" />
           <FormSubmitButton />
         </form>
       </div>
