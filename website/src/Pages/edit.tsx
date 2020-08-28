@@ -18,6 +18,8 @@ const FormSubmitButton: React.FC<{}> = () => {
 
 const Edit: React.FC<{}> = () => {
   const [selectedDay, setSelectedDay] = useState<DayValue>(null);
+  const [key, setKey] = useState<boolean>(false);
+  const [nhs, setNHS] = useState<boolean>(false);
 
   return (
     <div className="flex flex-col min-h-screen bg-eastlake-grey font-text">
@@ -50,7 +52,11 @@ const Edit: React.FC<{}> = () => {
           <StringField name="Hours" placeholder="Ex: 5" />
           <StringField name="Contact Name" placeholder="Jonathan Swift" />
           <StringField name="Contact Phone Number" placeholder="(425) 123-4567" />
-          <CheckBox label="Key Club Event" />
+          <CheckBox label="Key Club Event" setState={setKey}/>
+
+          <CheckBox label="NHS" setState={setNHS}/>
+          <StringField name="Officer Name" placeholder="Smith" hidden={!nhs} />
+
           <FormSubmitButton />
         </form>
       </div>

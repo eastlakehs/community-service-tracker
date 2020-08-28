@@ -3,9 +3,10 @@ import React from "react";
 const StringField: React.FunctionComponent<{
   name: string;
   placeholder: string;
-}> = ({ name, placeholder }) => {
+  hidden?: boolean;
+}> = ({ name, placeholder, hidden}) => {
   return (
-    <div className="flex flex-wrap -mx-3 mb-6">
+    <div className={"flex flex-wrap -mx-3 mb-6 " + (hidden ? "hidden" : "")}>
       <div className="w-full px-3">
         <label className="block uppercase tracking-wide text-white text-xs font-bold mb-2">
           {name}
@@ -21,12 +22,13 @@ const StringField: React.FunctionComponent<{
   );
 };
 
-const CheckBox: React.FunctionComponent<{ label: string; }> = ({ label }) => {
+const CheckBox: React.FunctionComponent<{ label: string; setState:Function }> = ({ label, setState }) => {
   return (
     <div className="flex flex-wrap -mx-3 mb-6">
       <div className="w-full px-3">
         <label className="inline-flex items-center mt-3">
-          <input type="checkbox" className="form-checkbox h-5 w-5 text-gray-600" /><span className="ml-2 text-white">{label}</span>
+          <input type="checkbox" className="form-checkbox h-5 w-5 text-gray-600" onChange={(e) => e.target.checked ? setState(true) : setState(false)} />
+          <span className="ml-2 text-white">{label}</span>
         </label>
       </div>
     </div>
