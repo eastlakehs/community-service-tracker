@@ -15,7 +15,11 @@ const blankDocument: firestoreDocumentType = {
   Name: "",
   Description: "",
   Hours: "",
-  Date: "string",
+  Date: JSON.stringify({
+    day: new Date().getDate(),
+    month: new Date().getMonth() + 1,
+    year: new Date().getFullYear(),
+  }),
   KeyClub: "No",
   NHS: "No",
   NHSofficer: "",

@@ -5,13 +5,13 @@ import {
 } from "../Firebase/firestore/firestoreData.type";
 
 interface editScreenInitialStateType {
-  currentData: firestoreDocumentType | null;
+  currentData: firestoreDocumentType;
   currentKey: string | null;
   editing: boolean | null; // if entry is a new event or an edit
 }
 
 const editScreenInitialState: editScreenInitialStateType = {
-  currentData: null,
+  currentData: { ...blankDocument },
   currentKey: null,
   editing: null,
 };
@@ -35,34 +35,34 @@ export const editScreenSlice = createSlice({
       Object.assign(state.currentData, action.payload.currentData);
     },
     setName: (state, action: PayloadAction<string>) => {
-      state.currentData!.Name = action.payload;
+      state.currentData.Name = action.payload;
     },
     setContactName: (state, action: PayloadAction<string>) => {
-      state.currentData!.contactName = action.payload;
+      state.currentData.contactName = action.payload;
     },
     setContactPhone: (state, action: PayloadAction<string>) => {
-      state.currentData!.contactPhone = action.payload;
+      state.currentData.contactPhone = action.payload;
     },
     setNHS: (state, action: PayloadAction<"Yes" | "No">) => {
-      state.currentData!.NHS = action.payload;
+      state.currentData.NHS = action.payload;
     },
     setDate: (state, action: PayloadAction<string>) => {
-      state.currentData!.Date = action.payload;
+      state.currentData.Date = action.payload;
     },
     setDescription: (state, action: PayloadAction<string>) => {
-      state.currentData!.Description = action.payload;
+      state.currentData.Description = action.payload;
     },
     setHours: (state, action: PayloadAction<string>) => {
-      state.currentData!.Hours = action.payload;
+      state.currentData.Hours = action.payload;
     },
     setKeyClub: (state, action: PayloadAction<"Yes" | "No">) => {
-      state.currentData!.KeyClub = action.payload;
+      state.currentData.KeyClub = action.payload;
     },
     setNHSOfficer: (state, action: PayloadAction<string>) => {
-      state.currentData!.NHSofficer = action.payload;
+      state.currentData.NHSofficer = action.payload;
     },
     clearCurrentEdit: (state) => {
-      state.currentData = null;
+      state.currentData = { ...blankDocument };
       state.currentKey = null;
       state.editing = null;
     },

@@ -21,7 +21,10 @@ import DatePicker, { DayValue, Day } from "react-modern-calendar-datepicker";
 import { useHistory } from "react-router-dom";
 import { submitEdit, submitNewEntry } from "../Firebase/firestore/submitEdit";
 
-const FormSubmitButton: React.FC<{ onSubmit: () => void }> = ({ onSubmit }) => {
+const FormSubmitButton: React.FC<{
+  onSubmit: () => void;
+  buttonText: string;
+}> = ({ onSubmit, buttonText }) => {
   return (
     <button
       type="submit"
@@ -31,7 +34,7 @@ const FormSubmitButton: React.FC<{ onSubmit: () => void }> = ({ onSubmit }) => {
       }}
       className="bg-blue-600 px-5 hover:bg-blue-700 py-3 rounded-lg mb-3 text-lg text-white"
     >
-      Submit Edit or New Activity
+      {buttonText}
     </button>
   );
 };
@@ -58,7 +61,7 @@ const Edit: React.FC<{
       <div className="mb-auto">
         <form className="w-full max-w-lg container mx-auto px-4 sm:px-8 items-center">
           <h1 className="text-center text-gray-200 py-2 lg:py-3 text-4xl sm:text-4xl lg:text-5xl xl:text-6xl">
-            Activity Edit Screen
+            {editing ? "Edit your activity" : "Log a new activity"}
           </h1>
           <StringField
             name="Activity Name"
@@ -88,7 +91,6 @@ const Edit: React.FC<{
             inputPlaceholder="Select a day"
             inputClassName="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
           />
-
           <StringField
             name="Hours"
             placeholder="Ex: 5"
@@ -141,6 +143,7 @@ const Edit: React.FC<{
           />
 
           <FormSubmitButton
+            buttonText={editing ? "Edit Activity" : "Log new Activity"}
             onSubmit={async () => {
               if (
                 editing &&
@@ -154,8 +157,7 @@ const Edit: React.FC<{
               if (
                 !editing &&
                 typeof signedInEmail === "string" &&
-                currentData &&
-                currentKey
+                currentData
               ) {
                 await submitNewEntry(currentData, signedInEmail);
                 history.push("/table");

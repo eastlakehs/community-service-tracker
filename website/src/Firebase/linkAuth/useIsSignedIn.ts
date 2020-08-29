@@ -7,7 +7,7 @@ const useIsSignedIn = () => {
   useEffect(() => {
     const unsubscribe = firebase.auth().onAuthStateChanged((user) => {
       if (user && user.email) {
-        setSignedIn(user.email);
+        setSignedIn(user.email.toLowerCase());
       } else {
         setSignedIn(false);
       }
