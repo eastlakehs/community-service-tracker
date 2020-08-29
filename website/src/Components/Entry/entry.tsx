@@ -52,4 +52,22 @@ const CheckBox: React.FunctionComponent<{
   );
 };
 
-export { StringField, CheckBox };
+const FormSubmitButton: React.FC<{
+  onSubmit: () => void;
+  buttonText: string;
+}> = ({ onSubmit, buttonText }) => {
+  return (
+    <button
+      type="submit"
+      onClick={(e) => {
+        e.preventDefault();
+        onSubmit();
+      }}
+      className="bg-blue-600 px-5 hover:bg-blue-700 py-3 rounded-lg mb-3 text-lg text-white"
+    >
+      {buttonText}
+    </button>
+  );
+};
+
+export { StringField, CheckBox, FormSubmitButton };

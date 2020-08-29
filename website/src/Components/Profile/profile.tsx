@@ -1,5 +1,5 @@
 import React from "react";
-import { StringField } from "../Entry/entry"
+import { StringField, FormSubmitButton } from "../Entry/entry"
 
 const Profile: React.FunctionComponent<{}> = () => {
     const setValue = () => {
@@ -11,6 +11,12 @@ const Profile: React.FunctionComponent<{}> = () => {
                 <StringField name="First Name" placeholder="John" value="" setValue={setValue} />
                 <StringField name="First Name" placeholder="Smith" value="" setValue={setValue} />
                 <StringField name="Graduation Year" placeholder="2022" value="" setValue={setValue} />
+                <FormSubmitButton
+                    buttonText={"Save Profile"}
+                    onSubmit={async () => {
+
+                    }}
+                />
             </form>
         </div>
     )

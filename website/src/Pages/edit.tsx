@@ -11,30 +11,12 @@ import {
   setContactName,
   setContactPhone,
 } from "../Redux/editScreenSlice";
-import { StringField, CheckBox } from "../Components/Entry/entry";
+import { StringField, CheckBox, FormSubmitButton } from "../Components/Entry/entry";
 import { firestoreDocumentType } from "../Firebase/firestore/firestoreData.type";
 import "react-modern-calendar-datepicker/lib/DatePicker.css";
 import DatePicker, { DayValue, Day } from "react-modern-calendar-datepicker";
 import { useHistory } from "react-router-dom";
 import { submitEdit, submitNewEntry } from "../Firebase/firestore/submitEdit";
-
-const FormSubmitButton: React.FC<{
-  onSubmit: () => void;
-  buttonText: string;
-}> = ({ onSubmit, buttonText }) => {
-  return (
-    <button
-      type="submit"
-      onClick={(e) => {
-        e.preventDefault();
-        onSubmit();
-      }}
-      className="bg-blue-600 px-5 hover:bg-blue-700 py-3 rounded-lg mb-3 text-lg text-white"
-    >
-      {buttonText}
-    </button>
-  );
-};
 
 const tempfunc = (value: string) => { };
 
