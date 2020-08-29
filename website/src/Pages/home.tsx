@@ -1,6 +1,6 @@
-import React, { useEffect } from "react";
+import React, { useEffect, Fragment } from "react";
 import Body from "../Components/Body/body";
-
+import Helmet from "../Components/Header/helmet";
 import signInwithLink from "../Firebase/linkAuth/signInWithLink";
 
 const Home = () => {
@@ -11,7 +11,13 @@ const Home = () => {
     });
   });
   return (
-    <Body />
+    <>
+      <Helmet
+        title="EHS tracker"
+        description="Main page for the eastlake service tracker website where students can record their volunteer hours."
+      />
+      <Body />
+    </>
   );
 };
 

@@ -1,6 +1,7 @@
 import React from "react";
 import { Edit } from "./edit";
 import { useDispatch, useSelector } from "react-redux";
+import Helmet from "../Components/Header/helmet";
 
 import {
   selectEditScreenState,
@@ -14,12 +15,18 @@ const EditController: React.FC<{}> = () => {
   const signedIn = useIsSignedIn();
   console.log(editState);
   return (
-    <Edit
-      editing={editState.editing}
-      currentData={editState.currentData}
-      currentKey={editState.currentKey}
-      signedInEmail={signedIn}
-    />
+    <>
+      <Helmet
+        title="Edit Page"
+        description="Page for editing and creating new and created volunteer hour entries."
+      />
+      <Edit
+        editing={editState.editing}
+        currentData={editState.currentData}
+        currentKey={editState.currentKey}
+        signedInEmail={signedIn}
+      />
+    </>
   );
 };
 

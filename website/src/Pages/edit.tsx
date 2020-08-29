@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { useDispatch } from "react-redux";
 import {
   setDate,
@@ -14,7 +14,7 @@ import {
 import { StringField, CheckBox, FormSubmitButton } from "../Components/Entry/entry";
 import { firestoreDocumentType } from "../Firebase/firestore/firestoreData.type";
 import "react-modern-calendar-datepicker/lib/DatePicker.css";
-import DatePicker, { DayValue, Day } from "react-modern-calendar-datepicker";
+import DatePicker, { Day } from "react-modern-calendar-datepicker";
 import { useHistory } from "react-router-dom";
 import { submitEdit, submitNewEntry } from "../Firebase/firestore/submitEdit";
 
@@ -28,7 +28,6 @@ const Edit: React.FC<{
 }> = ({ currentData, currentKey, editing, signedInEmail }) => {
   const dispatch = useDispatch();
   const history = useHistory();
-  const [selectedDay, setSelectedDay] = useState<DayValue>(null);
 
   return (
     <div className="mb-auto">
