@@ -1,11 +1,10 @@
 import React from "react";
 import { Edit } from "./edit";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import Helmet from "../Components/Header/helmet";
 
 import {
   selectEditScreenState,
-  setCurrentEdit,
 } from "../Redux/editScreenSlice";
 
 import { useIsSignedIn } from "../Firebase/linkAuth/useIsSignedIn";

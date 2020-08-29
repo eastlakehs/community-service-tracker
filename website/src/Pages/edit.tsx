@@ -18,8 +18,6 @@ import DatePicker, { Day } from "react-modern-calendar-datepicker";
 import { useHistory } from "react-router-dom";
 import { submitEdit, submitNewEntry } from "../Firebase/firestore/submitEdit";
 
-const tempfunc = (value: string) => { };
-
 const Edit: React.FC<{
   currentData: firestoreDocumentType | null;
   currentKey: string | null;

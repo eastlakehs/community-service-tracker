@@ -1,6 +1,6 @@
 import React from "react";
 import { initialStateType } from "../../Redux/userDataSlice";
-import { DayValue, Day } from "react-modern-calendar-datepicker";
+import { Day } from "react-modern-calendar-datepicker";
 /* Table CSS Credit: https://tailwindcomponents.com/component/table-responsive-with-filters */
 
 const TableHeaderStyle: string =
