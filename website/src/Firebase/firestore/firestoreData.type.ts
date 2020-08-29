@@ -4,7 +4,26 @@ export interface firestoreDocumentType {
   Description: string;
   Hours: string;
   Date: string;
+  KeyClub: "Yes" | "No";
+  NHS: "Yes" | "No";
+  NHSofficer: string;
+  contactName: string;
+  contactPhone: string;
 }
+
+const blankDocument: firestoreDocumentType = {
+  Name: "",
+  Description: "",
+  Hours: "",
+  Date: "string",
+  KeyClub: "No",
+  NHS: "No",
+  NHSofficer: "",
+  contactName: "",
+  contactPhone: "",
+};
+
+export { blankDocument };
 
 /** Holds both the data and the key value of a firestore Document.  */
 export interface fireStoreDocumentSnapshot {
@@ -15,14 +34,4 @@ export interface fireStoreDocumentSnapshot {
 /** Holds the entirety of a users firestore data */
 export interface fireStoreUserData {
   [key: string]: firestoreDocumentType;
-}
-
-export interface tableDataType {
-  header: ["Name", "Description", "Hour", "Date"];
-  data: {
-    Name: string;
-    Description: string;
-    Hours: number;
-    Date: string;
-  }[];
 }

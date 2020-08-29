@@ -21,7 +21,7 @@ const useSyncUserData = () => {
             const DocumentData = change.doc.data() as firestoreDocumentType;
             if (change.type === "added") {
               console.log("added");
-              console.log(change.doc.data());
+              //  console.log(change.doc.data());
               dispatch(
                 setDocument({
                   data: DocumentData,

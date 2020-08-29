@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import Home from "./Pages/home";
 import Login from "./Pages/login";
-import { Edit } from "./Pages/edit";
+import { EditController } from "./Pages/editController";
 import { Table } from "./Pages/table";
 
 const AppRouter = () => {
@@ -17,7 +17,7 @@ const AppRouter = () => {
           <Table />
         </Route>
         <Route path="/edit">
-          <Edit />
+          <EditController />
         </Route>
         <Route path="/">
           <Home />

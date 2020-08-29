@@ -1,5 +1,6 @@
 import React from "react";
 import { initialStateType } from "../../Redux/userDataSlice";
+import { DayValue, Day } from "react-modern-calendar-datepicker";
 /* Table CSS Credit: https://tailwindcomponents.com/component/table-responsive-with-filters */
 
 const TableHeaderStyle: string =
@@ -10,7 +11,8 @@ const ButtonStyle: string =
 
 const CSTable: React.FunctionComponent<{
   data: initialStateType;
-}> = ({ data }) => {
+  handleEditClick: (entryID: string) => void;
+}> = ({ data, handleEditClick }) => {
   const generateHeader = () => {
     return data.header.map((header) => {
       return (
@@ -33,7 +35,7 @@ const CSTable: React.FunctionComponent<{
 
   const EditButton: React.FunctionComponent<{
     name: string;
-    onClick: Function;
+    onClick: () => void;
   }> = ({ name, onClick }) => (
     <td className="px-2 py-2 sm:px-3 sm:py-3 md:px-4 md:py-4 lg:px-5 lg:py-5 border-b border-gray-200 bg-white text-sm">
       <button
@@ -47,20 +49,21 @@ const CSTable: React.FunctionComponent<{
     </td>
   );
 
-  const EditOnClick: Function = () => {
-    console.log("Edit Table Clicked");
-    // TODO Populate Page with Editable Data
-  };
-
   const generateTableData = () => {
     return Object.keys(data.data).map((entry) => {
+      const dateObj = JSON.parse(data.data[entry].Date) as Day;
       return (
         <tr>
           <TableCell name={data.data[entry].Name} />
           <TableCell name={data.data[entry].Description} />
           <TableCell name={data.data[entry].Hours} />
-          <TableCell name={data.data[entry].Date} />
-          <EditButton name="Edit" onClick={EditOnClick} />
+          <TableCell name={`${dateObj.month}-${dateObj.day}-${dateObj.year}`} />
+          <EditButton
+            name="Edit"
+            onClick={() => {
+              handleEditClick(entry);
+            }}
+          />
         </tr>
       );
     });

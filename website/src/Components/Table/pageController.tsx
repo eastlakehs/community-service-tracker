@@ -1,3 +1,4 @@
+/*
 import React from "react";
 import Page from "./page";
 import {} from "../Table/table.types";
@@ -6,7 +7,7 @@ import {
   selectTableState,
   setEndEntry,
   setCurrEntry,
-} from "../../Redux/tableDataSlice";
+} from "../../Redux/editScreenSlice";
 
 const PageController: React.FunctionComponent<{}> = () => {
   const dispatch = useDispatch();
@@ -62,3 +63,7 @@ const PageController: React.FunctionComponent<{}> = () => {
 };
 
 export default PageController;
+
+*/
+
+export {};

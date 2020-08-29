@@ -2,6 +2,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import {
   fireStoreDocumentSnapshot,
   fireStoreUserData,
+  blankDocument,
 } from "../Firebase/firestore/firestoreData.type";
 
 export interface initialStateType {
@@ -20,12 +21,7 @@ export const userDataSlice = createSlice({
   reducers: {
     setDocument: (state, action: PayloadAction<fireStoreDocumentSnapshot>) => {
       // Creates the state.data[action.payload.key] field so that Object.assign can work
-      state.data[action.payload.key] = {
-        Description: "",
-        Name: "",
-        Hours: "",
-        Date: "",
-      };
+      state.data[action.payload.key] = { ...blankDocument };
       Object.assign(state.data[action.payload.key], action.payload.data);
     },
     deleteDocument: (state, action: PayloadAction<string>) => {
