@@ -5,6 +5,7 @@ import Home from "./Pages/home";
 import Login from "./Pages/login";
 import { EditController } from "./Pages/editController";
 import { Table } from "./Pages/table";
+import Profile from "./Components/Profile/profile";
 
 const AppRouter = () => {
   return (
@@ -18,6 +19,9 @@ const AppRouter = () => {
         </Route>
         <Route path="/edit">
           <EditController />
+        </Route>
+        <Route path="/profile">
+          <Profile />
         </Route>
         <Route path="/">
           <Home />
