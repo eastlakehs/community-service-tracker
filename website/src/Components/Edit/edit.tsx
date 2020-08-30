@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import {
   setDate,
@@ -10,13 +10,29 @@ import {
   setName,
   setContactName,
   setContactPhone,
+  clearCurrentEdit,
 } from "../../Redux/editScreenSlice";
 import { StringField, CheckBox, FormSubmitButton } from "../Entry/entry";
 import { firestoreDocumentType } from "../../Firebase/firestore/firestoreData.type";
 import "react-modern-calendar-datepicker/lib/DatePicker.css";
 import DatePicker, { Day } from "react-modern-calendar-datepicker";
 import { useHistory } from "react-router-dom";
-import { submitEdit, submitNewEntry } from "../../Firebase/firestore/submitEdit";
+import {
+  submitEdit,
+  submitNewEntry,
+} from "../../Firebase/firestore/submitEdit";
+
+import { toast, ToastOptions } from "react-toastify";
+/** Easy toast creation generation at https://fkhadra.github.io/react-toastify/introduction/ */
+const ToastConfig: ToastOptions = {
+  position: "top-center",
+  autoClose: 2500,
+  hideProgressBar: false,
+  closeOnClick: false,
+  pauseOnHover: false,
+  draggable: false,
+  progress: undefined,
+};
 
 const Edit: React.FC<{
   currentData: firestoreDocumentType | null;
@@ -26,6 +42,8 @@ const Edit: React.FC<{
 }> = ({ currentData, currentKey, editing, signedInEmail }) => {
   const dispatch = useDispatch();
   const history = useHistory();
+
+  const [waitingForSubmit, setWaitingForSubmit] = useState(false);
 
   return (
     <div className="mb-auto">
@@ -52,7 +70,7 @@ const Edit: React.FC<{
 
         <label className="block uppercase tracking-wide text-white text-xs font-bold mb-2">
           Date
-          </label>
+        </label>
         <DatePicker
           value={currentData ? (JSON.parse(currentData.Date) as Day) : null}
           onChange={(day) => {
@@ -90,9 +108,7 @@ const Edit: React.FC<{
           setState={(value: boolean) => {
             dispatch(setKeyClub(value ? "Yes" : "No"));
           }}
-          checked={
-            currentData && currentData.KeyClub === "Yes" ? true : false
-          }
+          checked={currentData && currentData.KeyClub === "Yes" ? true : false}
         />
 
         <CheckBox
@@ -113,24 +129,40 @@ const Edit: React.FC<{
         />
 
         <FormSubmitButton
+          hidden={!waitingForSubmit}
           buttonText={editing ? "Edit Activity" : "Log new Activity"}
           onSubmit={async () => {
+            setWaitingForSubmit(true);
             if (
               editing &&
               typeof signedInEmail === "string" &&
               currentData &&
               currentKey
             ) {
-              await submitEdit(currentData, currentKey, signedInEmail);
-              history.push("/table");
+              const resp = await submitEdit(
+                currentData,
+                currentKey,
+                signedInEmail
+              );
+              setWaitingForSubmit(false);
+              if (resp) {
+                history.push("/table");
+                toast.success("Edit submited successfully", ToastConfig);
+                dispatch(clearCurrentEdit());
+              } else {
+                toast.error("Failed to submit error", ToastConfig);
+              }
             }
-            if (
-              !editing &&
-              typeof signedInEmail === "string" &&
-              currentData
-            ) {
-              await submitNewEntry(currentData, signedInEmail);
-              history.push("/table");
+            if (!editing && typeof signedInEmail === "string" && currentData) {
+              const resp = await submitNewEntry(currentData, signedInEmail);
+              setWaitingForSubmit(false);
+              if (resp) {
+                toast.success("New activity logged successfully", ToastConfig);
+                history.push("/table");
+                dispatch(clearCurrentEdit());
+              } else {
+                toast.error("Failed to log new activity", ToastConfig);
+              }
             }
           }}
         />

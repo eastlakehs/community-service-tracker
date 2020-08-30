@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { StringField, FormSubmitButton } from "../Entry/entry";
 import Helmet from "../Header/helmet";
 
@@ -10,12 +10,14 @@ const Profile: React.FunctionComponent<{
   updateLastName: (name: string) => void;
   updateGradYear: (name: string) => void;
   updateCallback: (data: userProfileData) => void;
+  waitingForSubmit: boolean;
 }> = ({
   profileData,
   updateFirstName,
   updateGradYear,
   updateLastName,
   updateCallback,
+  waitingForSubmit,
 }) => {
   return (
     <>
@@ -44,6 +46,7 @@ const Profile: React.FunctionComponent<{
             setValue={updateGradYear}
           />
           <FormSubmitButton
+            hidden={!waitingForSubmit}
             buttonText={"Save Profile"}
             onSubmit={() => {
               updateCallback(profileData);
