@@ -11,8 +11,7 @@ import {
   setProfileGraduationYear,
   selectProfileState,
 } from "../Redux/profileScreenSlice";
-
-import { ToastContainer, toast, ToastOptions } from "react-toastify";
+import { toast, ToastOptions } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 // Easy toast creation generation at https://fkhadra.github.io/react-toastify/introduction/
@@ -37,17 +36,7 @@ const ProfileController: React.FC<{}> = () => {
         title="Profile"
         description="Page for editing and viewing your profile."
       />
-      <ToastContainer
-        position="bottom-center"
-        autoClose={5000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-      />
+
       <Profile
         profileData={ProfileState}
         updateFirstName={(firstName: string) => {
