@@ -3,14 +3,13 @@ import React from "react";
 import Helmet from "../Components/Header/helmet";
 import TableController from "../Components/Table/tableController";
 import NotLoggedIn from "../Components/Login/notLoggedIn";
-
-import { useIsSignedIn } from "../Firebase/linkAuth/useIsSignedIn";
+import { useSelector } from "react-redux";
+import { selectSignedInState } from "../Redux/signedInSlice";
 
 const Table: React.FC<{}> = () => {
+  const signedInstate = useSelector(selectSignedInState);
 
-  const signedIn = useIsSignedIn();
-
-  if (!signedIn) {
+  if (!signedInstate.signedIn) {
     return (
       <>
         <Helmet
@@ -21,7 +20,7 @@ const Table: React.FC<{}> = () => {
           <NotLoggedIn />
         </div>
       </>
-    )
+    );
   }
   return (
     <>
