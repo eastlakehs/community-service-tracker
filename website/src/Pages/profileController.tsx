@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Profile from "../Components/Profile/profile";
 import Helmet from "../Components/Header/helmet";
 
@@ -12,21 +12,21 @@ import {
   selectProfileState,
 } from "../Redux/profileScreenSlice";
 import { toast, ToastOptions } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 
 // Easy toast creation generation at https://fkhadra.github.io/react-toastify/introduction/
 
 const ToastConfig: ToastOptions = {
-  position: "bottom-center",
-  autoClose: 5000,
+  position: "top-center",
+  autoClose: 2500,
   hideProgressBar: false,
-  closeOnClick: true,
-  pauseOnHover: true,
-  draggable: true,
+  closeOnClick: false,
+  pauseOnHover: false,
+  draggable: false,
   progress: undefined,
 };
 
 const ProfileController: React.FC<{}> = () => {
+  const [waitingForSubmit, setWaitingForSubmit] = useState(false);
   const dispatch = useDispatch();
   const currentUser = useIsSignedIn();
   const ProfileState = useSelector(selectProfileState);
@@ -38,6 +38,7 @@ const ProfileController: React.FC<{}> = () => {
       />
 
       <Profile
+        waitingForSubmit={waitingForSubmit}
         profileData={ProfileState}
         updateFirstName={(firstName: string) => {
           dispatch(setProfileFirstName(firstName));
@@ -49,6 +50,7 @@ const ProfileController: React.FC<{}> = () => {
           dispatch(setProfileGraduationYear(gradYear));
         }}
         updateCallback={async (data) => {
+          setWaitingForSubmit(true);
           if (currentUser && typeof currentUser === "string") {
             const resp = await updateUserProfile(
               data.firstName,
@@ -56,6 +58,7 @@ const ProfileController: React.FC<{}> = () => {
               data.graduationYear,
               currentUser
             );
+            setWaitingForSubmit(false);
             if (resp) {
               toast.success("Updated Profile", ToastConfig);
             } else {
