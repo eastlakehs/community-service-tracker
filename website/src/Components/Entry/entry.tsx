@@ -6,7 +6,9 @@ const StringField: React.FunctionComponent<{
   hidden?: boolean;
   value: string;
   setValue: (value: string) => void;
-}> = ({ name, placeholder, hidden, value, setValue }) => {
+  error?: boolean;
+  errorMessage?: string;
+}> = ({ name, placeholder, hidden, value, setValue, error, errorMessage }) => {
   return (
     <div className={"flex flex-wrap -mx-3 mb-6 " + (hidden ? "hidden" : "")}>
       <div className="w-full px-3">
@@ -14,7 +16,7 @@ const StringField: React.FunctionComponent<{
           {name}
         </label>
         <input
-          className="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+          className={"appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" + (error ? "border border-red" : "")}
           id="grid-first-name"
           type="text"
           value={value}
@@ -23,10 +25,22 @@ const StringField: React.FunctionComponent<{
           }}
           placeholder={placeholder}
         />
+        <ErrorMessage e={error} eM={errorMessage}  />
       </div>
     </div>
   );
 };
+
+const ErrorMessage: React.FunctionComponent<{
+  e?: boolean;
+  eM?: string
+}> = ({ e, eM }) => {
+  if (e) {
+    return (<p className="text-red-500 text-xs italic">{eM}</p>);
+  } else {
+    return (<></>);
+  }
+}
 
 const CheckBox: React.FunctionComponent<{
   label: string;
@@ -57,7 +71,7 @@ const AnimateSpinner: React.FC<{ hidden: boolean }> = ({ hidden }) => {
     <svg
       className={`animate-spin -ml-1 mr-3 h-5 w-5 text-white ${
         hidden ? "hidden" : "visible"
-      }`}
+        }`}
       xmlns="http://www.w3.org/2000/svg"
       fill="none"
       viewBox="0 0 24 24"
