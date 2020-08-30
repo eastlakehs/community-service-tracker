@@ -5,7 +5,11 @@ import Home from "./Pages/home";
 import Login from "./Pages/login";
 import { EditController } from "./Pages/editController";
 import { Table } from "./Pages/table";
+<<<<<<< HEAD
 import { ProfileController } from "./Pages/profileController";
+=======
+import ProfileController from "./Pages/profileController";
+>>>>>>> 3a8d2b70ca52de39a0bc27f493088880ee019648
 import PageHeader from "./Components/Header/pageHeader";
 import Footer from "./Components/Footer/footer";
 

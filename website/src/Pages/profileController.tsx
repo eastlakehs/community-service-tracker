@@ -1,5 +1,6 @@
 import React from "react";
 import Profile from "./profile";
+import Helmet from "../Components/Header/helmet";
 
 import { useDispatch, useSelector } from "react-redux";
 import { updateUserProfile } from "../Firebase/firestore/submitEdit";
@@ -18,28 +19,35 @@ const ProfileController: React.FC<{}> = () => {
   useSyncUserProfile();
   const ProfileState = useSelector(selectProfileState);
   return (
-    <Profile
-      profileData={ProfileState}
-      updateFirstName={(firstName: string) => {
-        dispatch(setProfileFirstName(firstName));
-      }}
-      updateLastName={(lastName: string) => {
-        dispatch(setProfileLastName(lastName));
-      }}
-      updateGradYear={(gradYear: string) => {
-        dispatch(setProfileGraduationYear(gradYear));
-      }}
-      updateCallback={(data) => {
-        if (currentUser && typeof currentUser === "string") {
-          updateUserProfile(
-            data.firstName,
-            data.lastName,
-            data.graduationYear,
-            currentUser
-          );
-        }
-      }}
-    />
+    <>
+      <Helmet
+        title="Profile"
+        description="Page for editing and viewing your profile."
+      />
+
+      <Profile
+        profileData={ProfileState}
+        updateFirstName={(firstName: string) => {
+          dispatch(setProfileFirstName(firstName));
+        }}
+        updateLastName={(lastName: string) => {
+          dispatch(setProfileLastName(lastName));
+        }}
+        updateGradYear={(gradYear: string) => {
+          dispatch(setProfileGraduationYear(gradYear));
+        }}
+        updateCallback={(data) => {
+          if (currentUser && typeof currentUser === "string") {
+            updateUserProfile(
+              data.firstName,
+              data.lastName,
+              data.graduationYear,
+              currentUser
+            );
+          }
+        }}
+      />
+    </>
   );
 };
 
