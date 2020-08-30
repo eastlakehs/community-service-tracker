@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { StringField, FormSubmitButton } from "../Entry/entry";
 import Helmet from "../Header/helmet";
 
