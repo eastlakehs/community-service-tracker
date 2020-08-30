@@ -1,20 +1,21 @@
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { firestoreDocumentType } from "./firestoreData.type";
 import { useIsSignedIn } from "../linkAuth/useIsSignedIn";
 import { db } from "../setup";
 import { setDocument, deleteDocument } from "../../Redux/userDataSlice";
+import { selectSignedInState } from "../../Redux/signedInSlice";
 
 /** Handles updating the redux store with the data of the current signed in user */
 const useSyncUserData = () => {
-  const isSignedIn = useIsSignedIn();
+  const signedInstate = useSelector(selectSignedInState);
   const dispatch = useDispatch();
   useEffect(() => {
     let unsubscribe: null | (() => void) = null;
-    if (isSignedIn && typeof isSignedIn === "string") {
+    if (signedInstate.signedIn) {
       unsubscribe = db
         .collection("users")
-        .doc(isSignedIn)
+        .doc(signedInstate.userEmail)
         .collection("entries")
         .onSnapshot((querySnapshot) => {
           querySnapshot.docChanges().forEach((change) => {
@@ -48,6 +49,6 @@ const useSyncUserData = () => {
     if (unsubscribe) {
       return unsubscribe;
     }
-  }, [isSignedIn, dispatch]);
+  }, [signedInstate, dispatch]);
 };
 export { useSyncUserData };

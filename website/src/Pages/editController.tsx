@@ -7,12 +7,13 @@ import { selectEditScreenState } from "../Redux/editScreenSlice";
 
 import { useIsSignedIn } from "../Firebase/linkAuth/useIsSignedIn";
 import NotLoggedIn from "../Components/Login/notLoggedIn";
+import { selectSignedInState } from "../Redux/signedInSlice";
 
 const EditController: React.FC<{}> = () => {
   const editState = useSelector(selectEditScreenState);
-  const signedIn = useIsSignedIn();
+  const signedInstate = useSelector(selectSignedInState);
 
-  if (!signedIn) {
+  if (!signedInstate.signedIn) {
     return (
       <>
         <Helmet
@@ -23,7 +24,7 @@ const EditController: React.FC<{}> = () => {
           <NotLoggedIn />
         </div>
       </>
-    )
+    );
   }
   return (
     <>
@@ -35,7 +36,7 @@ const EditController: React.FC<{}> = () => {
         editing={editState.editing}
         currentData={editState.currentData}
         currentKey={editState.currentKey}
-        signedInEmail={signedIn}
+        signedInEmail={signedInstate.userEmail}
       />
     </>
   );

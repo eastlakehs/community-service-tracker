@@ -13,6 +13,7 @@ import {
   selectProfileState,
 } from "../Redux/profileScreenSlice";
 import { toast, ToastOptions } from "react-toastify";
+import { selectSignedInState } from "../Redux/signedInSlice";
 
 // Easy toast creation generation at https://fkhadra.github.io/react-toastify/introduction/
 
@@ -29,10 +30,10 @@ const ToastConfig: ToastOptions = {
 const ProfileController: React.FC<{}> = () => {
   const [waitingForSubmit, setWaitingForSubmit] = useState(false);
   const dispatch = useDispatch();
-  const currentUser = useIsSignedIn();
+  const signedInstate = useSelector(selectSignedInState);
   const ProfileState = useSelector(selectProfileState);
 
-  if (!currentUser) {
+  if (!signedInstate.signedIn) {
     return (
       <>
         <Helmet
@@ -43,7 +44,7 @@ const ProfileController: React.FC<{}> = () => {
           <NotLoggedIn />
         </div>
       </>
-    )
+    );
   }
   return (
     <>
@@ -66,12 +67,15 @@ const ProfileController: React.FC<{}> = () => {
         }}
         updateCallback={async (data) => {
           setWaitingForSubmit(true);
-          if (currentUser && typeof currentUser === "string") {
+          if (
+            signedInstate.userEmail &&
+            typeof signedInstate.userEmail === "string"
+          ) {
             const resp = await updateUserProfile(
               data.firstName,
               data.lastName,
               data.graduationYear,
-              currentUser
+              signedInstate.userEmail
             );
             setWaitingForSubmit(false);
             if (resp) {
@@ -79,7 +83,7 @@ const ProfileController: React.FC<{}> = () => {
             } else {
               toast.error("Updated Profile", ToastConfig);
             }
-          } else if (!currentUser) {
+          } else if (!signedInstate.signedIn) {
             toast.error("You are not signed in", ToastConfig);
           }
         }}
