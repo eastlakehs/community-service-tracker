@@ -1,4 +1,4 @@
-import { VALIDATE_hours, VALIDATE_free_form } from "./validation";
+import { VALIDATE_hours, VALIDATE_free_form, VALIDATE_graduation } from "./validation";
 
 test("Running Validation Tests for VALIDATE_hours", () => {
   expect(VALIDATE_hours(".5").validate).toBe(true);
@@ -27,4 +27,21 @@ test("Running Validation Tests for VALIDATE_free_form", () => {
   expect(VALIDATE_free_form(" ").validate).toBe(false);
   expect(VALIDATE_free_form("          ").validate).toBe(false);
   expect(VALIDATE_free_form("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa").validate).toBe(false);
+});
+
+
+test("Running Validation Tests for VALIDATE_graduation", () => {
+  expect(VALIDATE_graduation("2021").validate).toBe(true);
+  expect(VALIDATE_graduation("2022").validate).toBe(true);
+  expect(VALIDATE_graduation("2023").validate).toBe(true);
+  expect(VALIDATE_graduation("2099").validate).toBe(true);
+
+  expect(VALIDATE_graduation("").validate).toBe(false);
+  expect(VALIDATE_graduation(" ").validate).toBe(false);
+  expect(VALIDATE_graduation("          ").validate).toBe(false);
+  expect(VALIDATE_graduation("a").validate).toBe(false);
+  expect(VALIDATE_graduation("1800").validate).toBe(false);
+  expect(VALIDATE_graduation("0000").validate).toBe(false);
+  expect(VALIDATE_graduation("2100").validate).toBe(false);
+  expect(VALIDATE_graduation("20aa").validate).toBe(false);
 });

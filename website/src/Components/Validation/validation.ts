@@ -32,4 +32,12 @@ const VALIDATE_free_form = (text: string): ValidationMessage => {
   return { validate: true, message: "" };
 }
 
-export { VALIDATE_hours, VALIDATE_free_form };
+const VALIDATE_graduation = (text: string): ValidationMessage => {
+  const re = new RegExp("^(20)\\d\\d$")
+  if (!re.test(text)) {
+    return { validate: false, message: "Invalid Year" };
+  }
+  return { validate: true, message: "" };
+}
+
+export { VALIDATE_hours, VALIDATE_free_form, VALIDATE_graduation };
