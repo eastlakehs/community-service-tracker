@@ -11,7 +11,9 @@ const HeaderButtons: React.FunctionComponent<{}> = () => {
     return (
       <>
         <a className="block lg:inline-block text-white mr-6 mt-2 lg:mt-auto">
-          {signedIn}
+          <Link to="/profile">
+            {signedIn}
+          </Link>
         </a>
         <a
           href="#"
