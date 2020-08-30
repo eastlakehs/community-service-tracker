@@ -10,21 +10,24 @@ const HeaderButtons: React.FunctionComponent<{}> = () => {
   if (signedIn && typeof signedIn === "string") {
     return (
       <>
-        <a className="block lg:inline-block text-white mr-6 mt-2 lg:mt-auto">
-          <Link to="/profile">
-            {signedIn}
-          </Link>
-        </a>
-        <a className="block lg:inline-block text-white mr-6 mt-2 lg:mt-auto">
-          <Link to="/table">
-            Hours
-          </Link>
-        </a>
-        <a className="block lg:inline-block text-white mr-6 mt-2 lg:mt-auto">
-          <Link to="/edit">
-            Submit
-          </Link>
-        </a>
+        <Link
+          to="/profile"
+          className="block lg:inline-block text-white mr-6 mt-2 lg:mt-auto"
+        >
+          {signedIn}
+        </Link>
+        <Link
+          to="/table"
+          className="block lg:inline-block text-white mr-6 mt-2 lg:mt-auto"
+        >
+          Hours
+        </Link>
+        <Link
+          to="/edit"
+          className="block lg:inline-block text-white mr-6 mt-2 lg:mt-auto"
+        >
+          Submit
+        </Link>
         <a
           href="#"
           onClick={async (e) => {

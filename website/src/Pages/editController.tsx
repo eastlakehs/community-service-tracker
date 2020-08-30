@@ -3,16 +3,13 @@ import { Edit } from "../Components/Edit/edit";
 import { useSelector } from "react-redux";
 import Helmet from "../Components/Header/helmet";
 
-import {
-  selectEditScreenState,
-} from "../Redux/editScreenSlice";
+import { selectEditScreenState } from "../Redux/editScreenSlice";
 
 import { useIsSignedIn } from "../Firebase/linkAuth/useIsSignedIn";
 
 const EditController: React.FC<{}> = () => {
   const editState = useSelector(selectEditScreenState);
   const signedIn = useIsSignedIn();
-  console.log(editState);
   return (
     <>
       <Helmet

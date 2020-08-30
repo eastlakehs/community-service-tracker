@@ -53,7 +53,7 @@ const CSTable: React.FunctionComponent<{
     return Object.keys(data.data).map((entry) => {
       const dateObj = JSON.parse(data.data[entry].Date) as Day;
       return (
-        <tr>
+        <tr key={data.data ? JSON.stringify(data.data[entry]) : "empty-entry"}>
           <TableCell name={data.data[entry].Name} />
           <TableCell name={data.data[entry].Description} />
           <TableCell name={data.data[entry].Hours} />
