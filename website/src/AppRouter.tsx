@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 // Routes
@@ -7,6 +7,7 @@ import Login from "./Pages/login";
 import { EditController } from "./Pages/editController";
 import { Table } from "./Pages/table";
 import { ProfileController } from "./Pages/profileController";
+import { Loading } from "./Pages/loading";
 
 // Header/Footer
 import PageHeader from "./Components/Header/pageHeader";
@@ -15,16 +16,28 @@ import Footer from "./Components/Footer/footer";
 // Data sync
 import { useSyncUserData } from "./Firebase/firestore/useUserData";
 import { useSyncUserProfile } from "./Firebase/firestore/useUserProfile";
+import { useIsSignedIn } from "./Firebase/linkAuth/useIsSignedIn";
 
 // React toastify
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
+import { useSelector } from "react-redux";
+import { selectSignedInState } from "./Redux/signedInSlice";
+
 const AppRouter = () => {
   /** Real time web socket connection to keep profile and entry table in sync for the current user */
   useSyncUserProfile();
   useSyncUserData();
-  /** Real time web socket connection to keep profile and entry table in sync for the current user */
+
+  /** Sync the current auth state with the redux slice signedInSlice.tsx */
+  const signedInstate = useSelector(selectSignedInState);
+  useIsSignedIn();
+
+  /** We should always return a loading spinner before we know the users auth state */
+  if (signedInstate.signedIn === null) {
+    return <Loading />;
+  }
   return (
     /** Toast message components with react toastify. Placed at the root of the app so that toasts
      * can persist even as components mount/unmount as the user navigates across the app

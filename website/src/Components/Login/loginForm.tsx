@@ -2,8 +2,9 @@
 import React, { useState, useEffect } from "react";
 import sendEmailAuth from "../../Firebase/linkAuth/sendEmailAuth";
 
-import { useIsSignedIn } from "../../Firebase/linkAuth/useIsSignedIn";
 import { useHistory } from "react-router-dom";
+import { selectSignedInState } from "../../Redux/signedInSlice";
+import { useSelector } from "react-redux";
 type emailState =
   | "base"
   | "email-send-failed"
@@ -52,13 +53,13 @@ const basicEmailValidation = (email: string) => {
 };
 
 const LoginForm = () => {
-  const signedIn = useIsSignedIn();
+  const signedInstate = useSelector(selectSignedInState);
   const history = useHistory();
   const [emailState, setEmailState] = useState<emailState>("base");
   const [emailInput, setEmailInput] = useState("");
 
   useEffect(() => {
-    if (signedIn) {
+    if (signedInstate.signedIn) {
       history.replace("/profile");
     }
   });
