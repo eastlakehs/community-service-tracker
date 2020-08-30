@@ -27,7 +27,11 @@ const blankDocument: firestoreDocumentType = {
   contactPhone: "",
 };
 
-export { blankDocument };
+export interface userProfileData {
+  firstName: string;
+  lastName: string;
+  graduationYear: string;
+}
 
 /** Holds both the data and the key value of a firestore Document.  */
 export interface fireStoreDocumentSnapshot {
@@ -39,3 +43,5 @@ export interface fireStoreDocumentSnapshot {
 export interface fireStoreUserData {
   [key: string]: firestoreDocumentType;
 }
+
+export { blankDocument };
