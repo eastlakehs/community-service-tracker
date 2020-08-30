@@ -20,6 +20,11 @@ const HeaderButtons: React.FunctionComponent<{}> = () => {
             Hours
           </Link>
         </a>
+        <a className="block lg:inline-block text-white mr-6 mt-2 lg:mt-auto">
+          <Link to="/edit">
+            Submit
+          </Link>
+        </a>
         <a
           href="#"
           onClick={async (e) => {
