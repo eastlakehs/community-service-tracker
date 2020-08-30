@@ -3,7 +3,8 @@ import { ValidationMessage } from "./validationMessage";
 /** All of the internal number validations have edge cases... this should work for our test input. Returns
  * true if the input string is a valid positive number. Function is safe regardless of input type.
  */
-const VALIDATE_hours = (hours: string): ValidationMessage => {
+const VALIDATE_hours = (hours?: string): ValidationMessage => {
+  if (hours == null) return { validate: false, message: "Input Null" };
   if (typeof hours !== "string") return { validate: false, message: "Input Not String" };
   if (!VALIDATE_free_form(hours).validate) return { validate: false, message: "Input Empty or too Long" };
   if (hours === ".") return { validate: false, message: "Invalid Hour" };
@@ -21,7 +22,8 @@ const VALIDATE_hours = (hours: string): ValidationMessage => {
   return { validate: true, message: "" };
 };
 
-const VALIDATE_free_form = (text: string): ValidationMessage => {
+const VALIDATE_free_form = (text?: string): ValidationMessage => {
+  if (text == null) return { validate: false, message: "Input Null" };
   const trimmedText = text.trim()
   if (trimmedText.length === 0) {
     return { validate: false, message: "Input Empty" };
