@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Profile from "../Components/Profile/profile";
 import Helmet from "../Components/Header/helmet";
+import NotLoggedIn from "../Components/Login/notLoggedIn";
 
 import { useDispatch, useSelector } from "react-redux";
 import { updateUserProfile } from "../Firebase/firestore/submitEdit";
@@ -30,6 +31,20 @@ const ProfileController: React.FC<{}> = () => {
   const dispatch = useDispatch();
   const currentUser = useIsSignedIn();
   const ProfileState = useSelector(selectProfileState);
+
+  if (!currentUser) {
+    return (
+      <>
+        <Helmet
+          title="Edit Page"
+          description="Page for editing and creating new and created volunteer hour entries."
+        />
+        <div className="mb-auto">
+          <NotLoggedIn />
+        </div>
+      </>
+    )
+  }
   return (
     <>
       <Helmet
