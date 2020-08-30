@@ -1,11 +1,9 @@
 import React from "react";
 
-import { useSyncUserData } from "../Firebase/firestore/useUserData";
 import Helmet from "../Components/Header/helmet";
 import TableController from "../Components/Table/tableController";
 
 const Table: React.FC<{}> = () => {
-  useSyncUserData();
   return (
     <>
       <Helmet

@@ -11,7 +11,14 @@ import { ProfileController } from "./Pages/profileController";
 import PageHeader from "./Components/Header/pageHeader";
 import Footer from "./Components/Footer/footer";
 
+import { useSyncUserData } from "./Firebase/firestore/useUserData";
+import { useSyncUserProfile } from "./Firebase/firestore/useUserProfile";
+
 const AppRouter = () => {
+  /** Real time web socket connection to keep profile and entry table in sync for the current user */
+  useSyncUserProfile();
+  useSyncUserData();
+  /** Real time web socket connection to keep profile and entry table in sync for the current user */
   return (
     <Router>
       <div className="flex flex-col min-h-screen bg-eastlake-grey font-text">

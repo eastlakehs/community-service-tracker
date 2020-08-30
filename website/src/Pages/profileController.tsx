@@ -5,7 +5,6 @@ import Helmet from "../Components/Header/helmet";
 import { useDispatch, useSelector } from "react-redux";
 import { updateUserProfile } from "../Firebase/firestore/submitEdit";
 import { useIsSignedIn } from "../Firebase/linkAuth/useIsSignedIn";
-import { useSyncUserProfile } from "../Firebase/firestore/useUserProfile";
 import {
   setProfileFirstName,
   setProfileLastName,
@@ -31,7 +30,6 @@ const ToastConfig: ToastOptions = {
 const ProfileController: React.FC<{}> = () => {
   const dispatch = useDispatch();
   const currentUser = useIsSignedIn();
-  useSyncUserProfile();
   const ProfileState = useSelector(selectProfileState);
   return (
     <>
