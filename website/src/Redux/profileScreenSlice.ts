@@ -1,7 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import {
-  firestoreDocumentType,
-  blankDocument,
   userProfileData,
 } from "../Firebase/firestore/firestoreData.type";
 
