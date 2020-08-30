@@ -1,5 +1,5 @@
 import React from "react";
-import { Edit } from "./edit";
+import { Edit } from "../Components/Edit/edit";
 import { useSelector } from "react-redux";
 import Helmet from "../Components/Header/helmet";
 

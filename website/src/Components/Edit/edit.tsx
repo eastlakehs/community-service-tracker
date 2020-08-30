@@ -10,13 +10,13 @@ import {
   setName,
   setContactName,
   setContactPhone,
-} from "../Redux/editScreenSlice";
-import { StringField, CheckBox, FormSubmitButton } from "../Components/Entry/entry";
-import { firestoreDocumentType } from "../Firebase/firestore/firestoreData.type";
+} from "../../Redux/editScreenSlice";
+import { StringField, CheckBox, FormSubmitButton } from "../Entry/entry";
+import { firestoreDocumentType } from "../../Firebase/firestore/firestoreData.type";
 import "react-modern-calendar-datepicker/lib/DatePicker.css";
 import DatePicker, { Day } from "react-modern-calendar-datepicker";
 import { useHistory } from "react-router-dom";
-import { submitEdit, submitNewEntry } from "../Firebase/firestore/submitEdit";
+import { submitEdit, submitNewEntry } from "../../Firebase/firestore/submitEdit";
 
 const Edit: React.FC<{
   currentData: firestoreDocumentType | null;

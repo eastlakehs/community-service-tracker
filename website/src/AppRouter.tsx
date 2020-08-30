@@ -5,7 +5,7 @@ import Home from "./Pages/home";
 import Login from "./Pages/login";
 import { EditController } from "./Pages/editController";
 import { Table } from "./Pages/table";
-import Profile from "./Pages/profile";
+import ProfileController from "./Pages/profileController";
 import PageHeader from "./Components/Header/pageHeader";
 import Footer from "./Components/Footer/footer";
 
@@ -25,7 +25,7 @@ const AppRouter = () => {
             <EditController />
           </Route>
           <Route path="/profile">
-            <Profile />
+            <ProfileController />
           </Route>
           <Route path="/">
             <Home />
