@@ -13,6 +13,21 @@ import {
   selectProfileState,
 } from "../Redux/profileScreenSlice";
 
+import { ToastContainer, toast, ToastOptions } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
+// Easy toast creation generation at https://fkhadra.github.io/react-toastify/introduction/
+
+const ToastConfig: ToastOptions = {
+  position: "bottom-center",
+  autoClose: 5000,
+  hideProgressBar: false,
+  closeOnClick: true,
+  pauseOnHover: true,
+  draggable: true,
+  progress: undefined,
+};
+
 const ProfileController: React.FC<{}> = () => {
   const dispatch = useDispatch();
   const currentUser = useIsSignedIn();
@@ -24,7 +39,17 @@ const ProfileController: React.FC<{}> = () => {
         title="Profile"
         description="Page for editing and viewing your profile."
       />
-
+      <ToastContainer
+        position="bottom-center"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
       <Profile
         profileData={ProfileState}
         updateFirstName={(firstName: string) => {
@@ -36,14 +61,21 @@ const ProfileController: React.FC<{}> = () => {
         updateGradYear={(gradYear: string) => {
           dispatch(setProfileGraduationYear(gradYear));
         }}
-        updateCallback={(data) => {
+        updateCallback={async (data) => {
           if (currentUser && typeof currentUser === "string") {
-            updateUserProfile(
+            const resp = await updateUserProfile(
               data.firstName,
               data.lastName,
               data.graduationYear,
               currentUser
             );
+            if (resp) {
+              toast.success("Updated Profile", ToastConfig);
+            } else {
+              toast.error("Updated Profile", ToastConfig);
+            }
+          } else if (!currentUser) {
+            toast.error("You are not signed in", ToastConfig);
           }
         }}
       />
