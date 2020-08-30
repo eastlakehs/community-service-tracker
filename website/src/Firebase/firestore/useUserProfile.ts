@@ -1,10 +1,8 @@
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { firestoreDocumentType } from "./firestoreData.type";
 import { useIsSignedIn } from "../linkAuth/useIsSignedIn";
 import { db } from "../setup";
 import {
-  selectProfileState,
   setCurrentProfile,
 } from "../../Redux/profileScreenSlice";
 import { userProfileData } from "./firestoreData.type";

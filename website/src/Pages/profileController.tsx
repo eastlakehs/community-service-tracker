@@ -1,5 +1,5 @@
 import React from "react";
-import Profile from "./profile";
+import Profile from "../Components/Profile/profile";
 import Helmet from "../Components/Header/helmet";
 
 import { useDispatch, useSelector } from "react-redux";
