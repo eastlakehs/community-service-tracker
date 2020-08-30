@@ -15,6 +15,11 @@ const HeaderButtons: React.FunctionComponent<{}> = () => {
             {signedIn}
           </Link>
         </a>
+        <a className="block lg:inline-block text-white mr-6 mt-2 lg:mt-auto">
+          <Link to="/table">
+            Hours
+          </Link>
+        </a>
         <a
           href="#"
           onClick={async (e) => {
