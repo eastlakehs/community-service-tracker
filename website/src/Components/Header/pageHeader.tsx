@@ -55,11 +55,12 @@ const HeaderButtons: React.FunctionComponent<{}> = () => {
 };
 
 const PageHeader = () => {
+  const signedIn = useIsSignedIn();
   const [show_nav, set_nav] = useState(false);
   return (
     <nav className="mb-10 bg-top-red p-6 flex flex-wrap font-black item-center justify-between">
       <div className="text-white mr-6 ">
-        <Link to="/">
+        <Link to={signedIn ? "/profile" : "/"}>
           <span className="text-xl tracking-tight">
             Wolf Pack Service Tracker
           </span>
