@@ -1,10 +1,9 @@
 import { firebase } from "../setup";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 
 import { useDispatch } from "react-redux";
 import { setSignInSate } from "../../Redux/signedInSlice";
 import signInwithLink from "./signInWithLink";
-import { FirebaseError } from "firebase";
 
 /** A hook for determining if a user is signed in or not. In addition, syncs sign in state in redux state
  * so pages dont have to wait to get auth state on each route change.
