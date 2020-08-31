@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { firestoreDocumentType } from "./firestoreData.type";
-import { useIsSignedIn } from "../linkAuth/useIsSignedIn";
 import { db } from "../setup";
 import { setDocument, deleteDocument } from "../../Redux/userDataSlice";
 import { selectSignedInState } from "../../Redux/signedInSlice";

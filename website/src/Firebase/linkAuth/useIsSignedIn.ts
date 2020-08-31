@@ -15,7 +15,7 @@ const useIsSignedIn = () => {
   useEffect(() => {
     let unsubscribe: firebase.Unsubscribe = () => {};
     // Log in a user if window contains log in code
-    const user = signInwithLink().then((user) => {
+    signInwithLink().then((user) => {
       // set auth state emmediately if window comtains auth link then attach authChange listener
       if (user && user.user && user.user.email) {
         dispatch(
