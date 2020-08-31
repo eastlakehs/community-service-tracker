@@ -21,16 +21,13 @@
    <img src="./Docs/images/wolflogo.png" width="200" height="200" />
 </p>
 
-# Work in progress 
-## Cloning origin website with react components. Origin website URL: https://eastlakecommunityservice.web.app/.
-### ~~Header~~ : https://github.com/eastlake-key/community-service-tracker/pull/7
-### ~~Body of main page~~ : https://github.com/eastlake-key/community-service-tracker/pull/21
-### ~~Footer~~ : https://github.com/eastlake-key/community-service-tracker/pull/29
-### Login UI: Not Done
-### Events Component: Not Done
+# Status: Currently in beta
+
 
 # Dependencies
 ## Browserstack + selenium
+
+### Selenium script currently not maintained: might be used in the future for e2e tests
 
 Generates screenshots for website based on ```Actions/screenshots/screenshot.py```. Screenshots are automatically uploaded as artifacts for each pull request to verify any significant UI breaking changes and ensure compatibility across platforms. 
 
@@ -54,25 +51,36 @@ Generates automatic preview builds for each pull request in order to demo for br
 <img width="741" alt="Screen Shot 2020-08-12 at 6 05 34 PM" src="https://user-images.githubusercontent.com/52898838/90083087-71da7900-dcc6-11ea-9ce1-171e46159b53.png">
 
 
-## React-helmet 
-
-Managment for the head element of the website (language tags, description, page title, etc). 
 
 ## React 
+UI framework <br>
+https://reactjs.org/
 
-UI framework 
+## React-helmet 
 
-## Redux 
+Managment for the head element of the website (language tags, description, page title, etc). <br>
+https://github.com/nfl/react-helmet
 
-State managment library 
+## Date picker
+https://github.com/Kiarash-Z/react-modern-calendar-datepicker
+
+## React toastify
+https://github.com/fkhadra/react-toastify
+
+## Redux-toolkit
+State managment library <br>
+https://redux-toolkit.js.org/
+
 
 ## Tailwind CSS
+Utility CSS Library <br>
+https://tailwindcss.com/
 
-Utility CSS Library 
 
 ## Firebase
+Email link authentication and firestore database <br>
+https://firebase.google.com/
 
-Email link authentication and firestore database
 
 # Common Problems encountered 
 ## Release build shows blank page and console.log shows "nothing was returned from render"
