@@ -54,7 +54,12 @@ const Edit: React.FC<{
     const is_hours_correct = VALIDATE_hours(currentData?.Hours)
     const is_contact_name_correct =  VALIDATE_free_form(currentData?.contactName)
     const is_contact_phone_number_correct = VALIDATE_free_form(currentData?.contactPhone)
+    const is_officer_name_correct = VALIDATE_free_form(currentData?.NHSofficer)
 
+    console.log(currentData?.NHS)
+    console.log(VALIDATE_free_form(currentData?.NHSofficer))
+    if (!is_officer_name_correct.validate && (currentData && currentData?.NHS === "Yes"))
+      return false;
     return is_name_correct.validate && is_description_correct.validate && is_hours_correct.validate && is_contact_name_correct.validate && is_contact_phone_number_correct.validate
   }
 
@@ -154,6 +159,9 @@ const Edit: React.FC<{
           setValue={(value) => {
             dispatch(setNHSOfficer(value));
           }}
+          shouldShowError={shouldShowError}
+          error={!VALIDATE_free_form(currentData?.NHSofficer).validate}
+          errorMessage={VALIDATE_free_form(currentData?.NHSofficer).message}
         />
 
         <FormSubmitButton
