@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import useIsSignedIn from "../../Firebase/linkAuth/useIsSignedIn";
 import { signOut } from "../../Firebase/linkAuth/signOut";
 import { useSelector } from "react-redux";
 import { selectSignedInState } from "../../Redux/signedInSlice";

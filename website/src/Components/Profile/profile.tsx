@@ -1,10 +1,12 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { StringField, FormSubmitButton } from "../Entry/entry";
 import Helmet from "../Header/helmet";
 
 import { userProfileData } from "../../Firebase/firestore/firestoreData.type";
-import { VALIDATE_free_form, VALIDATE_graduation } from "../Validation/validation";
-import { profile } from "console";
+import {
+  VALIDATE_free_form,
+  VALIDATE_graduation,
+} from "../Validation/validation";
 
 const Profile: React.FunctionComponent<{
   profileData: userProfileData;
@@ -24,13 +26,18 @@ const Profile: React.FunctionComponent<{
   const [shouldShowError, setShouldShowError] = useState(false);
 
   const ValidateProfilePage = (): boolean => {
-    const is_first_name_correct = VALIDATE_free_form(profileData?.firstName)
-    const is_last_name_correct = VALIDATE_free_form(profileData?.lastName)
-    const is_graduation_year_correct = VALIDATE_graduation(profileData?.graduationYear)
+    const is_first_name_correct = VALIDATE_free_form(profileData?.firstName);
+    const is_last_name_correct = VALIDATE_free_form(profileData?.lastName);
+    const is_graduation_year_correct = VALIDATE_graduation(
+      profileData?.graduationYear
+    );
 
-    return is_first_name_correct.validate && is_last_name_correct.validate && is_graduation_year_correct.validate
-  }
-
+    return (
+      is_first_name_correct.validate &&
+      is_last_name_correct.validate &&
+      is_graduation_year_correct.validate
+    );
+  };
 
   return (
     <>
@@ -48,7 +55,6 @@ const Profile: React.FunctionComponent<{
             shouldShowError={shouldShowError}
             error={!VALIDATE_free_form(profileData.firstName).validate}
             errorMessage={VALIDATE_free_form(profileData.firstName).message}
-            
           />
           <StringField
             name="Last Name"
@@ -66,14 +72,16 @@ const Profile: React.FunctionComponent<{
             setValue={updateGradYear}
             shouldShowError={shouldShowError}
             error={!VALIDATE_graduation(profileData.graduationYear).validate}
-            errorMessage={VALIDATE_graduation(profileData.graduationYear).message}
+            errorMessage={
+              VALIDATE_graduation(profileData.graduationYear).message
+            }
           />
           <FormSubmitButton
             hidden={!waitingForSubmit}
             buttonText={"Save Profile"}
             onSubmit={() => {
               if (!ValidateProfilePage()) {
-                setShouldShowError(true)
+                setShouldShowError(true);
                 return;
               }
               updateCallback(profileData);

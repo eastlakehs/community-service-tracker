@@ -23,7 +23,6 @@ import {
 } from "../../Firebase/firestore/submitEdit";
 
 import { toast, ToastOptions } from "react-toastify";
-import { ValidationMessage } from "../Validation/validationMessage";
 import { VALIDATE_free_form, VALIDATE_hours } from "../Validation/validation";
 /** Easy toast creation generation at https://fkhadra.github.io/react-toastify/introduction/ */
 const ToastConfig: ToastOptions = {
@@ -49,14 +48,24 @@ const Edit: React.FC<{
   const [shouldShowError, setShouldShowError] = useState(false);
 
   const ValidateEditPage = (): boolean => {
-    const is_name_correct = VALIDATE_free_form(currentData?.Name)
-    const is_description_correct = VALIDATE_free_form(currentData?.Description)
-    const is_hours_correct = VALIDATE_hours(currentData?.Hours)
-    const is_contact_name_correct =  VALIDATE_free_form(currentData?.contactName)
-    const is_contact_phone_number_correct = VALIDATE_free_form(currentData?.contactPhone)
+    const is_name_correct = VALIDATE_free_form(currentData?.Name);
+    const is_description_correct = VALIDATE_free_form(currentData?.Description);
+    const is_hours_correct = VALIDATE_hours(currentData?.Hours);
+    const is_contact_name_correct = VALIDATE_free_form(
+      currentData?.contactName
+    );
+    const is_contact_phone_number_correct = VALIDATE_free_form(
+      currentData?.contactPhone
+    );
 
-    return is_name_correct.validate && is_description_correct.validate && is_hours_correct.validate && is_contact_name_correct.validate && is_contact_phone_number_correct.validate
-  }
+    return (
+      is_name_correct.validate &&
+      is_description_correct.validate &&
+      is_hours_correct.validate &&
+      is_contact_name_correct.validate &&
+      is_contact_phone_number_correct.validate
+    );
+  };
 
   return (
     <div className="mb-auto">
@@ -161,7 +170,7 @@ const Edit: React.FC<{
           buttonText={editing ? "Edit Activity" : "Log new Activity"}
           onSubmit={async () => {
             if (!ValidateEditPage()) {
-              setShouldShowError(true)
+              setShouldShowError(true);
               return;
             }
             setWaitingForSubmit(true);

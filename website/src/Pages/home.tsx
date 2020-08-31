@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import Body from "../Components/Body/body";
 import Helmet from "../Components/Header/helmet";
-import signInwithLink from "../Firebase/linkAuth/signInWithLink";
 import { useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { selectSignedInState } from "../Redux/signedInSlice";

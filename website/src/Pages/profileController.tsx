@@ -5,7 +5,6 @@ import NotLoggedIn from "../Components/Login/notLoggedIn";
 
 import { useDispatch, useSelector } from "react-redux";
 import { updateUserProfile } from "../Firebase/firestore/submitEdit";
-import { useIsSignedIn } from "../Firebase/linkAuth/useIsSignedIn";
 import {
   setProfileFirstName,
   setProfileLastName,

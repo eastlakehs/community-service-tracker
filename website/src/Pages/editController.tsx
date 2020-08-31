@@ -4,8 +4,6 @@ import { useSelector } from "react-redux";
 import Helmet from "../Components/Header/helmet";
 
 import { selectEditScreenState } from "../Redux/editScreenSlice";
-
-import { useIsSignedIn } from "../Firebase/linkAuth/useIsSignedIn";
 import NotLoggedIn from "../Components/Login/notLoggedIn";
 import { selectSignedInState } from "../Redux/signedInSlice";
 

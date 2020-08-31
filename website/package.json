@@ -19,6 +19,7 @@
     "@types/react-helmet": "^6.1.0",
     "@types/react-redux": "^7.1.9",
     "@types/react-router-dom": "^5.1.5",
+    "eslint-config-react-app": "^5.2.1",
     "firebase": "^7.17.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
