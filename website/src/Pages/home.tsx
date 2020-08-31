@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import Body from "../Components/Body/body";
 import Helmet from "../Components/Header/helmet";
 import signInwithLink from "../Firebase/linkAuth/signInWithLink";
-import useIsSignedIn from "../Firebase/linkAuth/useIsSignedIn";
 import { useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { selectSignedInState } from "../Redux/signedInSlice";
@@ -10,13 +9,7 @@ import { selectSignedInState } from "../Redux/signedInSlice";
 const Home = () => {
   const signedInstate = useSelector(selectSignedInState);
   const history = useHistory();
-  // If a user is redirected to the home page from an auth link, we should log the user into our app.
-  useEffect(() => {
-    signInwithLink().then((value) => {
-      console.log(value);
-    });
-  });
-  // users that are login in should be redirected to profile page
+  // users that are logged in in should be redirected to profile page
   useEffect(() => {
     if (signedInstate.signedIn) {
       history.replace("/profile");
