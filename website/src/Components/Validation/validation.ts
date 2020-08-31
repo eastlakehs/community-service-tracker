@@ -28,7 +28,7 @@ const VALIDATE_free_form = (text?: string): ValidationMessage => {
   if (trimmedText.length === 0) {
     return { validate: false, message: "Input Empty" };
   }
-  else if (trimmedText.length > 100) {
+  else if (trimmedText.length > 280) {
     return { validate: false, message: "Input Too Long" };
   }
   return { validate: true, message: "" };
