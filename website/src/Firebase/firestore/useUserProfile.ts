@@ -1,6 +1,5 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useIsSignedIn } from "../linkAuth/useIsSignedIn";
 import { db } from "../setup";
 import { setCurrentProfile } from "../../Redux/profileScreenSlice";
 import { userProfileData } from "./firestoreData.type";
