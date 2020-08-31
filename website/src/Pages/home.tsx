@@ -1,28 +1,28 @@
 import React, { useEffect } from "react";
-import Helmet from "../Components/Header/helmet";
-import PageHeader from "../Components/Header/pageHeader";
 import Body from "../Components/Body/body";
-import Footer from "../Components/Footer/footer";
-
+import Helmet from "../Components/Header/helmet";
 import signInwithLink from "../Firebase/linkAuth/signInWithLink";
+import { useHistory } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { selectSignedInState } from "../Redux/signedInSlice";
 
 const Home = () => {
-  // If a user is redirected to the home page from an auth link, we should log the user into our app.
+  const signedInstate = useSelector(selectSignedInState);
+  const history = useHistory();
+  // users that are logged in in should be redirected to profile page
   useEffect(() => {
-    signInwithLink().then((value) => {
-      console.log(value);
-    });
+    if (signedInstate.signedIn) {
+      history.replace("/profile");
+    }
   });
   return (
-    <div className="flex flex-col min-h-screen bg-eastlake-grey font-text">
+    <>
       <Helmet
         title="EHS tracker"
         description="Main page for the eastlake service tracker website where students can record their volunteer hours."
       />
-      <PageHeader />
       <Body />
-      <Footer />
-    </div>
+    </>
   );
 };
 

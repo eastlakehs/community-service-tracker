@@ -1,8 +1,14 @@
 import { configureStore } from "@reduxjs/toolkit";
-import exampleSlice from "./exampleSlice";
+import userDataSlice from "./userDataSlice";
+import editScreenSlice from "./editScreenSlice";
+import profileDataSlice from "./profileScreenSlice";
+import signedInSlice from "./signedInSlice";
 
 export default configureStore({
   reducer: {
-    example: exampleSlice,
+    userData: userDataSlice,
+    editScreen: editScreenSlice,
+    profileData: profileDataSlice,
+    signedInState: signedInSlice,
   },
 });

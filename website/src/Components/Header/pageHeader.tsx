@@ -2,17 +2,34 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import useIsSignedIn from "../../Firebase/linkAuth/useIsSignedIn";
 import { signOut } from "../../Firebase/linkAuth/signOut";
+import { useSelector } from "react-redux";
+import { selectSignedInState } from "../../Redux/signedInSlice";
 /* eslint-disable jsx-a11y/anchor-is-valid */
 
 const HeaderButtons: React.FunctionComponent<{}> = () => {
-  const signedIn = useIsSignedIn();
+  const signedInstate = useSelector(selectSignedInState);
   // Display user email adress if the user is signed in
-  if (signedIn && typeof signedIn === "string") {
+  if (signedInstate.signedIn) {
     return (
       <>
-        <a className="block lg:inline-block text-white mr-6 mt-2 lg:mt-auto">
-          {signedIn}
-        </a>
+        <Link
+          to="/profile"
+          className="block lg:inline-block text-white mr-6 mt-2 lg:mt-auto"
+        >
+          {signedInstate.userEmail}
+        </Link>
+        <Link
+          to="/table"
+          className="block lg:inline-block text-white mr-6 mt-2 lg:mt-auto"
+        >
+          Hours
+        </Link>
+        <Link
+          to="/edit"
+          className="block lg:inline-block text-white mr-6 mt-2 lg:mt-auto"
+        >
+          Submit
+        </Link>
         <a
           href="#"
           onClick={async (e) => {
@@ -40,11 +57,12 @@ const HeaderButtons: React.FunctionComponent<{}> = () => {
 };
 
 const PageHeader = () => {
+  const signedInstate = useSelector(selectSignedInState);
   const [show_nav, set_nav] = useState(false);
   return (
     <nav className="mb-10 bg-top-red p-6 flex flex-wrap font-black item-center justify-between">
       <div className="text-white mr-6 ">
-        <Link to="/">
+        <Link to={signedInstate.userEmail ? "/profile" : "/"}>
           <span className="text-xl tracking-tight">
             Wolf Pack Service Tracker
           </span>

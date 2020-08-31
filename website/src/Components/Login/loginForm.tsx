@@ -1,7 +1,10 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import sendEmailAuth from "../../Firebase/linkAuth/sendEmailAuth";
 
+import { useHistory } from "react-router-dom";
+import { selectSignedInState } from "../../Redux/signedInSlice";
+import { useSelector } from "react-redux";
 type emailState =
   | "base"
   | "email-send-failed"
@@ -50,8 +53,16 @@ const basicEmailValidation = (email: string) => {
 };
 
 const LoginForm = () => {
+  const signedInstate = useSelector(selectSignedInState);
+  const history = useHistory();
   const [emailState, setEmailState] = useState<emailState>("base");
   const [emailInput, setEmailInput] = useState("");
+
+  useEffect(() => {
+    if (signedInstate.signedIn) {
+      history.replace("/profile");
+    }
+  });
   return (
     <div className="flex flex-1 items-center justify-center h-full w-full mb-32">
       <form
