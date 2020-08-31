@@ -7,8 +7,8 @@ const Footer = () => {
       <a className="text-white" href="https://repo.ehs-service.org">
         issues/suggestion: repo.ehs-service.org
       </a>
-      <a className="text-white pb-2" href="mailto:placeholder@gmail.com">
-        contact: placeholder@gmail.com
+      <a className="text-white pb-2" href="mailto:eastlakekey@gmail.com">
+        contact: eastlakekey@gmail.com
       </a>
     </footer>
   );
