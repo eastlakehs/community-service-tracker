@@ -2,7 +2,7 @@ import React from "react";
 
 import Helmet from "../Components/Header/helmet";
 import TableController from "../Components/Table/tableController";
-import NotLoggedIn from "../Components/Login/notLoggedIn";
+import InfoPage from "../Components/Info/infoPage";
 import { useSelector } from "react-redux";
 import { selectSignedInState } from "../Redux/signedInSlice";
 
@@ -17,7 +17,7 @@ const Table: React.FC<{}> = () => {
           description="Page for editing and creating new and created volunteer hour entries."
         />
         <div className="mb-auto">
-          <NotLoggedIn />
+        <InfoPage title="You Are Not Signed In!" message="Click here to sign in" link="/login"/>
         </div>
       </>
     );
