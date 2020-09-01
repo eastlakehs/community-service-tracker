@@ -33,7 +33,7 @@ const Body = () => {
             "text-center font-light text-white py-2 lg:py-3 text-sm sm:text-base lg:text-lg xl:text-xl"
           }
         >
-          An OTP login link will be sent to your email adress.
+          A login link will be sent to your email address.
         </h3>
       </div>
     </div>
