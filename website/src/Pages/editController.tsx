@@ -5,8 +5,8 @@ import Helmet from "../Components/Header/helmet";
 
 import { selectEditScreenState } from "../Redux/editScreenSlice";
 
-import NotLoggedIn from "../Components/Login/notLoggedIn";
 import { selectSignedInState } from "../Redux/signedInSlice";
+import InfoPage from "../Components/Info/infoPage";
 
 const EditController: React.FC<{}> = () => {
   const editState = useSelector(selectEditScreenState);
@@ -20,7 +20,7 @@ const EditController: React.FC<{}> = () => {
           description="Page for editing and creating new and created volunteer hour entries."
         />
         <div className="mb-auto">
-          <NotLoggedIn />
+          <InfoPage title="You Are Not Signed In!" message="Click here to sign in" link="/login"/>
         </div>
       </>
     );

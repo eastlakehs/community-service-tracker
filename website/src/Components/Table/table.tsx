@@ -2,6 +2,7 @@ import React from "react";
 import { initialStateType } from "../../Redux/userDataSlice";
 import { Day } from "react-modern-calendar-datepicker";
 import { totalizeHours } from "./Totalizer/totalizer";
+import InfoPage from "../Info/infoPage";
 /* Table CSS Credit: https://tailwindcomponents.com/component/table-responsive-with-filters */
 
 const TableHeaderStyle: string =
@@ -68,6 +69,12 @@ const CSTable: React.FunctionComponent<{
       );
     });
   };
+
+  if (Object.keys(data.data).length === 0) {
+    return (
+      <InfoPage title="No Hours Found!" message="Click here to submit hours!" link="/edit" />
+    )
+  }
 
   return (
     <>
