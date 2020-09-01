@@ -1,6 +1,7 @@
 import React from "react";
 import { initialStateType } from "../../Redux/userDataSlice";
 import { Day } from "react-modern-calendar-datepicker";
+import { totalizeHours } from "./Totalizer/totalizer";
 /* Table CSS Credit: https://tailwindcomponents.com/component/table-responsive-with-filters */
 
 const TableHeaderStyle: string =
@@ -70,25 +71,30 @@ const CSTable: React.FunctionComponent<{
   };
 
   return (
-    <div className="container mx-auto px-4 sm:px-8">
-      <div className="py-8">
-        <div className="-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto">
-          <div className="inline-block min-w-full shadow rounded-lg overflow-hidden">
-            <table className={"min-w-full leading-normal"}>
-              <thead>
-                <tr>
-                  <>{generateHeader()}</>
-                  <th className={TableHeaderStyle}>Operation</th>
-                </tr>
-              </thead>
-              <tbody>
-                <>{generateTableData()}</>
-              </tbody>
-            </table>
+    <>
+      <span className="flex justify-center text-white text-3xl">
+        {`Total Hours : ${totalizeHours(data)} hours`}
+      </span>
+      <div className="container mx-auto px-4 sm:px-8">
+        <div className="py-8">
+          <div className="-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto">
+            <div className="inline-block min-w-full shadow rounded-lg overflow-hidden">
+              <table className={"min-w-full leading-normal"}>
+                <thead>
+                  <tr>
+                    <>{generateHeader()}</>
+                    <th className={TableHeaderStyle}>Operation</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <>{generateTableData()}</>
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
