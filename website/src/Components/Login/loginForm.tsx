@@ -17,7 +17,7 @@ const UserHint: React.FunctionComponent<{ state: emailState }> = ({
   if (state === "base")
     return (
       <p className="text-red-500 text-base italic">
-        Please enter your lwsd.org email adress.
+        Please enter your lwsd.org email address.
       </p>
     );
   if (state === "email-send-failed")
@@ -29,7 +29,7 @@ const UserHint: React.FunctionComponent<{ state: emailState }> = ({
   if (state === "form-validation-error")
     return (
       <p className="text-red-500 text-base italic">
-        Improperly formatted email or email is not an lwsd email adress.
+        Improperly formatted email or email is not an lwsd email address.
       </p>
     );
   if (state === "email-send-successfully")
@@ -71,7 +71,7 @@ const LoginForm = () => {
       >
         <div className="mb-4">
           <label className="block text-gray-700 text-2xl font-bold mb-2">
-            Username
+            Email
           </label>
           <input
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
@@ -102,7 +102,7 @@ const LoginForm = () => {
             className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
             type="submit"
           >
-            Sign In
+            Send Login Link
           </button>
         </div>
       </form>
