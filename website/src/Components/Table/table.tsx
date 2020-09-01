@@ -23,12 +23,11 @@ const CSTable: React.FunctionComponent<{
       );
     });
   };
-  const TableCell: React.FunctionComponent<{ name: string | number }> = ({
-    name,
+  const TableCell: React.FunctionComponent<{ name: string | number}> = ({
+    name
   }) => (
     <td
       className="px-2 py-2 sm:px-3 sm:py-3 md:px-4 md:py-4 lg:px-5 lg:py-5 border-b border-gray-200 bg-white text-sm"
-      key={name}
     >
       <p className="text-gray-900">{name}</p>
     </td>
@@ -54,7 +53,7 @@ const CSTable: React.FunctionComponent<{
     return Object.keys(data.data).map((entry) => {
       const dateObj = JSON.parse(data.data[entry].Date) as Day;
       return (
-        <tr key={data.data ? JSON.stringify(data.data[entry]) : "empty-entry"}>
+        <tr key={data.data ? entry : "empty-entry"}>
           <TableCell name={data.data[entry].Name} />
           <TableCell name={data.data[entry].Description} />
           <TableCell name={data.data[entry].Hours} />
