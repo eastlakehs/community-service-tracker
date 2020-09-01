@@ -23,8 +23,8 @@ const CSTable: React.FunctionComponent<{
       );
     });
   };
-  const TableCell: React.FunctionComponent<{ name: string | number}> = ({
-    name
+  const TableCell: React.FunctionComponent<{ name: string | number }> = ({
+    name,
   }) => (
     <td
       className="px-2 py-2 sm:px-3 sm:py-3 md:px-4 md:py-4 lg:px-5 lg:py-5 border-b border-gray-200 bg-white text-sm"
