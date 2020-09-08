@@ -84,7 +84,7 @@ const Edit: React.FC<{
         </h1>
         <StringField
           name="Activity Name"
-          placeholder="Orginization, club, etc."
+          placeholder="Organization, club, etc."
           value={currentData ? currentData.Name : ""}
           setValue={(value: string) => {
             dispatch(setName(value));
