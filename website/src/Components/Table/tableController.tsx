@@ -24,8 +24,12 @@ const TableController: React.FunctionComponent<{}> = () => {
     history.push("/edit");
   };
 
+  const handleDelete = (currentID: string) => {
+    const confirmed = window.confirm("Are you sure you want to delete this entry?");
+  }
+
   // console.log(data);
-  return <CSTable data={data} handleEditClick={navigateToEdit} />;
+  return <CSTable data={data} handleEditClick={navigateToEdit} handleDelete={handleDelete}/>;
 };
 
 export default TableController;
