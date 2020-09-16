@@ -8,12 +8,6 @@ import InfoPage from "../Info/infoPage";
 const TableHeaderStyle: string =
   "px-2 py-2 sm:px-3 sm:py-3 md:px-4 md:py-4 lg:px-5 lg:py-5 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider";
 
-const EditButtonStyle: string =
-  "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mx-4 mt-2 rounded";
-
-const DeleteButtonStyle: string =
-  "bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 m-2 rounded";
-
 const CSTable: React.FunctionComponent<{
   data: initialStateType;
   handleEditClick: (entryID: string) => void;
@@ -44,7 +38,7 @@ const CSTable: React.FunctionComponent<{
     edit: boolean;
   }> = ({ name, onClick, edit}) => (
     <button
-      className={edit ? EditButtonStyle : DeleteButtonStyle}
+      className={edit ? "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mx-4 mt-2 rounded" : "bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 m-2 rounded"}
       onClick={() => {
         onClick();
       }}
