@@ -8,13 +8,11 @@ import InfoPage from "../Info/infoPage";
 const TableHeaderStyle: string =
   "px-2 py-2 sm:px-3 sm:py-3 md:px-4 md:py-4 lg:px-5 lg:py-5 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider";
 
-const ButtonStyle: string =
-  "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded";
-
 const CSTable: React.FunctionComponent<{
   data: initialStateType;
   handleEditClick: (entryID: string) => void;
-}> = ({ data, handleEditClick }) => {
+  handleDelete: (entryID: string) => void;
+}> = ({ data, handleEditClick, handleDelete }) => {
   const generateHeader = () => {
     return data.header.map((header) => {
       return (
@@ -27,27 +25,26 @@ const CSTable: React.FunctionComponent<{
   const TableCell: React.FunctionComponent<{ name: string | number }> = ({
     name,
   }) => (
-    <td
-      className="px-2 py-2 sm:px-3 sm:py-3 md:px-4 md:py-4 lg:px-5 lg:py-5 border-b border-gray-200 bg-white text-sm"
-    >
-      <p className="text-gray-900">{name}</p>
-    </td>
-  );
+      <td
+        className="px-2 py-2 sm:px-3 sm:py-3 md:px-4 md:py-4 lg:px-5 lg:py-5 border-b border-gray-200 bg-white text-sm"
+      >
+        <p className="text-gray-900">{name}</p>
+      </td>
+    );
 
-  const EditButton: React.FunctionComponent<{
+  const TableButton: React.FunctionComponent<{
     name: string;
     onClick: () => void;
-  }> = ({ name, onClick }) => (
-    <td className="px-2 py-2 sm:px-3 sm:py-3 md:px-4 md:py-4 lg:px-5 lg:py-5 border-b border-gray-200 bg-white text-sm">
-      <button
-        className={ButtonStyle}
-        onClick={() => {
-          onClick();
-        }}
-      >
-        {name}
-      </button>
-    </td>
+    edit: boolean;
+  }> = ({ name, onClick, edit}) => (
+    <button
+      className={edit ? "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mx-4 mt-2 rounded" : "bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 m-2 rounded"}
+      onClick={() => {
+        onClick();
+      }}
+    >
+      {name}
+    </button>
   );
 
   const generateTableData = () => {
@@ -59,12 +56,22 @@ const CSTable: React.FunctionComponent<{
           <TableCell name={data.data[entry].Description} />
           <TableCell name={data.data[entry].Hours} />
           <TableCell name={`${dateObj.month}-${dateObj.day}-${dateObj.year}`} />
-          <EditButton
-            name="Edit"
-            onClick={() => {
-              handleEditClick(entry);
-            }}
-          />
+          <td className={"px-2 border-b border-gray-200 bg-white text-sm "}>
+            <TableButton
+              name="Edit"
+              onClick={() => {
+                handleEditClick(entry);
+              }}
+              edit={true}
+            />
+            <TableButton
+              name="Delete"
+              onClick={() => {
+                handleDelete(entry);
+              }}
+              edit={false}
+            />
+          </td>
         </tr>
       );
     });
