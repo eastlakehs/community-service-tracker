@@ -1,75 +1,58 @@
 import { db, admin } from "./setup";
 
-/** Cleanly frees resources used by firebase */
-const firebaseExit = () => {
-  admin.apps.forEach((app) => {
-    if (app)
-      app
-        .delete()
-        .then(() => {
-          console.log("done");
-        })
-        .catch((e) => {
-          console.log(e);
-        });
-  });
-};
-
-const backupDB = async () => {
-  try {
-    /** Will store json of the entire firstore state. Stores everything except subcollections */
-    let backupJson: any = {};
-    const collections = await db.listCollections();
-    /** Promises for resolving data fetching for each document. Allows fast async backup */
-    const promises: Promise<any>[] = [];
-    collections.forEach((collection) => {
-      const getDocumentsPromise = new Promise(async (resolve, reject) => {
-        const collectionData = await collection.get().catch((e) => {
-          reject(e);
-        });
-        if (typeof collectionData === "undefined") {
-          reject(undefined);
+const recurseClone = async (
+  collectionRef: FirebaseFirestore.CollectionReference<
+    FirebaseFirestore.DocumentData
+  >,
+  currentDataRef: any
+) => {
+  const documents = await collectionRef.listDocuments();
+  return Promise.all(
+    documents.map(async (document) => {
+      // saves the fields of the current documnet at the current crawl point
+      const saveCurrentDocPromise = document.get().then((data) => {
+        if (!currentDataRef[document.id]) {
+          currentDataRef[document.id] = {};
         }
-        collectionData.forEach((document) => {
-          /** Create fields for collection and data if needed */
-          if (!backupJson[collection.id]) {
-            backupJson[collection.id] = {};
-          }
-          if (!backupJson[collection.id][document.id]) {
-            backupJson[collection.id][document.id] = {};
-          }
-          /** Deep copy data into collection/document.id */
-          Object.assign(
-            backupJson[collection.id][document.id],
-            document.data()
-          );
-        });
-        /** Data fetched sucessfully and imported */
-        resolve(true);
+        if (!currentDataRef[document.id]["_data"]) {
+          currentDataRef[document.id]["_data"] = {};
+        }
+        Object.assign(currentDataRef[document.id]["_data"], data.data());
       });
-      promises.push(getDocumentsPromise);
-    });
-    await Promise.all(promises).catch((e) => {
-      console.log(e);
-      return null;
-    });
-    firebaseExit();
-    return JSON.stringify(backupJson);
-  } catch (e) {
-    console.log(e);
-    return false;
-  }
+
+      // recurses and continues to crawl
+      const newCollections = await document.listCollections();
+
+      // keep crawling
+      await Promise.all(
+        newCollections.map(async (newCollection) => {
+          if (!currentDataRef[document.id]) {
+            currentDataRef[document.id] = {};
+          }
+          if (!currentDataRef[document.id][newCollection.id]) {
+            currentDataRef[document.id][newCollection.id] = {};
+          }
+          return recurseClone(
+            newCollection,
+            currentDataRef[document.id][newCollection.id]
+          );
+        })
+      );
+      return saveCurrentDocPromise;
+    })
+  );
 };
 
-/*
-const main = async () => {
-  const result = await backupDB();
-  if (result) {
-    console.log(result);
-  }
+const cloneDbAsJson = async () => {
+  const allCollections = await db.listCollections();
+  const exportedData: any = {};
+  await Promise.all(
+    allCollections.map(async (collection) => {
+      exportedData[collection.id] = {};
+      return recurseClone(collection, exportedData[collection.id]);
+    })
+  );
+  return exportedData;
 };
 
-main();
-*/
-
-export { backupDB, firebaseExit };
+export { cloneDbAsJson };

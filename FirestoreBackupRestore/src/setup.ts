@@ -1,5 +1,5 @@
 import * as admin from "firebase-admin";
-const serviceAccount = require("./community-ser-firebase-adminsdk-2i7wg-1fa9d77466.json");
+const serviceAccount = require("./community-ser-firebase-adminsdk-8h8w0-ea45baaa4e.json");
 
 /** Initialize the App */
 if (admin.apps.length === 0) {

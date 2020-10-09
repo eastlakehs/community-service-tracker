@@ -6,6 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "typescript": "tsc --project tsconfig.json",
+    "main": "npm run typescript && node build/main.js",
     "backup": "npm run typescript && node build/backup.js",
     "restore": "npm run typescript && node build/restore.js"
   },
