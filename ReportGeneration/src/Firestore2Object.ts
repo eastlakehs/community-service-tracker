@@ -1,5 +1,11 @@
-import { db, admin } from "./setup";
+import { dataJsonType } from "./data";
 
+/** Function which accepts a collection reference and reference to the crawl location in an object.
+ *  Find all documents of current collection, saves their data to crawl point, and recurses
+ *  on iteself for any further collections with new crawl points.
+ *
+ *  Returns a promise pending on the completion of a crawl from a current collection.
+ */
 const recurseClone = async (
   collectionRef: FirebaseFirestore.CollectionReference<
     FirebaseFirestore.DocumentData
@@ -43,7 +49,15 @@ const recurseClone = async (
   );
 };
 
-const cloneDbAsJson = async () => {
+/** Traverse all collections and save Firestore data from there using recurseClone function.
+ *  Returns entire Firestore database as a single object.
+ *
+ *  See data.ts for the structure of the resulting object for our database.
+ *  In short, keys represent collection or document IDs which can contain further child keys of collections or docuemnts.
+ *  The key _data is special because it signals the data field of a document.
+ *  As long the keyword _data is not used for naming documents or collections, there will no collisions.
+ */
+const cloneDbAsJson = async (db: FirebaseFirestore.Firestore) => {
   const allCollections = await db.listCollections();
   const exportedData: any = {};
   await Promise.all(
@@ -52,7 +66,7 @@ const cloneDbAsJson = async () => {
       return recurseClone(collection, exportedData[collection.id]);
     })
   );
-  return exportedData;
+  return exportedData as dataJsonType;
 };
 
 export { cloneDbAsJson };

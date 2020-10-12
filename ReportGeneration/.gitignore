@@ -6,6 +6,11 @@ yarn-debug.log*
 yarn-error.log*
 firebase-debug.log*
 
+# Output CSV
+*.csv
+output.csv
+src/*.csv
+
 #TS BUILD
 build
 
