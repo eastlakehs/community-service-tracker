@@ -25,6 +25,9 @@ import "react-toastify/dist/ReactToastify.css";
 import { useSelector } from "react-redux";
 import { selectSignedInState } from "./Redux/signedInSlice";
 
+// Report downloading
+import { ReportPage } from "./Components/Reports/reportPage";
+
 const AppRouter = () => {
   /** Real time web socket connection to keep profile and entry table in sync for the current user */
   useSyncUserProfile();
@@ -69,6 +72,9 @@ const AppRouter = () => {
             </Route>
             <Route path="/profile">
               <ProfileController />
+            </Route>
+            <Route path="/report">
+              <ReportPage />
             </Route>
             <Route path="/">
               <Home />
