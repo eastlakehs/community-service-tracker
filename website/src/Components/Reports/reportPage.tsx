@@ -28,10 +28,11 @@ const ReportPage: React.FunctionComponent<{}> = () => {
         >
           The hour summaries from all students should begin downloading as a csv
           file which can be opened in excel etc. Occasionally, browsers such as
-          chrome may block files from being downloaded. In this case, check the
+          Chrome may block files from being downloaded. In this case, check the
           top right of the adress bar to allow file downloads. Additionally,
           please ensure that you are using the latest version of chrome/edge. If
-          all fails, contact eastlakekey@gmail.com
+          all fails, contact eastlakekey@gmail.com. Note that hour report are 
+          automatically generated every 24 hours so they may not be fully up-to-date. 
         </h2>
       </div>
     </>
