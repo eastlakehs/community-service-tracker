@@ -76,6 +76,9 @@ const AppRouter = () => {
             <Route path="/report">
               <ReportPage />
             </Route>
+            <Route path="/reports">
+              <ReportPage />
+            </Route>
             <Route path="/">
               <Home />
             </Route>
