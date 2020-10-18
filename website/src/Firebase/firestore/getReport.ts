@@ -1,8 +1,12 @@
 import { db } from "../setup";
 
+type firebaseServerTimestamp = { seconds: number; nanoseconds: number };
+
 type reportType = null | {
   hourSummary: string;
+  lastUpdated: firebaseServerTimestamp;
 };
+
 /** Fetches the latest csv hour summaries */
 const getReport = async () => {
   const report = await db
@@ -14,7 +18,7 @@ const getReport = async () => {
       return null;
     });
   const typedReport = report?.data() as reportType;
-  if (typedReport) return typedReport.hourSummary;
+  if (typedReport) return typedReport;
   return null;
 };
 
@@ -28,14 +32,18 @@ const getReport = async () => {
 
 const downloadReport = async () => {
   const report = await getReport();
-  console.log(report);
   if (report) {
+    const reportDate = new Date(report.lastUpdated.seconds * 1000);
+    const reportName = `Hour-Report-${
+      reportDate.getUTCMonth() + 1
+    }-${reportDate.getDate()}.csv`;
+    console.log(reportName);
     let element = document.createElement("a");
     element.setAttribute(
       "href",
-      "data:text/plain;charset=utf-8," + encodeURIComponent(report)
+      "data:text/plain;charset=utf-8," + encodeURIComponent(report.hourSummary)
     );
-    element.setAttribute("download", `hour-report.csv`);
+    element.setAttribute("download", reportName);
     element.style.display = "none";
     document.body.appendChild(element);
     element.click();

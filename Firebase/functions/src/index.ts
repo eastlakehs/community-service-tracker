@@ -49,6 +49,7 @@ exports.saveSummariesToFirestore = functions.pubsub
     // save csv string to db
     await db.collection("reports").doc("latest").set({
       hourSummary: output,
+      lastUpdated: admin.firestore.FieldValue.serverTimestamp(),
     });
     console.log("Saved Report Successfully");
   });
