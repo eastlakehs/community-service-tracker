@@ -1,8 +1,17 @@
 rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
+
+    function emailMatchesDocument (_document) {
+      return (request.auth != null && request.auth.token.email.lower() == _document);
+    }
+
+    function emailIsValid (_email) {
+      return (request.auth.token.email.matches('.*@lwsd.org') || request.auth.token.email.matches('.*@bellevuecollege.edu'));
+    }
+
     match /users/{email}/{document=**} { 
-      allow read, write: if request.auth != null && request.auth.token.email.lower() == email && request.auth.token.email.matches('.*@lwsd.org');
+      allow read, write: if emailMatchesDocument(email) && emailIsValid(email); 
     }
     match /reports/{document=**} { 
       allow read;

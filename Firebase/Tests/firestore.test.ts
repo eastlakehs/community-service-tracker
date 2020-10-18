@@ -46,7 +46,7 @@ describe("own docs should resolve", () => {
   });
 });
 
-describe("non lwsd docs should reject", () => {
+describe("non valid school email docs should reject", () => {
   // signed in as student-a@lwsd.org
   const app = firebase.initializeTestApp({
     projectId: "community-ser",
@@ -54,14 +54,38 @@ describe("non lwsd docs should reject", () => {
   });
   const db = app.firestore();
 
-  // signed in as student-a, reading to student-b should fail
-  it("reading to student-a as student-a", async () => {
+  // non valid school email read should reject
+  it("reading to student-a as student-a (@domain.org)", async () => {
     const nonUserDoc = db.collection("users").doc("student-a@domain.org");
     expect(await firebase.assertFails(nonUserDoc.get()));
   });
-  // signed in as student-a, writing to student-b should fail
-  it("writing to student-a as student-a", async () => {
+  // non lwvalid school email write should reject
+  it("writing to student-a as student-a (@domain.org)", async () => {
     const nonUserDoc = db.collection("users").doc("student-a@domain.org");
     expect(await firebase.assertFails(nonUserDoc.set({})));
+  });
+});
+
+describe("bellevue college student emails should pass", () => {
+  // signed in as student-a@bellevuecollege.edu
+  const app = firebase.initializeTestApp({
+    projectId: "community-ser",
+    auth: { uid: "test-student", email: "student-a@bellevuecollege.edu" },
+  });
+  const db = app.firestore();
+
+  // whitelisted non lwsd email read should pass
+  it("reading to student-a as student-a (@bellevuecollege.edu)", async () => {
+    const nonUserDoc = db
+      .collection("users")
+      .doc("student-a@bellevuecollege.edu");
+    expect(await firebase.assertSucceeds(nonUserDoc.get()));
+  });
+  // whitelisted non lwsd email write should pass
+  it("writing to student-a as student-a (@bellevuecollege.edu)", async () => {
+    const nonUserDoc = db
+      .collection("users")
+      .doc("student-a@bellevuecollege.edu");
+    expect(await firebase.assertSucceeds(nonUserDoc.set({})));
   });
 });
