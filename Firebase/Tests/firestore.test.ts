@@ -46,7 +46,7 @@ describe("own docs should resolve", () => {
   });
 });
 
-describe("non lwsd docs should reject", () => {
+describe("non valid school email docs should reject", () => {
   // signed in as student-a@lwsd.org
   const app = firebase.initializeTestApp({
     projectId: "community-ser",
@@ -54,12 +54,12 @@ describe("non lwsd docs should reject", () => {
   });
   const db = app.firestore();
 
-  // non lwsd read should reject
+  // non valid school email read should reject
   it("reading to student-a as student-a (@domain.org)", async () => {
     const nonUserDoc = db.collection("users").doc("student-a@domain.org");
     expect(await firebase.assertFails(nonUserDoc.get()));
   });
-  // non lwsd write should reject
+  // non lwvalid school email write should reject
   it("writing to student-a as student-a (@domain.org)", async () => {
     const nonUserDoc = db.collection("users").doc("student-a@domain.org");
     expect(await firebase.assertFails(nonUserDoc.set({})));
