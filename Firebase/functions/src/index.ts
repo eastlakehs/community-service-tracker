@@ -43,12 +43,15 @@ exports.saveSummariesToFirestore = functions.pubsub
     // clone the DB
     const dbObject = await cloneDbAsJson(db);
     // parse DB to arrays with csv data
-    const csvData = parseToCSVTotals(dbObject);
+    const csvDataSummary = parseToCSVTotals(dbObject, false);
+    const csvDataAwardsList = parseToCSVTotals(dbObject, true);
     // convert arrays to csv string
-    const output = stringify(csvData);
+    const outputSummary = stringify(csvDataSummary);
+    const outputAwardsList = stringify(csvDataAwardsList);
     // save csv string to db
     await db.collection("reports").doc("latest").set({
-      hourSummary: output,
+      hourSummary: outputSummary,
+      awardsList: outputAwardsList,
       lastUpdated: admin.firestore.FieldValue.serverTimestamp(),
     });
     console.log("Saved Report Successfully");

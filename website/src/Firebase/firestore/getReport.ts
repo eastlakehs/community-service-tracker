@@ -4,6 +4,7 @@ type firebaseServerTimestamp = { seconds: number; nanoseconds: number };
 
 type reportType = null | {
   hourSummary: string;
+  awardsList: string;
   lastUpdated: firebaseServerTimestamp;
 };
 
@@ -29,28 +30,37 @@ const getReport = async () => {
  *
  *  Basically, create an element, attach a download tag to it, link data as href, click button, delete element.
  */
+const downloadFileFromString = (file: string, fileName: string) => {
+  let element = document.createElement("a");
+  element.setAttribute(
+    "href",
+    "data:text/plain;charset=utf-8," + encodeURIComponent(file)
+  );
+  element.setAttribute("download", fileName);
+  element.style.display = "none";
+  document.body.appendChild(element);
+  element.click();
+  document.body.removeChild(element);
+};
 
-const downloadReport = async () => {
+const downloadReports = async () => {
   const report = await getReport();
   if (report) {
     const reportDate = new Date(report.lastUpdated.seconds * 1000);
-    const reportName = `Hour-Report-${
+
+    // File Names
+    const reportNameHourSummary = `Hour-Report-${
       reportDate.getUTCMonth() + 1
     }-${reportDate.getDate()}.csv`;
-    console.log(reportName);
-    let element = document.createElement("a");
-    element.setAttribute(
-      "href",
-      "data:text/plain;charset=utf-8," + encodeURIComponent(report.hourSummary)
-    );
-    element.setAttribute("download", reportName);
-    element.style.display = "none";
-    document.body.appendChild(element);
-    element.click();
-    document.body.removeChild(element);
+    const reportNameAwardsList = `Awards-List-${
+      reportDate.getUTCMonth() + 1
+    }-${reportDate.getDate()}.csv`;
+
+    downloadFileFromString(report.hourSummary, reportNameHourSummary);
+    downloadFileFromString(report.awardsList, reportNameAwardsList);
     return true;
   }
   return null;
 };
 
-export { getReport, downloadReport };
+export { getReport, downloadReports };
