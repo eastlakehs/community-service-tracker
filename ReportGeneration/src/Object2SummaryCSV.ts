@@ -21,16 +21,45 @@ const sortHourSummary = (a: string[], b: string[]) => {
   return 0; // dumb tslint compiler
 };
 
-const parseToCSVTotals = (dbObject: dataJsonType) => {
+/** Sorts the awards report rows based on the highest award  */
+const sortAwardReport = (a: string[], b: string[]) => {
+  // header should always be on top
+  if (a[4] === "Highest Award") return -1;
+  if (b[4] === "Highest Award") return 1;
+  // sort by total hours
+  if (parseInt(a[4], 10) > parseInt(b[4], 10)) return -1;
+  if (parseInt(a[4], 10) < parseInt(b[4], 10)) return 1;
+  if (parseInt(a[4], 10) === parseInt(b[4], 10)) return 0;
+  return 0; // dumb tslint compiler
+};
+
+/** What award a student should get based on their total hours */
+const hourToAward = (hours: number) => {
+  if (hours >= 200) return "200 hour award";
+  if (hours >= 150) return "150 hour award";
+  if (hours >= 100) return "100 hour award";
+  if (hours >= 50) return "50 hour award";
+  return null; // no award
+};
+
+/** Generates the actual csv which is represented by nested array of rows
+ *  dbObject: the copy of the downloaded database as a json object
+ *
+ *  award: if we are generating an awards list or not. An awards list does not
+ *         include club breakdowns and includes only 50, 100, 150, and 200 hour
+ *         benchmarks based on the total hours.
+ */
+const parseToCSVTotals = (dbObject: dataJsonType, isAwardsList: boolean) => {
   let summaryRows = [
     [
       "First Name",
       "Last Name",
       "Year",
       "Email",
-      "Total NHS Hours",
-      "Total Key Club Hours",
-      "Total Hours",
+      ...(isAwardsList ? [] : ["Total NHS Hours"]),
+      ...(isAwardsList ? [] : ["Total Key Club Hours"]),
+      ...(isAwardsList ? [] : ["Total Hours"]),
+      ...(isAwardsList ? ["Highest Award"] : []),
     ],
   ];
 
@@ -51,7 +80,8 @@ const parseToCSVTotals = (dbObject: dataJsonType) => {
         }
         studentTotalHours += Number(entry._data.Hours);
       }
-      // studentInfo may be undefined
+      // studentInfo may be undefined. However, if a profile exists then graduationYear, lastName, and firstName
+      // fields will also exist but may be empty based on our UI code.
       let studentInfo = student?.profile?.info?._data;
       // case where a student has not recorded their profile info
       if (studentInfo === undefined) {
@@ -61,19 +91,27 @@ const parseToCSVTotals = (dbObject: dataJsonType) => {
           firstName: "N/A",
         };
       }
-      summaryRows.push([
-        // type assertion because the compiler isnt able to pick up the above case
-        firstCharUpper(studentInfo!.firstName),
-        firstCharUpper(studentInfo!.lastName),
-        studentInfo!.graduationYear,
-        keyStudent.toLowerCase(),
-        studentNHSHours.toFixed(2),
-        studentKeyClubHours.toFixed(2),
-        studentTotalHours.toFixed(2),
-      ]);
+      summaryRows.push(
+        // if hours are less than 50 and we are generating awards list, omit the student.
+        ...(isAwardsList && hourToAward(studentTotalHours) === null
+          ? []
+          : [
+              [
+                firstCharUpper(studentInfo.firstName),
+                firstCharUpper(studentInfo.lastName),
+                studentInfo!.graduationYear,
+                keyStudent.toLowerCase(),
+                // different data is added to a spreadsheet based on if we are generating an awards list or not
+                ...(isAwardsList ? [] : [studentNHSHours.toFixed(2)]),
+                ...(isAwardsList ? [] : [studentKeyClubHours.toFixed(2)]),
+                ...(isAwardsList ? [] : [studentTotalHours.toFixed(2)]),
+                ...(isAwardsList ? [hourToAward(studentTotalHours)!] : []),
+              ],
+            ])
+      );
     }
   }
-  summaryRows.sort(sortHourSummary);
+  summaryRows.sort(isAwardsList ? sortAwardReport : sortHourSummary);
   return summaryRows;
 };
 

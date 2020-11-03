@@ -6,7 +6,8 @@
     "preserveConstEnums": true,
     "sourceMap": true,
     "outDir": "build",
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
+    "strictNullChecks": true
   },
   "include": ["src/**/*.ts", "src/**/*.json"],
   "exclude": ["node_modules"]
