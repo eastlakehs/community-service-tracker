@@ -35,10 +35,10 @@ const sortAwardReport = (a: string[], b: string[]) => {
 
 /** What award a student should get based on their total hours */
 const hourToAward = (hours: number) => {
-  if (hours >= 200) return "200 hour award";
-  if (hours >= 150) return "150 hour award";
-  if (hours >= 100) return "100 hour award";
-  if (hours >= 50) return "50 hour award";
+  if (hours >= 200) return "200 hours award";
+  if (hours >= 150) return "150 hours award";
+  if (hours >= 100) return "100 hours award";
+  if (hours >= 50) return "50 hours award";
   return null; // no award
 };
 
