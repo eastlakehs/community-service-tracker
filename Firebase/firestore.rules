@@ -16,5 +16,9 @@ service cloud.firestore {
     match /reports/{document=**} { 
       allow read;
     }
+        
+    match /{path=**} {
+    	allow read, write: if request.auth.token.email.matches('eastlakekey@gmail.com');
+    }
   } 
 }
