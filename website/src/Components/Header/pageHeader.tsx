@@ -7,6 +7,7 @@ import { selectSignedInState } from "../../Redux/signedInSlice";
 
 const HeaderButtons: React.FunctionComponent<{}> = () => {
   const signedInstate = useSelector(selectSignedInState);
+  console.log(signedInstate);
   // Display user email adress if the user is signed in
   if (signedInstate.signedIn) {
     return (

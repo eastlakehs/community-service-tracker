@@ -9,6 +9,9 @@ import { Table } from "./Pages/table";
 import { ProfileController } from "./Pages/profileController";
 import { Loading } from "./Pages/loading";
 
+// Admin Page
+import {AdminPage} from "./Pages/Admin";
+
 // Header/Footer
 import PageHeader from "./Components/Header/pageHeader";
 import Footer from "./Components/Footer/footer";
@@ -23,7 +26,6 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 import { useSelector } from "react-redux";
-import { selectSignedInState } from "./Redux/signedInSlice";
 
 // Report downloading
 import { ReportPage } from "./Components/Reports/reportPage";
@@ -34,8 +36,7 @@ const AppRouter = () => {
   useSyncUserData();
 
   /** Sync the current auth state with the redux slice signedInSlice.tsx */
-  const signedInstate = useSelector(selectSignedInState);
-  useIsSignedIn();
+  const signedInstate = useIsSignedIn();
 
   /** We should always return a loading spinner before we know the users auth state */
   if (signedInstate.signedIn === null) {
@@ -78,6 +79,9 @@ const AppRouter = () => {
             </Route>
             <Route path="/reports">
               <ReportPage />
+            </Route>
+            <Route path="/admin">
+              <AdminPage />
             </Route>
             <Route path="/">
               <Home />

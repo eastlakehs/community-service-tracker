@@ -1,8 +1,8 @@
 import { firebase } from "../setup";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 import { useDispatch } from "react-redux";
-import { setSignInSate } from "../../Redux/signedInSlice";
+import { setSignInState, ISignedInState } from "../../Redux/signedInSlice";
 import signInwithLink from "./signInWithLink";
 
 /** A hook for determining if a user is signed in or not. In addition, syncs sign in state in redux state
@@ -11,41 +11,53 @@ import signInwithLink from "./signInWithLink";
  */
 const useIsSignedIn = () => {
   const dispatch = useDispatch();
+  const [localSignedInState, setLocalSignedInState] = useState<ISignedInState>({
+    signedIn: null,
+    userEmail: "",
+  })
   useEffect(() => {
     let unsubscribe: firebase.Unsubscribe = () => {};
     // Log in a user if window contains log in code
     signInwithLink().then((user) => {
       // set auth state emmediately if window comtains auth link then attach authChange listener
       if (user && user.user && user.user.email) {
-        dispatch(
-          setSignInSate({
+        const stateToSet = {
             signedIn: true,
             userEmail: user.user.email,
-          })
+        }
+        dispatch(
+          setSignInState(stateToSet)
         );
+        setLocalSignedInState(stateToSet)
       }
       // attach listener
       unsubscribe = firebase.auth().onAuthStateChanged((user) => {
         if (user && user.email) {
+          const stateToSet = {
+          signedIn: true,
+          userEmail: user.email.toLowerCase(),
+        }
           dispatch(
-            setSignInSate({
-              signedIn: true,
-              userEmail: user.email.toLowerCase(),
-            })
+            setSignInState(stateToSet)
           );
+          setLocalSignedInState(stateToSet)
         } else {
-          dispatch(
-            setSignInSate({
+        const stateToSet = {
               signedIn: false,
               userEmail: "",
-            })
+        }
+          console.log("fired")
+          dispatch(
+            setSignInState(stateToSet)
           );
+          setLocalSignedInState(stateToSet)
         }
       });
     });
     // detach the listener
     return unsubscribe;
-  });
+  }, []);
+  return localSignedInState; 
 };
 
 export { useIsSignedIn };
