@@ -9,14 +9,14 @@ export const Admin: React.FunctionComponent<{
     const testData = [
         {
             email: 's-dsudzilouski@lwsd.org',
-            firstName: 'first',
-            lastName: 'last',
+            firstName: 'Daniel',
+            lastName: 'Sudzilouski',
             graduationYear: '2021'
         },
         {
             email: 's-jizhang@lwsd.org',
-            firstName: 'first',
-            lastName: 'last',
+            firstName: 'Jason',
+            lastName: 'Zhang',
             graduationYear: '2021'
         }
     ]
