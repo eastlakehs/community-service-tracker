@@ -18,6 +18,18 @@ export const Admin: React.FunctionComponent<{
             firstName: 'Jason',
             lastName: 'Zhang',
             graduationYear: '2021'
+        },
+        {
+            email: 's-bsmith@lwsd.org',
+            firstName: 'Bob',
+            lastName: 'Smith',
+            graduationYear: '2023'
+        },
+        {
+            email: 's-jjones@bellvuecollege.edu',
+            firstName: 'John',
+            lastName: 'Jones',
+            graduationYear: '2020'
         }
     ]
     /** 

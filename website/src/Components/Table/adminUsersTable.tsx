@@ -36,7 +36,6 @@ const AdminUsersTable: React.FunctionComponent<{
   const TableButton: React.FunctionComponent<{
     name: string;
     onClick: () => void;
-    // what's up
   }> = ({ name, onClick }) => (
     <button
       className={"bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mx-4 mt-2 rounded"}
@@ -51,7 +50,7 @@ const AdminUsersTable: React.FunctionComponent<{
   const generateTableData = () => {
     return filteredData.map((user) => {
       return (
-        <tr key={data ? JSON.stringify(user) : "empty-entry"}>
+        <tr key={data ? JSON.stringify(user) : "empty"}>
           <TableCell name={user.email} />
           <TableCell name={user.firstName + ' ' + user.lastName} />
           <TableCell name={user.graduationYear} />
@@ -72,14 +71,6 @@ const AdminUsersTable: React.FunctionComponent<{
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFilteredData(filterAdminResult(e.target.value, data))
   }
-
-  /*
-  if (Object.keys(data.data).length === 0) {
-    return (
-      <InfoPage title="No Hours Found!" message="Click here to submit hours!" link="/edit" />
-    )
-  }
-  */
 
   return (
     <>
