@@ -36,7 +36,7 @@ export const Admin: React.FunctionComponent<{
     }
 
     return (
-        <div>
+        <div className="mb-auto">
             <AdminUsersTable data={testData} handleView={handleView} />
         </div>
     );
