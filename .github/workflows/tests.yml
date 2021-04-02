@@ -1,0 +1,29 @@
+name: CI:Tests
+
+# Run on any commit or pr on any branch
+on:
+  pull_request:
+    branches:
+      - '**'
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+    # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+    - uses: actions/checkout@v2
+
+    - name: Run Website Unit Tests
+      run: |
+         cd website 
+         yarn 
+         yarn test
+
+    - name: Run Database Unit Test
+      run: |
+         cd Firebase/Tests 
+         yarn 
+         yarn ci
