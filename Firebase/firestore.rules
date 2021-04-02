@@ -1,24 +1,31 @@
 rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
-
+    
     function emailMatchesDocument (_document) {
       return (request.auth != null && request.auth.token.email.lower() == _document);
     }
-
+    
+    // only accept requests from school emails to prevent spam
     function emailIsValid (_email) {
       return (request.auth.token.email.matches('.*@lwsd.org') || request.auth.token.email.matches('.*@bellevuecollege.edu'));
     }
-
+    
+    // users are free to read and edit their own documents 
+    // as long as the document matches their authenticated email
     match /users/{email}/{document=**} { 
       allow read, write: if emailMatchesDocument(email) && emailIsValid(email); 
     }
+    
+    // anyone can download the reports that contain hour summaries and awards
     match /reports/{document=**} { 
       allow read;
     }
-        
+    
+    // admin users that can impersonate any user to view/edit data
     match /{path=**} {
-    	allow read, write: if request.auth.token.email.matches('eastlakekey@gmail.com');
+    	allow read, write: if request.auth.token.email.matches('eastlakekey@gmail.com') || request.auth.token.email.matches('daniel@sudzilouski.com');
     }
+    
   } 
 }
