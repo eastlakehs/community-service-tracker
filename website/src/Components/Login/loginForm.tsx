@@ -43,11 +43,16 @@ const UserHint: React.FunctionComponent<{ state: emailState }> = ({
 
 const basicEmailValidation = (email: string) => {
   if (
-    //email.endsWith("@lwsd.org") &&
+    (email.endsWith("@lwsd.org") || email.endsWith("bellevuecollege.edu")) &&
     email.includes(".") &&
     email.includes("@")
-  ) {
+  ) 
+  {
     return true;
+  }
+  if (email == "eastlakekey@gmail.com")
+  {
+    return true
   }
   return false;
 };
