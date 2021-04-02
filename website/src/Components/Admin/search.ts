@@ -1,4 +1,4 @@
-import { profileAndEmail } from "../../Firebase/firestore/getCurrentUsers";
+import { profileAndEmail } from "../../Firebase/firestore/getListOfAllUsers";
 
 /**
  *  Take input query from admin view search

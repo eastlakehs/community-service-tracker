@@ -1,5 +1,5 @@
 import { filterAdminResult } from "./search";
-import { profileAndEmail } from "../../Firebase/firestore/getCurrentUsers";
+import { profileAndEmail } from "../../Firebase/firestore/getListOfAllUsers";
 
 const testData1: profileAndEmail[] = [
   {

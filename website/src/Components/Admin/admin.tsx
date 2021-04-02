@@ -1,56 +1,53 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import AdminUsersTable from "../Table/adminUsersTable";
-import { useDispatch } from "react-redux" 
+import { useDispatch } from "react-redux";
 import { setSignInState } from "../../Redux/signedInSlice";
+import {
+  getListOfCurrentUsers,
+  profileAndEmail,
+} from "../../Firebase/firestore/getListOfAllUsers";
 
-export const Admin: React.FunctionComponent<{
-}> = ({ }) => {
-    const dispatch = useDispatch(); 
-    const testData = [
-        {
-            email: 's-dsudzilouski@lwsd.org',
-            firstName: 'Daniel',
-            lastName: 'Sudzilouski',
-            graduationYear: '2021'
-        },
-        {
-            email: 's-jizhang@lwsd.org',
-            firstName: 'Jason',
-            lastName: 'Zhang',
-            graduationYear: '2021'
-        },
-        {
-            email: 's-bsmith@lwsd.org',
-            firstName: 'Bob',
-            lastName: 'Smith',
-            graduationYear: '2023'
-        },
-        {
-            email: 's-jjones@bellvuecollege.edu',
-            firstName: 'John',
-            lastName: 'Jones',
-            graduationYear: '2020'
-        }
-    ]
-    /** 
-     * Once a student has been selected, we shouild navigate as if they were a regular student 
-     */
-    const handleView = (userId: string) => {
+import { useSelector } from "react-redux";
+import { selectSignedInState } from "../../Redux/signedInSlice";
 
-        // pretend that we are another user
-        // admit accounts have permissions for any read/write
-        dispatch(setSignInState({
-            signedIn: true,
-            userEmail: userId
-        }))
-        // navigate to user page 
-
+/// TODO: error fallback for fetching list of users
+// TODO: fix redux bug
+export const Admin: React.FunctionComponent<{}> = ({}) => {
+  const dispatch = useDispatch();
+  const signedInState = useSelector(selectSignedInState);
+  const [listOfAllCurrentUsers, setListOfAllCurrentUsers] = useState<
+    profileAndEmail[]
+  >([]);
+  useEffect(() => {
+    // Async is weird inside of useEffect
+    // Easier to just chain .thens
+    if (signedInState.signedIn) {
+      console.log(signedInState.userEmail);
+      getListOfCurrentUsers().then((list) => {
+        console.log(list);
+        setListOfAllCurrentUsers(list);
+      });
     }
+  }, [signedInState]);
 
-    return (
-        <div className="mb-auto">
-            <AdminUsersTable data={testData} handleView={handleView} />
-        </div>
+  /**
+   * Once a student has been selected, we shouild navigate as if they were a regular student
+   */
+  const handleView = (userId: string) => {
+    // pretend that we are another user
+    // admit accounts have permissions for any read/write
+    dispatch(
+      setSignInState({
+        signedIn: true,
+        userEmail: userId,
+      })
     );
-};
+    // navigate to user page
+  };
 
+  return (
+    <div className="mb-auto">
+      <AdminUsersTable data={listOfAllCurrentUsers} handleView={handleView} />
+    </div>
+  );
+};
