@@ -14,7 +14,5 @@ export const initErrorLogging = () => {
     tracesSampleRate: 1.0,
   });
   // heart beat to know if sentry is working
-  Sentry.captureException(
-    '[NOT AN ERROR] Client Loaded Site'
-  );
+  Sentry.captureException("[NOT AN ERROR] Client Loaded Site");
 };
