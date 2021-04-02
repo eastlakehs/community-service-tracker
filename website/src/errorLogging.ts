@@ -15,6 +15,6 @@ export const initErrorLogging = () => {
   });
   // heart beat to know if sentry is working
   Sentry.captureException(
-    `Client loaded website at url:${window.location.href} -- not an acutal error`
+    '[NOT AN ERROR] Client Loaded Site'
   );
 };
