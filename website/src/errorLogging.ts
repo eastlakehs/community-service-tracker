@@ -13,4 +13,6 @@ export const initErrorLogging = () => {
     // We recommend adjusting this value in production
     tracesSampleRate: 1.0,
   });
+  // heart beat to know if sentry is working
+  Sentry.captureException("[NOT AN ERROR] Client Loaded Site");
 };
