@@ -1,5 +1,5 @@
 import React from "react";
-import LoginForm from "../Components/Login/loginForm";
+import { LoginForm } from "../Components/Login/loginForm";
 import Helmet from "../Components/Header/helmet";
 
 const Login = () => {
