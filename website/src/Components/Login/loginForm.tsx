@@ -12,6 +12,11 @@ type emailState =
   | "error-bad-format"
   | "error-invalid-domain";
 
+type emailValidationState = 
+  | "valid-email"
+  | "bad-format"
+  | "invalid-domain";
+
 const UserHint: React.FunctionComponent<{ state: emailState }> = ({
   state,
 }) => {
@@ -50,10 +55,10 @@ const UserHint: React.FunctionComponent<{ state: emailState }> = ({
 
 function validateFormatEmail(email: string) {
   const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-  return re.test(String(email).toLowerCase());
+  return re.test(email.toLowerCase());
 }
 
-const basicEmailValidation = (email: string) : number => {
+const basicEmailValidation = (email: string) : emailValidationState => {
   const isAdmin = [
     "eastlakekey@gmail.com",
     "daniel@sudzilouski.com",
@@ -64,16 +69,13 @@ const basicEmailValidation = (email: string) : number => {
   const isInDomain =
     email.endsWith("@lwsd.org") || email.endsWith("@bellevuecollege.edu");
   
-  // 0: no error
-  // 1: bad format
-  // 2: invalid domain
   if (isAdmin)
-    return 0;
+    return "valid-email";
   if (!isFormatted)
-    return 1;
+    return "bad-format";
   if (!isInDomain)
-    return 2;
-  return 0;
+    return "invalid-domain";
+  return "valid-email";
 };
 
 const LoginForm = () => {
@@ -113,7 +115,7 @@ const LoginForm = () => {
           <button
             onClick={async () => {
               switch (basicEmailValidation(emailInput)) {
-                case 0:
+                case "valid-email":
                   const result = await sendEmailAuth(emailInput);
                   if (result) {
                     setEmailState("email-send-successfully");
@@ -121,10 +123,10 @@ const LoginForm = () => {
                     setEmailState("email-send-failed");
                   }
                   break;
-                case 1:
+                case "bad-format":
                   setEmailState("error-bad-format");
                   break;
-                case 2:
+                case "invalid-domain":
                   setEmailState("error-invalid-domain");
                   break;
                 }
