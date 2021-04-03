@@ -8,8 +8,9 @@ import { useSelector } from "react-redux";
 type emailState =
   | "base"
   | "email-send-failed"
-  | "form-validation-error"
-  | "email-send-successfully";
+  | "email-send-successfully"
+  | "error-bad-format"
+  | "error-invalid-domain";
 
 const UserHint: React.FunctionComponent<{ state: emailState }> = ({
   state,
@@ -26,10 +27,16 @@ const UserHint: React.FunctionComponent<{ state: emailState }> = ({
         Email send failed. Please try again later or contact contact for help.
       </p>
     );
-  if (state === "form-validation-error")
+  if (state === "error-bad-format")
     return (
       <p className="text-red-500 text-base italic">
-        Improperly formatted email or email is not an lwsd email address.
+        Improperly formatted email.
+      </p>
+    ); 
+  if (state === "error-invalid-domain")
+    return (
+      <p className="text-red-500 text-base italic">
+        Email is not an lwsd email address.
       </p>
     );
   if (state === "email-send-successfully")
@@ -41,7 +48,7 @@ const UserHint: React.FunctionComponent<{ state: emailState }> = ({
   return null;
 };
 
-const basicEmailValidation = (email: string) => {
+const basicEmailValidation = (email: string) : number => {
   const isAdmin = [
     "eastlakekey@gmail.com",
     "daniel@sudzilouski.com",
@@ -51,7 +58,17 @@ const basicEmailValidation = (email: string) => {
   const isFormatted = email.includes(".") && email.includes("@");
   const isInDomain =
     email.endsWith("@lwsd.org") || email.endsWith("@bellevuecollege.edu");
-  return isFormatted && (isInDomain || isAdmin);
+  
+  // 0: no error
+  // 1: bad format
+  // 2: invalid domain
+  if (isAdmin)
+    return 0;
+  if (!isFormatted)
+    return 1;
+  if (!isInDomain)
+    return 2;
+  return 0;
 };
 
 const LoginForm = () => {
@@ -90,17 +107,23 @@ const LoginForm = () => {
         <div className="flex items-center justify-between">
           <button
             onClick={async () => {
-              if (basicEmailValidation(emailInput)) {
-                const result = await sendEmailAuth(emailInput);
-                if (result) {
-                  setEmailState("email-send-successfully");
-                } else {
-                  setEmailState("email-send-failed");
+              switch (basicEmailValidation(emailInput)) {
+                case 0:
+                  const result = await sendEmailAuth(emailInput);
+                  if (result) {
+                    setEmailState("email-send-successfully");
+                  } else {
+                    setEmailState("email-send-failed");
+                  }
+                  break;
+                case 1:
+                  setEmailState("error-bad-format");
+                  break;
+                case 2:
+                  setEmailState("error-invalid-domain");
+                  break;
                 }
-              } else {
-                setEmailState("form-validation-error");
-              }
-            }}
+            }}  
             className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
             type="submit"
           >
