@@ -48,14 +48,19 @@ const UserHint: React.FunctionComponent<{ state: emailState }> = ({
   return null;
 };
 
+function validateFormatEmail(email: string) {
+  const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  return re.test(String(email).toLowerCase());
+}
+
 const basicEmailValidation = (email: string) : number => {
   const isAdmin = [
     "eastlakekey@gmail.com",
     "daniel@sudzilouski.com",
     "s-dsudzilouski@lwsd.org",
     "s-jizhang@lwsd.org",
-  ].includes("email");
-  const isFormatted = email.includes(".") && email.includes("@");
+  ].includes(email);
+  const isFormatted = validateFormatEmail(email);
   const isInDomain =
     email.endsWith("@lwsd.org") || email.endsWith("@bellevuecollege.edu");
   
