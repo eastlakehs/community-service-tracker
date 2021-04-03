@@ -11,4 +11,5 @@ test("Running Validation Tests for basicEmailValidation", () => {
   expect(basicEmailValidation("s-jizhang@lwsd.org")).toBe("valid-email");
   expect(basicEmailValidation("eastlakekey@gmail.com")).toBe("valid-email");
   expect(basicEmailValidation("s-cye@lwsd.org")).toBe("valid-email");
+  expect(basicEmailValidation("janedoe@bellevuecollege.edu")).toBe("valid-email");
 });
