@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import { profileAndEmail } from "../../Firebase/firestore/getListOfAllUsers";
 
@@ -15,7 +15,12 @@ const AdminUsersTable: React.FunctionComponent<{
   handleView: (userID: string) => void;
 }> = ({ data, handleView }) => {
   const headers = ["Email", "Name", "Graduation Year"];
-  const [filteredData, setFilteredData] = useState(data);
+  const [filteredData, setFilteredData] = useState<profileAndEmail[]>([]);
+
+  useEffect(() => {
+    setFilteredData(data);
+  }, [data]);
+
   const generateHeader = () => {
     return headers.map((header) => {
       return (

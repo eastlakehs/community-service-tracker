@@ -6,7 +6,7 @@ export interface profileAndEmail extends userProfileData {
 }
 // TODO convert to single query rather than 300 seperate queries
 export const getListOfCurrentUsers = async () => {
-  // ~300 read ops. 1 read for each user
+  // ~600 read ops. 2 read for each user
   const documents = await db.collection("users").get();
   /**
    * The forEach method has a custom implentation by Firebase SDK
@@ -16,7 +16,6 @@ export const getListOfCurrentUsers = async () => {
   const users: string[] = [];
   documents.forEach((user) => {
     users.push(user.id);
-    console.log(user.id);
   });
   const userArrays = users.map(async (user) => {
     const result = await db
@@ -32,5 +31,5 @@ export const getListOfCurrentUsers = async () => {
     };
     return withEmail;
   });
-  return Promise.all(userArrays);
+  return await Promise.all(userArrays);
 };

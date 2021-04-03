@@ -12,6 +12,7 @@ import { selectSignedInState } from "../../Redux/signedInSlice";
 
 /// TODO: error fallback for fetching list of users
 // TODO: fix redux bug
+// TODO: error fallback for unauthed user
 export const Admin: React.FunctionComponent<{}> = ({}) => {
   const dispatch = useDispatch();
   const signedInState = useSelector(selectSignedInState);
@@ -22,9 +23,7 @@ export const Admin: React.FunctionComponent<{}> = ({}) => {
     // Async is weird inside of useEffect
     // Easier to just chain .thens
     if (signedInState.signedIn) {
-      console.log(signedInState.userEmail);
       getListOfCurrentUsers().then((list) => {
-        console.log(list);
         setListOfAllCurrentUsers(list);
       });
     }

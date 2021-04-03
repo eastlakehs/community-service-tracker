@@ -61,20 +61,20 @@ const updateUserProfile = async (
     lastName: lastName,
     graduationYear: graduationYear,
   };
-  const resp = await db
-    .collection("users")
-    .doc(currentUser)
-    .collection("profile")
-    .doc("info")
-    .set(profileData)
-    .catch((e) => {
-      console.log(e);
-      return null;
-    });
-  if (resp === null) {
-    return resp;
-  }
-  return true;
+  // batch writes allow us to do the writes atomically
+  const batch = db.batch();
+  const userRef = db.collection("users").doc(currentUser);
+  const infoRef = userRef.collection("profile").doc("info");
+  /**
+   * this is a workaround for an oversight in the web JS SDK
+   * the user document must have some kind of data attached to it
+   * Overwise, queries to get a list of documents in a collection return empty (this is needed for the admin view)
+   * We fill the document with some useless data to make the queries return correctly
+   */
+  batch.set(userRef, { EXISTS: true });
+  batch.set(infoRef, profileData);
+  const resp = await batch.commit().catch((_e) => null);
+  return resp === null ? null : true;
 };
 
 export { submitEdit, submitNewEntry, updateUserProfile };
