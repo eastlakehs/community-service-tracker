@@ -4,10 +4,18 @@ import { userProfileData } from "./firestoreData.type";
 export interface profileAndEmail extends userProfileData {
   email: string;
 }
-// TODO convert to single query rather than 300 seperate queries
+/**
+ * Returns list of all user profile data
+ * Or return null on failure
+ * Should use up 2 * number_of_users in read ops
+ */
 export const getListOfCurrentUsers = async () => {
   // ~600 read ops. 2 read for each user
-  const documents = await db.collection("users").get();
+  const documents = await db
+    .collection("users")
+    .get()
+    .catch((_e: any) => null);
+  if (!documents) return null;
   /**
    * The forEach method has a custom implentation by Firebase SDK
    * Not sure why they they did this and we can't use map as it's not exposed
@@ -31,5 +39,5 @@ export const getListOfCurrentUsers = async () => {
     };
     return withEmail;
   });
-  return await Promise.all(userArrays);
+  return await Promise.all(userArrays).catch((_e: any) => null);
 };

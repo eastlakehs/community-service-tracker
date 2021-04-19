@@ -9,6 +9,13 @@ import {
 
 import { useSelector } from "react-redux";
 import { selectSignedInState } from "../../Redux/signedInSlice";
+import { isAdmin } from "../../Constants/isAdmin";
+
+const ErrorText: React.FunctionComponent<{ text: string }> = ({ text }) => (
+  <text className="mb-auto text-center text-white py-2 lg:py-3 text-base sm:text-xl lg:text-2xl xl:text-3xl">
+    {text}
+  </text>
+);
 
 /// TODO: error fallback for fetching list of users
 // TODO: fix redux bug
@@ -17,17 +24,15 @@ export const Admin: React.FunctionComponent<{}> = ({}) => {
   const dispatch = useDispatch();
   const signedInState = useSelector(selectSignedInState);
   const [listOfAllCurrentUsers, setListOfAllCurrentUsers] = useState<
-    profileAndEmail[]
-  >([]);
+    profileAndEmail[] | null
+  >(null);
   useEffect(() => {
-    if ([""].includes(signedInState?.userEmail))
-      if (signedInState.signedIn) {
-        // Async is weird inside of useEffect
-        // Easier to just chain .thens
-        getListOfCurrentUsers().then((list) => {
-          setListOfAllCurrentUsers(list);
-        });
-      }
+    if (isAdmin(signedInState.userEmail)) {
+      getListOfCurrentUsers().then((list) => {
+        console.log("list", list);
+        setListOfAllCurrentUsers(list);
+      });
+    }
   }, [signedInState]);
 
   /**
@@ -45,9 +50,28 @@ export const Admin: React.FunctionComponent<{}> = ({}) => {
     // navigate to user page
   };
 
-  return (
-    <div className="mb-auto">
-      <AdminUsersTable data={listOfAllCurrentUsers} handleView={handleView} />
-    </div>
-  );
+  if (!isAdmin(signedInState.userEmail)) {
+    return (
+      <ErrorText text="You do not appear to be signed in as an admin user at the moment." />
+    );
+  }
+  if (listOfAllCurrentUsers === null) {
+    return <ErrorText text="Fetching user list..." />;
+  } else if (listOfAllCurrentUsers?.length === 0) {
+    /** Firebase requests never fail on network drop
+     *  They just return from cache (empty documents)
+     */
+    return (
+      <ErrorText
+        text="Failed network request. Please try again later or report the problem if
+        it persists."
+      />
+    );
+  } else {
+    return (
+      <div className="mb-auto">
+        <AdminUsersTable data={listOfAllCurrentUsers} handleView={handleView} />
+      </div>
+    );
+  }
 };
