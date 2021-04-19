@@ -20,13 +20,14 @@ export const Admin: React.FunctionComponent<{}> = ({}) => {
     profileAndEmail[]
   >([]);
   useEffect(() => {
-    // Async is weird inside of useEffect
-    // Easier to just chain .thens
-    if (signedInState.signedIn) {
-      getListOfCurrentUsers().then((list) => {
-        setListOfAllCurrentUsers(list);
-      });
-    }
+    if ([""].includes(signedInState?.userEmail))
+      if (signedInState.signedIn) {
+        // Async is weird inside of useEffect
+        // Easier to just chain .thens
+        getListOfCurrentUsers().then((list) => {
+          setListOfAllCurrentUsers(list);
+        });
+      }
   }, [signedInState]);
 
   /**
