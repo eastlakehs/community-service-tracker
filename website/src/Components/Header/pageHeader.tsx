@@ -3,11 +3,41 @@ import { Link } from "react-router-dom";
 import { signOut } from "../../Firebase/linkAuth/signOut";
 import { useSelector } from "react-redux";
 import { selectSignedInState } from "../../Redux/signedInSlice";
+import { isAdmin } from "../../Constants/isAdmin";
 /* eslint-disable jsx-a11y/anchor-is-valid */
+
+const LogoutButton = () => (
+  <a
+    href="#"
+    onClick={async (e) => {
+      e.preventDefault();
+      const error = await signOut();
+      if (error) {
+        console.log(error);
+      }
+    }}
+    className="block lg:inline-block text-white mr-6 mt-2 lg:mt-auto"
+  >
+    Logout
+  </a>
+);
 
 const HeaderButtons: React.FunctionComponent<{}> = () => {
   const signedInstate = useSelector(selectSignedInState);
   console.log(signedInstate);
+  if (isAdmin(signedInstate.userEmail)) {
+    return (
+      <>
+        <Link
+          to="/admin"
+          className="block lg:inline-block text-white mr-6 mt-2 lg:mt-auto"
+        >
+          Admin Dashboard
+        </Link>
+        <LogoutButton />
+      </>
+    );
+  }
   // Display user email adress if the user is signed in
   if (signedInstate.signedIn) {
     return (
@@ -30,19 +60,7 @@ const HeaderButtons: React.FunctionComponent<{}> = () => {
         >
           Submit
         </Link>
-        <a
-          href="#"
-          onClick={async (e) => {
-            e.preventDefault();
-            const error = await signOut();
-            if (error) {
-              console.log(error);
-            }
-          }}
-          className="block lg:inline-block text-white mr-6 mt-2 lg:mt-auto"
-        >
-          Logout
-        </a>
+        <LogoutButton />
       </>
     );
   }
