@@ -1,16 +1,16 @@
+/* Wilcard tsconfig.json for any code reused across several project folders */
 {
   "compilerOptions": {
-    "module": "CommonJS",
     "noImplicitAny": true,
     "removeComments": true,
     "preserveConstEnums": true,
-    "sourceMap": true,
-    "outDir": "build",
     "resolveJsonModule": true,
     "strictNullChecks": true,
-    "lib": ["ES2017"]
+    "lib": ["ES2017"],
+    "skipLibCheck": true,
+    "noEmit": true
   },
 
-  "include": ["src/**/*.ts", "src/**/*.json"],
+  "include": ["Cache/**/*"],
   "exclude": ["node_modules"]
 }
