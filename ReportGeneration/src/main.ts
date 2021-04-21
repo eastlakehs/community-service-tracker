@@ -14,7 +14,7 @@ import { parseToCSVTotals } from "./Object2SummaryCSV";
  */
 const main = async () => {
   const dbObject = await cloneDbAsJson(db);
-  const csvData = parseToCSVTotals(dbObject);
+  const csvData = parseToCSVTotals(dbObject, false);
 
   stringify(csvData, (err, output) => {
     if (err) {

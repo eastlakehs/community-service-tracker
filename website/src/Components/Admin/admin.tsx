@@ -24,12 +24,11 @@ export const Admin: React.FunctionComponent<{}> = ({}) => {
   const dispatch = useDispatch();
   const signedInState = useSelector(selectSignedInState);
   const [listOfAllCurrentUsers, setListOfAllCurrentUsers] = useState<
-    profileAndEmail[] | null
-  >(null);
+    profileAndEmail[] | null | undefined
+  >(undefined);
   useEffect(() => {
     if (isAdmin(signedInState.userEmail)) {
       getListOfCurrentUsers().then((list) => {
-        console.log("list", list);
         setListOfAllCurrentUsers(list);
       });
     }
@@ -55,12 +54,9 @@ export const Admin: React.FunctionComponent<{}> = ({}) => {
       <ErrorText text="You do not appear to be signed in as an admin user at the moment." />
     );
   }
-  if (listOfAllCurrentUsers === null) {
+  if (listOfAllCurrentUsers === undefined) {
     return <ErrorText text="Fetching user list..." />;
-  } else if (listOfAllCurrentUsers?.length === 0) {
-    /** Firebase requests never fail on network drop
-     *  They just return from cache (empty documents)
-     */
+  } else if (listOfAllCurrentUsers === null) {
     return (
       <ErrorText
         text="Failed network request. Please try again later or report the problem if
