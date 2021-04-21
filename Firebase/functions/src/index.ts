@@ -5,6 +5,7 @@ const bucket = "gs://community-ser.appspot.com";
 
 import { parseToCSVTotals } from "../../../ReportGeneration/src/Object2SummaryCSV";
 import { cloneDbAsJson } from "../../../ReportGeneration/src/Firestore2Object";
+import { profileCacheBuilder } from "../../../website/src/Cache/profileCache";
 import stringify = require("csv-stringify/lib/sync");
 import admin from "firebase-admin";
 const db = admin.initializeApp().firestore();
@@ -36,12 +37,16 @@ exports.scheduledFirestoreExport = functions.pubsub
       });
   });
 
-/** Saves current hour summary report to Firestore */
+/** Saves current hour summary report to Firestore
+ *  Also save the cache for user profile info
+ */
 exports.saveSummariesToFirestore = functions.pubsub
   .schedule("every 24 hours")
   .onRun(async (context: any) => {
     // clone the DB
     const dbObject = await cloneDbAsJson(db);
+    // build cache for user profile info
+    const userProfileCache = profileCacheBuilder(dbObject);
     // parse DB to arrays with csv data
     const csvDataSummary = parseToCSVTotals(dbObject, false);
     const csvDataAwardsList = parseToCSVTotals(dbObject, true);
@@ -54,5 +59,7 @@ exports.saveSummariesToFirestore = functions.pubsub
       awardsList: outputAwardsList,
       lastUpdated: admin.firestore.FieldValue.serverTimestamp(),
     });
+    // save profile cache to db
+    await db.collection("cache").doc("profileData").set(userProfileCache);
     console.log("Saved Report Successfully");
   });
