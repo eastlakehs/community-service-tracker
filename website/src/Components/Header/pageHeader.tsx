@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import firebase from "firebase";
 import { Link } from "react-router-dom";
 import { signOut } from "../../Firebase/linkAuth/signOut";
 import { useSelector } from "react-redux";
@@ -25,21 +26,22 @@ const LogoutButton = () => (
 const HeaderButtons: React.FunctionComponent<{}> = () => {
   const signedInstate = useSelector(selectSignedInState);
   console.log(signedInstate);
-  if (isAdmin(signedInstate.userEmail)) {
+  if (isAdmin(firebase.auth().currentUser?.email)) {
     return (
       <>
         <Link
           to="/admin"
           className="block lg:inline-block text-white mr-6 mt-2 lg:mt-auto"
         >
-          Admin Dashboard
+          Dashboard
         </Link>
         <LogoutButton />
       </>
     );
   }
+
   // Display user email adress if the user is signed in
-  if (signedInstate.signedIn) {
+  else if (signedInstate.signedIn) {
     return (
       <>
         <Link
@@ -74,18 +76,31 @@ const HeaderButtons: React.FunctionComponent<{}> = () => {
   );
 };
 
-const PageHeader = () => {
+const LogoButton: React.FunctionComponent<{}> = () => {
+  // make the home button redirect to admin if admin / user profile if it is a user
   const signedInstate = useSelector(selectSignedInState);
+  let url = "/";
+  if (isAdmin(firebase.auth().currentUser?.email)) 
+    url = "/admin";
+  else if (signedInstate.userEmail)
+    url = "/profile";
+
+  return (
+    <div className="text-white mr-6 ">
+      <Link to={url}>
+        <span className="text-xl tracking-tight">
+          Wolf Pack Service Tracker
+    </span>
+      </Link>
+    </div>
+  )
+}
+
+const PageHeader = () => {
   const [show_nav, set_nav] = useState(false);
   return (
     <nav className="mb-10 bg-top-red p-6 flex flex-wrap font-black item-center justify-between">
-      <div className="text-white mr-6 ">
-        <Link to={signedInstate.userEmail ? "/profile" : "/"}>
-          <span className="text-xl tracking-tight">
-            Wolf Pack Service Tracker
-          </span>
-        </Link>
-      </div>
+      <LogoButton />
       <div className={`block lg:hidden`}>
         <button
           onClick={() => {

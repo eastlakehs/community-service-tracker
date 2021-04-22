@@ -7,6 +7,5 @@ export const isAdmin = (userEmail: string | null | undefined): boolean =>
     ? [
         "daniel@sudzilouski.com",
         "eastlakekey@gmail.com",
-        "s-jizhang@lwsd.org",
       ].includes(userEmail)
     : false;

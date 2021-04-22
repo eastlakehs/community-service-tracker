@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react";
+import firebase from "firebase";
+import { useHistory } from "react-router-dom";
 import AdminUsersTable from "../Table/adminUsersTable";
 import { useDispatch } from "react-redux";
 import { setSignInState } from "../../Redux/signedInSlice";
@@ -21,13 +23,14 @@ const ErrorText: React.FunctionComponent<{ text: string }> = ({ text }) => (
 // TODO: fix redux bug
 // TODO: error fallback for unauthed user
 export const Admin: React.FunctionComponent<{}> = ({}) => {
+  const history = useHistory();
   const dispatch = useDispatch();
   const signedInState = useSelector(selectSignedInState);
   const [listOfAllCurrentUsers, setListOfAllCurrentUsers] = useState<
     profileAndEmail[] | null | undefined
   >(undefined);
   useEffect(() => {
-    if (isAdmin(signedInState.userEmail)) {
+    if (isAdmin(firebase.auth().currentUser?.email)) {
       getListOfCurrentUsers().then((list) => {
         setListOfAllCurrentUsers(list);
       });
@@ -47,9 +50,10 @@ export const Admin: React.FunctionComponent<{}> = ({}) => {
       })
     );
     // navigate to user page
+    history.push("/table");
   };
 
-  if (!isAdmin(signedInState.userEmail)) {
+  if (!isAdmin(firebase.auth().currentUser?.email))  {
     return (
       <ErrorText text="You do not appear to be signed in as an admin user at the moment." />
     );
