@@ -24,12 +24,11 @@ jobs:
     - uses: actions/checkout@v2
 
     - uses: actions/cache@v2
-      name: Cache yarn and node modules
+      name: Cache website modules
       with:
         path: |
           ./website/node_modules
-          ./Firebase/Tests/node_modules
-        key: ${{ runner.os }}-modules-${{ hashFiles('**/+(yarn.lock|package-lock.json)') }}
+        key: ${{ runner.os }}-modules-${{ hashFiles('./website/yarn.lock') }}
 
     - name: Run Website Unit Tests
       run: |
@@ -44,6 +43,14 @@ jobs:
         key:
           ${{ runner.os }}-firebase-emulators-${{
           hashFiles('emulator-cache/**') }}
+
+
+    - uses: actions/cache@v2
+      name: Cache database modules
+      with:
+        path: |
+          ./Firebase/Tests/node_modules
+        key: ${{ runner.os }}-modules-${{ hashFiles('./Firebase/Tests/yarn.lock') }}
 
 
     - name: Run Database Unit Test
