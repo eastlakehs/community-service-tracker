@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { setSignInState, ISignedInState } from "../../Redux/signedInSlice";
 import signInwithLink from "./signInWithLink";
+import { setIsAdmin } from "../../Redux/isAdminSlice";
+import { isAdmin } from "../../Constants/isAdmin";
 
 /** A hook for determining if a user is signed in or not. In addition, syncs sign in state in redux state
  * so pages dont have to wait to get auth state on each route change.
@@ -28,6 +30,9 @@ const useIsSignedIn = () => {
         dispatch(
           setSignInState(stateToSet)
         );
+        dispatch (
+          setIsAdmin({admin: isAdmin(user.user.email)})
+        )
         setLocalSignedInState(stateToSet)
       }
       // attach listener
@@ -40,6 +45,10 @@ const useIsSignedIn = () => {
           dispatch(
             setSignInState(stateToSet)
           );
+          dispatch (
+            setIsAdmin({admin: isAdmin(user.email.toLowerCase())}),
+          );
+
           setLocalSignedInState(stateToSet)
         } else {
         const stateToSet = {
@@ -50,6 +59,10 @@ const useIsSignedIn = () => {
           dispatch(
             setSignInState(stateToSet)
           );
+          dispatch (
+            setIsAdmin({admin: false}),
+          );
+        
           setLocalSignedInState(stateToSet)
         }
       });

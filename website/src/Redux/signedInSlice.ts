@@ -11,7 +11,7 @@ const initialState: ISignedInState = {
 };
 
 export const signedInSlice = createSlice({
-  name: "editSlice",
+  name: "signedInSlice",
   initialState: initialState,
   reducers: {
     setSignInState: (state, action: PayloadAction<ISignedInState>) => {

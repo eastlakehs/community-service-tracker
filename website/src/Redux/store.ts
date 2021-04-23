@@ -3,6 +3,7 @@ import userDataSlice from "./userDataSlice";
 import editScreenSlice from "./editScreenSlice";
 import profileDataSlice from "./profileScreenSlice";
 import signedInSlice from "./signedInSlice";
+import isAdminSlice from "./isAdminSlice";
 
 export default configureStore({
   reducer: {
@@ -10,5 +11,6 @@ export default configureStore({
     editScreen: editScreenSlice,
     profileData: profileDataSlice,
     signedInState: signedInSlice,
+    isAdminState: isAdminSlice,
   },
 });

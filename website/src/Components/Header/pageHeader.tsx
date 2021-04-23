@@ -1,10 +1,9 @@
 import React, { useState } from "react";
-import firebase from "firebase";
 import { Link } from "react-router-dom";
 import { signOut } from "../../Firebase/linkAuth/signOut";
 import { useSelector } from "react-redux";
 import { selectSignedInState } from "../../Redux/signedInSlice";
-import { isAdmin } from "../../Constants/isAdmin";
+import { selectIsAdminState, setIsAdmin } from "../../Redux/isAdminSlice";
 /* eslint-disable jsx-a11y/anchor-is-valid */
 
 const LogoutButton = () => (
@@ -25,8 +24,10 @@ const LogoutButton = () => (
 
 const HeaderButtons: React.FunctionComponent<{}> = () => {
   const signedInstate = useSelector(selectSignedInState);
-  console.log(signedInstate);
-  if (isAdmin(firebase.auth().currentUser?.email)) {
+  const adminState = useSelector(selectIsAdminState);
+  console.log(adminState)
+  console.log(signedInstate)
+  if (adminState) {
     return (
       <>
         <Link
@@ -41,7 +42,7 @@ const HeaderButtons: React.FunctionComponent<{}> = () => {
   }
 
   // Display user email adress if the user is signed in
-  else if (signedInstate.signedIn) {
+  if (signedInstate.signedIn) {
     return (
       <>
         <Link
@@ -80,7 +81,7 @@ const LogoButton: React.FunctionComponent<{}> = () => {
   // make the home button redirect to admin if admin / user profile if it is a user
   const signedInstate = useSelector(selectSignedInState);
   let url = "/";
-  if (isAdmin(firebase.auth().currentUser?.email)) 
+  if (useSelector(selectIsAdminState)) 
     url = "/admin";
   else if (signedInstate.userEmail)
     url = "/profile";
