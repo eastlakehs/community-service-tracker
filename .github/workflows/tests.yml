@@ -15,8 +15,6 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
-    env:
-      FIREBASE_EMULATORS_PATH: ${{ github.workspace }}/emulator-cache
 
     steps:
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
@@ -35,21 +33,13 @@ jobs:
          yarn 
          yarn test
 
-    - name: Cache firebase emulators
-      uses: actions/cache@v2
-      with:
-        path: ${{ env.FIREBASE_EMULATORS_PATH }}
-        key:
-          ${{ runner.os }}-firebase-emulators-${{
-          hashFiles('./Firebase/Tests/yarn.lock') }}
-
-
     - uses: actions/cache@v2
-      name: Cache database modules
+      name: Cache database modules and firebase binary
       with:
         path: |
           ./Firebase/Tests/node_modules
-        key: ${{ runner.os }}-database-modules-${{ hashFiles('./Firebase/Tests/yarn.lock') }}
+          ${{ github.workspace }}/emulator-cache
+        key: ${{ runner.os }}-database-${{ hashFiles('./Firebase/Tests/yarn.lock') }}
 
 
     - name: Run Database Unit Test
