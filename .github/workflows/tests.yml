@@ -28,7 +28,7 @@ jobs:
       with:
         path: |
           ./website/node_modules
-        key: ${{ runner.os }}-modules-${{ hashFiles('./website/yarn.lock') }}
+        key: ${{ runner.os }}-website-modules-${{ hashFiles('./website/yarn.lock') }}
 
     - name: Run Website Unit Tests
       run: |
@@ -50,7 +50,7 @@ jobs:
       with:
         path: |
           ./Firebase/Tests/node_modules
-        key: ${{ runner.os }}-modules-${{ hashFiles('./Firebase/Tests/yarn.lock') }}
+        key: ${{ runner.os }}-database-modules-${{ hashFiles('./Firebase/Tests/yarn.lock') }}
 
 
     - name: Run Database Unit Test
