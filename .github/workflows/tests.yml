@@ -26,7 +26,9 @@ jobs:
     - uses: actions/cache@v2
       name: Cache yarn and node modules
       with:
-        path: '**/node_modules'
+        path: |
+          $GITHUB_WORKSPACE/website/node_modules
+          ./Firebase/Tests/node_modules
         key: ${{ runner.os }}-modules-${{ hashFiles('**/+(yarn.lock|package-lock.json)') }}
 
     - name: Run Website Unit Tests
@@ -42,7 +44,6 @@ jobs:
         key:
           ${{ runner.os }}-firebase-emulators-${{
           hashFiles('emulator-cache/**') }}
-      continue-on-error: true
 
 
     - name: Run Database Unit Test
