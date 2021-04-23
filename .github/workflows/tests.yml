@@ -23,6 +23,12 @@ jobs:
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
     - uses: actions/checkout@v2
 
+    - uses: actions/cache@v2
+      name: Cache yarn and node modules
+      with:
+        path: '**/node_modules'
+        key: ${{ runner.os }}-modules-${{ hashFiles('**/+(yarn.lock|package-lock.json)') }}
+
     - name: Run Website Unit Tests
       run: |
          cd website 
