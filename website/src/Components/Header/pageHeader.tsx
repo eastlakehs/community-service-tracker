@@ -27,7 +27,7 @@ const HeaderButtons: React.FunctionComponent<{}> = () => {
   const adminState = useSelector(selectIsAdminState);
   console.log(adminState)
   console.log(signedInstate)
-  if (adminState) {
+  if (adminState.admin) {
     return (
       <>
         <Link
