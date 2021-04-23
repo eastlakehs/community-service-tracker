@@ -42,7 +42,7 @@ jobs:
         path: ${{ env.FIREBASE_EMULATORS_PATH }}
         key:
           ${{ runner.os }}-firebase-emulators-${{
-          hashFiles('emulator-cache/**') }}
+          hashFiles('./Firebase/Tests/yarn.lock') }}
 
 
     - uses: actions/cache@v2
