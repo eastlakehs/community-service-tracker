@@ -12,7 +12,10 @@ jobs:
   # This workflow contains a single job called "build"
   build:
     runs-on: ubuntu-latest
-    
+
+    env:
+      FIREBASE_EMULATORS_PATH: ${{ github.workspace }}/emulator-cache
+
     steps:
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
     - uses: actions/checkout@v2
@@ -22,6 +25,16 @@ jobs:
          cd website 
          yarn 
          yarn test
+
+    - name: Cache firebase emulators
+      uses: actions/cache@v2
+      with:
+        path: ${{ env.FIREBASE_EMULATORS_PATH }}
+        key:
+          ${{ runner.os }}-firebase-emulators-${{
+          hashFiles('emulator-cache/**') }}
+      continue-on-error: true
+
 
     - name: Run Database Unit Test
       run: |
