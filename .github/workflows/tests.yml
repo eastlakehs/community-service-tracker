@@ -27,7 +27,7 @@ jobs:
       name: Cache yarn and node modules
       with:
         path: |
-          $GITHUB_WORKSPACE/website/node_modules
+          ./website/node_modules
           ./Firebase/Tests/node_modules
         key: ${{ runner.os }}-modules-${{ hashFiles('**/+(yarn.lock|package-lock.json)') }}
 
