@@ -1,4 +1,4 @@
-name: CI
+name: Screenshots
 
 # Run on any commit or pr on any branch
 on:
