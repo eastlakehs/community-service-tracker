@@ -39,7 +39,7 @@ jobs:
         path: /home/runner/.cache/firebase/emulators
         key: ${{ runner.os }}-database-modules-${{ hashFiles('./Firebase/Tests/yarn.lock') }}
 
-    #Caches the node_modules folder
+    #Caches the node_modules
     - uses: actions/cache@v2
       name: Cache firebase binary
       with:
