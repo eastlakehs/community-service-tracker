@@ -36,7 +36,7 @@ jobs:
       with:
         path: |
           ./Firebase/Tests/node_modules
-          ${{ github.workspace }}/emulator-cache
+          /home/runner/.cache/firebase/emulators
         key: ${{ runner.os }}-database-${{ hashFiles('./Firebase/Tests/yarn.lock') }}
 
 
