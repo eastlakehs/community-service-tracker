@@ -1,15 +1,14 @@
 name: Tests
 
-# Run on any commit or pr on any branch
+# Run on any pr on any branch
 on:
   pull_request:
     branches:
       - '**'
 
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"
+  # This workflow contains a single job to run the tests
   build:
     runs-on: ubuntu-latest
 
@@ -18,6 +17,7 @@ jobs:
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
     - uses: actions/checkout@v2
 
+    #Caches the node_modules for the website tests
     - uses: actions/cache@v2
       name: Cache website modules
       with:
@@ -25,12 +25,14 @@ jobs:
           ./website/node_modules
         key: ${{ runner.os }}-website-modules-${{ hashFiles('./website/yarn.lock') }}
 
+    #Runs the website tests
     - name: Run Website Unit Tests
       run: |
          cd website 
          yarn 
          yarn test
 
+    #Caches the node_modules and the firebase emulator to speed up workflow time
     - uses: actions/cache@v2
       name: Cache database modules and firebase binary
       with:
@@ -39,7 +41,7 @@ jobs:
           /home/runner/.cache/firebase/emulators
         key: ${{ runner.os }}-database-cache-${{ hashFiles('./Firebase/Tests/yarn.lock') }}
 
-
+    #Runs the database tests
     - name: Run Database Unit Test
       run: |
          cd Firebase/Tests 
