@@ -14,7 +14,7 @@ jobs:
 
 
     steps:
-    # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+    # Checks-out the repository
     - uses: actions/checkout@v2
 
       #Caches the firebase emulator
