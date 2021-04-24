@@ -37,7 +37,7 @@ jobs:
         path: |
           ./Firebase/Tests/node_modules
           /home/runner/.cache/firebase/emulators
-        key: ${{ runner.os }}-database-${{ hashFiles('./Firebase/Tests/yarn.lock') }}
+        key: ${{ runner.os }}-database-cache-${{ hashFiles('./Firebase/Tests/yarn.lock') }}
 
 
     - name: Run Database Unit Test
