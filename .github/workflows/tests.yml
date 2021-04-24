@@ -32,14 +32,19 @@ jobs:
          yarn 
          yarn test
 
-    #Caches the node_modules and the firebase emulator to speed up workflow time
+    #Caches the firebase emulator
     - uses: actions/cache@v2
-      name: Cache database modules and firebase binary
+      name: Cache database modules
       with:
-        path: |
-          ./Firebase/Tests/node_modules
-          /home/runner/.cache/firebase/emulators
-        key: ${{ runner.os }}-database-cache-${{ hashFiles('./Firebase/Tests/yarn.lock') }}
+        path: /home/runner/.cache/firebase/emulators
+        key: ${{ runner.os }}-database-modules-${{ hashFiles('./Firebase/Tests/yarn.lock') }}
+
+    #Caches the node_modules
+    - uses: actions/cache@v2
+      name: Cache firebase binary
+      with:
+        path: ./Firebase/Tests/node_modules
+        key: ${{ runner.os }}-database-binary-${{ hashFiles('./Firebase/Tests/yarn.lock') }}
 
     #Runs the database tests
     - name: Run Database Unit Test
