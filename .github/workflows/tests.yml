@@ -17,6 +17,20 @@ jobs:
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
     - uses: actions/checkout@v2
 
+      #Caches the firebase emulator
+    - uses: actions/cache@v2
+      name: Cache database modules
+      with:
+        path: /home/runner/.cache/firebase/emulators
+        key: ${{ runner.os }}-firebase-modules-${{ hashFiles('./Firebase/Tests/yarn.lock') }}-test1
+
+      #Caches the node_modules
+    - uses: actions/cache@v2
+      name: Cache firebase binary
+      with:
+        path: ./Firebase/Tests/node_modules
+        key: ${{ runner.os }}-firebase-binary-${{ hashFiles('./Firebase/Tests/yarn.lock') }}-test1
+
     #Caches the node_modules for the website tests
     - uses: actions/cache@v2
       name: Cache website modules
@@ -31,20 +45,6 @@ jobs:
          cd website 
          yarn 
          yarn test
-
-    #Caches the firebase emulator
-    - uses: actions/cache@v2
-      name: Cache database modules
-      with:
-        path: /home/runner/.cache/firebase/emulators
-        key: ${{ runner.os }}-database-modules-${{ hashFiles('./Firebase/Tests/yarn.lock') }}
-
-    #Caches the node_modules
-    - uses: actions/cache@v2
-      name: Cache firebase binary
-      with:
-        path: ./Firebase/Tests/node_modules
-        key: ${{ runner.os }}-database-binary-${{ hashFiles('./Firebase/Tests/yarn.lock') }}
 
     #Runs the database tests
     - name: Run Database Unit Test
