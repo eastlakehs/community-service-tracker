@@ -22,14 +22,14 @@ jobs:
       name: Cache database modules
       with:
         path: /home/runner/.cache/firebase/emulators
-        key: ${{ runner.os }}-firebase-modules-${{ hashFiles('./Firebase/Tests/yarn.lock') }}-test1
+        key: ${{ runner.os }}-firebase-modules-${{ hashFiles('./Firebase/Tests/yarn.lock') }}
 
       #Caches the node_modules
     - uses: actions/cache@v2
       name: Cache firebase binary
       with:
         path: ./Firebase/Tests/node_modules
-        key: ${{ runner.os }}-firebase-binary-${{ hashFiles('./Firebase/Tests/yarn.lock') }}-test1
+        key: ${{ runner.os }}-firebase-binary-${{ hashFiles('./Firebase/Tests/yarn.lock') }}
 
     #Caches the node_modules for the website tests
     - uses: actions/cache@v2
