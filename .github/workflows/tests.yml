@@ -32,6 +32,12 @@ jobs:
       with:
         path: '**/node_modules'
         key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
+        
+    - name: Install node_modules if cache did not hit
+      if: steps.yarn-cache.outputs.cache-hit != 'true'
+      run: |
+        (cd Firebase/Tests && yarn)
+        (cd website && yarn)
 
     #Runs the website tests
     - name: Run Website Unit Tests
@@ -39,11 +45,6 @@ jobs:
          cd website 
          yarn test
 
-    - name: Install node_modules if cache did not hit
-      if: steps.yarn-cache.outputs.cache-hit != 'true'
-      run: |
-        (cd Firebase/Tests && yarn)
-        (cd website && yarn)
     #Runs the database tests
     - name: Run Database Unit Tests
       run: |
