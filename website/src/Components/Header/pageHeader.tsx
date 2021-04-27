@@ -25,8 +25,6 @@ const LogoutButton = () => (
 const HeaderButtons: React.FunctionComponent<{}> = () => {
   const signedInstate = useSelector(selectSignedInState);
   const adminState = useSelector(selectIsAdminState);
-  console.log(adminState)
-  console.log(signedInstate)
   if (adminState.admin) {
     return (
       <>

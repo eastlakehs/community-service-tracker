@@ -9,7 +9,7 @@ const initialState: AdminState = {
 };
 
 export const isAdminSlice = createSlice({
-  name: "isAdmin",
+  name: "isAdminSlice",
   initialState: initialState,
   reducers: {
     setIsAdmin: (state, action: PayloadAction<AdminState>) => {
@@ -20,7 +20,7 @@ export const isAdminSlice = createSlice({
 
 export const { setIsAdmin } = isAdminSlice.actions;
 
-export const selectIsAdminState = (state: { adminState: AdminState }) =>
-  state.adminState;
+export const selectIsAdminState = (state: { isAdminState: AdminState }) =>
+  state.isAdminState;
 
 export default isAdminSlice.reducer;
