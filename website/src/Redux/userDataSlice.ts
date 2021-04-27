@@ -19,6 +19,7 @@ export const userDataSlice = createSlice({
   name: "userData",
   initialState: initialState,
   reducers: {
+    clearAllData: () => initialState,
     setDocument: (state, action: PayloadAction<fireStoreDocumentSnapshot>) => {
       // Creates the state.data[action.payload.key] field so that Object.assign can work
       state.data[action.payload.key] = { ...blankDocument };
@@ -30,7 +31,11 @@ export const userDataSlice = createSlice({
   },
 });
 
-export const { setDocument, deleteDocument } = userDataSlice.actions;
+export const {
+  setDocument,
+  deleteDocument,
+  clearAllData,
+} = userDataSlice.actions;
 
 export const selectUserData = (state: { userData: initialStateType }) =>
   state.userData;
