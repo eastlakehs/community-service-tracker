@@ -1,10 +1,11 @@
-name: CI
+name: Screenshots
 
 # Run on any commit or pr on any branch
 on:
   pull_request:
     branches:
       - '**'
+
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:

@@ -1,29 +1,52 @@
-name: CI:Tests
-
-# Run on any commit or pr on any branch
+name: Tests
+#This comment is to test the cache. To test the cache, increment this number than commit the change: 2
+# Run on any pr on any branch
 on:
   pull_request:
     branches:
       - '**'
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+
 jobs:
-  # This workflow contains a single job called "build"
+  # This workflow contains a single job to run the tests
   build:
     runs-on: ubuntu-latest
-    
-    steps:
-    # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-    - uses: actions/checkout@v2
 
+
+    steps:
+    # Checks-out the repository
+    - uses: actions/checkout@v2
+      name: Checkout repository
+
+      #Caches the firebase emulator
+    - uses: actions/cache@v2
+      name: Cache firebase emulator
+      with:
+        path: /home/runner/.cache/firebase/emulators
+        key: ${{ runner.os }}-firebase-emulator-${{ hashFiles('./Firebase/Tests/yarn.lock') }}
+
+      #Caches the node_modules
+    - uses: actions/cache@v2
+      name: Cache node_modules
+      id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
+      with:
+        path: '**/node_modules'
+        key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
+        
+    - name: Install node_modules if cache did not hit
+      if: steps.yarn-cache.outputs.cache-hit != 'true'
+      run: |
+        (cd Firebase/Tests && yarn)
+        (cd website && yarn)
+
+    #Runs the website tests
     - name: Run Website Unit Tests
       run: |
          cd website 
-         yarn 
          yarn test
 
-    - name: Run Database Unit Test
+    #Runs the database tests
+    - name: Run Database Unit Tests
       run: |
          cd Firebase/Tests 
-         yarn 
          yarn ci
