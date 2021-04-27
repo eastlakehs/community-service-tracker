@@ -3,6 +3,7 @@ import { useHistory } from "react-router-dom";
 import AdminUsersTable from "../Table/adminUsersTable";
 import { useDispatch } from "react-redux";
 import { setSignInState } from "../../Redux/signedInSlice";
+import { clearAllData } from "../../Redux/userDataSlice";
 import {
   getListOfCurrentUsers,
   profileAndEmail,
@@ -48,11 +49,12 @@ export const Admin: React.FunctionComponent<{}> = ({}) => {
         admin: signedInState.admin, // persist admin if was admin
       })
     );
+    dispatch(clearAllData());
     // navigate to user page
     history.push("/table");
   };
 
-  if (!signedInState.admin)  {
+  if (!signedInState.admin) {
     return (
       <ErrorText text="You do not appear to be signed in as an admin user at the moment." />
     );
