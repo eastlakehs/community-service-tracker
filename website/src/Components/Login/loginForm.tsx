@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useState, useEffect } from "react";
 import sendEmailAuth from "../../Firebase/linkAuth/sendEmailAuth";
-
+import { isAdmin } from "../../Constants/isAdmin";
 import { useHistory } from "react-router-dom";
 import { selectSignedInState } from "../../Redux/signedInSlice";
 import { useSelector } from "react-redux";
@@ -12,10 +12,7 @@ type emailState =
   | "error-bad-format"
   | "error-invalid-domain";
 
-type emailValidationState = 
-  | "valid-email"
-  | "bad-format"
-  | "invalid-domain";
+type emailValidationState = "valid-email" | "bad-format" | "invalid-domain";
 
 const UserHint: React.FunctionComponent<{ state: emailState }> = ({
   state,
@@ -23,7 +20,8 @@ const UserHint: React.FunctionComponent<{ state: emailState }> = ({
   if (state === "base")
     return (
       <p className="text-red-500 text-base italic">
-        Please enter a valid school email (lwsd.org or bellevuecollege.edu) email address.
+        Please enter a valid school email (lwsd.org or bellevuecollege.edu)
+        email address.
       </p>
     );
   if (state === "email-send-failed")
@@ -37,7 +35,7 @@ const UserHint: React.FunctionComponent<{ state: emailState }> = ({
       <p className="text-red-500 text-base italic">
         Improperly formatted email.
       </p>
-    ); 
+    );
   if (state === "error-invalid-domain")
     return (
       <p className="text-red-500 text-base italic">
@@ -58,23 +56,14 @@ function validateFormatEmail(email: string) {
   return re.test(email.toLowerCase());
 }
 
-const basicEmailValidation = (email: string) : emailValidationState => {
-  const isAdmin = [
-    "eastlakekey@gmail.com",
-    "daniel@sudzilouski.com",
-    "s-dsudzilouski@lwsd.org",
-    "s-jizhang@lwsd.org",
-  ].includes(email);
+const basicEmailValidation = (email: string): emailValidationState => {
   const isFormatted = validateFormatEmail(email);
   const isInDomain =
     email.endsWith("@lwsd.org") || email.endsWith("@bellevuecollege.edu");
-  
-  if (isAdmin)
-    return "valid-email";
-  if (!isFormatted)
-    return "bad-format";
-  if (!isInDomain)
-    return "invalid-domain";
+
+  if (isAdmin(email)) return "valid-email";
+  if (!isFormatted) return "bad-format";
+  if (!isInDomain) return "invalid-domain";
   return "valid-email";
 };
 
@@ -129,8 +118,8 @@ const LoginForm = () => {
                 case "invalid-domain":
                   setEmailState("error-invalid-domain");
                   break;
-                }
-            }}  
+              }
+            }}
             className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
             type="submit"
           >

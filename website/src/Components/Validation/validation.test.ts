@@ -1,4 +1,8 @@
-import { VALIDATE_hours, VALIDATE_free_form, VALIDATE_graduation } from "./validation";
+import {
+  VALIDATE_hours,
+  VALIDATE_free_form,
+  VALIDATE_graduation,
+} from "./validation";
 
 test("Running Validation Tests for VALIDATE_hours", () => {
   expect(VALIDATE_hours(".5").validate).toBe(true);
@@ -26,9 +30,12 @@ test("Running Validation Tests for VALIDATE_free_form", () => {
   expect(VALIDATE_free_form("").validate).toBe(false);
   expect(VALIDATE_free_form(" ").validate).toBe(false);
   expect(VALIDATE_free_form("          ").validate).toBe(false);
-  expect(VALIDATE_free_form("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa").validate).toBe(false);
+  expect(
+    VALIDATE_free_form(
+      "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    ).validate
+  ).toBe(false);
 });
-
 
 test("Running Validation Tests for VALIDATE_graduation", () => {
   expect(VALIDATE_graduation("2021").validate).toBe(true);

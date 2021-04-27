@@ -96,7 +96,7 @@ const CSTable: React.FunctionComponent<{
                 <thead>
                   <tr>
                     <>{generateHeader()}</>
-                    <th className={TableHeaderStyle}>Operation</th>
+                    <th className={TableHeaderStyle}>Operations</th>
                   </tr>
                 </thead>
                 <tbody>

@@ -7,8 +7,10 @@
     "sourceMap": true,
     "outDir": "build",
     "resolveJsonModule": true,
-    "strictNullChecks": true
+    "strictNullChecks": true,
+    "lib": ["ES2017"]
   },
+
   "include": ["src/**/*.ts", "src/**/*.json"],
   "exclude": ["node_modules"]
 }

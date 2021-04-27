@@ -5,8 +5,38 @@ import { useSelector } from "react-redux";
 import { selectSignedInState } from "../../Redux/signedInSlice";
 /* eslint-disable jsx-a11y/anchor-is-valid */
 
+const LogoutButton = () => (
+  <a
+    href="#"
+    onClick={async (e) => {
+      e.preventDefault();
+      const error = await signOut();
+      if (error) {
+        console.log(error);
+      }
+    }}
+    className="block lg:inline-block text-white mr-6 mt-2 lg:mt-auto"
+  >
+    Logout
+  </a>
+);
+
 const HeaderButtons: React.FunctionComponent<{}> = () => {
   const signedInstate = useSelector(selectSignedInState);
+  if (signedInstate.admin) {
+    return (
+      <>
+        <Link
+          to="/admin"
+          className="block lg:inline-block text-white mr-6 mt-2 lg:mt-auto"
+        >
+          Dashboard
+        </Link>
+        <LogoutButton />
+      </>
+    );
+  }
+
   // Display user email adress if the user is signed in
   if (signedInstate.signedIn) {
     return (
@@ -29,19 +59,7 @@ const HeaderButtons: React.FunctionComponent<{}> = () => {
         >
           Submit
         </Link>
-        <a
-          href="#"
-          onClick={async (e) => {
-            e.preventDefault();
-            const error = await signOut();
-            if (error) {
-              console.log(error);
-            }
-          }}
-          className="block lg:inline-block text-white mr-6 mt-2 lg:mt-auto"
-        >
-          Logout
-        </a>
+        <LogoutButton />
       </>
     );
   }
@@ -55,18 +73,31 @@ const HeaderButtons: React.FunctionComponent<{}> = () => {
   );
 };
 
-const PageHeader = () => {
+const LogoButton: React.FunctionComponent<{}> = () => {
+  // make the home button redirect to admin if admin / user profile if it is a user
   const signedInstate = useSelector(selectSignedInState);
+  let url = "/";
+  if (signedInstate.admin) 
+    url = "/admin";
+  else if (signedInstate.userEmail)
+    url = "/profile";
+
+  return (
+    <div className="text-white mr-6 ">
+      <Link to={url}>
+        <span className="text-xl tracking-tight">
+          Wolf Pack Service Tracker
+    </span>
+      </Link>
+    </div>
+  )
+}
+
+const PageHeader = () => {
   const [show_nav, set_nav] = useState(false);
   return (
     <nav className="mb-10 bg-top-red p-6 flex flex-wrap font-black item-center justify-between">
-      <div className="text-white mr-6 ">
-        <Link to={signedInstate.userEmail ? "/profile" : "/"}>
-          <span className="text-xl tracking-tight">
-            Wolf Pack Service Tracker
-          </span>
-        </Link>
-      </div>
+      <LogoButton />
       <div className={`block lg:hidden`}>
         <button
           onClick={() => {

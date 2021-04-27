@@ -1,29 +1,32 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-type SignedInState = {
+export type ISignedInState = {
   signedIn: boolean | null;
   userEmail: string;
+  admin: boolean;
 };
 
-const initialState: SignedInState = {
+const initialState: ISignedInState = {
   signedIn: null,
   userEmail: "",
+  admin: false,
 };
 
 export const signedInSlice = createSlice({
-  name: "editSlice",
+  name: "signedInSlice",
   initialState: initialState,
   reducers: {
-    setSignInSate: (state, action: PayloadAction<SignedInState>) => {
+    setSignInState: (state, action: PayloadAction<ISignedInState>) => {
       state.signedIn = action.payload.signedIn;
       state.userEmail = action.payload.userEmail;
+      state.admin = action.payload.admin;
     },
   },
 });
 
-export const { setSignInSate } = signedInSlice.actions;
+export const { setSignInState } = signedInSlice.actions;
 
-export const selectSignedInState = (state: { signedInState: SignedInState }) =>
+export const selectSignedInState = (state: { signedInState: ISignedInState }) =>
   state.signedInState;
 
 export default signedInSlice.reducer;
