@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import { signOut } from "../../Firebase/linkAuth/signOut";
 import { useSelector } from "react-redux";
 import { selectSignedInState } from "../../Redux/signedInSlice";
-import { selectIsAdminState, setIsAdmin } from "../../Redux/isAdminSlice";
 /* eslint-disable jsx-a11y/anchor-is-valid */
 
 const LogoutButton = () => (
@@ -24,8 +23,7 @@ const LogoutButton = () => (
 
 const HeaderButtons: React.FunctionComponent<{}> = () => {
   const signedInstate = useSelector(selectSignedInState);
-  const adminState = useSelector(selectIsAdminState);
-  if (adminState.admin) {
+  if (signedInstate.admin) {
     return (
       <>
         <Link
@@ -78,9 +76,8 @@ const HeaderButtons: React.FunctionComponent<{}> = () => {
 const LogoButton: React.FunctionComponent<{}> = () => {
   // make the home button redirect to admin if admin / user profile if it is a user
   const signedInstate = useSelector(selectSignedInState);
-  const isAdminState = useSelector(selectIsAdminState);
   let url = "/";
-  if (isAdminState) 
+  if (signedInstate.admin) 
     url = "/admin";
   else if (signedInstate.userEmail)
     url = "/profile";
