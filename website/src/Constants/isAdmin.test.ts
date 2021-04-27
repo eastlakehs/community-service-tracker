@@ -3,7 +3,6 @@ import { isAdmin } from "./isAdmin";
 it("should return true for admin users", () => {
   expect(isAdmin("daniel@sudzilouski.com")).toBe(true);
   expect(isAdmin("eastlakekey@gmail.com")).toBe(true);
-  expect(isAdmin("s-jizhang@lwsd.org")).toBe(true);
 });
 
 it("should return false for non-admin users", () => {

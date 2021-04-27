@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useHistory } from "react-router-dom";
 import AdminUsersTable from "../Table/adminUsersTable";
 import { useDispatch } from "react-redux";
 import { setSignInState } from "../../Redux/signedInSlice";
@@ -9,7 +10,6 @@ import {
 
 import { useSelector } from "react-redux";
 import { selectSignedInState } from "../../Redux/signedInSlice";
-import { isAdmin } from "../../Constants/isAdmin";
 
 const ErrorText: React.FunctionComponent<{ text: string }> = ({ text }) => (
   <text className="mb-auto text-center text-white py-2 lg:py-3 text-base sm:text-xl lg:text-2xl xl:text-3xl">
@@ -21,13 +21,14 @@ const ErrorText: React.FunctionComponent<{ text: string }> = ({ text }) => (
 // TODO: fix redux bug
 // TODO: error fallback for unauthed user
 export const Admin: React.FunctionComponent<{}> = ({}) => {
+  const history = useHistory();
   const dispatch = useDispatch();
   const signedInState = useSelector(selectSignedInState);
   const [listOfAllCurrentUsers, setListOfAllCurrentUsers] = useState<
     profileAndEmail[] | null | undefined
   >(undefined);
   useEffect(() => {
-    if (isAdmin(signedInState.userEmail)) {
+    if (signedInState.admin) {
       getListOfCurrentUsers().then((list) => {
         setListOfAllCurrentUsers(list);
       });
@@ -44,12 +45,14 @@ export const Admin: React.FunctionComponent<{}> = ({}) => {
       setSignInState({
         signedIn: true,
         userEmail: userId,
+        admin: signedInState.admin, // persist admin if was admin
       })
     );
     // navigate to user page
+    history.push("/table");
   };
 
-  if (!isAdmin(signedInState.userEmail)) {
+  if (!signedInState.admin)  {
     return (
       <ErrorText text="You do not appear to be signed in as an admin user at the moment." />
     );
