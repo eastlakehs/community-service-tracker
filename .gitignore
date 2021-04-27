@@ -95,4 +95,4 @@ Temporary Items
 .apdisk
 
 # vscode
-./**/.vscode
+**/.vscode
