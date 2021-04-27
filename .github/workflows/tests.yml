@@ -43,10 +43,8 @@ jobs:
     - name: Install node_modules if cache did not hit
       if: steps.yarn-cache.outputs.cache-hit != 'true'
       run: |
-        cd Firebase/Tests
-        yarn
-        yarn install
-      
+        (cd Firebase/Tests && yarn)
+        (cd website && yarn)
     #Runs the database tests
     - name: Run Database Unit Tests
       run: |
