@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import firebase from "firebase";
 import { useHistory } from "react-router-dom";
 import AdminUsersTable from "../Table/adminUsersTable";
 import { useDispatch } from "react-redux";
@@ -11,7 +10,6 @@ import {
 
 import { useSelector } from "react-redux";
 import { selectSignedInState } from "../../Redux/signedInSlice";
-import { isAdmin } from "../../Constants/isAdmin";
 import { selectIsAdminState } from "../../Redux/isAdminSlice";
 
 const ErrorText: React.FunctionComponent<{ text: string }> = ({ text }) => (
