@@ -78,8 +78,9 @@ const HeaderButtons: React.FunctionComponent<{}> = () => {
 const LogoButton: React.FunctionComponent<{}> = () => {
   // make the home button redirect to admin if admin / user profile if it is a user
   const signedInstate = useSelector(selectSignedInState);
+  const isAdminState = useSelector(selectIsAdminState);
   let url = "/";
-  if (useSelector(selectIsAdminState)) 
+  if (isAdminState) 
     url = "/admin";
   else if (signedInstate.userEmail)
     url = "/profile";
