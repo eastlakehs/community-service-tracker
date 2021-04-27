@@ -12,6 +12,6 @@ const handleExport = (data: initialStateType) => {
         exportString += `${dateObj.month}-${dateObj.day}-${dateObj.year}`  + ', ';
         exportString += "\n";
     });
-    downloadFileFromString(exportString, "export-file.csv");
+    downloadFileFromString(exportString, "export_hours.csv");
 };
 export { handleExport };
