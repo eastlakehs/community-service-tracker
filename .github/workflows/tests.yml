@@ -1,5 +1,5 @@
 name: Tests
-
+#This comment is to test the cache. To test the cache, increment this number than commit the change: 1
 # Run on any pr on any branch
 on:
   pull_request:
@@ -22,22 +22,14 @@ jobs:
       name: Cache database modules
       with:
         path: /home/runner/.cache/firebase/emulators
-        key: ${{ runner.os }}-firebase-modules-${{ hashFiles('./Firebase/Tests/yarn.lock') }}
+        key: ${{ runner.os }}-firebase-emulator-${{ hashFiles('./Firebase/Tests/yarn.lock') }}
 
       #Caches the node_modules
     - uses: actions/cache@v2
-      name: Cache firebase binary
+      id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
       with:
-        path: ./Firebase/Tests/node_modules
-        key: ${{ runner.os }}-firebase-binary-${{ hashFiles('./Firebase/Tests/yarn.lock') }}
-
-    #Caches the node_modules for the website tests
-    - uses: actions/cache@v2
-      name: Cache website modules
-      with:
-        path: |
-          ./website/node_modules
-        key: ${{ runner.os }}-website-modules-${{ hashFiles('./website/yarn.lock') }}
+        path: '**/node_modules'
+        key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
 
     #Runs the website tests
     - name: Run Website Unit Tests
@@ -46,9 +38,15 @@ jobs:
          yarn 
          yarn test
 
+    - name: Install node modules if cache didn't hit
+      if: steps.yarn-cache.outputs.cache-hit != 'true'
+      run: |
+        cd Firebase/Tests
+        yarn
+        yarn install
+      
     #Runs the database tests
     - name: Run Database Unit Test
       run: |
          cd Firebase/Tests 
-         yarn 
          yarn ci
