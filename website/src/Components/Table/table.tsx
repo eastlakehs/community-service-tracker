@@ -2,6 +2,7 @@ import React from "react";
 import { initialStateType } from "../../Redux/userDataSlice";
 import { Day } from "react-modern-calendar-datepicker";
 import { totalizeHours } from "./Totalizer/totalizer";
+import { handleExport } from "./exporter/handleExport";
 import InfoPage from "../Info/infoPage";
 /* Table CSS Credit: https://tailwindcomponents.com/component/table-responsive-with-filters */
 
@@ -25,18 +26,18 @@ const CSTable: React.FunctionComponent<{
   const TableCell: React.FunctionComponent<{ name: string | number }> = ({
     name,
   }) => (
-      <td
-        className="px-2 py-2 sm:px-3 sm:py-3 md:px-4 md:py-4 lg:px-5 lg:py-5 border-b border-gray-200 bg-white text-sm"
-      >
-        <p className="text-gray-900">{name}</p>
-      </td>
-    );
+    <td
+      className="px-2 py-2 sm:px-3 sm:py-3 md:px-4 md:py-4 lg:px-5 lg:py-5 border-b border-gray-200 bg-white text-sm"
+    >
+      <p className="text-gray-900">{name}</p>
+    </td>
+  );
 
   const TableButton: React.FunctionComponent<{
     name: string;
     onClick: () => void;
     edit: boolean;
-  }> = ({ name, onClick, edit}) => (
+  }> = ({ name, onClick, edit }) => (
     <button
       className={edit ? "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mx-4 mt-2 rounded" : "bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 m-2 rounded"}
       onClick={() => {
@@ -89,7 +90,15 @@ const CSTable: React.FunctionComponent<{
         {`Total Hours : ${totalizeHours(data)} hours`}
       </span>
       <div className="container mx-auto px-4 sm:px-8">
-        <div className="py-8">
+        <div className="py-4">
+          <div className="text-center">
+            <button className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
+              onClick={() => {
+                handleExport(data);
+              }}>
+              Export
+            </button>
+          </div>
           <div className="-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto">
             <div className="inline-block min-w-full shadow rounded-lg overflow-hidden">
               <table className={"min-w-full leading-normal"}>
