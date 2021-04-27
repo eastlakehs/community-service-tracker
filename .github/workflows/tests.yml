@@ -16,16 +16,18 @@ jobs:
     steps:
     # Checks-out the repository
     - uses: actions/checkout@v2
+      name: Checkout repository
 
       #Caches the firebase emulator
     - uses: actions/cache@v2
-      name: Cache database modules
+      name: Cache firebase emulator
       with:
         path: /home/runner/.cache/firebase/emulators
         key: ${{ runner.os }}-firebase-emulator-${{ hashFiles('./Firebase/Tests/yarn.lock') }}
 
       #Caches the node_modules
     - uses: actions/cache@v2
+      name: Cache node_modules
       id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
       with:
         path: '**/node_modules'
@@ -38,7 +40,7 @@ jobs:
          yarn 
          yarn test
 
-    - name: Install node modules if cache didn't hit
+    - name: Install node_modules if cache did not hit
       if: steps.yarn-cache.outputs.cache-hit != 'true'
       run: |
         cd Firebase/Tests
@@ -46,7 +48,7 @@ jobs:
         yarn install
       
     #Runs the database tests
-    - name: Run Database Unit Test
+    - name: Run Database Unit Tests
       run: |
          cd Firebase/Tests 
          yarn ci
