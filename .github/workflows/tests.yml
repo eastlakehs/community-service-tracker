@@ -37,7 +37,6 @@ jobs:
     - name: Run Website Unit Tests
       run: |
          cd website 
-         yarn 
          yarn test
 
     - name: Install node_modules if cache did not hit
