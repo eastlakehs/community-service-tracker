@@ -30,7 +30,7 @@ const getReport = async () => {
  *
  *  Basically, create an element, attach a download tag to it, link data as href, click button, delete element.
  */
-export const downloadFileFromString = (file: string, fileName: string) => {
+const downloadFileFromString = (file: string, fileName: string) => {
   let element = document.createElement("a");
   element.setAttribute(
     "href",
