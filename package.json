@@ -1,4 +1,8 @@
 {
+  "scipts": {
+    "format-check": "prettier --check \"**/*.{ts,tsx,js,json}\"",
+    "format-write": "prettier --write \"**/*.{ts,tsx,js,json}\""
+  },
   "devDependencies": {
     "prettier": "2.2.1"
   }
