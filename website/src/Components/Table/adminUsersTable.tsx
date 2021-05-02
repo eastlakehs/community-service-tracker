@@ -3,7 +3,6 @@ import React, { useState, useEffect } from "react";
 import { profileAndEmail } from "../../Firebase/firestore/getListOfAllUsers";
 
 import { filterAdminResult } from "../../Components/Admin/search";
-import { fileURLToPath } from "url";
 
 /* Table CSS Credit: https://tailwindcomponents.com/component/table-responsive-with-filters */
 
