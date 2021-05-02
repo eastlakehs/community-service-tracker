@@ -31,6 +31,7 @@ jobs:
     - name: Install node_modules if cache did not hit
       if: steps.yarn-cache.outputs.cache-hit != 'true'
       run: |
+        yarn 
         (cd Firebase/Tests && yarn)
         (cd website && yarn)
 
@@ -50,5 +51,5 @@ jobs:
          yarn build
          
     - name: Check formatting
-      run: prettier --check "**/*.{ts,tsx,js,json}"
+      run: yarn format-check
       
