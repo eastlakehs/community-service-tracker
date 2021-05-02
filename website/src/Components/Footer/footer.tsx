@@ -6,7 +6,7 @@ const Footer = () => {
       <p className="text-white pt-2">Eastlake 2020</p>
       <p className="text-white pb-2">
           This tracker is open source: <a href="https://github.com/eastlakehs/community-service-tracker">
-          https://github.com/eastlakehs/community-service-tracker
+          contribute here
         </a>
       </p>
 
