@@ -21,7 +21,7 @@ const ErrorText: React.FunctionComponent<{ text: string }> = ({ text }) => (
 /// TODO: error fallback for fetching list of users
 // TODO: fix redux bug
 // TODO: error fallback for unauthed user
-export const Admin: React.FunctionComponent<{}> = ({}) => {
+export const Admin: React.FunctionComponent<{}> = () => {
   const history = useHistory();
   const dispatch = useDispatch();
   const signedInState = useSelector(selectSignedInState);
