@@ -5,7 +5,7 @@ const Footer = () => {
     <footer className="flex flex-col items-center bg-top-red">
       <p className="text-white pt-2">Eastlake 2020</p>
       <p className="text-white pb-2">
-          This tracker is open source: <a href="https://github.com/eastlakehs/community-service-tracker">
+          This tracker is open source: <a href="https://repo.ehs-service.org">
           contribute here
         </a>
       </p>
