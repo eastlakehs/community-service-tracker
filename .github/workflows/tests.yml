@@ -10,7 +10,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    # Checks-out the repository
     - uses: actions/checkout@v2
       name: Checkout repository
 
@@ -35,20 +34,21 @@ jobs:
         (cd Firebase/Tests && yarn)
         (cd website && yarn)
 
-    # Runs the website tests
     - name: Run Website Unit Tests
       run: |
          cd website 
          yarn test
 
-    # Runs the database tests
     - name: Run Database Unit Tests
       run: |
          cd Firebase/Tests 
          yarn ci
 
-    # Check build output for errors
     - name: Check build for errors
       run: |
          cd website 
          yarn build
+         
+    - name: Check formatting
+      run: prettier --check "**/*.{ts,tsx,js,json}"
+      
