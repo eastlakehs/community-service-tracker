@@ -32,6 +32,7 @@ jobs:
       if: steps.yarn-cache.outputs.cache-hit != 'true'
       run: |
         yarn 
+        (cd firebase && yarn)
         (cd firebase/Tests && yarn)
         (cd website && yarn)
 
