@@ -5,7 +5,7 @@ const bucket = "gs://community-ser.appspot.com";
 
 import { parseToCSVTotals } from "../../../report-generation/src/Object2SummaryCSV";
 import { cloneDbAsJson } from "../../../report-generation/src/Firestore2Object";
-import { profileCacheBuilder } from "../../../website/src/Cache/profileCache";
+import { profileCacheBuilder } from "../../../website/src/cache/profileCache";
 import stringify = require("csv-stringify/lib/sync");
 import admin from "firebase-admin";
 const db = admin.initializeApp().firestore();
