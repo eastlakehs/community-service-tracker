@@ -46,11 +46,17 @@ jobs:
          cd firebase/Tests 
          yarn ci
 
-    - name: Check build for errors
+    - name: Check website build for errors
       run: |
          cd website 
          yarn build
          
-    - name: Check formatting
+    - name: Check firebase functions build for errors
+      run: |
+         cd firebase
+         yarn lint 
+         yarn build
+         
+    - name: Check formatting for entire repo
       run: yarn format-check
       
