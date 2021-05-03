@@ -25,8 +25,6 @@ import { useIsSignedIn } from "./Firebase/linkAuth/useIsSignedIn";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-import { useSelector } from "react-redux";
-
 // Report downloading
 import { ReportPage } from "./Components/Reports/reportPage";
 

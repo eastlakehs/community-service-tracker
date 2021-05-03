@@ -11,7 +11,7 @@ export const filterAdminResult = (query: string, data: profileAndEmail[]) => {
     word = word.toLowerCase(); // don't care about casing of search
     dataRef = dataRef.filter((profile) => {
       let wordMatchesAProperty = false;
-      for (let [_property, propertyValueUntyped] of Object.entries(profile)) {
+      for (let [, propertyValueUntyped] of Object.entries(profile)) {
         let propertyValue = propertyValueUntyped as string; //https://github.com/Microsoft/TypeScript/issues/26010 oof object.entries types are broken
         propertyValue = propertyValue.toLowerCase(); // don't care about casing of search
         if (propertyValue.indexOf(word) === 0) {
