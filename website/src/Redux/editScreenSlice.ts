@@ -40,8 +40,8 @@ export const editScreenSlice = createSlice({
     setContactName: (state, action: PayloadAction<string>) => {
       state.currentData.contactName = action.payload;
     },
-    setContactInfo: (state, action: PayloadAction<string>) => {
-      state.currentData.contactInfo = action.payload;
+    setContactPhone: (state, action: PayloadAction<string>) => {
+      state.currentData.contactPhone = action.payload;
     },
     setNHS: (state, action: PayloadAction<"Yes" | "No">) => {
       state.currentData.NHS = action.payload;
@@ -80,7 +80,7 @@ export const {
   setKeyClub,
   setNHSOfficer,
   setContactName,
-  setContactInfo,
+  setContactPhone,
 } = editScreenSlice.actions;
 
 export const selectEditScreenState = (state: {
