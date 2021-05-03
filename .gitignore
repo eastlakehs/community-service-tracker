@@ -96,3 +96,6 @@ Temporary Items
 
 # vscode
 .vscode
+
+#IntelliJ, Webstorm, or other JetBrains IDE
+.idea
