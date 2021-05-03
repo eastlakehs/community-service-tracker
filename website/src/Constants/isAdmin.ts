@@ -4,8 +4,5 @@
  */
 export const isAdmin = (userEmail: string | null | undefined): boolean =>
   userEmail
-    ? [
-        "daniel@sudzilouski.com",
-        "eastlakekey@gmail.com",
-      ].includes(userEmail)
+    ? ["daniel@sudzilouski.com", "eastlakekey@gmail.com"].includes(userEmail)
     : false;

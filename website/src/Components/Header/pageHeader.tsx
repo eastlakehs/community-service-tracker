@@ -77,21 +77,19 @@ const LogoButton: React.FunctionComponent<{}> = () => {
   // make the home button redirect to admin if admin / user profile if it is a user
   const signedInstate = useSelector(selectSignedInState);
   let url = "/";
-  if (signedInstate.admin) 
-    url = "/admin";
-  else if (signedInstate.userEmail)
-    url = "/profile";
+  if (signedInstate.admin) url = "/admin";
+  else if (signedInstate.userEmail) url = "/profile";
 
   return (
     <div className="text-white mr-6 ">
       <Link to={url}>
         <span className="text-xl tracking-tight">
           Wolf Pack Service Tracker
-    </span>
+        </span>
       </Link>
     </div>
-  )
-}
+  );
+};
 
 const PageHeader = () => {
   const [show_nav, set_nav] = useState(false);

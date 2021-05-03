@@ -10,7 +10,7 @@ export const AdminPage = () => {
         title="Admin"
         description="Admin page for modifying student data"
       />
-        <Admin/>
+      <Admin />
     </>
   );
 };

@@ -7,7 +7,7 @@ import { selectSignedInState } from "../../Redux/signedInSlice";
 import { useHistory } from "react-router-dom";
 
 import { setCurrentEdit } from "../../Redux/editScreenSlice";
-import { deleteEntry } from "../../Firebase/firestore/deleteEntry"
+import { deleteEntry } from "../../Firebase/firestore/deleteEntry";
 const TableController: React.FunctionComponent<{}> = () => {
   const data = useSelector(selectUserData);
   const user = useSelector(selectSignedInState);
@@ -28,17 +28,22 @@ const TableController: React.FunctionComponent<{}> = () => {
   };
 
   const handleDelete = (currentID: string) => {
-    const confirmed = window.confirm("Are you sure you want to delete this entry?");
+    const confirmed = window.confirm(
+      "Are you sure you want to delete this entry?"
+    );
     if (confirmed) {
-      deleteEntry(
-        user.userEmail,
-        currentID
-      );
+      deleteEntry(user.userEmail, currentID);
     }
-  }
+  };
 
   // console.log(data);
-  return <CSTable data={data} handleEditClick={navigateToEdit} handleDelete={handleDelete}/>;
+  return (
+    <CSTable
+      data={data}
+      handleEditClick={navigateToEdit}
+      handleDelete={handleDelete}
+    />
+  );
 };
 
 export default TableController;

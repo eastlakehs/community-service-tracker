@@ -10,7 +10,7 @@ import { ProfileController } from "./Pages/profileController";
 import { Loading } from "./Pages/loading";
 
 // Admin Page
-import {AdminPage} from "./Pages/Admin";
+import { AdminPage } from "./Pages/Admin";
 
 // Header/Footer
 import PageHeader from "./Components/Header/pageHeader";
