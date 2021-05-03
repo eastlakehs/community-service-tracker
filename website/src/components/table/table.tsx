@@ -1,9 +1,9 @@
 import React from "react";
-import { initialStateType } from "../../Redux/userDataSlice";
+import { initialStateType } from "../../redux/userDataSlice";
 import { Day } from "react-modern-calendar-datepicker";
 import { totalizeHours } from "./Totalizer/totalizer";
 import { handleExport } from "./exporter/handleExport";
-import InfoPage from "../Info/infoPage";
+import InfoPage from "../info/infoPage";
 /* Table CSS Credit: https://tailwindcomponents.com/component/table-responsive-with-filters */
 
 const TableHeaderStyle: string =

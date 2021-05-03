@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
-import Helmet from "../Header/helmet";
-import { downloadReports } from "../../Firebase/firestore/getReport";
+import Helmet from "../header/helmet";
+import { downloadReports } from "../../firebase/firestore/getReport";
 
 const ReportPage: React.FunctionComponent<{}> = () => {
   useEffect(() => {

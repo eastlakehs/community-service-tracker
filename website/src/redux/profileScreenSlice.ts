@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { userProfileData } from "../Firebase/firestore/firestoreData.type";
+import { userProfileData } from "../firebase/firestore/firestoreData.type";
 
 const profileSliceInitialState: userProfileData = {
   firstName: "",

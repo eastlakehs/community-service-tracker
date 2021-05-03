@@ -2,12 +2,12 @@ import React from "react";
 import CSTable from "./table";
 
 import { useSelector, useDispatch } from "react-redux";
-import { selectUserData } from "../../Redux/userDataSlice";
-import { selectSignedInState } from "../../Redux/signedInSlice";
+import { selectUserData } from "../../redux/userDataSlice";
+import { selectSignedInState } from "../../redux/signedInSlice";
 import { useHistory } from "react-router-dom";
 
-import { setCurrentEdit } from "../../Redux/editScreenSlice";
-import { deleteEntry } from "../../Firebase/firestore/deleteEntry";
+import { setCurrentEdit } from "../../redux/editScreenSlice";
+import { deleteEntry } from "../../firebase/firestore/deleteEntry";
 const TableController: React.FunctionComponent<{}> = () => {
   const data = useSelector(selectUserData);
   const user = useSelector(selectSignedInState);

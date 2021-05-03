@@ -11,19 +11,19 @@ import {
   setContactName,
   setContactPhone,
   clearCurrentEdit,
-} from "../../Redux/editScreenSlice";
-import { StringField, CheckBox, FormSubmitButton } from "../Entry/entry";
-import { firestoreDocumentType } from "../../Firebase/firestore/firestoreData.type";
+} from "../../redux/editScreenSlice";
+import { StringField, CheckBox, FormSubmitButton } from "../entry/entry";
+import { firestoreDocumentType } from "../../firebase/firestore/firestoreData.type";
 import "react-modern-calendar-datepicker/lib/DatePicker.css";
 import DatePicker, { Day } from "react-modern-calendar-datepicker";
 import { useHistory } from "react-router-dom";
 import {
   submitEdit,
   submitNewEntry,
-} from "../../Firebase/firestore/submitEdit";
+} from "../../firebase/firestore/submitEdit";
 
 import { toast, ToastOptions } from "react-toastify";
-import { VALIDATE_free_form, VALIDATE_hours } from "../Validation/validation";
+import { VALIDATE_free_form, VALIDATE_hours } from "../validation/validation";
 /** Easy toast creation generation at https://fkhadra.github.io/react-toastify/introduction/ */
 const ToastConfig: ToastOptions = {
   position: "top-center",

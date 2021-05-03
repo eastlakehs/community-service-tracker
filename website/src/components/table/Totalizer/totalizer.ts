@@ -1,4 +1,4 @@
-import { initialStateType } from "../../../Redux/userDataSlice";
+import { initialStateType } from "../../../redux/userDataSlice";
 const totalizeHours = (data: initialStateType) => {
   let hoursTotal = 0;
   Object.keys(data.data).forEach((entry) => {

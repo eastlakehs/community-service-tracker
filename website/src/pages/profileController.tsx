@@ -1,18 +1,18 @@
 import React, { useState } from "react";
-import Profile from "../Components/Profile/profile";
-import Helmet from "../Components/Header/helmet";
-import InfoPage from "../Components/Info/infoPage";
+import Profile from "../components/profile/profile";
+import Helmet from "../components/header/helmet";
+import InfoPage from "../components/info/infoPage";
 
 import { useDispatch, useSelector } from "react-redux";
-import { updateUserProfile } from "../Firebase/firestore/submitEdit";
+import { updateUserProfile } from "../firebase/firestore/submitEdit";
 import {
   setProfileFirstName,
   setProfileLastName,
   setProfileGraduationYear,
   selectProfileState,
-} from "../Redux/profileScreenSlice";
+} from "../redux/profileScreenSlice";
 import { toast, ToastOptions } from "react-toastify";
-import { selectSignedInState } from "../Redux/signedInSlice";
+import { selectSignedInState } from "../redux/signedInSlice";
 
 // Easy toast creation generation at https://fkhadra.github.io/react-toastify/introduction/
 

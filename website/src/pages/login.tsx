@@ -1,6 +1,6 @@
 import React from "react";
-import { LoginForm } from "../Components/Login/loginForm";
-import Helmet from "../Components/Header/helmet";
+import { LoginForm } from "../components/login/loginForm";
+import Helmet from "../components/header/helmet";
 
 const Login = () => {
   return (

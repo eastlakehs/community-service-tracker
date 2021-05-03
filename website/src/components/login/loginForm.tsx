@@ -1,9 +1,9 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useState, useEffect } from "react";
-import sendEmailAuth from "../../Firebase/linkAuth/sendEmailAuth";
-import { isAdmin } from "../../Constants/isAdmin";
+import sendEmailAuth from "../../firebase/link-auth/sendEmailAuth";
+import { isAdmin } from "../../constants/isAdmin";
 import { useHistory } from "react-router-dom";
-import { selectSignedInState } from "../../Redux/signedInSlice";
+import { selectSignedInState } from "../../redux/signedInSlice";
 import { useSelector } from "react-redux";
 type emailState =
   | "base"

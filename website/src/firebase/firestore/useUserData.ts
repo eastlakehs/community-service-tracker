@@ -2,8 +2,8 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { firestoreDocumentType } from "./firestoreData.type";
 import { db } from "../setup";
-import { setDocument, deleteDocument } from "../../Redux/userDataSlice";
-import { selectSignedInState } from "../../Redux/signedInSlice";
+import { setDocument, deleteDocument } from "../../redux/userDataSlice";
+import { selectSignedInState } from "../../redux/signedInSlice";
 
 /** Handles updating the redux store with the data of the current signed in user */
 const useSyncUserData = () => {

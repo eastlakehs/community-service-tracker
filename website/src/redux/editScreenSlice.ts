@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import {
   firestoreDocumentType,
   blankDocument,
-} from "../Firebase/firestore/firestoreData.type";
+} from "../firebase/firestore/firestoreData.type";
 
 interface editScreenInitialStateType {
   currentData: firestoreDocumentType;

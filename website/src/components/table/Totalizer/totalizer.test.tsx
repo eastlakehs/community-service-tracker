@@ -1,5 +1,5 @@
 import { totalizeHours } from "./totalizer";
-import { initialStateType } from "../../../Redux/userDataSlice";
+import { initialStateType } from "../../../redux/userDataSlice";
 const sampleData1: initialStateType = {
   header: ["Name", "Description", "Hour", "Date"],
   data: {

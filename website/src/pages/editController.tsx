@@ -1,12 +1,12 @@
 import React from "react";
-import { Edit } from "../Components/Edit/edit";
+import { Edit } from "../components/edit/edit";
 import { useSelector } from "react-redux";
-import Helmet from "../Components/Header/helmet";
+import Helmet from "../components/header/helmet";
 
-import { selectEditScreenState } from "../Redux/editScreenSlice";
+import { selectEditScreenState } from "../redux/editScreenSlice";
 
-import { selectSignedInState } from "../Redux/signedInSlice";
-import InfoPage from "../Components/Info/infoPage";
+import { selectSignedInState } from "../redux/signedInSlice";
+import InfoPage from "../components/info/infoPage";
 
 const EditController: React.FC<{}> = () => {
   const editState = useSelector(selectEditScreenState);

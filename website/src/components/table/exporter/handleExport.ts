@@ -1,5 +1,5 @@
-import { initialStateType } from "../../../Redux/userDataSlice";
-import { downloadFileFromString } from "../../../Firebase/firestore/getReport";
+import { initialStateType } from "../../../redux/userDataSlice";
+import { downloadFileFromString } from "../../../firebase/firestore/getReport";
 import { Day } from "react-modern-calendar-datepicker";
 import stringify from "csv-stringify";
 

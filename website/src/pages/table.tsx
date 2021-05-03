@@ -1,10 +1,10 @@
 import React from "react";
 
-import Helmet from "../Components/Header/helmet";
-import TableController from "../Components/Table/tableController";
-import InfoPage from "../Components/Info/infoPage";
+import Helmet from "../components/header/helmet";
+import TableController from "../components/table/tableController";
+import InfoPage from "../components/info/infoPage";
 import { useSelector } from "react-redux";
-import { selectSignedInState } from "../Redux/signedInSlice";
+import { selectSignedInState } from "../redux/signedInSlice";
 
 const Table: React.FC<{}> = () => {
   const signedInstate = useSelector(selectSignedInState);

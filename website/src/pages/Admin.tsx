@@ -1,7 +1,7 @@
 import React from "react";
-import Helmet from "../Components/Header/helmet";
+import Helmet from "../components/header/helmet";
 
-import { Admin } from "../Components/Admin/admin";
+import { Admin } from "../components/admin/admin";
 
 export const AdminPage = () => {
   return (

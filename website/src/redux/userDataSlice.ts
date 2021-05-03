@@ -3,7 +3,7 @@ import {
   fireStoreDocumentSnapshot,
   fireStoreUserData,
   blankDocument,
-} from "../Firebase/firestore/firestoreData.type";
+} from "../firebase/firestore/firestoreData.type";
 
 export interface initialStateType {
   header: ["Name", "Description", "Hour", "Date"];

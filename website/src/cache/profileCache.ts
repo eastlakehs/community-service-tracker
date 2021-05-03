@@ -1,5 +1,5 @@
 import { ICacheBuilder } from "./cacheBuilder";
-import { profileAndEmail } from "../../../website/src/Firebase/firestore/getListOfAllUsers";
+import { profileAndEmail } from "../firebase/firestore/getListOfAllUsers";
 
 /** Builds a profile cache with emails as keys and profile info as data */
 export type IProfileCache = Record<string, Omit<profileAndEmail, "email">>;

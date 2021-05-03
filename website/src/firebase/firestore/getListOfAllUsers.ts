@@ -4,7 +4,7 @@ import { userProfileData } from "./firestoreData.type";
 import {
   deserializeProfileCache,
   IProfileCache,
-} from "../../Cache/profileCache";
+} from "../../cache/profileCache";
 
 export interface profileAndEmail extends userProfileData {
   email: string;

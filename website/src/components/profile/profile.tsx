@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import { StringField, FormSubmitButton } from "../Entry/entry";
-import Helmet from "../Header/helmet";
+import { StringField, FormSubmitButton } from "../entry/entry";
+import Helmet from "../header/helmet";
 
-import { userProfileData } from "../../Firebase/firestore/firestoreData.type";
+import { userProfileData } from "../../firebase/firestore/firestoreData.type";
 import {
   VALIDATE_free_form,
   VALIDATE_graduation,
-} from "../Validation/validation";
+} from "../validation/validation";
 
 const Profile: React.FunctionComponent<{
   profileData: userProfileData;

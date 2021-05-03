@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
-import Body from "../Components/Body/body";
-import Helmet from "../Components/Header/helmet";
+import Body from "../components/body/body";
+import Helmet from "../components/header/helmet";
 import { useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { selectSignedInState } from "../Redux/signedInSlice";
+import { selectSignedInState } from "../redux/signedInSlice";
 
 const Home = () => {
   const signedInstate = useSelector(selectSignedInState);

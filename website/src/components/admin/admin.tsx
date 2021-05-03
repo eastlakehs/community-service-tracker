@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
-import AdminUsersTable from "../Table/adminUsersTable";
+import AdminUsersTable from "../table/adminUsersTable";
 import { useDispatch } from "react-redux";
-import { setSignInState } from "../../Redux/signedInSlice";
-import { clearAllData } from "../../Redux/userDataSlice";
+import { setSignInState } from "../../redux/signedInSlice";
+import { clearAllData } from "../../redux/userDataSlice";
 import {
   getListOfCurrentUsers,
   profileAndEmail,
-} from "../../Firebase/firestore/getListOfAllUsers";
+} from "../../firebase/firestore/getListOfAllUsers";
 
 import { useSelector } from "react-redux";
-import { selectSignedInState } from "../../Redux/signedInSlice";
+import { selectSignedInState } from "../../redux/signedInSlice";
 
 const ErrorText: React.FunctionComponent<{ text: string }> = ({ text }) => (
   <text className="mb-auto text-center text-white py-2 lg:py-3 text-base sm:text-xl lg:text-2xl xl:text-3xl">

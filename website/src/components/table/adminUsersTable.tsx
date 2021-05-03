@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 
-import { profileAndEmail } from "../../Firebase/firestore/getListOfAllUsers";
+import { profileAndEmail } from "../../firebase/firestore/getListOfAllUsers";
 
-import { filterAdminResult } from "../../Components/Admin/search";
+import { filterAdminResult } from "../admin/search";
 
 /* Table CSS Credit: https://tailwindcomponents.com/component/table-responsive-with-filters */
 

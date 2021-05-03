@@ -1,9 +1,9 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { db } from "../setup";
-import { setCurrentProfile } from "../../Redux/profileScreenSlice";
+import { setCurrentProfile } from "../../redux/profileScreenSlice";
 import { userProfileData } from "./firestoreData.type";
-import { selectSignedInState } from "../../Redux/signedInSlice";
+import { selectSignedInState } from "../../redux/signedInSlice";
 
 /** Handles updating the redux store with the data of the current signed in user */
 const useSyncUserProfile = () => {
