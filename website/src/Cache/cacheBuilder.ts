@@ -1,4 +1,4 @@
-import { dataJsonType } from "../../../ReportGeneration/src/data";
+import { dataJsonType } from "../../../report-generation/src/data";
 /**
  *  Some data from the database get read a lot but dosn't necessarily need fast read access
  *  For example, the admin page requres a list of all student names/emails

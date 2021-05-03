@@ -3,8 +3,8 @@ const firestore = require("@google-cloud/firestore");
 const client = new firestore.v1.FirestoreAdminClient();
 const bucket = "gs://community-ser.appspot.com";
 
-import { parseToCSVTotals } from "../../../ReportGeneration/src/Object2SummaryCSV";
-import { cloneDbAsJson } from "../../../ReportGeneration/src/Firestore2Object";
+import { parseToCSVTotals } from "../../../report-generation/src/Object2SummaryCSV";
+import { cloneDbAsJson } from "../../../report-generation/src/Firestore2Object";
 import { profileCacheBuilder } from "../../../website/src/Cache/profileCache";
 import stringify = require("csv-stringify/lib/sync");
 import admin from "firebase-admin";

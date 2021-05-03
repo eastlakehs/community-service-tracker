@@ -139,7 +139,7 @@ const Edit: React.FC<{
           errorMessage={VALIDATE_free_form(currentData?.contactName).message}
         />
         <StringField
-            //This is named contact phone, but it will take any info.
+          //This is named contact phone, but it will take any info.
           name="Contact Phone Number or Email"
           placeholder="(425) 123-4567"
           value={currentData ? currentData.contactPhone : ""}
