@@ -7,9 +7,7 @@ import { dataJsonType } from "./data";
  *  Returns a promise pending on the completion of a crawl from a current collection.
  */
 const recurseClone = async (
-  collectionRef: FirebaseFirestore.CollectionReference<
-    FirebaseFirestore.DocumentData
-  >,
+  collectionRef: FirebaseFirestore.CollectionReference<FirebaseFirestore.DocumentData>,
   currentDataRef: any
 ) => {
   const documents = await collectionRef.listDocuments();

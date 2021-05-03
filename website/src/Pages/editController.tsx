@@ -20,7 +20,11 @@ const EditController: React.FC<{}> = () => {
           description="Page for editing and creating new and created volunteer hour entries."
         />
         <div className="mb-auto">
-          <InfoPage title="You Are Not Signed In!" message="Click here to sign in" link="/login"/>
+          <InfoPage
+            title="You Are Not Signed In!"
+            message="Click here to sign in"
+            link="/login"
+          />
         </div>
       </>
     );

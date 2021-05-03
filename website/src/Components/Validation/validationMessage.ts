@@ -1,4 +1,4 @@
 export interface ValidationMessage {
-    message: string;
-    validate: boolean;
+  message: string;
+  validate: boolean;
 }

@@ -24,9 +24,8 @@ const Body = () => {
           className={
             "text-center text-white py-2 lg:py-3 text-base sm:text-xl lg:text-2xl xl:text-3xl"
           }
-        ><Link to="/login">
-            Login to track service activities
-            </Link>
+        >
+          <Link to="/login">Login to track service activities</Link>
         </h2>
         <h3
           className={

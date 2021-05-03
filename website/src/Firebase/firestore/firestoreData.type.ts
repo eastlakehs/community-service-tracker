@@ -33,7 +33,6 @@ export interface userProfileData {
   graduationYear: string;
 }
 
-
 /** Holds both the data and the key value of a firestore Document.  */
 export interface fireStoreDocumentSnapshot {
   data: firestoreDocumentType;
