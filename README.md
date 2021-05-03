@@ -23,7 +23,7 @@
 
 # Status: Live at <a href="https://ehs-service.org"> http://ehs-service.org </a>
 
-# Please see [CONTRIBUTING.md](https://github.com/eastlakehs/community-service-tracker/blob/master/CONTRIBUTING.md) for how to run the website locally
+# Please see CONTRIBUTING.md for how to run the website locally
 
 ## Best Practicies
 ### In order to make this repo maintainible, the following rules should be followed:
