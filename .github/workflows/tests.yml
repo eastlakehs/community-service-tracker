@@ -18,7 +18,7 @@ jobs:
       name: Cache firebase emulator
       with:
         path: /home/runner/.cache/firebase/emulators
-        key: ${{ runner.os }}-firebase-emulator-${{ hashFiles('./Firebase/Tests/yarn.lock') }}
+        key: ${{ runner.os }}-firebase-emulator-${{ hashFiles('./firebase/Tests/yarn.lock') }}
 
       # Caches the node_modules
     - uses: actions/cache@v2
@@ -32,7 +32,7 @@ jobs:
       if: steps.yarn-cache.outputs.cache-hit != 'true'
       run: |
         yarn 
-        (cd Firebase/Tests && yarn)
+        (cd firebase/Tests && yarn)
         (cd website && yarn)
 
     - name: Run Website Unit Tests
@@ -42,7 +42,7 @@ jobs:
 
     - name: Run Database Unit Tests
       run: |
-         cd Firebase/Tests 
+         cd firebase/Tests 
          yarn ci
 
     - name: Check build for errors
