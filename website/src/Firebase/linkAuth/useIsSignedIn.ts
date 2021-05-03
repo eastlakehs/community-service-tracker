@@ -61,7 +61,7 @@ const useIsSignedIn = () => {
     });
     // detach the listener
     return unsubscribe;
-  }, []);
+  }, [dispatch]);
   return localSignedInState; 
 };
 
