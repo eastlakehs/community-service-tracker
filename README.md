@@ -21,31 +21,14 @@
    <img src="./Docs/images/wolflogo.png" width="200" height="200" />
 </p>
 
-# Status: Live at <a href="https://ehs-service.org"> http://ehs-service.org </a>
-
-# Please see CONTRIBUTING.md for how to run the website locally
-
-## Best Practicies
-### In order to make this repo maintainible, the following rules should be followed:
-Pushing directly to a branch should be blocked <br>
-All commits should be done through pull requests <br>
-All pull requests should be reviewed by at least one other person <br>
-
-## Security
-
-### Using Firebase email-link-auth is the safest choice
-<a href = "https://firebase.google.com/docs/auth/web/email-link-auth">Firebase Docs</a> <br>
-Users get a emailed a link that allows them to sign in <br>
-No passwords are ever stored which prevents unintential misconfigurations <br>
-The user emails are automatically verified which prevents impersonation and binds the user to their lwsd email <br>
-Only users from lwsd will be able to acess the database,  preventing outside usage/spam <br>
+# Status: Currently in beta
 
 
 # Dependencies
 ## Browserstack + selenium
 
 ### Selenium script currently not maintained: might be used in the future for e2e tests
-### Does not work for pull requests that are from a different repository
+
 Generates screenshots for website based on ```Actions/screenshots/screenshot.py```. Screenshots are automatically uploaded as artifacts for each pull request to verify any significant UI breaking changes and ensure compatibility across platforms. 
 
 Current platforms added to the config include: 
@@ -60,7 +43,6 @@ You can access screenshots by going to the artifact section of a github actions 
 <img width="1680" alt="Screen Shot 2020-08-12 at 5 55 13 PM" src="https://user-images.githubusercontent.com/52898838/90082918-e365f780-dcc5-11ea-9632-7e188a03585e.png">
 ## Netlify 
 
-### Authentication currently does not work with Netlify builds. If you need to test a feature that requires logging in, please run the site locally using the guide in CONTRIBUTING.md
 Generates automatic preview builds for each pull request in order to demo for breaking changes. Once merged to master, netlify will automatically upate the live website to the preview build. 
 
 
@@ -117,3 +99,19 @@ Instead, do this:
 ```jsx
 <div :class="{{ error ? 'text-red-600' : 'text-green-600' }}"></div>
 ```
+
+## Best Practicies
+### In order to make this repo maintainible, the following rules should be followed: 
+Pushing directly to a branch should be blocked <br>
+All commits should be done through pull requests <br>
+All pull requests should be reviewed by at least one other person <br>
+ 
+## Security
+
+### Using Firebase email-link-auth is the safest choice
+<a href = "https://firebase.google.com/docs/auth/web/email-link-auth">Firebase Docs</a> <br>
+Users get a emailed a link that allows them to sign in <br>
+No passwords are ever stored which prevents unintential misconfigurations <br>
+The user emails are automatically verified which prevents impersonation and binds the user to their lwsd email <br>
+Only users from lwsd will be able to acess the database,  preventing outside usage/spam <br>
+
