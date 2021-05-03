@@ -26,7 +26,7 @@ jobs:
       id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
       with:
         path: '**/node_modules'
-        key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
+        key: ${{ runner.os }}-v1-modules-${{ hashFiles('**/yarn.lock') }}
         
     - name: Install node_modules if cache did not hit
       if: steps.yarn-cache.outputs.cache-hit != 'true'
