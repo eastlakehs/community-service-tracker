@@ -9,7 +9,7 @@ import {
   setNHSOfficer,
   setName,
   setContactName,
-  setContactInfo,
+  setContactPhone,
   clearCurrentEdit,
 } from "../../Redux/editScreenSlice";
 import { StringField, CheckBox, FormSubmitButton } from "../Entry/entry";
@@ -55,7 +55,7 @@ const Edit: React.FC<{
       currentData?.contactName
     );
     const is_contact_phone_number_correct = VALIDATE_free_form(
-      currentData?.contactInfo
+      currentData?.contactPhone
     );
     const is_officer_name_correct = VALIDATE_free_form(currentData?.NHSofficer);
 
@@ -75,17 +75,6 @@ const Edit: React.FC<{
       is_contact_phone_number_correct.validate
     );
   };
-  //This is to get the contact info while keeping support for the legacy contact phone
-  function getContactInfo(): string {
-    if(currentData) {
-      if(currentData.contactInfo) {
-        return currentData.contactInfo
-      } else if(currentData.contactPhone) {
-        return currentData.contactPhone
-      }
-    }
-    return ""
-  }
 
   return (
     <div className="mb-auto">
@@ -150,15 +139,15 @@ const Edit: React.FC<{
           errorMessage={VALIDATE_free_form(currentData?.contactName).message}
         />
         <StringField
-          name="Contact Email or Phone Number"
+          name="Contact Phone Number"
           placeholder="(425) 123-4567"
-          value={getContactInfo()}
+          value={currentData ? currentData.contactPhone : ""}
           setValue={(value: string) => {
-            dispatch(setContactInfo(value));
+            dispatch(setContactPhone(value));
           }}
           shouldShowError={shouldShowError}
-          error={!VALIDATE_free_form(currentData?.contactInfo).validate}
-          errorMessage={VALIDATE_free_form(currentData?.contactInfo).message}
+          error={!VALIDATE_free_form(currentData?.contactPhone).validate}
+          errorMessage={VALIDATE_free_form(currentData?.contactPhone).message}
         />
         <CheckBox
           label="Key Club Event"

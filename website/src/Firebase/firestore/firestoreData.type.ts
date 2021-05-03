@@ -9,7 +9,6 @@ export interface firestoreDocumentType {
   NHSofficer: string;
   contactName: string;
   contactPhone: string;
-  contactInfo: string;
 }
 
 const blankDocument: firestoreDocumentType = {
@@ -26,7 +25,6 @@ const blankDocument: firestoreDocumentType = {
   NHSofficer: "",
   contactName: "",
   contactPhone: "",
-  contactInfo: ""
 };
 
 export interface userProfileData {
