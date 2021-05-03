@@ -32,7 +32,7 @@ jobs:
       if: steps.yarn-cache.outputs.cache-hit != 'true'
       run: |
         yarn 
-        (cd firebase && yarn)
+        (cd firebase/functions && yarn)
         (cd firebase/Tests && yarn)
         (cd website && yarn)
 
@@ -53,7 +53,7 @@ jobs:
          
     - name: Check firebase functions build for errors
       run: |
-         cd firebase
+         cd firebase/functions
          yarn lint 
          yarn build
          
