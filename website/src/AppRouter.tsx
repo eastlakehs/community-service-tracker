@@ -2,33 +2,31 @@ import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 // Routes
-import Home from "./Pages/home";
-import Login from "./Pages/login";
-import { EditController } from "./Pages/editController";
-import { Table } from "./Pages/table";
-import { ProfileController } from "./Pages/profileController";
-import { Loading } from "./Pages/loading";
+import Home from "./pages/home";
+import Login from "./pages/login";
+import { EditController } from "./pages/editController";
+import { Table } from "./pages/table";
+import { ProfileController } from "./pages/profileController";
+import { Loading } from "./pages/loading";
 
 // Admin Page
-import {AdminPage} from "./Pages/Admin";
+import { AdminPage } from "./pages/Admin";
 
 // Header/Footer
-import PageHeader from "./Components/Header/pageHeader";
-import Footer from "./Components/Footer/footer";
+import PageHeader from "./components/header/pageHeader";
+import Footer from "./components/footer/footer";
 
 // Data sync
-import { useSyncUserData } from "./Firebase/firestore/useUserData";
-import { useSyncUserProfile } from "./Firebase/firestore/useUserProfile";
-import { useIsSignedIn } from "./Firebase/linkAuth/useIsSignedIn";
+import { useSyncUserData } from "./firebase/firestore/useUserData";
+import { useSyncUserProfile } from "./firebase/firestore/useUserProfile";
+import { useIsSignedIn } from "./firebase/link-auth/useIsSignedIn";
 
 // React toastify
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-import { useSelector } from "react-redux";
-
 // Report downloading
-import { ReportPage } from "./Components/Reports/reportPage";
+import { ReportPage } from "./components/reports/reportPage";
 
 const AppRouter = () => {
   /** Real time web socket connection to keep profile and entry table in sync for the current user */
