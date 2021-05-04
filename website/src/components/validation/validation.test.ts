@@ -37,18 +37,40 @@ test("Running Validation Tests for VALIDATE_free_form", () => {
   ).toBe(false);
 });
 
-test("Running Validation Tests for VALIDATE_graduation", () => {
-  expect(VALIDATE_graduation("2021").validate).toBe(true);
-  expect(VALIDATE_graduation("2022").validate).toBe(true);
-  expect(VALIDATE_graduation("2023").validate).toBe(true);
-  expect(VALIDATE_graduation("2099").validate).toBe(true);
+//This function is here to avoid hard coded years in the tests, by returning the current year plus a specified number of years as a string
+//Variable declared outside function to avoid it being re-declared every test
+let year = new Date().getFullYear();
+function thisYearPlus(years: number): string {
+  year += years;
+  return year.toString();
+}
 
+test("Running Validation Tests for VALIDATE_graduation", () => {
+  //Tests expected graduation years
+  expect(VALIDATE_graduation(thisYearPlus(0)).validate).toBe(true);
+  expect(VALIDATE_graduation(thisYearPlus(1)).validate).toBe(true);
+  expect(VALIDATE_graduation(thisYearPlus(2)).validate).toBe(true);
+  expect(VALIDATE_graduation(thisYearPlus(5)).validate).toBe(true);
+
+  //Tests graduation years slightly around the limit
+  expect(VALIDATE_graduation(thisYearPlus(-1)).validate).toBe(false);
+  expect(VALIDATE_graduation(thisYearPlus(6)).validate).toBe(false);
+  expect(VALIDATE_graduation(thisYearPlus(7)).validate).toBe(false);
+  expect(VALIDATE_graduation(thisYearPlus(10)).validate).toBe(false);
+  expect(VALIDATE_graduation(thisYearPlus(20)).validate).toBe(false);
+
+  //Tests bonkers years that should never be valid
   expect(VALIDATE_graduation("").validate).toBe(false);
   expect(VALIDATE_graduation(" ").validate).toBe(false);
   expect(VALIDATE_graduation("          ").validate).toBe(false);
   expect(VALIDATE_graduation("a").validate).toBe(false);
   expect(VALIDATE_graduation("1800").validate).toBe(false);
+  expect(VALIDATE_graduation(thisYearPlus(-6000)).validate).toBe(false);
   expect(VALIDATE_graduation("0000").validate).toBe(false);
-  expect(VALIDATE_graduation("2100").validate).toBe(false);
+  expect(VALIDATE_graduation(thisYearPlus(100)).validate).toBe(false);
+  expect(VALIDATE_graduation(thisYearPlus(50)).validate).toBe(false);
+  expect(VALIDATE_graduation(thisYearPlus(800)).validate).toBe(false);
+  expect(VALIDATE_graduation(thisYearPlus(99999)).validate).toBe(false);
   expect(VALIDATE_graduation("20aa").validate).toBe(false);
+  expect(VALIDATE_graduation(":) :(").validate).toBe(false);
 });
