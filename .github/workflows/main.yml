@@ -23,11 +23,11 @@ jobs:
           
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
     - uses: actions/checkout@v2
-      if: ${{ steps.checksecret.outputs.is_BROWSERSTACK_KEY_set == true }}
+      if: ${{ steps.checksecret.outputs.is_BROWSERSTACK_KEY_set == "true" }}
 
     - name: Generate Website Screenshots
       #Checks if the previous step ran. If it didn't skip this step as well
-      if: ${{ steps.checksecret.outputs.is_BROWSERSTACK_KEY_set == true }}
+      if: ${{ steps.checksecret.outputs.is_BROWSERSTACK_KEY_set == "true" }}
       run: |
          pip3 install --upgrade pip
          export BROWSERSTACK_KEY=${{secrets.BROWSERSTACK_KEY}}
@@ -36,7 +36,7 @@ jobs:
          
     - uses: actions/upload-artifact@v2
       #Checks if the previous step ran. If it didn't skip this step as well
-      if: ${{ steps.checksecret.outputs.is_BROWSERSTACK_KEY_set == true }}
+      if: ${{ steps.checksecret.outputs.is_BROWSERSTACK_KEY_set == "true" }}
       with:
         name: Screenshots
         path: actions/screenshots/*.png
