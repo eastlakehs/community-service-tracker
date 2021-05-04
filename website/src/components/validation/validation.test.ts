@@ -38,9 +38,8 @@ test("Running Validation Tests for VALIDATE_free_form", () => {
 });
 
 //This function is here to avoid hard coded years in the tests, by returning the current year plus a specified number of years as a string
-//Variable declared outside function to avoid it being re-declared every test
-let year = new Date().getFullYear();
 function thisYearPlus(years: number): string {
+  let year = new Date().getFullYear();
   year += years;
   return year.toString();
 }
@@ -50,6 +49,8 @@ test("Running Validation Tests for VALIDATE_graduation", () => {
   expect(VALIDATE_graduation(thisYearPlus(0)).validate).toBe(true);
   expect(VALIDATE_graduation(thisYearPlus(1)).validate).toBe(true);
   expect(VALIDATE_graduation(thisYearPlus(2)).validate).toBe(true);
+  expect(VALIDATE_graduation(thisYearPlus(3)).validate).toBe(true);
+  expect(VALIDATE_graduation(thisYearPlus(4)).validate).toBe(true);
   expect(VALIDATE_graduation(thisYearPlus(5)).validate).toBe(true);
 
   //Tests graduation years slightly around the limit
