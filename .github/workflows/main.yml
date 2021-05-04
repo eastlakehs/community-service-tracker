@@ -32,8 +32,6 @@ jobs:
     steps:
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
     - uses: actions/checkout@v2
-      #This checks if the secret exists. If the secret does not exist, this job should not run.
-      if: secrets.BROWSERSTACK_KEY != null
 
     - name: Generate Website Screenshots
       #Checks if the previous step ran. If it didn't skip this step as well
