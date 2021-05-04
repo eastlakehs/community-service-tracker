@@ -9,29 +9,22 @@ on:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  #This job checks if the browserstack key exists. If it does not exist, do not attempt to take screenshots
-  checksecret:
-    name: check if BROWSERSTACK_KEY is set in github secrets
-    runs-on: ubuntu-latest
-    outputs:
-      is_BROWSERSTACK_KEY_set: ${{ steps.checksecret_job.outputs.is_BROWSERSTACK_KEY_set }}
-    steps:
-      - name: Check whether unity activation requests should be done
-        id: checksecret_step
-        env:
-            KEY: ${{ secrets.BROWSERSTACK_KEY }}
-        run: |
-            echo "is_BROWSERSTACK_KEY_set: ${{ env.KEY != '' }}"
-            echo "::set-output name=is_BROWSERSTACK_KEY_set::${{ env.KEY != '' }}"
-
   # This workflow contains a single job called "build"
   build:
     runs-on: ubuntu-latest
     needs: checksecret
     if: needs.checksecret.outputs.is_BROWSERSTACK_KEY_set == true
     steps:
+    - name: Check whether unity activation requests should be done
+      id: checksecret
+      env:
+          KEY: ${{ secrets.BROWSERSTACK_KEY }}
+      run: |
+          echo "is_BROWSERSTACK_KEY_set: ${{ env.KEY != '' }}"
+          echo "::set-output name=is_BROWSERSTACK_KEY_set::${{ env.KEY != '' }}"
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
     - uses: actions/checkout@v2
+      if: ${{ steps.checksecret.outputs.is_BROWSERSTACK_KEY_set == true }}
 
     - name: Generate Website Screenshots
       #Checks if the previous step ran. If it didn't skip this step as well
