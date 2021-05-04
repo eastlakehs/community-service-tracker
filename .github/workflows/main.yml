@@ -16,8 +16,12 @@ jobs:
     steps:
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
     - uses: actions/checkout@v2
+      #This checks if the secret exists. If the secret does not exist, this job should not run.
+      if: ${{ secrest.BROWSERSTACK_KEY != null }}
 
     - name: Generate Website Screenshots
+      #Checks if the previous step ran. If it didn't skip this step as well
+      if: ${{ success() }}
       run: |
          pip3 install --upgrade pip
          export BROWSERSTACK_KEY=${{secrets.BROWSERSTACK_KEY}}
@@ -25,6 +29,8 @@ jobs:
          cd actions/screenshots && python3 screenshot.py
          
     - uses: actions/upload-artifact@v2
+      #Checks if the previous step ran. If it didn't skip this step as well
+      if: ${{ success() }}
       with:
         name: Screenshots
         path: actions/screenshots/*.png
