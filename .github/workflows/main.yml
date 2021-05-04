@@ -21,14 +21,14 @@ jobs:
         env:
             KEY: ${{ secrets.BROWSERSTACK_KEY }}
         run: |
-            echo "is_MY_SECRET_set: ${{ env.KEY != '' }}"
+            echo "is_BROWSERSTACK_KEY_set: ${{ env.KEY != '' }}"
             echo "::set-output name=is_BROWSERSTACK_KEY_set::${{ env.KEY != '' }}"
 
   # This workflow contains a single job called "build"
   build:
     runs-on: ubuntu-latest
     needs: checksecret
-    if: needs.checksecret.outputs.is_MY_SECRET_set == 'true'
+    if: needs.checksecret.outputs.is_BROWSERSTACK_KEY_set == 'true'
     steps:
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
     - uses: actions/checkout@v2
