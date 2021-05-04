@@ -12,8 +12,6 @@ jobs:
   # This workflow contains a single job called "build"
   build:
     runs-on: ubuntu-latest
-    needs: checksecret
-    if: needs.checksecret.outputs.is_BROWSERSTACK_KEY_set == true
     steps:
     - name: Check whether unity activation requests should be done
       id: checksecret
