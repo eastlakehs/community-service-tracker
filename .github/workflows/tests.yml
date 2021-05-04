@@ -26,12 +26,13 @@ jobs:
       id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
       with:
         path: '**/node_modules'
-        key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
+        key: ${{ runner.os }}-v2-modules-${{ hashFiles('**/yarn.lock') }}
         
     - name: Install node_modules if cache did not hit
       if: steps.yarn-cache.outputs.cache-hit != 'true'
       run: |
         yarn 
+        (cd firebase/functions && yarn)
         (cd firebase/tests && yarn)
         (cd website && yarn)
 
@@ -45,11 +46,17 @@ jobs:
          cd firebase/tests 
          yarn ci
 
-    - name: Check build for errors
+    - name: Check website build for errors
       run: |
          cd website 
          yarn build
          
-    - name: Check formatting
+    - name: Check firebase functions build for errors
+      run: |
+         cd firebase/functions
+         yarn lint 
+         yarn build
+         
+    - name: Check formatting for entire repo
       run: yarn format-check
       
