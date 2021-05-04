@@ -1,16 +1,14 @@
 name: Screenshots
 
-# Run on any commit or pr on any branch
+# Run on any pr on any branch
 on:
   pull_request:
     branches:
       - '**'
 
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"
-  build:
+  screenshots:
     runs-on: ubuntu-latest
     steps:
     - name: Check whether unity activation requests should be done
@@ -23,10 +21,11 @@ jobs:
           
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
     - uses: actions/checkout@v2
+      #Checks if the browserstack key exists
       if: ${{ steps.checksecret.outputs.is_BROWSERSTACK_KEY_set == 'true' }}
 
     - name: Generate Website Screenshots
-      #Checks if the previous step ran. If it didn't skip this step as well
+    #Checks if the browserstack key exists
       if: ${{ steps.checksecret.outputs.is_BROWSERSTACK_KEY_set == 'true' }}
       run: |
          pip3 install --upgrade pip
@@ -35,7 +34,7 @@ jobs:
          cd actions/screenshots && python3 screenshot.py
          
     - uses: actions/upload-artifact@v2
-      #Checks if the previous step ran. If it didn't skip this step as well
+      #Checks if the browserstack key exists
       if: ${{ steps.checksecret.outputs.is_BROWSERSTACK_KEY_set == 'true' }}
       with:
         name: Screenshots
