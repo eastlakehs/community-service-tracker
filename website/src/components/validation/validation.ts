@@ -24,9 +24,12 @@ const VALIDATE_hours = (hours?: string): ValidationMessage => {
   return { validate: true, message: "" };
 };
 
-const VALIDATE_free_form = (text?: string, optional: boolean = false): ValidationMessage => {
+const VALIDATE_free_form = (
+  text?: string,
+  optional: boolean = false
+): ValidationMessage => {
   if (text == null) {
-    if(optional) {
+    if (optional) {
       return { validate: true, message: "" };
     } else {
       return { validate: false, message: "Input Null" };
