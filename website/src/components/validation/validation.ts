@@ -36,19 +36,25 @@ const VALIDATE_free_form = (text?: string): ValidationMessage => {
 };
 
 const VALIDATE_graduation = (text: string): ValidationMessage => {
-  let thisyear = new Date().getFullYear();
+  const thisyear: number = new Date().getFullYear();
   //This grabs each number in the string into an array
-  let matches = text.match(/(\d+)/);
+  const matches = text.match(/(\d+)/);
   if (matches) {
     //If this is true, the extracted number is a different length than the string, meaning there's at least one character not part of the number in the string
     if (matches[0].length !== text.length) {
       return { validate: false, message: "Invalid Year" };
     }
     //This grabs the actual number from the string
-    let num: number = parseInt(matches[0]);
+    const num: number = parseInt(matches[0]);
     //If the year submitted is either this year, or less than or equal to 5 years from now, it's valid
     if (num >= thisyear && num <= thisyear + 5) {
       return { validate: true, message: "" };
+    } else {
+      return {
+        validate: false,
+        message:
+          "Year should be between " + thisyear + " and " + (thisyear + 5),
+      };
     }
   }
   //If all else fails, the year is invalid
