@@ -1,15 +1,17 @@
 import * as functions from "firebase-functions";
-import * as firestore from "@google-cloud/firestore";
+import firestore from "@google-cloud/firestore";
 const client = new firestore.v1.FirestoreAdminClient();
 
-const bucket = "gs://community-ser.appspot.com/firestore-backup";
+import { runTimeOpts } from "./runsWith";
+
+const bucket = "gs://backups.ehs-service.org";
+const projectId = "community-ser";
 
 /** Backs up database every 24 hours to cloud storage bucket */
-export const dailyFirestoreBackup = functions.pubsub
-  .schedule("every 24 hours")
+export const dailyFirestoreBackup = functions
+  .runWith(runTimeOpts.dailyFirestoreBackup)
+  .pubsub.schedule("every 24 hours")
   .onRun(async () => {
-    const projectId = (process.env.GCP_PROJECT ||
-      process.env.GCLOUD_PROJECT) as string;
     const databaseName = client.databasePath(projectId, "(default)");
     try {
       const responses = await client.exportDocuments({
@@ -21,7 +23,7 @@ export const dailyFirestoreBackup = functions.pubsub
         collectionIds: [],
       });
       const response = responses[0];
-      console.log(`Operation Name: ${response["name"]}`);
+      console.log(`Operation Name: ${response["name"]} completed backup`);
     } catch (err) {
       console.error(err);
       throw new Error("Export operation failed");

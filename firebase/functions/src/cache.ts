@@ -3,6 +3,7 @@ import * as admin from "firebase-admin";
 const db = admin.initializeApp().firestore();
 import stringify from "csv-stringify/lib/sync";
 
+import { runTimeOpts } from "./runsWith";
 import { parseToCSVTotals } from "../../../report-generation/src/Object2SummaryCSV";
 import { cloneDbAsJson } from "../../../report-generation/src/Firestore2Object";
 import { profileCacheBuilder } from "../../../website/src/cache/profileCache";
@@ -11,8 +12,9 @@ import { profileCacheBuilder } from "../../../website/src/cache/profileCache";
  * Builds awards summaries and saves to db
  * Saves cache of user list to db under one doc
  */
-export const dailyCacheBuilders = functions.pubsub
-  .schedule("every 24 hours")
+export const dailyCacheBuilders = functions
+  .runWith(runTimeOpts.dailyCacheBuilders)
+  .pubsub.schedule("every 24 hours")
   .onRun(async (context: any) => {
     // clone the DB
     const dbObject = await cloneDbAsJson(db);

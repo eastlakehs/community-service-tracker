@@ -12,12 +12,12 @@
   "engines": {
     "node": "14"
   },
-  "main": "lib/Firebase/functions/src/index.js",
+  "main": "lib/firebase/functions/src/index.js",
   "dependencies": {
     "@google-cloud/firestore": "^4.11.0",
     "csv-stringify": "^5.5.1",
     "firebase-admin": "9.7.0",
-    "firebase-functions": "^3.6.1"
+    "firebase-functions": "^3.13.2"
   },
   "devDependencies": {
     "firebase-functions-test": "^0.2.0",
