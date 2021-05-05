@@ -11,6 +11,7 @@ import {
   setContactName,
   setContactPhone,
   clearCurrentEdit,
+  setNotes
 } from "../../redux/editScreenSlice";
 import { StringField, CheckBox, FormSubmitButton } from "../entry/entry";
 import { firestoreDocumentType } from "../../firebase/firestore/firestoreData.type";
@@ -150,6 +151,17 @@ const Edit: React.FC<{
           error={!VALIDATE_free_form(currentData?.contactPhone).validate}
           errorMessage={VALIDATE_free_form(currentData?.contactPhone).message}
         />
+        <StringField
+            name="Notes:"
+            placeholder=""
+            setValue={(value: string) => {
+              dispatch(setNotes(value)); //TODO actually write this to database
+            }}
+            value={currentData ? currentData.notes : ""}
+            shouldShowError={shouldShowError}
+            error={!VALIDATE_free_form(currentData?.notes, true).validate}
+            errorMessage={VALIDATE_free_form(currentData?.notes, true).message}
+        />
         <CheckBox
           label="Key Club Event"
           setState={(value: boolean) => {
@@ -157,7 +169,6 @@ const Edit: React.FC<{
           }}
           checked={currentData && currentData.KeyClub === "Yes" ? true : false}
         />
-
         <CheckBox
           label="NHS"
           setState={(value: boolean) => {
