@@ -19,13 +19,13 @@ jobs:
           echo "is_BROWSERSTACK_KEY_set: ${{ env.KEY != '' }}"
           echo "::set-output name=is_BROWSERSTACK_KEY_set::${{ env.KEY != '' }}"
           
-    # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
     - uses: actions/checkout@v2
       #Checks if the browserstack key exists
       if: ${{ steps.checksecret.outputs.is_BROWSERSTACK_KEY_set == 'true' }}
 
     - name: Generate Website Screenshots
-    #Checks if the browserstack key exists
+      #Checks if the browserstack key exists
       if: ${{ steps.checksecret.outputs.is_BROWSERSTACK_KEY_set == 'true' }}
       run: |
          pip3 install --upgrade pip
