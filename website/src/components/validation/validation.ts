@@ -36,11 +36,18 @@ const VALIDATE_free_form = (text?: string): ValidationMessage => {
 };
 
 const VALIDATE_graduation = (text: string): ValidationMessage => {
-  const re = new RegExp("^(20)\\d\\d$");
-  if (!re.test(text)) {
+  const thisyear: number = new Date().getFullYear();
+  const gradYear: number = Number(text);
+  if (!Number.isInteger(gradYear)) {
     return { validate: false, message: "Invalid Year" };
+  } else if (gradYear >= thisyear && gradYear <= thisyear + 5) {
+    return { validate: true, message: "" };
+  } else {
+    return {
+      validate: false,
+      message: `Year should be between ${thisyear} and ${thisyear + 5}`,
+    };
   }
-  return { validate: true, message: "" };
 };
 
 export { VALIDATE_hours, VALIDATE_free_form, VALIDATE_graduation };
