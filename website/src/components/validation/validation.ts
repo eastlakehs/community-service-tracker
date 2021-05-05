@@ -24,8 +24,14 @@ const VALIDATE_hours = (hours?: string): ValidationMessage => {
   return { validate: true, message: "" };
 };
 
-const VALIDATE_free_form = (text?: string): ValidationMessage => {
-  if (text == null) return { validate: false, message: "Input Null" };
+const VALIDATE_free_form = (text?: string, optional: boolean = false): ValidationMessage => {
+  if (text == null) {
+    if(optional) {
+      return { validate: true, message: "" };
+    } else {
+      return { validate: false, message: "Input Null" };
+    }
+  }
   const trimmedText = text.trim();
   if (trimmedText.length === 0) {
     return { validate: false, message: "Input Empty" };

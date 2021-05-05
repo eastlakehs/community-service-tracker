@@ -61,6 +61,9 @@ export const editScreenSlice = createSlice({
     setNHSOfficer: (state, action: PayloadAction<string>) => {
       state.currentData.NHSofficer = action.payload;
     },
+    setNotes: (state, action: PayloadAction<string>) => {
+      state.currentData.notes = action.payload;
+    },
     clearCurrentEdit: (state) => {
       state.currentData = { ...blankDocument };
       state.currentKey = null;
@@ -81,6 +84,7 @@ export const {
   setNHSOfficer,
   setContactName,
   setContactPhone,
+  setNotes
 } = editScreenSlice.actions;
 
 export const selectEditScreenState = (state: {
