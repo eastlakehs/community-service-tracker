@@ -84,7 +84,7 @@ export const {
   setNHSOfficer,
   setContactName,
   setContactPhone,
-  setNotes
+  setNotes,
 } = editScreenSlice.actions;
 
 export const selectEditScreenState = (state: {

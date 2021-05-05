@@ -26,7 +26,7 @@ const blankDocument: firestoreDocumentType = {
   NHSofficer: "",
   contactName: "",
   contactPhone: "",
-  notes: ""
+  notes: "",
 };
 
 export interface userProfileData {
