@@ -11,6 +11,7 @@ import {
 
 import { useSelector } from "react-redux";
 import { selectSignedInState } from "../../redux/signedInSlice";
+import { clearCurrentEdit } from "../../redux/editScreenSlice";
 
 const ErrorText: React.FunctionComponent<{ text: string }> = ({ text }) => (
   <text className="mb-auto text-center text-white py-2 lg:py-3 text-base sm:text-xl lg:text-2xl xl:text-3xl">
@@ -50,6 +51,7 @@ export const Admin: React.FunctionComponent<{}> = () => {
       })
     );
     dispatch(clearAllData());
+    dispatch(clearCurrentEdit());
     // navigate to user page
     history.push("/table");
   };
