@@ -10,7 +10,6 @@
 name: Firestore Backup
 
 on:
-  workflow_dispatch: # allow action to be run manually 
   schedule:
     - cron:  '0 0 * * *' # everyday at midnight
   pull_request: # temporary
@@ -37,20 +36,25 @@ jobs:
       env:
         BACKUP_SECRET: ${{ secrets.BACKUP_SECRET }}
       run: |
+        # Dependencies 
+        yarn 
+        
         # Save version info of gpg tool in case implementations change in later versions
         mkdir artifacts
         gpg --version > ./artifacts/GPG_VERSION
         
+        # Folder where unencryprted backup is dumped
         mkdir ./latest-firestore-backup
-        yarn 
-        sudo npm install -g ts-node
-        ts-node actions/backup.ts
+        
+        # Copy backup
+        npx ts-node actions/backup.ts
         zip -r ./latest-firestore-backup.zip ./latest-firestore-backup
+        
         # Encrypt backup with symetric key
         gpg --pinentry-mode loopback --passphrase "${BACKUP_SECRET}" --output ./artifacts/encrypted --symmetric --cipher-algo AES256 ./latest-firestore-backup.zip
 
     - name: Archive databse to actions artifacts
       uses: actions/upload-artifact@v2
       with:
-          name: backup-latest
-          path: ./artifacts # test file
+          name: firestore-backup-latest
+          path: ./artifacts
