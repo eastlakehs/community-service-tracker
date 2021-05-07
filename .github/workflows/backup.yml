@@ -23,6 +23,9 @@ jobs:
 
     steps:
     
+    - uses: actions/checkout@v2
+      name: Checkout repository
+      
     - uses: google-github-actions/setup-gcloud@master
       name: Set up Google Cloud SDK
       with:
@@ -44,10 +47,15 @@ jobs:
           #   sort by second column (date) and reverse (newest first)
           #   get first line (newest backup)
           # to -> local destination
-        gsutil cp ((gsutil ls -l gs://backups.ehs-service.org) | (sort -k 2 -r) | (sed -n 1p)) ./backup
-        gsutil cp gs://backups.ehs-service.org/test/clocktree.cpp ./clocktree.cpp # test file
+        mkdir ./latest-firestore-backup
+        mkdir ./actions/latest-firestore-backup
+        yarn 
+        yarn add global ts-node
+        ts-node actions/backup.ts
+        #gsutil cp ((gsutil ls -l gs://backups.ehs-service.org) | (sort -k 2 -r) | (sed -n 1p)) ./backup
+        #gsutil cp gs://backups.ehs-service.org/test/clocktree.cpp ./clocktree.cpp # test file
         # Encrypt backup with symetric key
-        gpg --pinentry-mode loopback --passphrase "${BACKUP_SECRET}" --output ./artifacts/encrypted --symmetric --cipher-algo AES256 ./clocktree.cpp
+        #pg --pinentry-mode loopback --passphrase "${BACKUP_SECRET}" --output ./artifacts/encrypted --symmetric --cipher-algo AES256 ./clocktree.cpp
 
     - name: Archive databse to actions artifacts
       uses: actions/upload-artifact@v2
