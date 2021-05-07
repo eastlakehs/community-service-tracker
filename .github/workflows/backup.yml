@@ -51,7 +51,7 @@ jobs:
         zip -r ./latest-firestore-backup.zip ./latest-firestore-backup
         
         # Encrypt backup with symetric key
-        gpg --pinentry-mode loopback --passphrase "${BACKUP_SECRET}" --output ./artifacts/encrypted --symmetric --cipher-algo AES256 ./latest-firestore-backup.zip
+        gpg --pinentry-mode loopback --passphrase "${BACKUP_SECRET}" --output ./artifacts/encrypted.gpg --symmetric --cipher-algo AES256 ./latest-firestore-backup.zip
 
     - name: Archive databse to actions artifacts
       uses: actions/upload-artifact@v2
