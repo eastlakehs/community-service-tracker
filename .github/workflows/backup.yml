@@ -12,14 +12,10 @@ name: Firestore Backup
 on:
   schedule:
     - cron:  '0 0 * * *' # everyday at midnight
-  pull_request: # temporary
-    branches:
-      - '**'
-
+    
 jobs:
-  build:
+  backup:
     runs-on: ubuntu-latest
-
     steps:
     
     - uses: actions/checkout@v2
