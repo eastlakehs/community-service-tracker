@@ -50,7 +50,7 @@ jobs:
         mkdir ./latest-firestore-backup
         mkdir ./actions/latest-firestore-backup
         yarn 
-        yarn add global ts-node
+        npm install -g ts-node
         ts-node actions/backup.ts
         #gsutil cp ((gsutil ls -l gs://backups.ehs-service.org) | (sort -k 2 -r) | (sed -n 1p)) ./backup
         #gsutil cp gs://backups.ehs-service.org/test/clocktree.cpp ./clocktree.cpp # test file
