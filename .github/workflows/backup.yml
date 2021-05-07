@@ -41,19 +41,13 @@ jobs:
         mkdir artifacts
         gpg --version > ./artifacts/GPG_VERSION
         
-        # Clone latest backup folder
-          # from -> remote destination named:
-          #   list files by metadata
-          #   sort by second column (date) and reverse (newest first)
-          #   get first line (newest backup)
-          # to -> local destination
         mkdir ./latest-firestore-backup
         yarn 
         sudo npm install -g ts-node
         ts-node actions/backup.ts
         zip -r ./latest-firestore-backup.zip ./latest-firestore-backup
         # Encrypt backup with symetric key
-        #pg --pinentry-mode loopback --passphrase "${BACKUP_SECRET}" --output ./artifacts/encrypted --symmetric --cipher-algo AES256 ./latest-firestore-backup.zip
+        pg --pinentry-mode loopback --passphrase "${BACKUP_SECRET}" --output ./artifacts/encrypted --symmetric --cipher-algo AES256 ./latest-firestore-backup.zip
 
     - name: Archive databse to actions artifacts
       uses: actions/upload-artifact@v2
