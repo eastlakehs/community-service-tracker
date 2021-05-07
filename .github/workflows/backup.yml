@@ -1,6 +1,7 @@
 name: Firestore Backup
 
 on:
+  workflow_dispatch: # allow action to be run manually 
   schedule:
     - cron:  '0 0 * * *' # everyday at midnight
 
