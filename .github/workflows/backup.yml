@@ -43,7 +43,8 @@ jobs:
         ((gsutil ls -l gs://backups.ehs-service.org) \    #   list files by metadata
         | (sort -k 2 -r) \                                #   sort by second column (date) and reverse (newest first)
         | (sed -n 1p)) \                                  #   get first line (newest backup)
-        ./backup                                          # to -> local destination
+         ./backup                                         # to -> local destination
+        /
         
         gsutil cp gs://backups.ehs-service.org/test/clocktree.cpp ./clocktree.cpp # test file
         # Encrypt backup with symetric key
