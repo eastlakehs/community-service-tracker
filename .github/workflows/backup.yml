@@ -1,0 +1,56 @@
+# README: 
+# Disaster recovery in the case that the entire google account with firestore data gets wiped somehow 
+# Sync daily backups from storage buckets to github artifacts which should persist for 90 days 
+
+# Decyption (you will be prompted for pin-entry)
+# Symetrical 256 bit ancryption with passphrase in repository secrets 
+# All collaboraters (write access) will be able to manually extract the repo secret with a custom script if needed
+# gpg --decrypt encrypted.gpg > decrypted.zip
+
+name: Firestore Backup
+
+on:
+  schedule:
+    - cron:  '0 0 * * *' # everyday at midnight
+    
+jobs:
+  backup:
+    runs-on: ubuntu-latest
+    steps:
+    
+    - uses: actions/checkout@v2
+      name: Checkout repository
+      
+    - uses: google-github-actions/setup-gcloud@v0.2.0
+      name: Set up Google Cloud SDK
+      with:
+        project_id: ${{ secrets.GCP_PROJECT_ID }}
+        service_account_key: ${{ secrets.GCP_SA_KEY }}
+        export_default_credentials: true
+
+    - name: Use gcloud CLI
+      env:
+        BACKUP_SECRET: ${{ secrets.BACKUP_SECRET }}
+      run: |
+        # Dependencies 
+        yarn 
+        
+        # Save version info of gpg tool in case implementations change in later versions
+        mkdir artifacts
+        gpg --version > ./artifacts/GPG_VERSION
+        
+        # Folder where unencryprted backup is dumped
+        mkdir ./latest-firestore-backup
+        
+        # Copy backup
+        npx ts-node actions/backup.ts
+        zip -r ./latest-firestore-backup.zip ./latest-firestore-backup
+        
+        # Encrypt backup with symetric key
+        gpg --pinentry-mode loopback --passphrase "${BACKUP_SECRET}" --output ./artifacts/encrypted.gpg --symmetric --cipher-algo AES256 ./latest-firestore-backup.zip
+
+    - name: Archive databse to actions artifacts
+      uses: actions/upload-artifact@v2
+      with:
+          name: firestore-backup-latest
+          path: ./artifacts
