@@ -34,12 +34,15 @@ jobs:
       env:
         BACKUP_SECRET: ${{ secrets.BACKUP_SECRET }}
       run: |
-        gsutil cp gs://backups.ehs-service.org/test/clocktree.cpp ./clocktree.cpp # test file
-        gpg --pinentry-mode loopback --passphrase "${BACKUP_SECRET}" --output ./encrypted --symmetric --cipher-algo AES256 ./clocktree.cpp
+        # Save version info of gpg tool in case implementations change in later versions
+        gpg --version > ./artifacts/GPG_VERSION 
+        # Clone backup folder
+        gsutil cp gs://backups.ehs-service.org/test/clocktree.cpp ./artifacts/clocktree.cpp # test file
+        # Encrypt backup with symetric key
+        gpg --pinentry-mode loopback --passphrase "${BACKUP_SECRET}" --output ./artifacts/encrypted --symmetric --cipher-algo AES256 ./clocktree.cpp
 
-        
     - name: Archive databse to actions artifacts
       uses: actions/upload-artifact@v2
       with:
           name: backup-latest
-          path: ./encrypted # test file
+          path: ./artifacts # test file
