@@ -40,7 +40,7 @@ jobs:
         # Clone backup folder
         gsutil cp gs://backups.ehs-service.org/test/clocktree.cpp ./artifacts/clocktree.cpp # test file
         # Encrypt backup with symetric key
-        gpg --pinentry-mode loopback --passphrase "${BACKUP_SECRET}" --output ./artifacts/encrypted --symmetric --cipher-algo AES256 ./clocktree.cpp
+        gpg --pinentry-mode loopback --passphrase "${BACKUP_SECRET}" --output ./artifacts/encrypted --symmetric --cipher-algo AES256 ./artifacts/clocktree.cpp
 
     - name: Archive databse to actions artifacts
       uses: actions/upload-artifact@v2
