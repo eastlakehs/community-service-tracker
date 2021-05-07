@@ -21,6 +21,4 @@ files.forEach((file) => {
 });
 
 /** Fetch latest backup file */
-console.log(latestDownload);
-console.log(`gsutil cp -r ${latestDownload} ./latest-firestore-backup`);
 execSync(`gsutil cp -r ${latestDownload} ./latest-firestore-backup`);
