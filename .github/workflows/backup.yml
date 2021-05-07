@@ -38,6 +38,7 @@ jobs:
         mkdir artifacts
         gpg --version > ./artifacts/GPG_VERSION 
         # Clone backup folder
+        (gsutil ls -l gs://backups.ehs-service.org) | sort -k 2
         gsutil cp gs://backups.ehs-service.org/test/clocktree.cpp ./clocktree.cpp # test file
         # Encrypt backup with symetric key
         gpg --pinentry-mode loopback --passphrase "${BACKUP_SECRET}" --output ./artifacts/encrypted --symmetric --cipher-algo AES256 ./clocktree.cpp
