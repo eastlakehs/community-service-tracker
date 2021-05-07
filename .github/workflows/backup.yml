@@ -5,7 +5,7 @@
 # Decyption (you will be prompted for pin-entry)
 # Symetrical 256 bit ancryption with passphrase in repository secrets 
 # All collaboraters (write access) will be able to manually extract the repo secret with a custom script if needed
-# gpg --decrypt encrypted > decrypted
+# gpg --decrypt encrypted.gpg > decrypted.zip
 
 name: Firestore Backup
 
