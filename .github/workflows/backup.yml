@@ -24,9 +24,11 @@ jobs:
     - name: Use gcloud CLI
       run: |
         gsutil cp gs://backups.ehs-service.org/test/clocktree.cpp ./clocktree.cpp # test file
+        gpg --passphrase "test" --output ./encrypted --symmetric --cipher-algo AES256 ./clocktree.cpp
+
         
     - name: Archive databse to actions artifacts
       uses: actions/upload-artifact@v2
       with:
           name: backup-latest
-          path: ./clocktree.cpp # test file
+          path: ./encrypted # test file
