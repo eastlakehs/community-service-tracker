@@ -9,9 +9,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-
-     name: Set up Google Cloud SDK
-      uses: google-github-actions/setup-gcloud@master
+    
+    - uses: google-github-actions/setup-gcloud@master
+      name: Set up Google Cloud SDK
       with:
         project_id: ${{ secrets.GCP_PROJECT_ID }}
         service_account_key: ${{ secrets.GCP_SA_KEY }}
