@@ -35,6 +35,7 @@ jobs:
         BACKUP_SECRET: ${{ secrets.BACKUP_SECRET }}
       run: |
         # Save version info of gpg tool in case implementations change in later versions
+        mkdir artifacts
         gpg --version > ./artifacts/GPG_VERSION 
         # Clone backup folder
         gsutil cp gs://backups.ehs-service.org/test/clocktree.cpp ./artifacts/clocktree.cpp # test file
