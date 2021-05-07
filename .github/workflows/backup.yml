@@ -39,13 +39,12 @@ jobs:
         gpg --version > ./artifacts/GPG_VERSION
         
         # Clone latest backup folder
-        gsutil cp \                                       # from -> remote destination named:
-        ((gsutil ls -l gs://backups.ehs-service.org) \    #   list files by metadata
-        | (sort -k 2 -r) \                                #   sort by second column (date) and reverse (newest first)
-        | (sed -n 1p)) \                                  #   get first line (newest backup)
-         ./backup                                         # to -> local destination
-        /
-        
+          # from -> remote destination named:
+          #   list files by metadata
+          #   sort by second column (date) and reverse (newest first)
+          #   get first line (newest backup)
+          # to -> local destination
+        gsutil cp ((gsutil ls -l gs://backups.ehs-service.org) | (sort -k 2 -r) | (sed -n 1p)) ./backup
         gsutil cp gs://backups.ehs-service.org/test/clocktree.cpp ./clocktree.cpp # test file
         # Encrypt backup with symetric key
         gpg --pinentry-mode loopback --passphrase "${BACKUP_SECRET}" --output ./artifacts/encrypted --symmetric --cipher-algo AES256 ./clocktree.cpp
