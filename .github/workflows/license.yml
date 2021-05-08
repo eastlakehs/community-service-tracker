@@ -23,13 +23,10 @@ jobs:
           python update.py
 
       - name: Commit the changes
-        #This makes sure the workflow doesn't fail if there's nothing to be committed
-        continue-on-error: true
         run: |
           git config --global user.email "<>"
           git config --global user.name "Github Actions Bot"
           git add .
-          git commit -m 'Update license year'
+          git commit -m 'Update license year' || true # pass is there is nothing to commit
           git push
-
 
