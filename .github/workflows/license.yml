@@ -1,0 +1,32 @@
+name: Update License
+
+
+on:
+  schedule:
+    - cron: '0 0 1 * *'
+
+  workflow_dispatch:
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+
+
+    steps:
+      # Checks-out repo
+      - uses: actions/checkout@v2
+
+      #This uses sed to change the year
+      - name: Edit the license file
+        run: |
+          python ./actions/license/update.py
+
+      - name: Commit the changes
+        run: |
+          git config --global user.email "<>"
+          git config --global user.name "Github Actions Bot"
+          git add .
+          git commit -m 'Update license year'
+          git push
+
+
