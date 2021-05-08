@@ -22,7 +22,8 @@ jobs:
       #This uses sed to change the year
       - name: Edit the license file
         run: |
-          python ./actions/license/update.py
+          cd ./actions/license
+          python update.py
 
       - name: Commit the changes
         run: |
