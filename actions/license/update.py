@@ -1,5 +1,3 @@
-import sys
-import fileinput
 from datetime import datetime
 import re
 
