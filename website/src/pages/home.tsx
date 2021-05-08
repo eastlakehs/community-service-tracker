@@ -11,7 +11,11 @@ const Home = () => {
   // users that are logged in in should be redirected to profile page
   useEffect(() => {
     if (signedInstate.signedIn) {
-      history.replace("/profile");
+      if (signedInstate.admin) {
+        history.replace("/admin");
+      } else {
+        history.replace("/profile");
+      }
     }
   });
   return (
