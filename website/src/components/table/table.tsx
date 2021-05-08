@@ -1,9 +1,13 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { initialStateType } from "../../redux/userDataSlice";
 import { Day } from "react-modern-calendar-datepicker";
 import { totalizeHours } from "./Totalizer/totalizer";
 import { handleExport } from "./exporter/handleExport";
 import InfoPage from "../info/infoPage";
+import { useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
+import { selectSignedInState } from "../../redux/signedInSlice";
+import { isAdmin } from "../../constants/isAdmin";
 /* Table CSS Credit: https://tailwindcomponents.com/component/table-responsive-with-filters */
 
 const TableHeaderStyle: string =
@@ -14,6 +18,16 @@ const CSTable: React.FunctionComponent<{
   handleEditClick: (entryID: string) => void;
   handleDelete: (entryID: string) => void;
 }> = ({ data, handleEditClick, handleDelete }) => {
+  const signedInstate = useSelector(selectSignedInState);
+  const history = useHistory();
+
+  useEffect(() => {
+    // only redirect if not viewing another user
+    if (signedInstate.admin && isAdmin(signedInstate.userEmail)) {
+      history.replace("/admin");
+    }
+  });
+
   const generateHeader = () => {
     return data.header.map((header) => {
       return (
