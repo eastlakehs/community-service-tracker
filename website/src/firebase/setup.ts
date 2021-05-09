@@ -1,4 +1,4 @@
-import * as firebase from "firebase/app";
+import firebase from "firebase/app";
 import "firebase/auth";
 import "firebase/firestore";
 
@@ -28,5 +28,11 @@ if (firebase.apps.length === 0) {
   firebase.initializeApp(firebaseConfig);
 }
 let db = firebase.firestore();
+
+/** Re-write backend calls to local emulator on dev environment */
+if (window.location.hostname === "localhost") {
+  db.useEmulator("localhost", 9001);
+  firebase.auth().useEmulator("http://localhost:9002");
+}
 
 export { db, firebase, actionCodeSettings };
