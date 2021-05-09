@@ -36,5 +36,5 @@ jobs:
       env:
         FIREBASE_SECRET: ${{ secrets.FIREBASE_SECRET }}
       run: |
-         cd firebase
-         firebase deploy
+         cd firebase/functions
+         yarn deploy-all
