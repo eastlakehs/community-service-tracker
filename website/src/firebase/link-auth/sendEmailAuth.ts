@@ -29,7 +29,7 @@ const sendEmailAuth = async (email: string) => {
       }, 100);
     });
   } else {
-    // use action auth in prod
+    // use actual auth in prod
     const result = await firebase
       .auth()
       .sendSignInLinkToEmail(email, actionCodeSettings)
