@@ -31,8 +31,8 @@ let db = firebase.firestore();
 
 /** Re-write backend calls to local emulator on dev environment */
 if (window.location.hostname === "localhost") {
-  db.useEmulator("localhost", 9001);
-  firebase.auth().useEmulator("http://localhost:9002");
+  db.useEmulator("localhost", 8080);
+  firebase.auth().useEmulator("http://localhost:9099");
 }
 
 export { db, firebase, actionCodeSettings };

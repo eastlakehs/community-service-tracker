@@ -9,16 +9,16 @@
   "emulators": {
     "ui": {
       "enabled": true,
-      "port": 9000
+      "port": 4000
     },
     "firestore": {
-      "port": 9001
+      "port": 8080
     },
     "auth": {
-      "port": 9002
+      "port": 9099
     },
     "functions": {
-      "port": 9105
+      "port": 5001
     }
   },
   "functions": {
