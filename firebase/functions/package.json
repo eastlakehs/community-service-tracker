@@ -6,7 +6,7 @@
     "serve": "npm run build && firebase emulators:start --only functions",
     "shell": "npm run build && firebase functions:shell",
     "start": "npm run shell",
-    "deploy": "firebase deploy --only functions",
+    "deploy-all": "npx firebase deploy",
     "logs": "firebase functions:log"
   },
   "engines": {
@@ -21,6 +21,7 @@
   },
   "devDependencies": {
     "firebase-functions-test": "^0.2.0",
+    "firebase-tools": "^9.10.2",
     "tslint": "^5.12.0",
     "typescript": "^3.8.0"
   },
