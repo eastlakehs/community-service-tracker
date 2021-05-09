@@ -7,7 +7,7 @@ const isDev = () => window.location.hostname === "localhost";
 /** Configuration for firebase project. The apiKey is NOT private information. */
 const firebaseConfig = isDev()
   ? {
-      apiKey: "mock-firebase-backen",
+      apiKey: "this-does-not-matter-but-it-crashes-without-it",
       projectId: "mock-firebase-backend",
     }
   : {
