@@ -1,0 +1,40 @@
+name: Production
+
+on:
+  push:
+    branches:    
+      - master
+  pull_request: # temporary for testing
+    branches:
+      - '**'
+
+jobs:
+  depoloy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+      name: Checkout repository
+
+      # Caches the node_modules
+    - uses: actions/cache@v2
+      name: Cache node_modules
+      id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
+      with:
+        path: '**/node_modules'
+        key: ${{ runner.os }}-v2-modules-${{ hashFiles('**/yarn.lock') }}
+        
+    - name: Install node_modules if cache did not hit
+      if: steps.yarn-cache.outputs.cache-hit != 'true'
+      run: |
+        yarn 
+        (cd firebase/functions && yarn)
+        (cd firebase/tests && yarn)
+        (cd website && yarn)
+         
+    - name: Deploy firebase project
+      env:
+        FIREBASE_SECRET: ${{ secrets.FIREBASE_SECRET }}
+      run: |
+         cd firebase
+         firebase deploy
