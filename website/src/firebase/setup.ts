@@ -23,7 +23,7 @@ const firebaseConfig = isDev()
 /** Documentation at https://firebase.google.com/docs/auth/web/passing-state-in-email-actions#passing_statecontinue_url_in_email_actions */
 const actionCodeSettings: firebase.auth.ActionCodeSettings = {
   // The redirect URL
-  url: isDev() ? "http://localhost" : "https://ehs-service.org",
+  url: "https://ehs-service.org",
   handleCodeInApp: true,
   dynamicLinkDomain: undefined,
 };
