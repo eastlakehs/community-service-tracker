@@ -79,11 +79,11 @@ const Edit: React.FC<{
 
   return (
     <div className="mb-auto">
-      <form className="w-full container max-w-lg mx-auto px-4 sm:px-8 items-center">
+      <form className="w-full container max-w-2xl mx-auto px-4 sm:px-8 items-center">
         <h1 className="text-center text-gray-200 py-2 lg:py-3 text-4xl sm:text-4xl lg:text-5xl xl:text-6xl">
           {editing ? "Edit your activity" : "Log a new activity"}
         </h1>
-        <div className="grid grid-cols-2 gap-4">
+        <div className="sm:grid grid-cols-2 gap-4">
           <StringField
             name="Activity Name"
             placeholder="Organization, club, etc."
@@ -95,7 +95,7 @@ const Edit: React.FC<{
             error={!VALIDATE_free_form(currentData?.Name).validate}
             errorMessage={VALIDATE_free_form(currentData?.Name).message}
           />
-          <div className="grid grid-cols-2 gap-4">
+          <div className="sm:grid grid-cols-2 gap-4">
             <div>
               <StringField
                 name="Hours"
@@ -119,7 +119,7 @@ const Edit: React.FC<{
                   day && dispatch(setDate(JSON.stringify(day)));
                 }}
                 inputPlaceholder="Select a day"
-                inputClassName="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                inputClassName="appearance-none block sm:w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white sm:mb-0 mb-8"
               />
 
             </div>
@@ -171,9 +171,21 @@ const Edit: React.FC<{
           error={!VALIDATE_free_form(currentData?.notes, true).validate}
           errorMessage={VALIDATE_free_form(currentData?.notes, true).message}
         />
+         <StringField
+          name="Officer Name"
+          placeholder="Smith"
+          hidden={!(currentData && currentData.NHS === "Yes")}
+          value={currentData ? currentData.NHSofficer : ""}
+          setValue={(value) => {
+            dispatch(setNHSOfficer(value));
+          }}
+          shouldShowError={shouldShowError}
+          error={!VALIDATE_free_form(currentData?.NHSofficer).validate}
+          errorMessage={VALIDATE_free_form(currentData?.NHSofficer).message}
+        />
         <div>
-          <div className="grid grid-cols-11">
-            <div className="col-span-4">
+          <div className="sm:grid grid-cols-11">
+            <div className="sm:col-span-4">
               <CheckBox
                 label="Key Club Event"
                 setState={(value: boolean) => {
@@ -182,7 +194,7 @@ const Edit: React.FC<{
                 checked={currentData && currentData.KeyClub === "Yes" ? true : false}
               />
             </div>
-            <div className="col-span-2">
+            <div className="sm:col-span-2">
               <CheckBox
                 label="NHS"
                 setState={(value: boolean) => {
@@ -191,7 +203,7 @@ const Edit: React.FC<{
                 checked={currentData && currentData.NHS === "Yes" ? true : false}
               />
             </div>
-            <div className="col-span-5 text-right">
+            <div className="sm:col-span-5 sm:text-right text-left">
               <FormSubmitButton
                 hidden={!waitingForSubmit}
                 buttonText={editing ? "Edit Activity" : "Log new Activity"}
@@ -238,18 +250,6 @@ const Edit: React.FC<{
           </div>
           
         </div>
-        <StringField
-          name="Officer Name"
-          placeholder="Smith"
-          hidden={!(currentData && currentData.NHS === "Yes")}
-          value={currentData ? currentData.NHSofficer : ""}
-          setValue={(value) => {
-            dispatch(setNHSOfficer(value));
-          }}
-          shouldShowError={shouldShowError}
-          error={!VALIDATE_free_form(currentData?.NHSofficer).validate}
-          errorMessage={VALIDATE_free_form(currentData?.NHSofficer).message}
-        />
       </form>
     </div>
   );
