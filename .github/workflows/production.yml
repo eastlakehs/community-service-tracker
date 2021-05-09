@@ -34,7 +34,7 @@ jobs:
          
     - name: Deploy firebase project
       env:
-        FIREBASE_SECRET: ${{ secrets.FIREBASE_SECRET }}
+        FIREBASE_TOKEN: ${{ secrets.FIREBASE_SECRET }}
       run: |
          cd firebase/functions
          yarn deploy-all
