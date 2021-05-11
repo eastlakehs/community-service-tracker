@@ -114,14 +114,15 @@ const Edit: React.FC<{
                 Date
               </label>
               <DatePicker
-                value={currentData ? (JSON.parse(currentData.Date) as Day) : null}
+                value={
+                  currentData ? (JSON.parse(currentData.Date) as Day) : null
+                }
                 onChange={(day) => {
                   day && dispatch(setDate(JSON.stringify(day)));
                 }}
                 inputPlaceholder="Select a day"
                 inputClassName="appearance-none block sm:w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white sm:mb-0 mb-8"
               />
-
             </div>
           </div>
           <StringField
@@ -149,17 +150,17 @@ const Edit: React.FC<{
           />
         </div>
         <StringField
-            name="Description"
-            placeholder="I did ....."
-            setValue={(value: string) => {
-              dispatch(setDescription(value));
-            }}
-            value={currentData ? currentData.Description : ""}
-            shouldShowError={shouldShowError}
-            error={!VALIDATE_free_form(currentData?.Description).validate}
-            errorMessage={VALIDATE_free_form(currentData?.Description).message}
-          />
-        
+          name="Description"
+          placeholder="I did ....."
+          setValue={(value: string) => {
+            dispatch(setDescription(value));
+          }}
+          value={currentData ? currentData.Description : ""}
+          shouldShowError={shouldShowError}
+          error={!VALIDATE_free_form(currentData?.Description).validate}
+          errorMessage={VALIDATE_free_form(currentData?.Description).message}
+        />
+
         <StringField
           name="Notes:"
           placeholder=""
@@ -171,7 +172,7 @@ const Edit: React.FC<{
           error={!VALIDATE_free_form(currentData?.notes, true).validate}
           errorMessage={VALIDATE_free_form(currentData?.notes, true).message}
         />
-         <StringField
+        <StringField
           name="Officer Name"
           placeholder="Smith"
           hidden={!(currentData && currentData.NHS === "Yes")}
@@ -191,7 +192,9 @@ const Edit: React.FC<{
                 setState={(value: boolean) => {
                   dispatch(setKeyClub(value ? "Yes" : "No"));
                 }}
-                checked={currentData && currentData.KeyClub === "Yes" ? true : false}
+                checked={
+                  currentData && currentData.KeyClub === "Yes" ? true : false
+                }
               />
             </div>
             <div className="sm:col-span-2">
@@ -200,7 +203,9 @@ const Edit: React.FC<{
                 setState={(value: boolean) => {
                   dispatch(setNHS(value ? "Yes" : "No"));
                 }}
-                checked={currentData && currentData.NHS === "Yes" ? true : false}
+                checked={
+                  currentData && currentData.NHS === "Yes" ? true : false
+                }
               />
             </div>
             <div className="sm:col-span-5 sm:text-right text-left">
@@ -233,11 +238,21 @@ const Edit: React.FC<{
                       toast.error("Failed to submit error", ToastConfig);
                     }
                   }
-                  if (!editing && typeof signedInEmail === "string" && currentData) {
-                    const resp = await submitNewEntry(currentData, signedInEmail);
+                  if (
+                    !editing &&
+                    typeof signedInEmail === "string" &&
+                    currentData
+                  ) {
+                    const resp = await submitNewEntry(
+                      currentData,
+                      signedInEmail
+                    );
                     setWaitingForSubmit(false);
                     if (resp) {
-                      toast.success("New activity logged successfully", ToastConfig);
+                      toast.success(
+                        "New activity logged successfully",
+                        ToastConfig
+                      );
                       history.push("/table");
                       dispatch(clearCurrentEdit());
                     } else {
@@ -246,9 +261,8 @@ const Edit: React.FC<{
                   }
                 }}
               />
-           </div>
+            </div>
           </div>
-          
         </div>
       </form>
     </div>
