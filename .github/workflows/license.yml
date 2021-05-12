@@ -15,19 +15,6 @@ jobs:
       # Checks-out repo
       - uses: actions/checkout@v2
       
-      # Creat New Branch
-      - name: Create New Branch
-        uses: peterjgrainger/action-create-branch@v2.0.1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          branch: 'license'
-          
-      # Switch to New Branch
-      - uses: actions/checkout@v2
-        with:
-          ref: license
-
       # This uses sed to change the year
       - name: Edit The License File
         run: |
@@ -37,11 +24,12 @@ jobs:
       # Committing The Changes
       - name: Commit Changes
         run: |
+          git checkout -b license
           git config --global user.email "<>"
           git config --global user.name "Github Actions Bot"
           git add .
           git commit -m 'Update license year' || true # pass is there is nothing to commit
-          git push
+          git push origin license
       
       # Create PR
       - name: Create Pull Request
