@@ -51,5 +51,5 @@ jobs:
           destination_branch: "master"
           pr_title: "Update License"
           pr_body: "*An automated License Update PR*"
-          pr_label: "actions"
+          pr_label: "actions,automatic"
           github_token: ${{ secrets.GITHUB_TOKEN }}
