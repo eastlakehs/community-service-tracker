@@ -11,22 +11,23 @@ jobs:
   update:
     runs-on: ubuntu-latest
 
-
     steps:
       # Checks-out repo
       - uses: actions/checkout@v2
 
-      #This uses sed to change the year
+      # This uses sed to change the year
       - name: Edit the license file
         run: |
           cd ./actions/license
           python update.py
-
-      - name: Commit the changes
-        run: |
-          git config --global user.email "<>"
-          git config --global user.name "Github Actions Bot"
-          git add .
-          git commit -m 'Update license year' || true # pass is there is nothing to commit
-          git push
-
+      
+      # Create PR
+      - name: pull-request
+        uses: repo-sync/pull-request@v2
+        with:
+          source_branch: "license"
+          destination_branch: "master"
+          pr_title: "Update License"
+          pr_body: ":crown: *An automated PR*"
+          pr_label: "action"
+          github_token: ${{ secrets.GITHUB_TOKEN }}
