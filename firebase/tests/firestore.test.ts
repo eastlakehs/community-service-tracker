@@ -185,13 +185,13 @@ describe("admins should be able to do anything", () => {
     expect(await firebase.assertSucceeds(randomDoc3.get()));
   });
 
-  it("writing to anything as admin)", async () => {
+  it("writing to anything as admin", async () => {
     expect(await firebase.assertSucceeds(randomDoc1.set({})));
     expect(await firebase.assertSucceeds(randomDoc2.set({})));
     expect(await firebase.assertSucceeds(randomDoc3.set({})));
   });
 
-  it("deleting anything as admin)", async () => {
+  it("deleting anything as admin", async () => {
     expect(await firebase.assertSucceeds(randomDoc1.delete()));
     expect(await firebase.assertSucceeds(randomDoc2.delete()));
     expect(await firebase.assertSucceeds(randomDoc3.delete()));
