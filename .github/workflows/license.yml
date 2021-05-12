@@ -1,27 +1,20 @@
 name: Update License
-
-
 on:
   schedule:
     - cron: '0 0 1 * *'
-
-  workflow_dispatch:
 
 jobs:
   update:
     runs-on: ubuntu-latest
 
     steps:
-      # Checks-out repo
       - uses: actions/checkout@v2
       
-      # This uses sed to change the year
       - name: Edit The License File
         run: |
           cd ./actions/license
           python update.py
       
-      # Committing The Changes
       - name: Commit Changes
         run: |
           git checkout -b license
@@ -30,8 +23,7 @@ jobs:
           git add .
           git commit -m 'Update license year' || true # pass is there is nothing to commit
           git push origin license
-      
-      # Create PR
+
       - name: Create Pull Request
         uses: repo-sync/pull-request@v2
         with:
