@@ -15,12 +15,18 @@ jobs:
       # Checks-out repo
       - uses: actions/checkout@v2
       
+      # Creat New Branch
       - name: Create New Branch
         uses: peterjgrainger/action-create-branch@v2.0.1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           branch: 'license'
+          
+      # Switch to New Branch
+      - uses: actions/checkout@v2
+        with:
+          ref: my-branch
 
       # This uses sed to change the year
       - name: Edit The License File
@@ -44,6 +50,6 @@ jobs:
           source_branch: "license"
           destination_branch: "master"
           pr_title: "Update License"
-          pr_body: ":crown: *An automated License Update PR*"
+          pr_body: "*An automated License Update PR*"
           pr_label: "action"
           github_token: ${{ secrets.GITHUB_TOKEN }}
