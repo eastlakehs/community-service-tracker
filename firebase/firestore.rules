@@ -3,28 +3,37 @@ service cloud.firestore {
   match /databases/{database}/documents {
     
     function emailMatchesDocument (_document) {
-      return (request.auth != null && request.auth.token.email.lower() == _document);
+      return (request.auth.token.email.lower() == _document);
     }
     
     // only accept requests from school emails to prevent spam
     function emailIsValid (_email) {
       return (request.auth.token.email.matches('.*@lwsd.org') || request.auth.token.email.matches('.*@bellevuecollege.edu'));
     }
+
+    // allow only email/password based auth 
+    // require email verification
+    // if a user uses email-link-auth first, firebase prevents setting a password for the account (tested this myself), requiring an email-based password reset
+    function isAuthenticatedProperly () {
+      let isAuthed = request.auth != null && request.auth.token != null && request.auth.token.email != null; 
+      let isVerified = request.auth.token.email_verified; 
+      let isPasswordAuth = request.auth.token.firebase.sign_in_provider == "password";
+      return (isAuthed && isVerified && isPasswordAuth);
+    }
+
+    function isAdmin () {
+      return (request.auth.token.email.matches('eastlakekey@gmail.com') || request.auth.token.email.matches('daniel@sudzilouski.com'));
+    }
     
     // users are free to read and edit their own documents 
     // as long as the document matches their authenticated email
     match /users/{email}/{document=**} { 
-      allow read, write: if emailMatchesDocument(email) && emailIsValid(email); 
+      allow read, write: if isAuthenticatedProperly() &&  emailIsValid(email) && emailMatchesDocument(email);
     }
     
-    // anyone can download the reports that contain hour summaries and awards
-    match /reports/{document=**} { 
-      allow read;
-    }
-    
-    // admin users that can impersonate any user to view/edit data
+    // admin users have full access to database
     match /{path=**} {
-    	allow read, write: if request.auth.token.email.matches('eastlakekey@gmail.com') || request.auth.token.email.matches('daniel@sudzilouski.com');
+    	allow read, write: if isAuthenticatedProperly() && isAdmin();
     }
     
   } 
