@@ -25,9 +25,6 @@ import { useIsSignedIn } from "./firebase/link-auth/useIsSignedIn";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-// Report downloading
-import { ReportPage } from "./components/reports/reportPage";
-
 const AppRouter = () => {
   /** Real time web socket connection to keep profile and entry table in sync for the current user */
   useSyncUserProfile();
@@ -71,12 +68,6 @@ const AppRouter = () => {
             </Route>
             <Route path="/profile">
               <ProfileController />
-            </Route>
-            <Route path="/report">
-              <ReportPage />
-            </Route>
-            <Route path="/reports">
-              <ReportPage />
             </Route>
             <Route path="/admin">
               <AdminPage />
