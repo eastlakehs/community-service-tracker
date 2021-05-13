@@ -22,7 +22,7 @@ service cloud.firestore {
     }
 
     function isAdmin () {
-      return (request.auth.token.email.matches('eastlakekey@gmail.com') || request.auth.token.email.matches('daniel@sudzilouski.com'));
+      return (request.auth.token.email.matches('eastlakekey@gmail.com') || request.auth.token.email.matches('daniel@sudzilouski.com') || request.auth.token.email.matches('communityservice@ehsptsa.org'));
     }
     
     // users are free to read and edit their own documents 
