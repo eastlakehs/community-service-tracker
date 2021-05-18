@@ -4,18 +4,24 @@ import Helmet from "../components/header/helmet";
 import { useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { selectSignedInState } from "../redux/signedInSlice";
+import { selectProfileState } from "../redux/profileScreenSlice";
 
 const Home = () => {
   const signedInstate = useSelector(selectSignedInState);
   const history = useHistory();
-  // users that are logged in in should be redirected to profile page
+  // users that are logged in in should be redirected to hours table or profile page
   useEffect(() => {
     if (signedInstate.signedIn) {
       if (signedInstate.admin) {
         history.replace("/admin");
       } else {
-        history.replace("/profile");
-      }
+        const ProfileState = useSelector(selectProfileState);
+        if(ProfileState.firstName == null || ProfileState.graduationYear == null || ProfileState.lastName == null) {
+          history.replace("/profile");
+        } else {
+          history.replace("/table");
+        }
+      } 
     }
   });
   return (

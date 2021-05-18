@@ -5,6 +5,7 @@ import { isAdmin } from "../../constants/isAdmin";
 import { useHistory } from "react-router-dom";
 import { selectSignedInState } from "../../redux/signedInSlice";
 import { useSelector } from "react-redux";
+import { selectProfileState } from "../../redux/profileScreenSlice";
 type emailState =
   | "base"
   | "email-send-failed"
@@ -78,8 +79,13 @@ const LoginForm = () => {
       if (signedInstate.admin) {
         history.replace("/admin");
       } else {
-        history.replace("/profile");
-      }
+        const ProfileState = selectProfileState();
+        if(ProfileState.firstName == null || ProfileState.graduationYear == null || ProfileState.lastName == null) {
+          history.replace("/profile");
+        } else {
+          history.replace("/table");
+        }
+      } 
     }
   });
   return (
