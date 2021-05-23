@@ -73,14 +73,13 @@ const LoginForm = () => {
   const history = useHistory();
   const [emailState, setEmailState] = useState<emailState>("base");
   const [emailInput, setEmailInput] = useState("");
-
+  const profileState = useSelector(selectProfileState);
   useEffect(() => {
     if (signedInstate.signedIn) {
       if (signedInstate.admin) {
         history.replace("/admin");
       } else {
-        const ProfileState = selectProfileState();
-        if(ProfileState.firstName == null || ProfileState.graduationYear == null || ProfileState.lastName == null) {
+        if(profileState.firstName === "") {
           history.replace("/profile");
         } else {
           history.replace("/table");

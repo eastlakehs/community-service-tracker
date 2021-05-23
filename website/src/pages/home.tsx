@@ -8,6 +8,7 @@ import { selectProfileState } from "../redux/profileScreenSlice";
 
 const Home = () => {
   const signedInstate = useSelector(selectSignedInState);
+  const profileState = useSelector(selectProfileState);
   const history = useHistory();
   // users that are logged in in should be redirected to hours table or profile page
   useEffect(() => {
@@ -15,8 +16,7 @@ const Home = () => {
       if (signedInstate.admin) {
         history.replace("/admin");
       } else {
-        const ProfileState = useSelector(selectProfileState);
-        if(ProfileState.firstName == null || ProfileState.graduationYear == null || ProfileState.lastName == null) {
+        if(profileState.firstName === "" || profileState.graduationYear === "" || profileState.lastName === "") {
           history.replace("/profile");
         } else {
           history.replace("/table");
