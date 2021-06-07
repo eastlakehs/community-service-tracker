@@ -1,11 +1,3 @@
----
-name: Generic
-about: A generic PR template
-title: ''
-labels: ''
-assignees: ''
----
-
 <!-- (Optional) The issue this closes -->
 Closes #
 
