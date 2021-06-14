@@ -16,12 +16,16 @@ const Home = () => {
       if (signedInstate.admin) {
         history.replace("/admin");
       } else {
-        if(profileState.firstName === "" || profileState.graduationYear === "" || profileState.lastName === "") {
+        if (
+          profileState.firstName === "" ||
+          profileState.graduationYear === "" ||
+          profileState.lastName === ""
+        ) {
           history.replace("/profile");
         } else {
           history.replace("/table");
         }
-      } 
+      }
     }
   });
   return (

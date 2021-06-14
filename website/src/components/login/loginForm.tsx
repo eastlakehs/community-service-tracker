@@ -79,12 +79,12 @@ const LoginForm = () => {
       if (signedInstate.admin) {
         history.replace("/admin");
       } else {
-        if(profileState.firstName === "") {
+        if (profileState.firstName === "") {
           history.replace("/profile");
         } else {
           history.replace("/table");
         }
-      } 
+      }
     }
   });
   return (
