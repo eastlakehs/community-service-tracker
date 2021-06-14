@@ -4,6 +4,7 @@ import { Day } from "react-modern-calendar-datepicker";
 import { totalizeHours } from "./Totalizer/totalizer";
 import { handleExport } from "./exporter/handleExport";
 import InfoPage from "../info/infoPage";
+import { ISignedInState } from "../../redux/signedInSlice";
 /* Table CSS Credit: https://tailwindcomponents.com/component/table-responsive-with-filters */
 
 const TableHeaderStyle: string =
@@ -11,9 +12,10 @@ const TableHeaderStyle: string =
 
 const CSTable: React.FunctionComponent<{
   data: initialStateType;
+  user: ISignedInState;
   handleEditClick: (entryID: string) => void;
   handleDelete: (entryID: string) => void;
-}> = ({ data, handleEditClick, handleDelete }) => {
+}> = ({ data, user, handleEditClick, handleDelete }) => {
   const generateHeader = () => {
     return data.header.map((header) => {
       return (
@@ -80,6 +82,16 @@ const CSTable: React.FunctionComponent<{
     });
   };
 
+  if (user.userEmail) {
+    return (
+      <InfoPage
+        title="No Profile Data!"
+        message="Click here to update your profile data"
+        link="/profile"
+      />
+    )
+  }
+  
   if (Object.keys(data.data).length === 0) {
     return (
       <InfoPage

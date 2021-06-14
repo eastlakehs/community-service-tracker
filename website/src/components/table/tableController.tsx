@@ -50,6 +50,7 @@ const TableController: React.FunctionComponent<{}> = () => {
   return (
     <CSTable
       data={data}
+      user={user}
       handleEditClick={navigateToEdit}
       handleDelete={handleDelete}
     />
