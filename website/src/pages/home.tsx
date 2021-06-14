@@ -8,7 +8,7 @@ import { selectSignedInState } from "../redux/signedInSlice";
 const Home = () => {
   const signedInstate = useSelector(selectSignedInState);
   const history = useHistory();
-  // users that are logged in in should be redirected to hours table or profile page
+  // users that are logged in in should be redirected to profile page
   useEffect(() => {
     if (signedInstate.signedIn) {
       if (signedInstate.admin) {
