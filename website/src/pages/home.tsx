@@ -4,7 +4,6 @@ import Helmet from "../components/header/helmet";
 import { useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { selectSignedInState } from "../redux/signedInSlice";
-import { selectProfileState } from "../redux/profileScreenSlice";
 
 const Home = () => {
   const signedInstate = useSelector(selectSignedInState);
