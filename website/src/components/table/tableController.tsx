@@ -9,9 +9,11 @@ import { useHistory } from "react-router-dom";
 import { setCurrentEdit } from "../../redux/editScreenSlice";
 import { deleteEntry } from "../../firebase/firestore/deleteEntry";
 import { isAdmin } from "../../constants/isAdmin";
+import { selectProfileState } from "../../redux/profileScreenSlice";
 const TableController: React.FunctionComponent<{}> = () => {
   const data = useSelector(selectUserData);
   const user = useSelector(selectSignedInState);
+  const userProfileData = useSelector(selectProfileState);
 
   const dispatch = useDispatch();
   const history = useHistory();
@@ -50,7 +52,7 @@ const TableController: React.FunctionComponent<{}> = () => {
   return (
     <CSTable
       data={data}
-      user={user}
+      userData={userProfileData}
       handleEditClick={navigateToEdit}
       handleDelete={handleDelete}
     />
