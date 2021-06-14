@@ -89,9 +89,9 @@ const CSTable: React.FunctionComponent<{
         message="Click here to update your profile data"
         link="/profile"
       />
-    )
+    );
   }
-  
+
   if (Object.keys(data.data).length === 0) {
     return (
       <InfoPage

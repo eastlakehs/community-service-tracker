@@ -78,7 +78,7 @@ const LoginForm = () => {
       if (signedInstate.admin) {
         history.replace("/admin");
       } else {
-        history.replace("/table");        
+        history.replace("/table");
       }
     }
   });
