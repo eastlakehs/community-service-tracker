@@ -85,8 +85,8 @@ const Edit: React.FC<{
         </h1>
         <div className="sm:grid grid-cols-2 gap-4">
           <StringField
-            name="Activity Name"
-            placeholder="Organization, club, etc."
+            name="Activity Name and Organization"
+            placeholder="Ex: Helped run concessions stand at Eastlake's football game"
             value={currentData ? currentData.Name : ""}
             setValue={(value: string) => {
               dispatch(setName(value));
