@@ -7,6 +7,7 @@ on:
 
 jobs:
   deploy:
+    concurrency: firebase_deploy
     runs-on: ubuntu-latest
 
     steps:
