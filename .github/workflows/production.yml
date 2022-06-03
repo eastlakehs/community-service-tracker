@@ -1,4 +1,6 @@
 name: Production
+#Prevents multiple firebase deploy workflows running at the same time
+#If another run is requested, it will be queued until the running one finishes
 concurrency: firebase_deploy
 
 on:
