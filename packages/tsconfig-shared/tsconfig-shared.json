@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "module": "ESNext",
-    "target" : "ESNext",
+    "target": "ESNext",
     "noImplicitAny": true,
     "sourceMap": true,
     "inlineSources": true,
@@ -13,8 +13,5 @@
   },
 
   "include": ["src/**/*.ts", "src/**/*.json"],
-  "exclude": [
-    "dist",
-    "node_modules"
-  ]
+  "exclude": ["dist", "node_modules"]
 }
