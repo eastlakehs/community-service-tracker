@@ -14,9 +14,9 @@ jobs:
       name: Checkout repository
 
     - uses: actions/setup-node@v2
-      name: Setup NodeJS v14
+      name: Setup NodeJS v16
       with:
-        node-version: '14'
+        node-version: '16'
 
     # Caches the firebase emulator
     - uses: actions/cache@v2
