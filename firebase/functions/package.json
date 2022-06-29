@@ -21,7 +21,7 @@
   },
   "devDependencies": {
     "firebase-functions-test": "^0.2.0",
-    "firebase-tools": "^9.10.2",
+    "firebase-tools": "^11.1.0",
     "tslint": "^5.12.0",
     "typescript": "^3.8.0"
   },
