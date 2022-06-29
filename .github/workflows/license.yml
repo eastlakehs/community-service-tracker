@@ -2,7 +2,9 @@ name: Update License
 on:
   schedule:
     - cron: '0 0 1 * *'
-
+  push:
+    paths:
+      - '.github/workflows/license.yml'
 jobs:
   update:
     runs-on: ubuntu-latest
