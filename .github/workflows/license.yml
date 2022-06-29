@@ -20,6 +20,8 @@ jobs:
       
       - name: Commit Changes
         run: |
+          git checkout master
+          git pull origin
           git checkout -b license
           git config --global user.email "<>"
           git config --global user.name "Github Actions Bot"
