@@ -20,6 +20,7 @@ jobs:
           git checkout -b license
           git config --global user.email "<>"
           git config --global user.name "Github Actions Bot"
+          git pull
           git add .
           git commit -m 'Update license year' || true # pass is there is nothing to commit
           git push origin license
