@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Check out new license branch
+      - name: Check out repo
         uses: actions/checkout@v3
           
       - name: Edit The License File
@@ -20,8 +20,8 @@ jobs:
       
       - name: Commit Changes
         run: |
-          git checkout master
-          git pull origin
+          git status
+          git pull
           git checkout -b license
           git config --global user.email "<>"
           git config --global user.name "Github Actions Bot"
