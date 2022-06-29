@@ -7,7 +7,6 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@craco/craco": "^5.6.4",
     "@reduxjs/toolkit": "^1.4.0",
     "@sentry/react": "^6.2.5",
     "@sentry/tracing": "^6.2.5",
