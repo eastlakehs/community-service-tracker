@@ -64,5 +64,8 @@
     "@typescript-eslint/eslint-plugin": "^3.10.0",
     "@typescript-eslint/parser": "^3.10.0",
     "eslint-plugin-react": "^7.20.6"
+  },
+  "engines": {
+    "node": "16"
   }
 }

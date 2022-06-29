@@ -27,7 +27,7 @@
   "resolved" "https://registry.npmjs.org/diff/-/diff-4.0.2.tgz"
   "version" "4.0.2"
 
-"ehs-service-tsconfig@file:/home/runner/work/community-service-tracker/community-service-tracker/packages/tsconfig-shared":
+"ehs-service-tsconfig@file:/Users/danielsudzilouski/Desktop/community-service-tracker/packages/tsconfig-shared":
   "resolved" "file:packages/tsconfig-shared"
   "version" "0.0.4"
 
