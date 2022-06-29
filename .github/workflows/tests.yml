@@ -23,45 +23,45 @@ jobs:
       name: Cache firebase emulator
       with:
         path: /home/runner/.cache/firebase/emulators
-        key: ${{ runner.os }}-firebase-emulator-${{ hashFiles('./firebase/tests/yarn.lock') }}
+        key: ${{ runner.os }}-firebase-emulator-${{ hashFiles('./firebase/tests/package-lock.json') }}
 
       # Caches the node_modules
     - uses: actions/cache@v2
       name: Cache node_modules
-      id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
+      id: npm-cache # use this to check for `cache-hit` (`steps.npm-cache.outputs.cache-hit != 'true'`)
       with:
         path: '**/node_modules'
-        key: ${{ runner.os }}-v2-modules-${{ hashFiles('**/yarn.lock') }}
+        key: ${{ runner.os }}-v2-modules-${{ hashFiles('**/package-lock.json') }}
         
     - name: Install node_modules if cache did not hit
-      if: steps.yarn-cache.outputs.cache-hit != 'true'
+      if: steps.npm-cache.outputs.cache-hit != 'true'
       run: |
-        yarn 
-        (cd firebase/functions && yarn)
-        (cd firebase/tests && yarn)
-        (cd website && yarn)
+        npm i 
+        (cd firebase/functions && npm i)
+        (cd firebase/tests && npm i)
+        (cd website && npm i)
 
     - name: Run Website Unit Tests
       run: |
          cd website 
-         yarn test
+         npm run test
 
     - name: Run Database Unit Tests
       run: |
          cd firebase/tests 
-         yarn ci
+         npm run ci
 
     - name: Check website build for errors
       run: |
          cd website 
-         yarn build
+         npm run build
          
     - name: Check firebase functions build for errors
       run: |
          cd firebase/functions
-         yarn lint 
-         yarn build
+         npm run lint 
+         npm run build
          
     - name: Check formatting for entire repo
-      run: yarn format-check
+      run: npm run format-check
       
