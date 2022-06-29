@@ -13,7 +13,7 @@ jobs:
       - uses: actions/checkout@v2
         name: Checkout repository
         with:
-          - token: ${{ secrets.EHS_SERVICE_BOT_GITHUB_TOKEN }}
+          token: ${{ secrets.EHS_SERVICE_BOT_GITHUB_TOKEN }}
 
       - uses: actions/setup-node@v2
         name: Setup NodeJS v16
