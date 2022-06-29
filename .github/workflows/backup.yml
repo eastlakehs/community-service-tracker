@@ -33,7 +33,7 @@ jobs:
         BACKUP_SECRET: ${{ secrets.BACKUP_SECRET }}
       run: |
         # Dependencies 
-        yarn 
+        npm i
         
         # Save version info of gpg tool in case implementations change in later versions
         mkdir artifacts

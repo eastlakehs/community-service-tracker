@@ -15,5 +15,8 @@
   },
   "bugs": {
     "url": "https://github.com/eastlakehs/community-service-tracker/issues"
+  },
+  "engines": {
+    "node": "16"
   }
 }

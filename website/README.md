@@ -2,14 +2,14 @@
 
 ## Install
 
-`yarn`
+`npm i`
 
 ## Starting Dev
 
-`sudo yarn start:macos` or `yarn start:windows`
+`sudo npm run start:macos` or `npm run start:windows`
 
 ## Prod Build
 
-`yarn build`
+`npm run build`
 
 # Eastlake-Community-Service-Tracker
