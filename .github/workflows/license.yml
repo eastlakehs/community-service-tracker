@@ -12,8 +12,6 @@ jobs:
     steps:
       - name: Check out new license branch
         uses: actions/checkout@v3
-        with:
-          ref: license
           
       - name: Edit The License File
         run: |
@@ -22,6 +20,7 @@ jobs:
       
       - name: Commit Changes
         run: |
+          git checkout -b license
           git config --global user.email "<>"
           git config --global user.name "Github Actions Bot"
           git add .
