@@ -2,16 +2,16 @@ name: Update License
 on:
   schedule:
     - cron: '0 0 1 * *'
-
+  push:
+    paths:
+      - '.github/workflows/license.yml'
 jobs:
   update:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Check out new license branch
+      - name: Check out repo
         uses: actions/checkout@v3
-        with:
-          ref: license
           
       - name: Edit The License File
         run: |
@@ -20,11 +20,13 @@ jobs:
       
       - name: Commit Changes
         run: |
+          git status
+          git checkout -b license
           git config --global user.email "<>"
           git config --global user.name "Github Actions Bot"
           git add .
           git commit -m 'Update license year' || true # pass is there is nothing to commit
-          git push
+          git push -u origin license --force
 
       - name: Create Pull Request
         uses: repo-sync/pull-request@v2
