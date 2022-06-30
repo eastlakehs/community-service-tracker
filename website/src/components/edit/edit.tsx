@@ -13,12 +13,7 @@ import {
   clearCurrentEdit,
   setNotes,
 } from "../../redux/editScreenSlice";
-import {
-  StringField,
-  CheckBox,
-  FormSubmitButton,
-  DateField,
-} from "../entry/entry";
+import { StringField, CheckBox, FormSubmitButton, DateField } from "../entry";
 import { firestoreDocumentType } from "../../firebase/firestore/firestoreData.type";
 import { useHistory } from "react-router-dom";
 import {
@@ -119,18 +114,18 @@ const Edit: React.FC<{
               />
             </div>
             <DateField
-                name="Date"
-                value={
-                  currentData?.Date
-                      ? `${JSON.parse(currentData.Date).year}-${
-                          JSON.parse(currentData.Date).month
-                      }-${JSON.parse(currentData.Date).day}`
-                      : ""
-                }
-                setValue={(value: string) => dispatch(setDate(value))}
-                shouldShowError={shouldShowError}
-                error={!VALIDATE_date(currentData?.Date).validate}
-                errorMessage={VALIDATE_date(currentData?.Date).message}
+              name="Date"
+              value={
+                currentData?.Date
+                  ? `${JSON.parse(currentData.Date).year}-${
+                      JSON.parse(currentData.Date).month
+                    }-${JSON.parse(currentData.Date).day}`
+                  : ""
+              }
+              setValue={(value: string) => dispatch(setDate(value))}
+              shouldShowError={shouldShowError}
+              error={!VALIDATE_date(currentData?.Date).validate}
+              errorMessage={VALIDATE_date(currentData?.Date).message}
             />
           </div>
           <StringField
