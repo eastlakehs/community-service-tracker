@@ -44,6 +44,48 @@ const StringField: React.FunctionComponent<{
   );
 };
 
+export const DateField: React.FunctionComponent<{
+  name: string;
+  value?: string;
+  setValue: (value: string) => void;
+  shouldShowError?: boolean;
+  error?: boolean;
+  errorMessage?: string;
+}> = ({ name, value, setValue, error, errorMessage, shouldShowError }) => {
+  return (
+    <div className={"flex flex-wrap -mx-3 mb-6"}>
+      <div className="w-full px-3">
+        <label className="block uppercase tracking-wide text-white text-xs font-bold mb-2">
+          {name}
+        </label>
+        <input
+          /**
+           * https://github.com/tailwindlabs/tailwindcss-forms/issues/38
+           * Date input does not respect placeholder coloring in tailwind
+           * So you have to manually set the placeholder coloring
+           */
+          className={
+            "appearance-none block w-full bg-gray-200 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" +
+            (error && shouldShowError ? "border border-red-500" : "") +
+            (value ? "text-gray-700" : "text-gray-500")
+          }
+          type="date"
+          value={value}
+          onChange={(e) => {
+            const dateObj = {
+              year: e.target.value.slice(0, 4),
+              month: e.target.value.slice(5, 7),
+              day: e.target.value.slice(8, 10),
+            };
+            setValue(JSON.stringify(dateObj));
+          }}
+        />
+        <ErrorMessage e={error && shouldShowError} eM={errorMessage} />
+      </div>
+    </div>
+  );
+};
+
 const ErrorMessage: React.FunctionComponent<{
   e?: boolean;
   eM?: string;

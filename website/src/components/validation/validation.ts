@@ -59,4 +59,21 @@ const VALIDATE_graduation = (text: string): ValidationMessage => {
   }
 };
 
-export { VALIDATE_hours, VALIDATE_free_form, VALIDATE_graduation };
+const VALIDATE_date = (text?: String): ValidationMessage => {
+  if (!text)
+    return {
+      validate: false,
+      message: "Date not selected",
+    };
+  return {
+    validate: true,
+    message: "",
+  };
+};
+
+export {
+  VALIDATE_hours,
+  VALIDATE_free_form,
+  VALIDATE_graduation,
+  VALIDATE_date,
+};
