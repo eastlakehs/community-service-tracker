@@ -68,26 +68,20 @@ const VALIDATE_date = (text?: string): ValidationMessage => {
     if (
       parsedObj.day.length === 2 &&
       parsedObj.month.length === 2 &&
-      parsedObj.year.length === 4
+      parsedObj.year.length === 4 &&
+      charIsANumber(parsedObj.day[0]) &&
+      charIsANumber(parsedObj.day[1]) &&
+      charIsANumber(parsedObj.month[0]) &&
+      charIsANumber(parsedObj.month[1]) &&
+      charIsANumber(parsedObj.year[0]) &&
+      charIsANumber(parsedObj.year[1]) &&
+      charIsANumber(parsedObj.year[2]) &&
+      charIsANumber(parsedObj.year[3])
     ) {
-      if (charIsANumber(parsedObj.day[0]) && charIsANumber(parsedObj.day[1])) {
-        if (
-          charIsANumber(parsedObj.month[0]) &&
-          charIsANumber(parsedObj.month[1])
-        ) {
-          if (
-            charIsANumber(parsedObj.year[0]) &&
-            charIsANumber(parsedObj.year[1]) &&
-            charIsANumber(parsedObj.year[2]) &&
-            charIsANumber(parsedObj.year[3])
-          ) {
-            return {
-              validate: true,
-              message: "",
-            };
-          }
-        }
-      }
+      return {
+        validate: true,
+        message: "",
+      };
     }
   }
   return {
