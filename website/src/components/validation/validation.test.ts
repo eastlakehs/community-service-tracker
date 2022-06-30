@@ -2,6 +2,7 @@ import {
   VALIDATE_hours,
   VALIDATE_free_form,
   VALIDATE_graduation,
+  VALIDATE_date,
 } from "./validation";
 
 test("Running Validation Tests for VALIDATE_hours", () => {
@@ -76,4 +77,13 @@ test("Running Validation Tests for VALIDATE_graduation", () => {
   expect(VALIDATE_graduation(thisYearPlus(99999)).validate).toBe(false);
   expect(VALIDATE_graduation("20aa").validate).toBe(false);
   expect(VALIDATE_graduation(":) :(").validate).toBe(false);
+});
+
+test("Running Validation Tests for VALIDATE_date", () => {
+  expect(VALIDATE_date("").validate).toBe(false);
+  expect(VALIDATE_date("2020-2-01").validate).toBe(false);
+  expect(VALIDATE_date("202-200-01").validate).toBe(false);
+  expect(VALIDATE_date(undefined).validate).toBe(false);
+  expect(VALIDATE_date("2020-02-01").validate).toBe(true);
+  expect(VALIDATE_date("2022-06-30").validate).toBe(true);
 });

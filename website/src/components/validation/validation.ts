@@ -1,4 +1,8 @@
 import { ValidationMessage } from "./validationMessage";
+import { parseHtmlDate } from "../entry/dateField";
+
+const charIsANumber = (c: string) =>
+  c in ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
 
 /** All of the internal number validations have edge cases... this should work for our test input. Returns
  * true if the input string is a valid positive number. Function is safe regardless of input type.
@@ -15,9 +19,7 @@ const VALIDATE_hours = (hours?: string): ValidationMessage => {
     if (hours.charAt(i) === ".") {
       if (dot_used) return { validate: false, message: "Invalid Hour" };
       else dot_used = true;
-    } else if (
-      !(hours.charAt(i) in ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"])
-    ) {
+    } else if (!charIsANumber(hours.charAt(i))) {
       return { validate: false, message: "Invalid Hour" };
     }
   }
@@ -59,4 +61,38 @@ const VALIDATE_graduation = (text: string): ValidationMessage => {
   }
 };
 
-export { VALIDATE_hours, VALIDATE_free_form, VALIDATE_graduation };
+const VALIDATE_date = (text?: string): ValidationMessage => {
+  // has to be YYYY-MM-DD
+  if (text && text.length === 10) {
+    const parsedObj = parseHtmlDate(text);
+    if (
+      parsedObj.day.length === 2 &&
+      parsedObj.month.length === 2 &&
+      parsedObj.year.length === 4 &&
+      charIsANumber(parsedObj.day[0]) &&
+      charIsANumber(parsedObj.day[1]) &&
+      charIsANumber(parsedObj.month[0]) &&
+      charIsANumber(parsedObj.month[1]) &&
+      charIsANumber(parsedObj.year[0]) &&
+      charIsANumber(parsedObj.year[1]) &&
+      charIsANumber(parsedObj.year[2]) &&
+      charIsANumber(parsedObj.year[3])
+    ) {
+      return {
+        validate: true,
+        message: "",
+      };
+    }
+  }
+  return {
+    validate: false,
+    message: "Date not selected",
+  };
+};
+
+export {
+  VALIDATE_hours,
+  VALIDATE_free_form,
+  VALIDATE_graduation,
+  VALIDATE_date,
+};

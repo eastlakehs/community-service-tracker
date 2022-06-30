@@ -13,10 +13,8 @@ import {
   clearCurrentEdit,
   setNotes,
 } from "../../redux/editScreenSlice";
-import { StringField, CheckBox, FormSubmitButton } from "../entry/entry";
+import { StringField, CheckBox, FormSubmitButton, DateField } from "../entry";
 import { firestoreDocumentType } from "../../firebase/firestore/firestoreData.type";
-import "react-modern-calendar-datepicker/lib/DatePicker.css";
-import DatePicker, { Day } from "react-modern-calendar-datepicker";
 import { useHistory } from "react-router-dom";
 import {
   submitEdit,
@@ -24,7 +22,11 @@ import {
 } from "../../firebase/firestore/submitEdit";
 
 import { toast, ToastOptions } from "react-toastify";
-import { VALIDATE_free_form, VALIDATE_hours } from "../validation/validation";
+import {
+  VALIDATE_free_form,
+  VALIDATE_hours,
+  VALIDATE_date,
+} from "../validation/validation";
 /** Easy toast creation generation at https://fkhadra.github.io/react-toastify/introduction/ */
 const ToastConfig: ToastOptions = {
   position: "top-center",
@@ -59,6 +61,7 @@ const Edit: React.FC<{
       currentData?.contactPhone
     );
     const is_officer_name_correct = VALIDATE_free_form(currentData?.NHSofficer);
+    const is_date_correct = VALIDATE_date(currentData?.Date);
 
     console.log(currentData?.NHS);
     console.log(VALIDATE_free_form(currentData?.NHSofficer));
@@ -73,7 +76,8 @@ const Edit: React.FC<{
       is_description_correct.validate &&
       is_hours_correct.validate &&
       is_contact_name_correct.validate &&
-      is_contact_phone_number_correct.validate
+      is_contact_phone_number_correct.validate &&
+      is_date_correct.validate
     );
   };
 
@@ -109,21 +113,20 @@ const Edit: React.FC<{
                 errorMessage={VALIDATE_hours(currentData?.Hours).message}
               />
             </div>
-            <div>
-              <label className="block uppercase tracking-wide text-white text-xs font-bold mb-2">
-                Date
-              </label>
-              <DatePicker
-                value={
-                  currentData ? (JSON.parse(currentData.Date) as Day) : null
-                }
-                onChange={(day) => {
-                  day && dispatch(setDate(JSON.stringify(day)));
-                }}
-                inputPlaceholder="Select a day"
-                inputClassName="appearance-none block sm:w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white sm:mb-0 mb-8"
-              />
-            </div>
+            <DateField
+              name="Date"
+              value={
+                currentData?.Date
+                  ? `${JSON.parse(currentData.Date).year}-${
+                      JSON.parse(currentData.Date).month
+                    }-${JSON.parse(currentData.Date).day}`
+                  : ""
+              }
+              setValue={(value: string) => dispatch(setDate(value))}
+              shouldShowError={shouldShowError}
+              error={!VALIDATE_date(currentData?.Date).validate}
+              errorMessage={VALIDATE_date(currentData?.Date).message}
+            />
           </div>
           <StringField
             name="Contact Name"
