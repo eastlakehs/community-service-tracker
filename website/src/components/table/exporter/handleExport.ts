@@ -6,7 +6,11 @@ const handleExport = (data: initialStateType) => {
   let exportArray: string[][] = [];
   exportArray.push(data.header);
   Object.keys(data.data).forEach((entry) => {
-    const dateObj = JSON.parse(data.data[entry].Date) as {day: string, month: string, year: string} ;
+    const dateObj = JSON.parse(data.data[entry].Date) as {
+      day: string;
+      month: string;
+      year: string;
+    };
     let dataRow: string[] = [];
     dataRow.push(data.data[entry].Name);
     dataRow.push(data.data[entry].Description);

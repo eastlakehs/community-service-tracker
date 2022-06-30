@@ -51,7 +51,11 @@ const CSTable: React.FunctionComponent<{
 
   const generateTableData = () => {
     return Object.keys(data.data).map((entry) => {
-      const dateObj = JSON.parse(data.data[entry].Date) as { day: string, month: string, year: string} ;
+      const dateObj = JSON.parse(data.data[entry].Date) as {
+        day: string;
+        month: string;
+        year: string;
+      };
       return (
         <tr key={data.data ? entry : "empty-entry"}>
           <TableCell name={data.data[entry].Name} />
