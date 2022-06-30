@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { StringField, FormSubmitButton } from "../entry/entry";
+import { StringField, FormSubmitButton } from "../entry";
 import Helmet from "../header/helmet";
 
 import { userProfileData } from "../../firebase/firestore/firestoreData.type";
