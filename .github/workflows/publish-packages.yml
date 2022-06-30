@@ -1,4 +1,5 @@
 name: Publish-Packages
+concurrency: deploy_packages # queue one deploy at a time
 
 on:
   push:
