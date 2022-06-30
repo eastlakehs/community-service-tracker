@@ -28,7 +28,7 @@ const StringField: React.FunctionComponent<{
         <input
           className={
             "appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" +
-            (error && shouldShowError ? "border border-red-500" : "")
+            (error && shouldShowError ? " border border-red-500" : "")
           }
           id="grid-first-name"
           type="text"
@@ -46,7 +46,7 @@ const StringField: React.FunctionComponent<{
 
 export const DateField: React.FunctionComponent<{
   name: string;
-  value?: string;
+  value: string;
   setValue: (value: string) => void;
   shouldShowError?: boolean;
   error?: boolean;
@@ -65,9 +65,9 @@ export const DateField: React.FunctionComponent<{
            * So you have to manually set the placeholder coloring
            */
           className={
-            "appearance-none block w-full bg-gray-200 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" +
-            (error && shouldShowError ? "border border-red-500" : "") +
-            (value ? "text-gray-700" : "text-gray-500")
+            "appearance-none block w-full bg-gray-200 border rounded py-3 px-2 mb-3 leading-tight focus:outline-none focus:bg-white" +
+            (error && shouldShowError ? " border border-red-500" : "") +
+            (value ? " text-gray-700" : " text-gray-500")
           }
           type="date"
           value={value}

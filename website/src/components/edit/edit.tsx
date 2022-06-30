@@ -118,18 +118,21 @@ const Edit: React.FC<{
                 errorMessage={VALIDATE_hours(currentData?.Hours).message}
               />
             </div>
+            <DateField
+                name="Date"
+                value={
+                  currentData?.Date
+                      ? `${JSON.parse(currentData.Date).year}-${
+                          JSON.parse(currentData.Date).month
+                      }-${JSON.parse(currentData.Date).day}`
+                      : ""
+                }
+                setValue={(value: string) => dispatch(setDate(value))}
+                shouldShowError={shouldShowError}
+                error={!VALIDATE_date(currentData?.Date).validate}
+                errorMessage={VALIDATE_date(currentData?.Date).message}
+            />
           </div>
-          <DateField
-            name="Date"
-            value={
-              currentData?.Date
-                ? `${JSON.parse(currentData.Date).year}-${
-                    JSON.parse(currentData.Date).month
-                  }-${JSON.parse(currentData.Date).day}`
-                : undefined
-            }
-            setValue={(value: string) => dispatch(setDate(value))}
-          />
           <StringField
             name="Contact Name"
             placeholder="Jonathan Swift"
