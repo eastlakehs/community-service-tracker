@@ -4,13 +4,35 @@ import { ErrorMessage } from "./errorMessage";
 
 // parses state from date input to object
 // date input in html is formatted as YYYY-MM-DD
-export const parseHtmlDate = (state: string) => {
+export const serializeHtmlDate = (state: string) => {
   assert(state.length === 10);
   return {
-    year: state.slice(0, 4),
-    month: state.slice(5, 7),
-    day: state.slice(8, 10),
+    year: Number(state.slice(0, 4)),
+    month: Number(state.slice(5, 7)),
+    day: Number(state.slice(8, 10)),
   };
+};
+
+// takes the string representation of the date
+// that we store in the backend and converts it to a html format date
+export const convertSerializedToHtmlDate = (state: string): string => {
+  if (state === "") return "";
+
+  const jsonParsed = JSON.parse(state) as {
+    day: number;
+    month: number;
+    year: number;
+  };
+  let htmlDate = String(jsonParsed.year) + "-";
+
+  if (jsonParsed.month <= 9) htmlDate += "0";
+  htmlDate += String(jsonParsed.month);
+  htmlDate += "-";
+
+  if (jsonParsed.day <= 9) htmlDate += "0";
+  htmlDate += String(jsonParsed.day);
+
+  return htmlDate;
 };
 
 export const DateField: React.FunctionComponent<{
@@ -39,9 +61,9 @@ export const DateField: React.FunctionComponent<{
             (value ? " text-gray-700" : " text-gray-500")
           }
           type="date"
-          value={value}
+          value={convertSerializedToHtmlDate(value)}
           onChange={(e) =>
-            setValue(JSON.stringify(parseHtmlDate(e.target.value)))
+            setValue(JSON.stringify(serializeHtmlDate(e.target.value)))
           }
         />
         <ErrorMessage e={error && shouldShowError} eM={errorMessage} />
