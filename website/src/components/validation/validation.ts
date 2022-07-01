@@ -1,6 +1,7 @@
 import { ValidationMessage } from "./validationMessage";
 
-const charIsANumber = (c: string) => c in ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
+const charIsANumber = (c: string) =>
+  c in ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
 
 /** All of the internal number validations have edge cases... this should work for our test input. Returns
  * true if the input string is a valid positive number. Function is safe regardless of input type.
