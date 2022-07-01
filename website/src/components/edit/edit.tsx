@@ -15,7 +15,7 @@ import {
 } from "../../redux/editScreenSlice";
 import { StringField, CheckBox, FormSubmitButton, DateField } from "../entry";
 import { firestoreDocumentType } from "../../firebase/firestore/firestoreData.type";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import {
   submitEdit,
   submitNewEntry,
@@ -45,7 +45,7 @@ const Edit: React.FC<{
   signedInEmail: string | boolean;
 }> = ({ currentData, currentKey, editing, signedInEmail }) => {
   const dispatch = useDispatch();
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const [waitingForSubmit, setWaitingForSubmit] = useState(false);
   const [shouldShowError, setShouldShowError] = useState(false);
@@ -226,7 +226,7 @@ const Edit: React.FC<{
                     );
                     setWaitingForSubmit(false);
                     if (resp) {
-                      history.push("/table");
+                      navigate("/table");
                       toast.success("Edit submited successfully", ToastConfig);
                       dispatch(clearCurrentEdit());
                     } else {
@@ -248,7 +248,7 @@ const Edit: React.FC<{
                         "New activity logged successfully",
                         ToastConfig
                       );
-                      history.push("/table");
+                      navigate("/table");
                       dispatch(clearCurrentEdit());
                     } else {
                       toast.error("Failed to log new activity", ToastConfig);

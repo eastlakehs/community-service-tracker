@@ -4,7 +4,7 @@ import CSTable from "./table";
 import { useSelector, useDispatch } from "react-redux";
 import { selectUserData } from "../../redux/userDataSlice";
 import { selectSignedInState } from "../../redux/signedInSlice";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import { setCurrentEdit } from "../../redux/editScreenSlice";
 import { deleteEntry } from "../../firebase/firestore/deleteEntry";
@@ -14,14 +14,14 @@ const TableController: React.FunctionComponent<{}> = () => {
   const user = useSelector(selectSignedInState);
 
   const dispatch = useDispatch();
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const signedInstate = useSelector(selectSignedInState);
 
   useEffect(() => {
     // only redirect if not viewing another user
     if (signedInstate.admin && isAdmin(signedInstate.userEmail)) {
-      history.replace("/admin");
+      navigate("/admin");
     }
   });
 
@@ -34,7 +34,7 @@ const TableController: React.FunctionComponent<{}> = () => {
         editing: true,
       })
     );
-    history.push("/edit");
+    navigate("/edit");
   };
 
   const handleDelete = (currentID: string) => {

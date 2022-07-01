@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 // Routes
 import Home from "./pages/home";
@@ -56,26 +56,14 @@ const AppRouter = () => {
       <Router>
         <div className="flex flex-col min-h-screen bg-eastlake-grey font-text">
           <PageHeader />
-          <Switch>
-            <Route path="/login">
-              <Login />
-            </Route>
-            <Route path="/table">
-              <Table />
-            </Route>
-            <Route path="/edit">
-              <EditController />
-            </Route>
-            <Route path="/profile">
-              <ProfileController />
-            </Route>
-            <Route path="/admin">
-              <AdminPage />
-            </Route>
-            <Route path="/">
-              <Home />
-            </Route>
-          </Switch>
+          <Routes>
+            <Route path="/login" element={<Login />} />
+            <Route path="/table" element={<Table />} />
+            <Route path="/edit" element={<EditController />} />
+            <Route path="/profile" element={<ProfileController />} />
+            <Route path="/admin" element={<AdminPage />} />
+            <Route path="/" element={<Home />} />
+          </Routes>
           <Footer />
         </div>
       </Router>

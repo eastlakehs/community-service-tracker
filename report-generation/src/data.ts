@@ -1,5 +1,5 @@
 /** Type of our entire Firestore database */
-interface dataJsonType {
+export type dataJsonType = {
   users: {
     [key: string]: {
       entries?: {
@@ -29,6 +29,4 @@ interface dataJsonType {
       _data: {};
     };
   };
-}
-
-export { dataJsonType };
+};
