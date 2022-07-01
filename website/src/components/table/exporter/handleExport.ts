@@ -1,6 +1,6 @@
 import { initialStateType } from "../../../redux/userDataSlice";
 import { downloadFileFromString } from "../../../firebase/firestore/getReport";
-import { stringify } from "csv-stringify/sync";
+import { stringify } from "csv-stringify/browser/esm/sync";
 
 const handleExport = (data: initialStateType) => {
   let exportArray: string[][] = [];
