@@ -1,0 +1,12 @@
+[build]
+base = "website/"
+
+[context.production]
+command = "npm i && npm run build"
+publish = "build/"
+environment = { NODE_VERSION = "16" }
+
+[context.deploy-preview]
+command = "npm i && npm run build"
+publish = "build/"
+environment = { NODE_VERSION = "16" }
