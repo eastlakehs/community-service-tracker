@@ -68,7 +68,7 @@ const basicEmailValidation = (email: string): emailValidationState => {
 
 const LoginForm = () => {
   const signedInstate = useSelector(selectSignedInState);
-  const history = useNavigate();
+  const navigation = useNavigate();
   const [emailState, setEmailState] = useState<emailState>("base");
   const [emailInput, setEmailInput] = useState("");
 
@@ -76,10 +76,10 @@ const LoginForm = () => {
     if (signedInstate.signedIn) {
       if (signedInstate.admin) {
         //@ts-ignore https://github.com/react-navigation/react-navigation/issues/8256
-        history.replace("/admin");
+        navigation.replace("/admin");
       } else {
         //@ts-ignore https://github.com/react-navigation/react-navigation/issues/8256
-        history.replace("/profile");
+        navigation.replace("/profile");
       }
     }
   });
