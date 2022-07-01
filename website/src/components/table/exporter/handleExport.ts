@@ -1,6 +1,6 @@
 import { initialStateType } from "../../../redux/userDataSlice";
 import { downloadFileFromString } from "../../../firebase/firestore/getReport";
-import stringify from "csv-stringify";
+import { stringify } from "csv-stringify/sync";
 
 const handleExport = (data: initialStateType) => {
   let exportArray: string[][] = [];
@@ -19,8 +19,6 @@ const handleExport = (data: initialStateType) => {
     exportArray.push(dataRow);
   });
 
-  stringify(exportArray, (err: any, output: string) => {
-    downloadFileFromString(output, "export_hours.csv");
-  });
+  downloadFileFromString(stringify(exportArray), "export_hours.csv");
 };
 export { handleExport };

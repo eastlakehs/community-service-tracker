@@ -68,8 +68,6 @@ test("Running Validation Tests for VALIDATE_graduation", () => {
 
   //Tests bonkers years that should never be valid
   expect(VALIDATE_graduation("").validate).toBe(false);
-  expect(VALIDATE_graduation(NaN).validate).toBe(false);
-  expect(VALIDATE_graduation(2021.24).validate).toBe(false); //floating point
   expect(VALIDATE_graduation(" ").validate).toBe(false);
   expect(VALIDATE_graduation("          ").validate).toBe(false);
   expect(VALIDATE_graduation("a").validate).toBe(false);

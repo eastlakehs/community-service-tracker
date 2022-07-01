@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import { signOut } from "../../firebase/link-auth/signOut";
 import { useSelector } from "react-redux";
 import { selectSignedInState } from "../../redux/signedInSlice";
-/* eslint-disable jsx-a11y/anchor-is-valid */
 
 const LogoutButton = () => (
   <a

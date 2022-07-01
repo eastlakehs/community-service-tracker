@@ -1,8 +1,7 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useState, useEffect } from "react";
 import sendEmailAuth from "../../firebase/link-auth/sendEmailAuth";
 import { isAdmin } from "../../constants/isAdmin";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { selectSignedInState } from "../../redux/signedInSlice";
 import { useSelector } from "react-redux";
 type emailState =
@@ -69,15 +68,17 @@ const basicEmailValidation = (email: string): emailValidationState => {
 
 const LoginForm = () => {
   const signedInstate = useSelector(selectSignedInState);
-  const history = useHistory();
+  const history = useNavigate();
   const [emailState, setEmailState] = useState<emailState>("base");
   const [emailInput, setEmailInput] = useState("");
 
   useEffect(() => {
     if (signedInstate.signedIn) {
       if (signedInstate.admin) {
+        //@ts-ignore https://github.com/react-navigation/react-navigation/issues/8256
         history.replace("/admin");
       } else {
+        //@ts-ignore https://github.com/react-navigation/react-navigation/issues/8256
         history.replace("/profile");
       }
     }

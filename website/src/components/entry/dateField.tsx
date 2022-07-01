@@ -1,11 +1,9 @@
 import React from "react";
-import assert from "assert";
 import { ErrorMessage } from "./errorMessage";
 
 // parses state from date input to object
 // date input in html is formatted as YYYY-MM-DD
 export const serializeHtmlDate = (state: string) => {
-  assert(state.length === 10);
   return {
     year: Number(state.slice(0, 4)),
     month: Number(state.slice(5, 7)),

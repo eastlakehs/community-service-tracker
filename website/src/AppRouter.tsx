@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 // Routes
 import Home from "./pages/home";
@@ -56,7 +56,7 @@ const AppRouter = () => {
       <Router>
         <div className="flex flex-col min-h-screen bg-eastlake-grey font-text">
           <PageHeader />
-          <Switch>
+          <Routes>
             <Route path="/login">
               <Login />
             </Route>
@@ -75,7 +75,7 @@ const AppRouter = () => {
             <Route path="/">
               <Home />
             </Route>
-          </Switch>
+          </Routes>
           <Footer />
         </div>
       </Router>

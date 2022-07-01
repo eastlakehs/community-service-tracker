@@ -1,19 +1,21 @@
 import React, { useEffect } from "react";
 import Body from "../components/body/body";
 import Helmet from "../components/header/helmet";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { selectSignedInState } from "../redux/signedInSlice";
 
 const Home = () => {
   const signedInstate = useSelector(selectSignedInState);
-  const history = useHistory();
+  const navigate = useNavigate();
   // users that are logged in in should be redirected to profile page
   useEffect(() => {
     if (signedInstate.signedIn) {
       if (signedInstate.admin) {
+        //@ts-ignore https://github.com/react-navigation/react-navigation/issues/8256
         history.replace("/admin");
       } else {
+        //@ts-ignore https://github.com/react-navigation/react-navigation/issues/8256
         history.replace("/profile");
       }
     }
