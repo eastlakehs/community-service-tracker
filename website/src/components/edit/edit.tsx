@@ -63,8 +63,6 @@ const Edit: React.FC<{
     const is_officer_name_correct = VALIDATE_free_form(currentData?.NHSofficer);
     const is_date_correct = VALIDATE_date(currentData?.Date);
 
-    console.log(currentData?.NHS);
-    console.log(VALIDATE_free_form(currentData?.NHSofficer));
     if (
       !is_officer_name_correct.validate &&
       currentData &&
@@ -115,13 +113,7 @@ const Edit: React.FC<{
             </div>
             <DateField
               name="Date"
-              value={
-                currentData?.Date
-                  ? `${JSON.parse(currentData.Date).year}-${
-                      JSON.parse(currentData.Date).month
-                    }-${JSON.parse(currentData.Date).day}`
-                  : ""
-              }
+              value={currentData?.Date ? currentData?.Date : ""}
               setValue={(value: string) => dispatch(setDate(value))}
               shouldShowError={shouldShowError}
               error={!VALIDATE_date(currentData?.Date).validate}

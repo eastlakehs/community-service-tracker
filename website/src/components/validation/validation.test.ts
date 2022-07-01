@@ -5,6 +5,11 @@ import {
   VALIDATE_date,
 } from "./validation";
 
+import {
+  convertSerializedToHtmlDate,
+  serializeHtmlDate,
+} from "../entry/dateField";
+
 test("Running Validation Tests for VALIDATE_hours", () => {
   expect(VALIDATE_hours(".5").validate).toBe(true);
   expect(VALIDATE_hours("0.5").validate).toBe(true);
@@ -81,9 +86,53 @@ test("Running Validation Tests for VALIDATE_graduation", () => {
 
 test("Running Validation Tests for VALIDATE_date", () => {
   expect(VALIDATE_date("").validate).toBe(false);
-  expect(VALIDATE_date("2020-2-01").validate).toBe(false);
-  expect(VALIDATE_date("202-200-01").validate).toBe(false);
   expect(VALIDATE_date(undefined).validate).toBe(false);
-  expect(VALIDATE_date("2020-02-01").validate).toBe(true);
-  expect(VALIDATE_date("2022-06-30").validate).toBe(true);
+  expect(VALIDATE_date('{"year":2020,"month":0,"day":14}').validate).toBe(
+    false
+  );
+  expect(VALIDATE_date('{"year":2020,"month":1,"day":0}').validate).toBe(false);
+  expect(VALIDATE_date('{"year":2020,"month":1,"day":40}').validate).toBe(
+    false
+  );
+  expect(VALIDATE_date('{"year":2020,"month":13,"day":20}').validate).toBe(
+    false
+  );
+  expect(VALIDATE_date('{"year":2010,"month":1,"day":1}').validate).toBe(true);
+  expect(VALIDATE_date('{"year":2020,"month":10,"day":14}').validate).toBe(
+    true
+  );
+  expect(VALIDATE_date('{"year":2030,"month":12,"day":32}').validate).toBe(
+    true
+  );
+});
+
+test("Running Validation Tests for convertSerializedToHtmlDate", () => {
+  expect(convertSerializedToHtmlDate("")).toBe("");
+  expect(convertSerializedToHtmlDate('{"year":2010,"month":1,"day":14}')).toBe(
+    "2010-01-14"
+  );
+  expect(convertSerializedToHtmlDate('{"year":2020,"month":10,"day":14}')).toBe(
+    "2020-10-14"
+  );
+  expect(convertSerializedToHtmlDate('{"year":2030,"month":1,"day":1}')).toBe(
+    "2030-01-01"
+  );
+});
+
+test("Running Validation Tests for serializeHtmlDate", () => {
+  expect(serializeHtmlDate("2010-01-14")).toStrictEqual({
+    year: 2010,
+    month: 1,
+    day: 14,
+  });
+  expect(serializeHtmlDate("2020-10-14")).toStrictEqual({
+    year: 2020,
+    month: 10,
+    day: 14,
+  });
+  expect(serializeHtmlDate("2030-01-01")).toStrictEqual({
+    year: 2030,
+    month: 1,
+    day: 1,
+  });
 });

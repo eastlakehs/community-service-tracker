@@ -1,5 +1,4 @@
 import { ValidationMessage } from "./validationMessage";
-import { parseHtmlDate } from "../entry/dateField";
 
 const charIsANumber = (c: string) =>
   c in ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
@@ -61,22 +60,20 @@ const VALIDATE_graduation = (text: string): ValidationMessage => {
   }
 };
 
+// where text is a JSON stringified {year: number, month: number, day: number}
 const VALIDATE_date = (text?: string): ValidationMessage => {
-  // has to be YYYY-MM-DD
-  if (text && text.length === 10) {
-    const parsedObj = parseHtmlDate(text);
+  if (text) {
+    const parsedObj = JSON.parse(text);
     if (
-      parsedObj.day.length === 2 &&
-      parsedObj.month.length === 2 &&
-      parsedObj.year.length === 4 &&
-      charIsANumber(parsedObj.day[0]) &&
-      charIsANumber(parsedObj.day[1]) &&
-      charIsANumber(parsedObj.month[0]) &&
-      charIsANumber(parsedObj.month[1]) &&
-      charIsANumber(parsedObj.year[0]) &&
-      charIsANumber(parsedObj.year[1]) &&
-      charIsANumber(parsedObj.year[2]) &&
-      charIsANumber(parsedObj.year[3])
+      typeof parsedObj.day === "number" &&
+      typeof parsedObj.month === "number" &&
+      typeof parsedObj.year === "number" &&
+      parsedObj.day >= 1 &&
+      parsedObj.day <= 32 &&
+      parsedObj.month >= 1 &&
+      parsedObj.month <= 12 &&
+      parsedObj.year >= 2000 &&
+      parsedObj.year <= 2100
     ) {
       return {
         validate: true,
