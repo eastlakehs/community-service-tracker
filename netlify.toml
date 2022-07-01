@@ -1,12 +1,15 @@
 [build]
 base = "website/"
+environment = { NODE_VERSION = "16", NODE_ENV="production"}
+command = """
+    npm i
+    npm run build
+    cp build/index.html build/404.html # serves all routes as index.html so that internal routing can work
+"""
+publish = "build/"
 
+# provide overrides for deploy production below
 [context.production]
-command = "npm i && npm run build"
-publish = "build/"
-environment = { NODE_VERSION = "16" }
 
+# provide overrides for deploy previews below
 [context.deploy-preview]
-command = "npm i && npm run build"
-publish = "build/"
-environment = { NODE_VERSION = "16" }
