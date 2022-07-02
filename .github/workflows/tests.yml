@@ -28,7 +28,6 @@ jobs:
     - name: Install node_modules
       run: |
         npm i 
-        (cd firebase/functions && npm i)
         (cd website && npm i)
 
     - name: Run Website Unit Tests
@@ -48,9 +47,9 @@ jobs:
          
     - name: Check firebase functions build for errors
       run: |
-         cd firebase/functions
+         cd packages/firebase-functions
          npm run lint 
-         npm run build
+         npm run compile
          
     - name: Check formatting for entire repo
       run: npm run format-check

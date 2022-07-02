@@ -1,8 +1,9 @@
 import * as functions from "firebase-functions";
-import firestore from "@google-cloud/firestore";
-const client = new firestore.v1.FirestoreAdminClient();
+import firestore from "firebase-admin/firestore";
 
 import { runTimeOpts } from "./runsWith";
+
+const client = new firestore.v1.FirestoreAdminClient();
 
 const bucket = "gs://backups.ehs-service.org";
 const projectId = "community-ser";
