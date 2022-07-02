@@ -31,5 +31,5 @@ jobs:
       env:
         FIREBASE_TOKEN: ${{ secrets.FIREBASE_SECRET }}
       run: |
-        (cd firebase/functions && npm run deploy)
+        (cd packages/firebase-functions && npm run deploy)
         (cd packages/firebase-firestore && npm run deploy)
