@@ -1,6 +1,6 @@
 {
   "name": "root",
-  "version": "0.0.22",
+  "version": "0.0.23",
   "scripts": {
     "format-check": "prettier --check \"**/*.{ts,tsx,js,json}\"",
     "format-write": "prettier --write \"**/*.{ts,tsx,js,json}\""
