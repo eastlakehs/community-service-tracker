@@ -20,26 +20,16 @@ jobs:
       name: Setup NodeJS v16
       with:
         node-version: '16'
-
-      # Caches the node_modules
-    - uses: actions/cache@v2
-      name: Cache node_modules
-      id: npm-cache # use this to check for `cache-hit` (`steps.npm-cache.outputs.cache-hit != 'true'`)
-      with:
-        path: '**/node_modules'
-        key: ${{ runner.os }}-v2-modules-${{ hashFiles('**/package-lock.json') }}
         
-    - name: Install node_modules if cache did not hit
-      if: steps.npm-cache.outputs.cache-hit != 'true'
+    - name: Install node_modules
       run: |
         npm i 
         (cd firebase/functions && npm i)
-        (cd firebase/tests && npm i)
         (cd website && npm i)
          
     - name: Deploy firebase project
       env:
         FIREBASE_TOKEN: ${{ secrets.FIREBASE_SECRET }}
       run: |
-         cd firebase/functions
-         npm run deploy-all
+        (cd firebase/functions && npm run deploy)
+        (cd packages/firebase-firestore && npm run deploy)

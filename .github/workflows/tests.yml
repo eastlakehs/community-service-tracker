@@ -23,22 +23,12 @@ jobs:
       name: Cache firebase emulator
       with:
         path: /home/runner/.cache/firebase/emulators
-        key: ${{ runner.os }}-firebase-emulator-${{ hashFiles('./firebase/tests/package-lock.json') }}
-
-      # Caches the node_modules
-    - uses: actions/cache@v2
-      name: Cache node_modules
-      id: npm-cache # use this to check for `cache-hit` (`steps.npm-cache.outputs.cache-hit != 'true'`)
-      with:
-        path: '**/node_modules'
-        key: ${{ runner.os }}-v2-modules-${{ hashFiles('**/package-lock.json') }}
+        key: firebase-emulator
         
-    - name: Install node_modules if cache did not hit
-      if: steps.npm-cache.outputs.cache-hit != 'true'
+    - name: Install node_modules
       run: |
         npm i 
         (cd firebase/functions && npm i)
-        (cd firebase/tests && npm i)
         (cd website && npm i)
 
     - name: Run Website Unit Tests
@@ -48,7 +38,7 @@ jobs:
 
     - name: Run Database Unit Tests
       run: |
-         cd firebase/tests 
+         cd packages/firebase-firestore
          npm run ci
 
     - name: Check website build for errors
