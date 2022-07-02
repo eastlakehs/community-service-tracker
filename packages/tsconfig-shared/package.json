@@ -1,5 +1,5 @@
 {
-  "name": "ehs-service-tsconfig",
+  "name": "@ehs-service/tsconfig",
   "version": "0.0.21",
   "description": "Shared tsconfig.json for repo",
   "author": "Daniel Sudzilouski <daniel@sudzilouski.com>",
