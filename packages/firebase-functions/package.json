@@ -2,9 +2,9 @@
   "name": "functions",
   "scripts": {
     "lint": "tslint --project tsconfig.json",
-    "build": "tsc",
-    "serve": "npm run build && firebase emulators:start --only functions",
-    "shell": "npm run build && firebase functions:shell",
+    "compile": "tsc",
+    "serve": "npm run compile && firebase emulators:start --only functions",
+    "shell": "npm run compile && firebase functions:shell",
     "start": "npm run shell",
     "deploy": "`npm bin`/firebase deploy --only functions",
     "logs": "`npm bin`/firebase functions:log"
@@ -14,10 +14,10 @@
   },
   "main": "lib/firebase/functions/src/index.js",
   "dependencies": {
-    "@google-cloud/firestore": "^5.0.2",
     "csv-stringify": "^5.5.1",
+    "firebase": "^9.8.4",
     "firebase-admin": "^10.0",
-    "firebase-functions": "^3.21.2"
+    "firebase-functions": "^3.22.0"
   },
   "devDependencies": {
     "firebase-functions-test": "^2.2.0",
