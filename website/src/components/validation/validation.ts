@@ -1,5 +1,8 @@
 import { ValidationMessage } from "./validationMessage";
 
+const charIsANumber = (c: string) =>
+  c in ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
+
 /** All of the internal number validations have edge cases... this should work for our test input. Returns
  * true if the input string is a valid positive number. Function is safe regardless of input type.
  */
@@ -15,9 +18,7 @@ const VALIDATE_hours = (hours?: string): ValidationMessage => {
     if (hours.charAt(i) === ".") {
       if (dot_used) return { validate: false, message: "Invalid Hour" };
       else dot_used = true;
-    } else if (
-      !(hours.charAt(i) in ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"])
-    ) {
+    } else if (!charIsANumber(hours.charAt(i))) {
       return { validate: false, message: "Invalid Hour" };
     }
   }
@@ -59,4 +60,36 @@ const VALIDATE_graduation = (text: string): ValidationMessage => {
   }
 };
 
-export { VALIDATE_hours, VALIDATE_free_form, VALIDATE_graduation };
+// where text is a JSON stringified {year: number, month: number, day: number}
+const VALIDATE_date = (text?: string): ValidationMessage => {
+  if (text) {
+    const parsedObj = JSON.parse(text);
+    if (
+      typeof parsedObj.day === "number" &&
+      typeof parsedObj.month === "number" &&
+      typeof parsedObj.year === "number" &&
+      parsedObj.day >= 1 &&
+      parsedObj.day <= 32 &&
+      parsedObj.month >= 1 &&
+      parsedObj.month <= 12 &&
+      parsedObj.year >= 2000 &&
+      parsedObj.year <= 2100
+    ) {
+      return {
+        validate: true,
+        message: "",
+      };
+    }
+  }
+  return {
+    validate: false,
+    message: "Date not selected",
+  };
+};
+
+export {
+  VALIDATE_hours,
+  VALIDATE_free_form,
+  VALIDATE_graduation,
+  VALIDATE_date,
+};

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import AdminUsersTable from "../table/adminUsersTable";
 import { useDispatch } from "react-redux";
 import { setSignInState } from "../../redux/signedInSlice";
@@ -23,7 +23,7 @@ const ErrorText: React.FunctionComponent<{ text: string }> = ({ text }) => (
 // TODO: fix redux bug
 // TODO: error fallback for unauthed user
 export const Admin: React.FunctionComponent<{}> = () => {
-  const history = useHistory();
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const signedInState = useSelector(selectSignedInState);
   const [listOfAllCurrentUsers, setListOfAllCurrentUsers] = useState<
@@ -53,7 +53,7 @@ export const Admin: React.FunctionComponent<{}> = () => {
     dispatch(clearAllData());
     dispatch(clearCurrentEdit());
     // navigate to user page
-    history.push("/table");
+    navigate("/table");
   };
 
   if (!signedInState.admin) {

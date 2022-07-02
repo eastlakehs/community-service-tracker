@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "module": "ESNext",
+    "target": "ESNext",
+    "noImplicitAny": true,
+    "sourceMap": true,
+    "inlineSources": true,
+    "noImplicitAny": true,
+    "outDir": "build",
+    "resolveJsonModule": true,
+    "strictNullChecks": true,
+    "lib": ["ESNext", "DOM", "DOM.Iterable"]
+  },
+
+  "include": ["src/**/*.ts", "src/**/*.json"],
+  "exclude": ["dist", "node_modules"]
+}

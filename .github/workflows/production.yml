@@ -1,12 +1,15 @@
-name: Tests
+name: Production
+#Prevents multiple firebase deploy workflows running at the same time
+#If another run is requested, it will be queued until the running one finishes
+concurrency: firebase_deploy
 
 on:
-  pull_request:
-    branches:
-      - '**'
+  push:
+    branches:    
+      - master
 
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
 
     steps:
@@ -17,13 +20,6 @@ jobs:
       name: Setup NodeJS v16
       with:
         node-version: '16'
-
-    # Caches the firebase emulator
-    - uses: actions/cache@v2
-      name: Cache firebase emulator
-      with:
-        path: /home/runner/.cache/firebase/emulators
-        key: ${{ runner.os }}-firebase-emulator-${{ hashFiles('./firebase/tests/package-lock.json') }}
 
       # Caches the node_modules
     - uses: actions/cache@v2
@@ -40,28 +36,10 @@ jobs:
         (cd firebase/functions && npm i)
         (cd firebase/tests && npm i)
         (cd website && npm i)
-
-    - name: Run Website Unit Tests
-      run: |
-         cd website 
-         npm run test
-
-    - name: Run Database Unit Tests
-      run: |
-         cd firebase/tests 
-         npm run ci
-
-    - name: Check website build for errors
-      run: |
-         cd website 
-         npm run build
          
-    - name: Check firebase functions build for errors
+    - name: Deploy firebase project
+      env:
+        FIREBASE_TOKEN: ${{ secrets.FIREBASE_SECRET }}
       run: |
          cd firebase/functions
-         npm run lint 
-         npm run build
-         
-    - name: Check formatting for entire repo
-      run: npm run format-check
-      
+         npm run deploy-all

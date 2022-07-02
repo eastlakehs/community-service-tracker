@@ -1,12 +1,20 @@
 {
+  "name": "root",
+  "version": "0.0.20",
   "scripts": {
     "format-check": "prettier --check \"**/*.{ts,tsx,js,json}\"",
     "format-write": "prettier --write \"**/*.{ts,tsx,js,json}\""
   },
   "devDependencies": {
-    "prettier": "2.2.1",
-    "typescript": "4.2.4",
     "@types/node": "15.0.2",
-    "ts-node": "9.1.1"
+    "prettier": "2.2.1",
+    "ts-node": "9.1.1",
+    "typescript": "4.2.4"
+  },
+  "workspaces": [
+    "./packages/*"
+  ],
+  "engines": {
+    "node": "16"
   }
 }

@@ -1,13 +1,16 @@
 import { initialStateType } from "../../../redux/userDataSlice";
 import { downloadFileFromString } from "../../../firebase/firestore/getReport";
-import { Day } from "react-modern-calendar-datepicker";
-import stringify from "csv-stringify";
+import { stringify } from "csv-stringify/browser/esm/sync";
 
 const handleExport = (data: initialStateType) => {
   let exportArray: string[][] = [];
   exportArray.push(data.header);
   Object.keys(data.data).forEach((entry) => {
-    const dateObj = JSON.parse(data.data[entry].Date) as Day;
+    const dateObj = JSON.parse(data.data[entry].Date) as {
+      day: string;
+      month: string;
+      year: string;
+    };
     let dataRow: string[] = [];
     dataRow.push(data.data[entry].Name);
     dataRow.push(data.data[entry].Description);
@@ -16,8 +19,6 @@ const handleExport = (data: initialStateType) => {
     exportArray.push(dataRow);
   });
 
-  stringify(exportArray, (err: any, output: string) => {
-    downloadFileFromString(output, "export_hours.csv");
-  });
+  downloadFileFromString(stringify(exportArray), "export_hours.csv");
 };
 export { handleExport };

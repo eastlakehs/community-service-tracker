@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "jest --detectOpenHandles --forceExit",
-    "ci": "firebase emulators:exec --only firestore \"yarn test\""
+    "ci": "firebase emulators:exec --only firestore \"npm run test\""
   },
   "author": "",
   "license": "MIT",
@@ -23,5 +23,8 @@
   },
   "dependencies": {
     "firebase": "^7.19.1"
+  },
+  "engines": {
+    "node": "16"
   }
 }
