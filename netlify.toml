@@ -1,8 +1,9 @@
 [build]
 base = "website/"
-environment = { NODE_VERSION = "16", NODE_ENV="production"}
+environment = { NODE_VERSION = "16"}
 command = """
 npm i
+export NODE_ENV="production"
 npm run build
 cp build/index.html build/404.html # serves all routes as index.html so that internal routing can work
 """
