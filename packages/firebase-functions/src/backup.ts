@@ -1,5 +1,5 @@
 import * as functions from "firebase-functions";
-import firestore from "firebase-admin/firestore"
+import firestore from "firebase-admin/firestore";
 
 import { runTimeOpts } from "./runsWith";
 
