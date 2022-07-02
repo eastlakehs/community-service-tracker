@@ -49,7 +49,7 @@ jobs:
       run: |
          cd packages/firebase-functions
          npm run lint 
-         npm run build
+         npm run compile
          
     - name: Check formatting for entire repo
       run: npm run format-check
