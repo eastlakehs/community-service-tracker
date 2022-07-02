@@ -20,16 +20,12 @@ jobs:
       name: Setup NodeJS v16
       with:
         node-version: '16'
-        
-    - name: Install node_modules
-      run: |
-        npm i 
-        (cd firebase/functions && npm i)
-        (cd website && npm i)
-         
+
     - name: Deploy firebase project
       env:
         FIREBASE_TOKEN: ${{ secrets.FIREBASE_SECRET }}
       run: |
+        npm i 
+        (cd website && npm i)
         (cd packages/firebase-functions && npm run deploy)
         (cd packages/firebase-firestore && npm run deploy)
