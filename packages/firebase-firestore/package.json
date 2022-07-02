@@ -5,9 +5,11 @@
   "description": "Firestore configs and authentication tests",
   "scripts": {
     "compile": "tsc",
-    "test": "NODE_OPTIONS=--experimental-vm-modules jest --detectOpenHandles --forceExit",
-    "ci": "firebase emulators:exec --only firestore \"npm run test\"",
-    "deploy": "`npm bin`/firebase deploy --only firestore"
+    "test": "npm run test:full",
+    "deploy": "npm run deploy:firestore",
+    "test:only": "NODE_OPTIONS=--experimental-vm-modules jest --detectOpenHandles --forceExit",
+    "test:full": "npm run compile && firebase emulators:exec --only firestore \"npm run test:only\"",
+    "deploy:firestore": "`npm bin`/firebase deploy --only firestore"
   },
   "author": "Daniel Sudzilouski <daniel@sudzilouski.com>",
   "homepage": "https://github.com/eastlakehs/community-service-tracker",
