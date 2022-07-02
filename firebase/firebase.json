@@ -7,11 +7,18 @@
     "rules": "storage.rules"
   },
   "emulators": {
-    "firestore": {
-      "port": 8081
-    },
     "ui": {
-      "enabled": false
+      "enabled": true,
+      "port": 4000
+    },
+    "firestore": {
+      "port": 8080
+    },
+    "auth": {
+      "port": 9099
+    },
+    "functions": {
+      "port": 5001
     }
   },
   "functions": {

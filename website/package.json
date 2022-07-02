@@ -36,9 +36,13 @@
     "typescript": "^4.7.4"
   },
   "scripts": {
-    "start:windows": "set PORT=80 && npm run tailwind && react-scripts start",
-    "start:macos": "export PORT=80 && npm run tailwind && react-scripts start",
-    "start:linux": "PORT=80 && npm run tailwind && react-scripts start",
+    "start": "yarn kill-ports && yarn configure-emulators",
+    "start-website": "cross-env PORT=80 && yarn tailwind && react-scripts start",
+    "spinup-emulators": "cd ../firebase && concurrently \"firebase emulators:start --project=mock-firebase-backend\" \"cd ../website && yarn start-website\"",
+    "configure-emulators": "yarn build-functions && cross-env GCLOUD_PROJECT=\"mock-firebase-backend\" cross-env FIRESTORE_EMULATOR_HOST=\"localhost:8080\" cross-env FIREBASE_AUTH_EMULATOR_HOST=\"localhost:9099\" yarn spinup-emulators",
+    "kill-ports": "kill-port 4000 && kill-port 8080 && kill-port 9099 && kill-port 5001",
+    "build-functions":"cd ../firebase/functions && npm run lint && npm run build && cd ../../website",
+
     "build": "npm run tailwind && react-scripts build",
     "test": "npm run tailwind && react-scripts test",
     "eject": "react-scripts eject",
@@ -60,6 +64,9 @@
     "@fullhuman/postcss-purgecss": "^2.3.0",
     "@typescript-eslint/eslint-plugin": "^3.10.0",
     "@typescript-eslint/parser": "^3.10.0",
+    "concurrently": "^6.1.0",
+    "cross-env": "^7.0.3",
+    "cross-port-killer": "^1.3.0",
     "eslint-plugin-react": "^7.20.6"
   },
   "engines": {
