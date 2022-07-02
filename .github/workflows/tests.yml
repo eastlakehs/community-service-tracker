@@ -39,7 +39,7 @@ jobs:
     - name: Run Database Unit Tests
       run: |
          cd packages/firebase-firestore
-         npm run ci
+         npm run test
 
     - name: Check website build for errors
       run: |
