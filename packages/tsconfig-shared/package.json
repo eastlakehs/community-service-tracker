@@ -1,6 +1,6 @@
 {
   "name": "@ehs-service/tsconfig",
-  "version": "0.0.21",
+  "version": "0.0.22",
   "description": "Shared tsconfig.json for repo",
   "author": "Daniel Sudzilouski <daniel@sudzilouski.com>",
   "homepage": "https://github.com/eastlakehs/community-service-tracker",
