@@ -21,7 +21,7 @@ jobs:
         with:
           node-version: '16'
 
-      - name: Bump version
+      - name: Publish Packages
         env:
           NPM_PUBLISH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
         run: |
