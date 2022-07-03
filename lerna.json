@@ -5,11 +5,11 @@
   "command": {
     "version": {
       "message": "[skip actions] publish %s"
+    },
+    "publish": {
+      "message": "[skip actions] publish %s",
+      "registry": "https://registry.npmjs.org",
+      "verifyAccess": false
     }
-  },
-  "publish": {
-    "message": "[skip actions] publish %s",
-    "registry": "https://registry.npmjs.org",
-    "verifyAccess": false
   }
 }
