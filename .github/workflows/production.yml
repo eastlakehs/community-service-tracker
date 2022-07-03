@@ -29,3 +29,4 @@ jobs:
         (cd website && npm i)
         (cd packages/firebase-functions && npm run deploy)
         (cd packages/firebase-firestore && npm run deploy)
+        (cd packages/firebase-storage && npm run deploy)
