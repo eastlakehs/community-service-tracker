@@ -21,20 +21,13 @@ jobs:
         with:
           node-version: '16'
 
-      - name: Publish modules
+      - name: Bump version
         env:
           NPM_PUBLISH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
         run: |
-          echo "//registry.npmjs.org/:_authToken=${NPM_PUBLISH_TOKEN}" > .npmrc
-          npm publish --workspaces --access=public
-          rm -rf .npmrc
-
-      - name: Bump version
-        run: |
           # There is no clean solution to allow push access to github actions when protected branches are enabled.
           # The workaround is to use a separate github "bot" account and its PAT.
+          echo "//registry.npmjs.org/:_authToken=${NPM_PUBLISH_TOKEN}" > .npmrc
           git config --global user.email "bot@ehs-service.org"
           git config --global user.name "ehs-service-bot"
-          git add .
-
           lerna publish patch --yes
