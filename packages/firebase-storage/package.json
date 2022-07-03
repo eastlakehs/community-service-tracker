@@ -1,0 +1,23 @@
+{
+  "name": "@ehs-service/firebase-storage",
+  "type": "module",
+  "version": "0.0.29",
+  "description": "Firestore storage config",
+  "scripts": {
+    "deploy": "npm run deploy",
+    "deploy:storage": "`npm bin`/firebase deploy --only storage"
+  },
+  "author": "Daniel Sudzilouski <daniel@sudzilouski.com>",
+  "homepage": "https://github.com/eastlakehs/community-service-tracker",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/eastlakehs/community-service-tracker.git"
+  },
+  "bugs": {
+    "url": "https://github.com/eastlakehs/community-service-tracker/issues"
+  },
+  "engines": {
+    "node": "16"
+  },
+  "license": "MIT"
+}
