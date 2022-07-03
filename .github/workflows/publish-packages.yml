@@ -48,6 +48,9 @@ jobs:
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_SECRET }}
         run: |
+          # lerna lock files are kind of malformed where local packages are not included
+          # correct the lock files by running npm i
+          npx lerna exec -- npm i
           (cd packages/firebase-functions && npm run deploy)
           (cd packages/firebase-firestore && npm run deploy)
           (cd packages/firebase-storage && npm run deploy)
