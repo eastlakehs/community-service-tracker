@@ -4,7 +4,7 @@
   "version": "0.0.36",
   "description": "Firestore storage config",
   "scripts": {
-    "deploy": "npm run deploy",
+    "deploy": "npm run deploy:storage",
     "deploy:storage": "`npm bin`/firebase deploy --only storage"
   },
   "author": "Daniel Sudzilouski <daniel@sudzilouski.com>",
