@@ -1,7 +1,7 @@
 import * as functions from "firebase-functions";
-import firestore from "firebase-admin/firestore";
+import * as firestore from "firebase-admin/firestore";
 
-import { runTimeOpts } from "./runsWith";
+import { runTimeOpts } from "./runsWith.js";
 
 const client = new firestore.v1.FirestoreAdminClient();
 

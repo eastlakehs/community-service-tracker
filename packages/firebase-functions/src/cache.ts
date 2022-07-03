@@ -1,21 +1,21 @@
-import * as functions from "firebase-functions";
-import * as admin from "firebase-admin";
-const db = admin.initializeApp().firestore();
-import stringify from "csv-stringify/lib/sync";
+import { runWith } from "firebase-functions";
+import { getFirestore, FieldValue } from "firebase-admin/firestore";
+import { stringify } from "csv-stringify/browser/esm/sync";
 
-import { runTimeOpts } from "./runsWith";
-import { parseToCSVTotals } from "../../../report-generation/src/Object2SummaryCSV";
-import { cloneDbAsJson } from "../../../report-generation/src/Firestore2Object";
-import { profileCacheBuilder } from "../../../website/src/cache/profileCache";
+import { runTimeOpts } from "./runsWith.js";
+import { parseToCSVTotals } from "../../../report-generation/src/Object2SummaryCSV.js";
+import { cloneDbAsJson } from "../../../report-generation/src/Firestore2Object.js";
+import { profileCacheBuilder } from "../../../website/src/cache/profileCache.js";
 
 /**
  * Builds awards summaries and saves to db
  * Saves cache of user list to db under one doc
  */
-export const dailyCacheBuilders = functions
-  .runWith(runTimeOpts.dailyCacheBuilders)
+export const dailyCacheBuilders = runWith(runTimeOpts.dailyCacheBuilders)
   .pubsub.schedule("every 24 hours")
   .onRun(async (context: any) => {
+    const db = getFirestore();
+
     // clone the DB
     const dbObject = await cloneDbAsJson(db);
     // build cache for user profile info
@@ -30,7 +30,7 @@ export const dailyCacheBuilders = functions
     await db.collection("reports").doc("latest").set({
       hourSummary: outputSummary,
       awardsList: outputAwardsList,
-      lastUpdated: admin.firestore.FieldValue.serverTimestamp(),
+      lastUpdated: FieldValue.serverTimestamp(),
     });
     // save profile cache to db
     await db.collection("cache").doc("profileData").set(userProfileCache);
