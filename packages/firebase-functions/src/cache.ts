@@ -1,4 +1,4 @@
-import {runWith} from "firebase-functions";
+import { runWith } from "firebase-functions";
 import { getFirestore, FieldValue } from "firebase-admin/firestore";
 import { stringify } from "csv-stringify/browser/esm/sync";
 
@@ -11,13 +11,12 @@ import { profileCacheBuilder } from "../../../website/src/cache/profileCache.js"
  * Builds awards summaries and saves to db
  * Saves cache of user list to db under one doc
  */
-export const dailyCacheBuilders =
-    runWith(runTimeOpts.dailyCacheBuilders)
+export const dailyCacheBuilders = runWith(runTimeOpts.dailyCacheBuilders)
   .pubsub.schedule("every 24 hours")
   .onRun(async (context: any) => {
-      const db = getFirestore();
+    const db = getFirestore();
 
-      // clone the DB
+    // clone the DB
     const dbObject = await cloneDbAsJson(db);
     // build cache for user profile info
     const userProfileCache = profileCacheBuilder(dbObject);
