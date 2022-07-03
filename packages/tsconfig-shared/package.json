@@ -1,6 +1,6 @@
 {
   "name": "@ehs-service/tsconfig",
-  "version": "0.0.31",
+  "version": "0.0.32",
   "description": "Shared tsconfig.json for repo",
   "author": "Daniel Sudzilouski <daniel@sudzilouski.com>",
   "homepage": "https://github.com/eastlakehs/community-service-tracker",
@@ -11,15 +11,12 @@
     "url": "git+https://github.com/eastlakehs/community-service-tracker.git"
   },
   "publishConfig": {
-    "registry": "https://registry.npmjs.org/"
+    "access": "public"
   },
   "bugs": {
     "url": "https://github.com/eastlakehs/community-service-tracker/issues"
   },
   "engines": {
     "node": "16"
-  },
-  "publishConfig": {
-    "access": "public"
   }
 }
