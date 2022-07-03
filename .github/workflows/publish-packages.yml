@@ -36,6 +36,7 @@ jobs:
           git config --global user.name "ehs-service-bot"
           lerna publish patch --yes --no-push
           # lerna version bump messes up format, push back manually
+          rm -rf .npmrc
           npm run format-write 
           git add .
           git commit --amend --no-edit
