@@ -21,6 +21,10 @@ jobs:
         with:
           node-version: '16'
 
+      - name: Install Dependencies
+        run: |
+          npm i
+
       - name: Publish Packages
         env:
           NPM_PUBLISH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
@@ -30,15 +34,17 @@ jobs:
           echo "//registry.npmjs.org/:_authToken=${NPM_PUBLISH_TOKEN}" > .npmrc
           git config --global user.email "bot@ehs-service.org"
           git config --global user.name "ehs-service-bot"
-          lerna publish patch --yes
+          lerna publish patch --yes --no-push
+          # lerna version bump messes up format, push back manually
+          npm run format-write 
+          git add .
+          git commit --amend --no-edit
+          git push
 
       - name: Deploy firebase project
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_SECRET }}
         run: |
-          git reset ${{ github.sha }} --hard # drop version bump from lerna
-          npm i 
-          (cd website && npm i)
           (cd packages/firebase-functions && npm run deploy)
           (cd packages/firebase-firestore && npm run deploy)
           (cd packages/firebase-storage && npm run deploy)
