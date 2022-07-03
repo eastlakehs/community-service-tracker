@@ -1,6 +1,9 @@
 # Build outputs
 **/*/dist
 
+# Secrets
+.npmrc
+
 # Logs
 logs
 *.log
