@@ -24,6 +24,8 @@ jobs:
       - name: Install Dependencies
         run: |
           npm i
+          (cd website && npm i)
+          (cd report-generation && npm i)
 
       - name: Publish Packages
         env:
