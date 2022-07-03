@@ -1,6 +1,6 @@
 {
   "name": "@ehs-service/firebase-functions",
-  "version": "0.0.25",
+  "version": "0.0.26",
   "type": "module",
   "scripts": {
     "lint": "tslint --project tsconfig.json",
