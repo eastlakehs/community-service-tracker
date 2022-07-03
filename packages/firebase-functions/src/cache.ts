@@ -1,4 +1,5 @@
 import { runWith } from "firebase-functions";
+import { initializeApp } from "firebase-admin/app";
 import { getFirestore, FieldValue } from "firebase-admin/firestore";
 import { stringify } from "csv-stringify/browser/esm/sync";
 
@@ -14,6 +15,7 @@ import { profileCacheBuilder } from "../../../website/src/cache/profileCache.js"
 export const dailyCacheBuilders = runWith(runTimeOpts.dailyCacheBuilders)
   .pubsub.schedule("every 24 hours")
   .onRun(async (context: any) => {
+    initializeApp();
     const db = getFirestore();
 
     // clone the DB
