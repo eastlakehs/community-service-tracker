@@ -35,8 +35,6 @@ jobs:
           # The workaround is to use a separate github "bot" account and its PAT.
           git config --global user.email "bot@ehs-service.org"
           git config --global user.name "ehs-service-bot"
-          npm version patch --workspaces --include-workspace-root --git-tag-version=false --commit-hooks=false
           git add .
-          # https://github.blog/changelog/2021-02-08-github-actions-skip-pull-request-and-push-workflows-with-skip-ci/
-          git commit -m "[skip actions] bump patch version"
-          git push origin master
+
+          lerna publish patch --yes
