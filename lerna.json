@@ -1,12 +1,15 @@
 {
-  "packages": [
-    "packages/*"
-  ],
+  "packages": ["packages/*"],
   "useNx": false,
   "version": "0.0.28",
   "command": {
     "version": {
       "message": "[skip actions] publish %s"
     }
+  },
+  "publish": {
+    "message": "[skip actions] publish %s",
+    "registry": "https://registry.npmjs.org",
+    "verifyAccess": false
   }
 }
