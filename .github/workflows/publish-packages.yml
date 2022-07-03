@@ -1,5 +1,5 @@
 name: Publish-Packages
-concurrency: deploy_packages # queue one deploy at a time
+concurrency: deploy # queue one deploy at a time
 
 on:
   push:
@@ -32,6 +32,13 @@ jobs:
           git config --global user.name "ehs-service-bot"
           lerna publish patch --yes
 
-      # trigger firebase deploy once npm packages are published
-      - uses: ./.github/workflows/production.yml
-        secrets: inherit
+      - name: Deploy firebase project
+        env:
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_SECRET }}
+        run: |
+          git reset ${{ github.sha }} --hard # drop version bump from lerna
+          npm i 
+          (cd website && npm i)
+          (cd packages/firebase-functions && npm run deploy)
+          (cd packages/firebase-firestore && npm run deploy)
+          (cd packages/firebase-storage && npm run deploy)
