@@ -3,10 +3,8 @@ name: Production
 #If another run is requested, it will be queued until the running one finishes
 concurrency: firebase_deploy
 
-on:
-  push:
-    branches:    
-      - master
+# trigger firebase deploy once npm packages are published
+on: [workflow_call]
 
 jobs:
   deploy:

@@ -7,7 +7,7 @@ on:
       - master
 
 jobs:
-  deploy:
+  publish-packages:
     runs-on: ubuntu-latest
 
     steps:
@@ -31,3 +31,7 @@ jobs:
           git config --global user.email "bot@ehs-service.org"
           git config --global user.name "ehs-service-bot"
           lerna publish patch --yes
+
+      # trigger firebase deploy once npm packages are published
+      - uses: ./.github/workflows/production.yml
+        secrets: inherit
