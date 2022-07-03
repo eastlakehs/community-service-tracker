@@ -21,22 +21,13 @@ jobs:
         with:
           node-version: '16'
 
-      - name: Publish modules
+      - name: Publish Packages
         env:
           NPM_PUBLISH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
         run: |
-          echo "//registry.npmjs.org/:_authToken=${NPM_PUBLISH_TOKEN}" > .npmrc
-          npm publish --workspaces --access=public
-          rm -rf .npmrc
-
-      - name: Bump version
-        run: |
           # There is no clean solution to allow push access to github actions when protected branches are enabled.
           # The workaround is to use a separate github "bot" account and its PAT.
+          echo "//registry.npmjs.org/:_authToken=${NPM_PUBLISH_TOKEN}" > .npmrc
           git config --global user.email "bot@ehs-service.org"
           git config --global user.name "ehs-service-bot"
-          npm version patch --workspaces --include-workspace-root --git-tag-version=false --commit-hooks=false
-          git add .
-          # https://github.blog/changelog/2021-02-08-github-actions-skip-pull-request-and-push-workflows-with-skip-ci/
-          git commit -m "[skip actions] bump patch version"
-          git push origin master
+          lerna publish patch --yes

@@ -25,6 +25,7 @@
   },
   "main": "dist/packages/firebase-functions/src/index.js",
   "dependencies": {
+    "@ehs-service/tsconfig": "^0.0.27",
     "csv-stringify": "^6.1.3",
     "firebase": "^9.8.4",
     "firebase-admin": "^10.0",
