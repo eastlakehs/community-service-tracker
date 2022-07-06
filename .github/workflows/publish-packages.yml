@@ -37,7 +37,7 @@ jobs:
           git config --global user.name "ehs-service-bot"
           git pull --rebase # might have multiple commits queued
           # lerna version bump messes up format, push back manually
-          lerna version patch --no-push
+          lerna version patch --no-push --yes
           npm run format-write 
           git add .
           git commit --amend --no-edit
