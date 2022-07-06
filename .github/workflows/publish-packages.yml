@@ -43,7 +43,7 @@ jobs:
           git commit --amend --no-edit
           git push
           echo "//registry.npmjs.org/:_authToken=${NPM_PUBLISH_TOKEN}" > .npmrc
-          lerna publish from-git --yes
+          lerna publish from-package --yes
           rm -rf .npmrc
 
       - name: Deploy firebase project
@@ -52,7 +52,9 @@ jobs:
         run: |
           # lerna lock files are kind of malformed where local packages are not included
           # correct the lock files by running npm i
-          npx lerna exec -- npm i
+          # because npm publish is eventually consistent, we might have a wait a bit for the packages to go live
+          for i in {1..10}; do npx lerna exec -- npm i && break || sleep 10; done
+
           (cd packages/firebase-functions && npm run deploy)
           (cd packages/firebase-firestore && npm run deploy)
           (cd packages/firebase-storage && npm run deploy)
