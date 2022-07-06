@@ -33,17 +33,18 @@ jobs:
         run: |
           # There is no clean solution to allow push access to github actions when protected branches are enabled.
           # The workaround is to use a separate github "bot" account and its PAT.
-          echo "//registry.npmjs.org/:_authToken=${NPM_PUBLISH_TOKEN}" > .npmrc
           git config --global user.email "bot@ehs-service.org"
           git config --global user.name "ehs-service-bot"
-          lerna publish patch --yes --no-push
+          git pull --rebase # might have multiple commits queued
           # lerna version bump messes up format, push back manually
-          rm -rf .npmrc
+          lerna version patch --no-push
           npm run format-write 
           git add .
           git commit --amend --no-edit
-          git pull --rebase
           git push
+          echo "//registry.npmjs.org/:_authToken=${NPM_PUBLISH_TOKEN}" > .npmrc
+          lerna publish --yes
+          rm -rf .npmrc
 
       - name: Deploy firebase project
         env:
