@@ -19,7 +19,7 @@ jobs:
       - uses: actions/setup-node@v2
         name: Setup NodeJS v16
         with:
-          node-version: '16'
+          node-version: "16"
 
       - name: Install Dependencies
         run: |
@@ -42,6 +42,7 @@ jobs:
           npm run format-write 
           git add .
           git commit --amend --no-edit
+          git pull --rebase
           git push
 
       - name: Deploy firebase project
