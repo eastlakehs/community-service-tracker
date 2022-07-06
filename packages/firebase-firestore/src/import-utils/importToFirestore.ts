@@ -1,4 +1,4 @@
-import { Firestore, doc, setDoc } from "firebase/firestore";
+import { Firestore, doc, setDoc, collection } from "firebase/firestore";
 import { dbType } from "./dbType.js";
 
 /**
@@ -18,7 +18,7 @@ export const importToFirestore = async (
       collectionValue
     )) {
       path.push(documentName);
-      await setDoc(doc(firestore, path.join("/")), documentValue);
+      await setDoc(doc(firestore, path.join("/")), documentValue.fieldValues);
       await importToFirestore(documentValue.subCollections, firestore, path);
       path.pop();
     }

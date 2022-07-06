@@ -55,7 +55,7 @@ const tokenNotVerified: TokenOptions = {
 
 const tokenNotPasswordAuth: TokenOptions = {
   firebase: {
-    sign_in_provider: "something else",
+    sign_in_provider: "anonymous",
   },
   email_verified: true,
 };

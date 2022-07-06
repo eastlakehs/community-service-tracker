@@ -7,8 +7,8 @@
     "compile": "tsc",
     "test": "npm run test:full",
     "deploy": "npm run deploy:firestore",
-    "test:only": "NODE_OPTIONS=--experimental-vm-modules `npm bin`/jest --detectOpenHandles --forceExit --runInBand",
-    "test:full": "npm run compile && firebase emulators:exec --only firestore \"npm run test:only\"",
+    "test:only": "export FIRESTORE_EMULATOR_HOST=\"localhost:8080\"; export NODE_OPTIONS=--experimental-vm-modules; `npm bin`/jest --detectOpenHandles --forceExit --runInBand",
+    "test:full": "npm run compile && firebase emulators:exec --ui --only firestore \"npm run test:only\"",
     "deploy:firestore": "`npm bin`/firebase deploy --only firestore"
   },
   "author": "Daniel Sudzilouski <daniel@sudzilouski.com>",
@@ -33,7 +33,8 @@
   },
   "dependencies": {
     "@firebase/rules-unit-testing": "^2.0.3",
-    "firebase": "^9.8.4"
+    "firebase": "^9.8.4",
+    "firebase-admin": "^11.0.0"
   },
   "publishConfig": {
     "access": "public"
