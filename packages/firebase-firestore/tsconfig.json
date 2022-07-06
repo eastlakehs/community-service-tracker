@@ -1,9 +1,9 @@
 {
   "compilerOptions": {
-    "module": "nodenext",
-    "moduleResolution": "nodenext",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
     "target": "esnext",
-    "noImplicitAny": true,
+    "skipLibCheck": true,
     "sourceMap": true,
     "inlineSources": true,
     "noImplicitAny": true,

@@ -7,7 +7,7 @@
     "compile": "tsc",
     "test": "npm run test:full",
     "deploy": "npm run deploy:firestore",
-    "test:only": "NODE_OPTIONS=--experimental-vm-modules jest --detectOpenHandles --forceExit",
+    "test:only": "NODE_OPTIONS=--experimental-vm-modules `npm bin`/jest --detectOpenHandles --forceExit --runInBand",
     "test:full": "npm run compile && firebase emulators:exec --only firestore \"npm run test:only\"",
     "deploy:firestore": "`npm bin`/firebase deploy --only firestore"
   },
@@ -25,12 +25,8 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@babel/core": "^7.11.6",
-    "@babel/preset-env": "^7.11.5",
-    "@babel/preset-typescript": "^7.10.4",
-    "@types/jest": "^28.1.4",
+    "@types/jest": "^28.1.2",
     "@types/node": "^14.6.4",
-    "babel-jest": "^26.3.0",
     "firebase-tools": "^9.8.0",
     "jest": "^28.1.2",
     "typescript": "^4.7.4"

@@ -1,9 +1,10 @@
 import { initializeTestEnvironment } from "@firebase/rules-unit-testing";
-import { Settings } from "firebase/firestore";
+import {} from "firebase/firestore";
 
 import { dbType } from "@ehs-service/firebase-firestore/src/import-utils/dbType.js";
 import { importToFirestore } from "@ehs-service/firebase-firestore/src/import-utils/importToFirestore.js";
 
+/*
 describe("test importToFirestore", () => {
   it("imports an example DB correctly", async () => {
     const exampleDB: dbType = {
@@ -44,3 +45,4 @@ describe("test importToFirestore", () => {
   });
 });
 //FIREBASE_EMULATOR_HUB
+*/
