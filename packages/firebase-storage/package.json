@@ -1,7 +1,7 @@
 {
   "name": "@ehs-service/firebase-storage",
   "type": "module",
-  "version": "0.0.50",
+  "version": "0.0.51",
   "description": "Firestore storage config",
   "scripts": {
     "deploy": "npm run deploy:storage",
