@@ -1,7 +1,7 @@
 {
   "packages": ["packages/*"],
   "useNx": false,
-  "version": "0.0.52",
+  "version": "0.0.53",
   "command": {
     "version": {
       "message": "[skip actions] publish %s"
