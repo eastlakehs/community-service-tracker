@@ -7,7 +7,7 @@
     "compile": "tsc",
     "test": "npm run test:full",
     "deploy": "npm run deploy:firestore",
-    "test:only": "export FIRESTORE_EMULATOR_HOST=\"localhost:8080\"; export NODE_OPTIONS=--experimental-vm-modules; `npm bin`/jest --detectOpenHandles --forceExit --runInBand",
+    "test:only": "export FIRESTORE_EMULATOR_HOST=\"localhost:8080\"; export NODE_OPTIONS=--experimental-vm-modules; node_modules/.bin/jest --detectOpenHandles --forceExit --runInBand",
     "test:full": "npm run compile && firebase emulators:exec --ui --only firestore \"npm run test:only\"",
     "deploy:firestore": "`npm bin`/firebase deploy --only firestore"
   },
