@@ -1,7 +1,7 @@
 {
   "name": "@ehs-service/firebase-firestore",
   "type": "module",
-  "version": "0.0.55",
+  "version": "0.0.56",
   "description": "Firestore configs and authentication tests",
   "scripts": {
     "compile": "tsc",
