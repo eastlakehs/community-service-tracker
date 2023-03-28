@@ -8,6 +8,7 @@ npm run build
 cp build/index.html build/404.html # serves all routes as index.html so that internal routing can work
 """
 publish = "build/"
+ignore = "/bin/false" # always build regardless of content changes https://answers.netlify.com/t/builds-cancelled-for-a-new-branch-due-to-no-content-change/17169/2
 
 # provide overrides for deploy production below
 [context.production]
