@@ -12,6 +12,8 @@ import {
   setContactPhone,
   clearCurrentEdit,
   setNotes,
+  addImage,
+  removeImage,
 } from "../../redux/editScreenSlice";
 import {
   StringField,
@@ -190,9 +192,9 @@ const Edit: React.FC<{
           name="Picture Upload"
           placeholder="Smith"
           hidden={!(currentData && currentData.NHS === "Yes")}
-          value={currentData ? currentData.NHSofficer : ""}
-          setValue={(value) => {
-            dispatch(setNHSOfficer(value));
+          value={currentData ? currentData.pictures : []}
+          addImage={(value) => {
+            dispatch(addImage(value));
           }}
           shouldShowError={shouldShowError}
           error={!VALIDATE_free_form(currentData?.NHSofficer).validate}

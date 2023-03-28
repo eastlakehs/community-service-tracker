@@ -1,13 +1,16 @@
 import React from "react";
 
 import { ErrorMessage } from "./errorMessage";
+import { selectSignedInState } from "../../redux/signedInSlice";
+import { useSelector } from "react-redux";
+import { uploadPhoto } from "../../firebase/firestore/uploadPhoto";
 
 export const PictureField: React.FunctionComponent<{
   name: string;
   placeholder: string;
   hidden?: boolean;
-  value: string;
-  setValue: (value: string) => void;
+  value: string[];
+  addImage: (value: string) => void;
   shouldShowError?: boolean;
   error?: boolean;
   errorMessage?: string;
@@ -16,11 +19,14 @@ export const PictureField: React.FunctionComponent<{
   placeholder,
   hidden,
   value,
-  setValue,
+  addImage,
   error,
   errorMessage,
   shouldShowError,
 }) => {
+  const signedInstate = useSelector(selectSignedInState);
+
+  console.log(value);
   return (
     <div className={"flex flex-wrap -mx-3 mb-6 " + (hidden ? "hidden" : "")}>
       <div className="w-full px-3">
@@ -38,8 +44,23 @@ export const PictureField: React.FunctionComponent<{
           id="grid-first-name"
           // value={value}
           onChange={(e) => {
-            console.log(e.target.files);
-            //setValue(e.target.value);
+            let files = e.target.files;
+            if (files) {
+              for (let i = 0; i < files.length; i++) {
+                let file = files.item(i);
+                if (file) {
+                  uploadPhoto(file, signedInstate.userEmail, "pictures").then(
+                    (url) => {
+                      if (url) {
+                        addImage(url);
+                      } else {
+                        // error uploading image
+                      }
+                    }
+                  );
+                }
+              }
+            }
           }}
         />
         <ErrorMessage e={error && shouldShowError} eM={errorMessage} />

@@ -95,6 +95,8 @@ export const {
   setContactName,
   setContactPhone,
   setNotes,
+  addImage,
+  removeImage,
 } = editScreenSlice.actions;
 
 export const selectEditScreenState = (state: {
