@@ -103,6 +103,11 @@ const LoginForm = () => {
         <div className="mb-6">
           <UserHint state={emailState} />
         </div>
+        <div className="mb-6">
+          <a href="https://forms.gle/2rBLHFPTo9uE8F4o6" className="text-gray-700 text-base italic">
+             We are now collecting feedback here: https://forms.gle/2rBLHFPTo9uE8F4o6
+          </a>
+        </div>
         <div className="flex items-center justify-between">
           <button
             onClick={async () => {
