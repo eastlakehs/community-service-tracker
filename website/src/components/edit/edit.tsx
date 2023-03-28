@@ -13,7 +13,13 @@ import {
   clearCurrentEdit,
   setNotes,
 } from "../../redux/editScreenSlice";
-import { StringField, CheckBox, FormSubmitButton, DateField } from "../entry";
+import {
+  StringField,
+  PictureField,
+  CheckBox,
+  FormSubmitButton,
+  DateField,
+} from "../entry";
 import { firestoreDocumentType } from "../../firebase/firestore/firestoreData.type";
 import { useNavigate } from "react-router-dom";
 import {
@@ -160,7 +166,7 @@ const Edit: React.FC<{
           name="Notes:"
           placeholder=""
           setValue={(value: string) => {
-            dispatch(setNotes(value)); //TODO actually write this to database
+            dispatch(setNotes(value));
           }}
           value={currentData ? currentData.notes : ""}
           shouldShowError={shouldShowError}
@@ -179,6 +185,20 @@ const Edit: React.FC<{
           error={!VALIDATE_free_form(currentData?.NHSofficer).validate}
           errorMessage={VALIDATE_free_form(currentData?.NHSofficer).message}
         />
+
+        <PictureField
+          name="Picture Upload"
+          placeholder="Smith"
+          hidden={!(currentData && currentData.NHS === "Yes")}
+          value={currentData ? currentData.NHSofficer : ""}
+          setValue={(value) => {
+            dispatch(setNHSOfficer(value));
+          }}
+          shouldShowError={shouldShowError}
+          error={!VALIDATE_free_form(currentData?.NHSofficer).validate}
+          errorMessage={VALIDATE_free_form(currentData?.NHSofficer).message}
+        />
+
         <div>
           <div className="sm:grid grid-cols-11">
             <div className="sm:col-span-4">

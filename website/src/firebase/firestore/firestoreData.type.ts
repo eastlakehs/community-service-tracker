@@ -10,6 +10,7 @@ export interface firestoreDocumentType {
   contactName: string;
   contactPhone: string;
   notes: string;
+  pictures: string[];
 }
 
 const blankDocument: firestoreDocumentType = {
@@ -23,6 +24,7 @@ const blankDocument: firestoreDocumentType = {
   contactName: "",
   contactPhone: "",
   notes: "",
+  pictures: []
 };
 
 export interface userProfileData {
