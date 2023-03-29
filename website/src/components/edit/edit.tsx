@@ -196,6 +196,9 @@ const Edit: React.FC<{
           addImage={(value) => {
             dispatch(addImage(value));
           }}
+          removeImage={(value) => {
+            dispatch(removeImage(value));
+          }}
           shouldShowError={shouldShowError}
           error={!VALIDATE_free_form(currentData?.NHSofficer).validate}
           errorMessage={VALIDATE_free_form(currentData?.NHSofficer).message}
