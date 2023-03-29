@@ -190,8 +190,6 @@ const Edit: React.FC<{
 
         <PictureField
           name="Picture Upload"
-          placeholder="Smith"
-          hidden={!(currentData && currentData.NHS === "Yes")}
           value={currentData ? currentData.pictures : []}
           addImage={(value) => {
             dispatch(addImage(value));
@@ -199,9 +197,6 @@ const Edit: React.FC<{
           removeImage={(value) => {
             dispatch(removeImage(value));
           }}
-          shouldShowError={shouldShowError}
-          error={!VALIDATE_free_form(currentData?.NHSofficer).validate}
-          errorMessage={VALIDATE_free_form(currentData?.NHSofficer).message}
         />
 
         <div>

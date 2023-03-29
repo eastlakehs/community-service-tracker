@@ -23,45 +23,29 @@ const Button: React.FunctionComponent<{
 
 export const PictureField: React.FunctionComponent<{
   name: string;
-  placeholder: string;
-  hidden?: boolean;
   value: string[];
   addImage: (value: string) => void;
   removeImage: (value: string) => void;
-  shouldShowError?: boolean;
   error?: boolean;
-  errorMessage?: string;
-}> = ({
-  name,
-  placeholder,
-  hidden,
-  value,
-  addImage,
-  removeImage,
-  error,
-  errorMessage,
-  shouldShowError,
-}) => {
+}> = ({ value, addImage, removeImage, error }) => {
   const signedInstate = useSelector(selectSignedInState);
 
   console.log(value);
   return (
     <>
-      <div className={"flex flex-wrap -mx-3 mb-6 " + (hidden ? "hidden" : "")}>
+      <div className={"flex flex-wrap -mx-3 mb-6 "}>
         <div className="w-full px-3">
           <label className="block uppercase tracking-wide text-white text-xs font-bold mb-2">
-            Picture Upload
+            Picture Upload (Photos Will Show Below)
           </label>
           <input
             type="file"
             accept="image/*"
             className={
-              "appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" +
-              (error && shouldShowError ? " border border-red-500" : "")
+              "appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
             }
             multiple={true}
             id="grid-first-name"
-            // value={value}
             onChange={(e) => {
               let files = e.target.files;
               if (files) {
@@ -73,7 +57,7 @@ export const PictureField: React.FunctionComponent<{
                         if (url) {
                           addImage(url);
                         } else {
-                          // error uploading image
+                          // handle error uploading image later
                         }
                       }
                     );
