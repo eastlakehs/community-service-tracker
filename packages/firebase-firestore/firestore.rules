@@ -44,7 +44,7 @@ service cloud.firestore {
 }
 
 service firebase.storage {
-  match /b/{bucket}/o {
+  match /b/community-ser.appspot.com/o {
     match /pictures/{email}/{allPaths=**} {
         allow read, write: if isAuthenticatedProperly() &&  emailIsValid(email) && emailMatchesDocument(email);
     }
