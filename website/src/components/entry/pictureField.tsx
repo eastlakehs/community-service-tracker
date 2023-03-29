@@ -36,7 +36,7 @@ export const PictureField: React.FunctionComponent<{
       <div className={"flex flex-wrap -mx-3 mb-6 "}>
         <div className="w-full px-3">
           <label className="block uppercase tracking-wide text-white text-xs font-bold mb-2">
-            Picture Upload (Photos Will Show Below)
+            Upload Picture (You may need to disable adblocker)
           </label>
           <input
             type="file"
@@ -44,7 +44,7 @@ export const PictureField: React.FunctionComponent<{
             className={
               "appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
             }
-            multiple={true}
+            multiple={false}
             id="grid-first-name"
             onChange={(e) => {
               let files = e.target.files;
