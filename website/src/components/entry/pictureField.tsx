@@ -46,6 +46,10 @@ export const PictureField: React.FunctionComponent<{
             }
             multiple={false}
             id="grid-first-name"
+            onClick={(e) => {
+              // https://stackoverflow.com/questions/12030686/html-input-file-selection-event-not-firing-upon-selecting-the-same-file
+              (e.target as HTMLInputElement).value = "";
+            }}
             onChange={(e) => {
               let files = e.target.files;
               if (files) {
