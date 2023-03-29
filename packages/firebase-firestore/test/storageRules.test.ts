@@ -1,7 +1,7 @@
 /**
  *  About: this file contains security unit testing in order to ensure that our app is secured from un-authorized outside access
  */
-/*
+
 
 import {
     initializeTestEnvironment,
@@ -11,7 +11,7 @@ import {
     RulesTestEnvironment,
   } from "@firebase/rules-unit-testing";
 
-
+  import {assert, expect, should} from "chai"
   
   import { getStorage, ref, deleteObject, getStream, uploadBytes, FirebaseStorage, getDownloadURL, uploadString } from "firebase/storage";
 
@@ -58,28 +58,22 @@ import {
     },
     email_verified: true,
   };
-  */
+  
 
-  /*
-  // https://stackoverflow.com/questions/24488985/how-to-mock-file-in-javascript
-  const mockFile = () => new File([""], "filename", { type: 'text/html' });
-  const blob = Buffer.from('A'.repeat(1024)) // This or anything lower just hangs
 
-  */
- /*
-  describe("non-user docs should reject", () => {
+  describe("non-user storage items should reject", () => {
     // signed in as student-a@lwsd.org
     const storage = () => initStorage("student-a@lwsd.org", tokenValid);
 
     // signed in as student-a, reading to student-b should fail
     it("reading to student-b as student-a", async () => {
-      await assertSucceeds(getDownloadURL(ref(storage(), "users/student-b@lwsd.org")));
+      await assertFails(getDownloadURL(ref(storage(), "users/student-b@lwsd.org")));
     });
     // signed in as student-a, writing to student-b should fail
     it("writing to student-b as student-a", async () => {
       const nonUserDoc = ref(storage(), "users/student-b@lwsd.org");
       await assertFails(uploadString(nonUserDoc, "foobar"));
-    }, 50000);
+    });
     // signed in as student-a, deleting to student-b should fail
     it("deleting to student-b as student-a", async () => {
       const nonUserDoc = ref(storage(), "users/student-b@lwsd.org");
