@@ -82,8 +82,6 @@ export const PictureField: React.FunctionComponent<{
               }
             }}
           />
-
-          <ErrorMessage e={error && shouldShowError} eM={errorMessage} />
         </div>
       </div>
 
