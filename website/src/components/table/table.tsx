@@ -125,6 +125,15 @@ const CSTable: React.FunctionComponent<{
               </table>
             </div>
           </div>
+          <div className="mb-6">
+            <a
+              href="https://forms.gle/2rBLHFPTo9uE8F4o6"
+              className="text-white text-base italic"
+            >
+              We are now collecting feedback for the tracker here:
+              https://forms.gle/2rBLHFPTo9uE8F4o6
+            </a>
+          </div>
         </div>
       </div>
     </>
