@@ -65,13 +65,18 @@ export const editScreenSlice = createSlice({
       state.currentData.notes = action.payload;
     },
     addImage: (state, action: PayloadAction<string>) => {
-      if(!state.currentData.pictures.includes(action.payload)) {
-        state.currentData.pictures = [...state.currentData.pictures, action.payload]
+      if (!state.currentData.pictures.includes(action.payload)) {
+        state.currentData.pictures = [
+          ...state.currentData.pictures,
+          action.payload,
+        ];
       }
     },
     removeImage: (state, action: PayloadAction<string>) => {
-      if(state.currentData.pictures.includes(action.payload)) {
-        state.currentData.pictures = state.currentData.pictures.filter(x => x !== action.payload)
+      if (state.currentData.pictures.includes(action.payload)) {
+        state.currentData.pictures = state.currentData.pictures.filter(
+          (x) => x !== action.payload
+        );
       }
     },
     clearCurrentEdit: (state) => {

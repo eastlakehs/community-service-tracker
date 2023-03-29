@@ -24,7 +24,7 @@ const blankDocument: firestoreDocumentType = {
   contactName: "",
   contactPhone: "",
   notes: "",
-  pictures: []
+  pictures: [],
 };
 
 export interface userProfileData {

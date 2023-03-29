@@ -1,7 +1,7 @@
 import firebase from "firebase/compat/app";
 import "firebase/compat/auth";
 import "firebase/compat/firestore";
-import "firebase/compat/storage"
+import "firebase/compat/storage";
 
 /** Configuration for firebase project. The apiKey is NOT private information. */
 const firebaseConfig = {
