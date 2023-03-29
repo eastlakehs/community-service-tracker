@@ -14,6 +14,7 @@ const sampleData1: initialStateType = {
       contactName: "",
       contactPhone: "",
       notes: "",
+      pictures: [],
     },
   },
 };
@@ -37,6 +38,7 @@ const sampleData3: initialStateType = {
       contactName: "",
       contactPhone: "",
       notes: "",
+      pictures: [],
     },
     key2: {
       NHS: "Yes",
@@ -49,6 +51,7 @@ const sampleData3: initialStateType = {
       contactName: "",
       contactPhone: "",
       notes: "",
+      pictures: [],
     },
     key3: {
       NHS: "Yes",
@@ -61,6 +64,7 @@ const sampleData3: initialStateType = {
       contactName: "",
       contactPhone: "",
       notes: "",
+      pictures: [],
     },
   },
 };

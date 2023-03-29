@@ -64,6 +64,21 @@ export const editScreenSlice = createSlice({
     setNotes: (state, action: PayloadAction<string>) => {
       state.currentData.notes = action.payload;
     },
+    addImage: (state, action: PayloadAction<string>) => {
+      if (!state.currentData.pictures.includes(action.payload)) {
+        state.currentData.pictures = [
+          ...state.currentData.pictures,
+          action.payload,
+        ];
+      }
+    },
+    removeImage: (state, action: PayloadAction<string>) => {
+      if (state.currentData.pictures.includes(action.payload)) {
+        state.currentData.pictures = state.currentData.pictures.filter(
+          (x) => x !== action.payload
+        );
+      }
+    },
     clearCurrentEdit: (state) => {
       state.currentData = { ...blankDocument };
       state.currentKey = null;
@@ -85,6 +100,8 @@ export const {
   setContactName,
   setContactPhone,
   setNotes,
+  addImage,
+  removeImage,
 } = editScreenSlice.actions;
 
 export const selectEditScreenState = (state: {
