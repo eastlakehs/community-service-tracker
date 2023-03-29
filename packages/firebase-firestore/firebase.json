@@ -3,10 +3,16 @@
     "rules": "firestore.rules",
     "indexes": "firestore.indexes.json"
   },
+  "storage": {
+    "rules": "firestore.rules"
+  },
   "emulators": {
     "ui": {
       "enabled": true,
       "port": 4000
+    },
+    "hub": {
+      "port": 4400
     },
     "firestore": {
       "port": 8080
@@ -16,6 +22,9 @@
     },
     "functions": {
       "port": 5001
+    },
+    "storage": {
+      "port": 5002
     }
   }
 }

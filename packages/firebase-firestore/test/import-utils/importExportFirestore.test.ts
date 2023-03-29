@@ -1,5 +1,6 @@
 import { initializeTestEnvironment } from "@firebase/rules-unit-testing";
 import { dbType } from "@ehs-service/firebase-firestore/src/import-utils/dbType.js";
+import { assert, expect, should } from "chai";
 import { importToFirestore } from "@ehs-service/firebase-firestore/src/import-utils/importToFirestore.js";
 import { exportFromFirestore } from "@ehs-service/firebase-firestore/src/import-utils/exportFromFirestore.js";
 
@@ -79,7 +80,7 @@ const importExportIdentity = async (seedDb: dbType) => {
   await deleteApp(app);
   await testEnv.clearFirestore();
   await testEnv.cleanup();
-  expect(exportData).toStrictEqual(seedDb);
+  expect(exportData).to.deep.equal(seedDb);
 };
 
 describe("test importToFirestore and exportToFirestore", () => {
