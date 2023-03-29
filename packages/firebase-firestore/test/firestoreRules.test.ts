@@ -10,6 +10,8 @@ import {
   RulesTestEnvironment,
 } from "@firebase/rules-unit-testing";
 
+import {assert, expect, should} from "chai"
+
 import {
   Firestore,
   getDoc,

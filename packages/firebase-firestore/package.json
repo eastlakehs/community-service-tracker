@@ -7,7 +7,7 @@
     "compile": "tsc",
     "test": "npm run test:full",
     "deploy": "npm run deploy:firestore",
-    "test:only": "export FIRESTORE_EMULATOR_HOST=\"localhost:8080\"; export NODE_OPTIONS=--experimental-vm-modules; node_modules/.bin/jest --env=node --detectOpenHandles --forceExit --runInBand",
+    "test:only": "export FIRESTORE_EMULATOR_HOST=\"localhost:8080\"; export NODE_OPTIONS=--experimental-vm-modules; node_modules/.bin/mocha dist/test/**/**/*.js",
     "test:full": "npm run compile && firebase emulators:exec --ui --only firestore,storage \"npm run test:only\"",
     "deploy:firestore": "`npm bin`/firebase deploy --only firestore,storage"
   },
@@ -33,9 +33,12 @@
   },
   "dependencies": {
     "@firebase/rules-unit-testing": "^2.0.3",
+    "@types/chai": "^4.3.4",
     "@web-std/file": "^3.0.2",
+    "chai": "^4.3.7",
     "firebase": "^9.8.4",
     "firebase-admin": "^11.0.0",
+    "mocha": "^10.2.0",
     "web-file-polyfill": "^1.0.4"
   },
   "publishConfig": {

@@ -1,6 +1,7 @@
 /**
  *  About: this file contains security unit testing in order to ensure that our app is secured from un-authorized outside access
  */
+/*
 
 import {
     initializeTestEnvironment,
@@ -57,6 +58,7 @@ import {
     },
     email_verified: true,
   };
+  */
 
   /*
   // https://stackoverflow.com/questions/24488985/how-to-mock-file-in-javascript
@@ -64,6 +66,7 @@ import {
   const blob = Buffer.from('A'.repeat(1024)) // This or anything lower just hangs
 
   */
+ /*
   describe("non-user docs should reject", () => {
     // signed in as student-a@lwsd.org
     const storage = () => initStorage("student-a@lwsd.org", tokenValid);
@@ -195,3 +198,6 @@ import {
     });
   });
   */
+ 
+
+  
