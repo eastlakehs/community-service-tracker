@@ -1,7 +1,9 @@
 import { initializeTestEnvironment } from "@firebase/rules-unit-testing";
 import { dbType } from "@ehs-service/firebase-firestore/src/import-utils/dbType.js";
-import { importToFirestore } from "@ehs-service/firebase-firestore/src/import-utils/importToFirestore.js";
-import { exportFromFirestore } from "@ehs-service/firebase-firestore/src/import-utils/exportFromFirestore.js";
+//import { importToFirestore } from "@ehs-service/firebase-firestore/src/import-utils/importToFirestore.js";
+//import { exportFromFirestore } from "@ehs-service/firebase-firestore/src/import-utils/exportFromFirestore.js";
+import { importToFirestore } from "../../src/import-utils/importToFirestore.js";
+import { exportFromFirestore } from "../../src/import-utils/exportFromFirestore.js";
 
 import { initializeApp, deleteApp } from "firebase-admin/app";
 import { getFirestore } from "firebase-admin/firestore";

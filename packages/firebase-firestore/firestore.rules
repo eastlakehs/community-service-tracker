@@ -42,3 +42,15 @@ service cloud.firestore {
     
   } 
 }
+
+service firebase.storage {
+  match /b/{bucket}/o {
+    match /pictures/{email}/{allPaths=**} {
+        allow read, write: if isAuthenticatedProperly() &&  emailIsValid(email) && emailMatchesDocument(email);
+    }
+    match /{path=**} {
+    	allow read, write: if isAuthenticatedProperly() && isAdmin();
+    }
+  }
+}
+
