@@ -14,7 +14,7 @@ export const uploadPhoto = async (
     });
     if (res) {
       // file already exists
-      return;
+      return res;
     }
 
     const task = storage
