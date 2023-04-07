@@ -50,37 +50,60 @@ const CSTable: React.FunctionComponent<{
   );
 
   const generateTableData = () => {
-    return Object.keys(data.data).map((entry) => {
-      const dateObj = JSON.parse(data.data[entry].Date) as {
-        day: string;
-        month: string;
-        year: string;
-      };
-      return (
-        <tr key={data.data ? entry : "empty-entry"}>
-          <TableCell name={data.data[entry].Name} />
-          <TableCell name={data.data[entry].Description} />
-          <TableCell name={data.data[entry].Hours} />
-          <TableCell name={`${dateObj.month}-${dateObj.day}-${dateObj.year}`} />
-          <td className={"px-2 border-b border-gray-200 bg-white text-sm "}>
-            <TableButton
-              name="Edit"
-              onClick={() => {
-                handleEditClick(entry);
-              }}
-              edit={true}
+    return Object.keys(data.data)
+      .sort((a, b) => {
+        let dateA = JSON.parse(data.data[a].Date) as {
+          day: string;
+          month: string;
+          year: string;
+        };
+        let dateB = JSON.parse(data.data[b].Date) as {
+          day: string;
+          month: string;
+          year: string;
+        };
+        //Negative if A is earlier
+        if (Number(dateA.year) !== Number(dateB.year)) {
+          return Number(dateB.year) - Number(dateA.year);
+        } else if (Number(dateA.month) !== Number(dateB.month)) {
+          return Number(dateB.month) - Number(dateA.month);
+        } else {
+          return Number(dateB.day) - Number(dateA.day);
+        }
+      })
+      .map((entry) => {
+        const dateObj = JSON.parse(data.data[entry].Date) as {
+          day: string;
+          month: string;
+          year: string;
+        };
+        return (
+          <tr key={data.data ? entry : "empty-entry"}>
+            <TableCell name={data.data[entry].Name} />
+            <TableCell name={data.data[entry].Description} />
+            <TableCell name={data.data[entry].Hours} />
+            <TableCell
+              name={`${dateObj.month}-${dateObj.day}-${dateObj.year}`}
             />
-            <TableButton
-              name="Delete"
-              onClick={() => {
-                handleDelete(entry);
-              }}
-              edit={false}
-            />
-          </td>
-        </tr>
-      );
-    });
+            <td className={"px-2 border-b border-gray-200 bg-white text-sm "}>
+              <TableButton
+                name="Edit"
+                onClick={() => {
+                  handleEditClick(entry);
+                }}
+                edit={true}
+              />
+              <TableButton
+                name="Delete"
+                onClick={() => {
+                  handleDelete(entry);
+                }}
+                edit={false}
+              />
+            </td>
+          </tr>
+        );
+      });
   };
 
   if (Object.keys(data.data).length === 0) {
