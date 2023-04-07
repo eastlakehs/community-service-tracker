@@ -50,7 +50,26 @@ const CSTable: React.FunctionComponent<{
   );
 
   const generateTableData = () => {
-    return Object.keys(data.data).map((entry) => {
+    return Object.keys(data.data).sort((a, b) => {
+      let dateA = JSON.parse(data.data[a].Date) as {
+        day: string;
+        month: string;
+        year: string;
+      }
+      let dateB = JSON.parse(data.data[b].Date) as {
+        day: string;
+        month: string;
+        year: string;
+      }
+      //Negative if A is earlier
+      if(Number(dateA.year) !== Number(dateB.year)) {
+        return Number(dateB.year) - Number(dateA.year)
+      } else if (Number(dateA.month) !== Number(dateB.month)) {
+        return Number(dateB.month) - Number(dateA.month)
+      } else {
+        return Number(dateB.day) - Number(dateA.day)
+      }
+    }).map((entry) => {
       const dateObj = JSON.parse(data.data[entry].Date) as {
         day: string;
         month: string;
